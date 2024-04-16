@@ -1,0 +1,207 @@
+{
+  "polozky": [
+    {
+      "id": "DruhSkoly/gymn",
+      "kod": "gymn",
+      "nazev": {
+        "cs": "Gymnázium"
+      }
+    },
+    {
+      "id": "DruhSkoly/hotSk",
+      "kod": "hotSk",
+      "nazev": {
+        "cs": "Hotelová škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/IntSS",
+      "kod": "IntSS",
+      "nazev": {
+        "cs": "Integrovaná střední škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/jazyk",
+      "kod": "jazyk",
+      "nazev": {
+        "cs": "Jazyková škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/konz",
+      "kod": "konz",
+      "nazev": {
+        "cs": "Konzervatoř"
+      }
+    },
+    {
+      "id": "DruhSkoly/obchA",
+      "kod": "obchA",
+      "nazev": {
+        "cs": "Obchodní akademie"
+      }
+    },
+    {
+      "id": "DruhSkoly/obchS",
+      "kod": "obchS",
+      "nazev": {
+        "cs": "Obchodní škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/odbrS",
+      "kod": "odbrS",
+      "nazev": {
+        "cs": "Odborná škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/odbrU",
+      "kod": "odbrU",
+      "nazev": {
+        "cs": "Odborné učiliště"
+      }
+    },
+    {
+      "id": "DruhSkoly/prakt",
+      "kod": "prakt",
+      "nazev": {
+        "cs": "Praktická škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/rodS",
+      "kod": "rodS",
+      "nazev": {
+        "cs": "Rodinná škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/soc",
+      "kod": "soc",
+      "nazev": {
+        "cs": "Sociálně právní akademie"
+      }
+    },
+    {
+      "id": "DruhSkoly/sOS",
+      "kod": "sOS",
+      "nazev": {
+        "cs": "Střední odborná škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sOU",
+      "kod": "sOU",
+      "nazev": {
+        "cs": "Střední odborné učiliště"
+      }
+    },
+    {
+      "id": "DruhSkoly/spec",
+      "kod": "spec",
+      "nazev": {
+        "cs": "Jiná, specifická škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sPeS",
+      "kod": "sPeS",
+      "nazev": {
+        "cs": "Střední pedagogická škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sPoS",
+      "kod": "sPoS",
+      "nazev": {
+        "cs": "Střední podnikatelská škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sPrS",
+      "kod": "sPrS",
+      "nazev": {
+        "cs": "Střední průmyslová škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sUs",
+      "kod": "sUs",
+      "nazev": {
+        "cs": "Střední umělecká škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sZaS",
+      "kod": "sZaS",
+      "nazev": {
+        "cs": "Střední zahradnická škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sZdS",
+      "kod": "sZdS",
+      "nazev": {
+        "cs": "Střední zdravotnická škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sZeS",
+      "kod": "sZeS",
+      "nazev": {
+        "cs": "Střední zemědělská škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/ucil",
+      "kod": "ucil",
+      "nazev": {
+        "cs": "Učiliště"
+      }
+    },
+    {
+      "id": "DruhSkoly/voa",
+      "kod": "voa",
+      "nazev": {
+        "cs": "Vyšší obchodní akademie"
+      }
+    },
+    {
+      "id": "DruhSkoly/vos",
+      "kod": "vos",
+      "nazev": {
+        "cs": "Vyšší odborná škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/vs",
+      "kod": "vs",
+      "nazev": {
+        "cs": "Vysoká škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/zs",
+      "kod": "zs",
+      "nazev": {
+        "cs": "Základní škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/sS",
+      "kod": "sS",
+      "nazev": {
+        "cs": "Střední škola"
+      }
+    },
+    {
+      "id": "DruhSkoly/vyu",
+      "kod": "vyu",
+      "nazev": {
+        "cs": "Výchovný ústav"
+      }
+    }
+  ]
+}

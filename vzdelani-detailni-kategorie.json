@@ -1,0 +1,116 @@
+{
+  "polozky": [
+    {
+      "id": "VzdelaniDetailniKategorie/bezVzdel",
+      "kod": "bezVzdel",
+      "nazev": {
+        "cs": "Bez vzdělání"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/neuplZakl",
+      "kod": "neuplZakl",
+      "nazev": {
+        "cs": "Neúplné základní"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/zaklPraktSkol",
+      "kod": "zaklPraktSkol",
+      "nazev": {
+        "cs": "Základní + praktická škola"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/nizsiStred",
+      "kod": "nizsiStred",
+      "nazev": {
+        "cs": "Nižší střední"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/nizsiStredOdbor",
+      "kod": "nizsiStredOdbor",
+      "nazev": {
+        "cs": "Nižší střední odborné"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/stredOdbor",
+      "kod": "stredOdbor",
+      "nazev": {
+        "cs": "Střední odborné bez maturity a bez vyučení"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/stredOdborVyuc",
+      "kod": "stredOdborVyuc",
+      "nazev": {
+        "cs": "Střední odborné (vyučen)"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/usoSMatVyuc",
+      "kod": "usoSMatVyuc",
+      "nazev": {
+        "cs": "ÚSO (vyučení s maturitou)"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/usv",
+      "kod": "usv",
+      "nazev": {
+        "cs": "ÚSV s maturitou"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/usoSMat",
+      "kod": "usoSMat",
+      "nazev": {
+        "cs": "ÚSO s maturitou (bez vyučení)"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/konz",
+      "kod": "konz",
+      "nazev": {
+        "cs": "Vyšší odborné vzdělání v konzervatoři"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/vyssOdbor",
+      "kod": "vyssOdbor",
+      "nazev": {
+        "cs": "Vyšší odborné"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/bakal",
+      "kod": "bakal",
+      "nazev": {
+        "cs": "VŠ Bakalářské"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/vysoka",
+      "kod": "vysoka",
+      "nazev": {
+        "cs": "VŠ Magisterské"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/doktor",
+      "kod": "doktor",
+      "nazev": {
+        "cs": "VŠ Doktorské (vědecká výchova)"
+      }
+    },
+    {
+      "id": "VzdelaniDetailniKategorie/ne",
+      "kod": "ne",
+      "nazev": {
+        "cs": "Nezadáno"
+      }
+    }
+  ]
+}

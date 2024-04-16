@@ -1,0 +1,74 @@
+{
+  "polozky": [
+    {
+      "id": "VhodnostProZaky/5tr",
+      "kod": "5tr",
+      "nazev": {
+        "cs": "Žáci 5. tříd ZŠ"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/7tr",
+      "kod": "7tr",
+      "nazev": {
+        "cs": "Žáci 7. tříd ZŠ"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/abb",
+      "kod": "abb",
+      "nazev": {
+        "cs": "Absolvent bakalářského studia"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/abm",
+      "kod": "abm",
+      "nazev": {
+        "cs": "Absolvent magisterského studia"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/dosp",
+      "kod": "dosp",
+      "nazev": {
+        "cs": "Dospělí, zákl. vzdělání"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/mat",
+      "kod": "mat",
+      "nazev": {
+        "cs": "Maturanti"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/pvd",
+      "kod": "pvd",
+      "nazev": {
+        "cs": "Povinná školní docházka"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/vyu",
+      "kod": "vyu",
+      "nazev": {
+        "cs": "Vyučenci"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/abvos",
+      "kod": "abvos",
+      "nazev": {
+        "cs": " Absolvent vyšší odborné školy"
+      }
+    },
+    {
+      "id": "VhodnostProZaky/abs",
+      "kod": "abs",
+      "nazev": {
+        "cs": "Absolvent středního vzdělání"
+      }
+    }
+  ]
+}
