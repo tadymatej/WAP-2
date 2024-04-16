@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model projects {
+  id    Int     @id @default(autoincrement())
+  name  String  @db.VarChar(255)
+  tasks tasks[]
+}
+
+model tasks {
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(255)
+  completed  Boolean   @default(false)
+  project_id Int?
+  projects   projects? @relation(fields: [project_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
