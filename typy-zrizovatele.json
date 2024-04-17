@@ -1,0 +1,46 @@
+{
+  "polozky": [
+    {
+      "id": "TypZrizovatele/jiny",
+      "kod": "jiny",
+      "nazev": {
+        "cs": "Jiný zřizovatel"
+      }
+    },
+    {
+      "id": "TypZrizovatele/kr",
+      "kod": "kr",
+      "nazev": {
+        "cs": "Kraj"
+      }
+    },
+    {
+      "id": "TypZrizovatele/soukr",
+      "kod": "soukr",
+      "nazev": {
+        "cs": "Soukromý subjekt"
+      }
+    },
+    {
+      "id": "TypZrizovatele/st",
+      "kod": "st",
+      "nazev": {
+        "cs": "Stát"
+      }
+    },
+    {
+      "id": "TypZrizovatele/obec",
+      "kod": "obec",
+      "nazev": {
+        "cs": "Obec"
+      }
+    },
+    {
+      "id": "TypZrizovatele/cirkev",
+      "kod": "cirkev",
+      "nazev": {
+        "cs": "Církev"
+      }
+    }
+  ]
+}
