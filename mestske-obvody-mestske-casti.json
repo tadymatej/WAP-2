@@ -1,0 +1,1197 @@
+{
+  "polozky": [
+    {
+      "id": "MestskyObvodMestskaCast/500054",
+      "kod": 500054,
+      "nazev": {
+        "cs": "Praha 1"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/19"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500089",
+      "kod": 500089,
+      "nazev": {
+        "cs": "Praha 2"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/27"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500097",
+      "kod": 500097,
+      "nazev": {
+        "cs": "Praha 3"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/35"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500119",
+      "kod": 500119,
+      "nazev": {
+        "cs": "Praha 4"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/43"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500143",
+      "kod": 500143,
+      "nazev": {
+        "cs": "Praha 5"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500178",
+      "kod": 500178,
+      "nazev": {
+        "cs": "Praha 6"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/60"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500186",
+      "kod": 500186,
+      "nazev": {
+        "cs": "Praha 7"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/78"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500208",
+      "kod": 500208,
+      "nazev": {
+        "cs": "Praha 8"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/86"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500216",
+      "kod": 500216,
+      "nazev": {
+        "cs": "Praha 9"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/500224",
+      "kod": 500224,
+      "nazev": {
+        "cs": "Praha 10"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/501298",
+      "kod": 501298,
+      "nazev": {
+        "cs": "Ústí nad Labem-Severní Terasa"
+      },
+      "obec": "Obec/554804"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/502081",
+      "kod": 502081,
+      "nazev": {
+        "cs": "Ústí nad Labem-Neštěmice"
+      },
+      "obec": "Obec/554804"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/502316",
+      "kod": 502316,
+      "nazev": {
+        "cs": "Ústí nad Labem-Střekov"
+      },
+      "obec": "Obec/554804"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538060",
+      "kod": 538060,
+      "nazev": {
+        "cs": "Praha-Běchovice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538078",
+      "kod": 538078,
+      "nazev": {
+        "cs": "Praha-Benice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538124",
+      "kod": 538124,
+      "nazev": {
+        "cs": "Praha-Březiněves"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/86"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538175",
+      "kod": 538175,
+      "nazev": {
+        "cs": "Praha-Dolní Počernice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538205",
+      "kod": 538205,
+      "nazev": {
+        "cs": "Praha-Dubeč"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538213",
+      "kod": 538213,
+      "nazev": {
+        "cs": "Praha 20"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538302",
+      "kod": 538302,
+      "nazev": {
+        "cs": "Praha-Klánovice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538353",
+      "kod": 538353,
+      "nazev": {
+        "cs": "Praha-Koloděje"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538361",
+      "kod": 538361,
+      "nazev": {
+        "cs": "Praha-Kolovraty"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538388",
+      "kod": 538388,
+      "nazev": {
+        "cs": "Praha-Královice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538400",
+      "kod": 538400,
+      "nazev": {
+        "cs": "Praha-Křeslice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538531",
+      "kod": 538531,
+      "nazev": {
+        "cs": "Praha-Nedvězí"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538736",
+      "kod": 538736,
+      "nazev": {
+        "cs": "Praha-Satalice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538931",
+      "kod": 538931,
+      "nazev": {
+        "cs": "Praha 22"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/538949",
+      "kod": 538949,
+      "nazev": {
+        "cs": "Praha 21"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539007",
+      "kod": 539007,
+      "nazev": {
+        "cs": "Praha-Vinoř"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539449",
+      "kod": 539449,
+      "nazev": {
+        "cs": "Praha-Lipence"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539465",
+      "kod": 539465,
+      "nazev": {
+        "cs": "Praha-Lochkov"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539589",
+      "kod": 539589,
+      "nazev": {
+        "cs": "Praha-Přední Kopanina"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/60"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539601",
+      "kod": 539601,
+      "nazev": {
+        "cs": "Praha 16"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539635",
+      "kod": 539635,
+      "nazev": {
+        "cs": "Praha-Řeporyje"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539678",
+      "kod": 539678,
+      "nazev": {
+        "cs": "Praha-Slivenec"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539694",
+      "kod": 539694,
+      "nazev": {
+        "cs": "Praha 13"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539724",
+      "kod": 539724,
+      "nazev": {
+        "cs": "Praha-Šeberov"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/43"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539791",
+      "kod": 539791,
+      "nazev": {
+        "cs": "Praha-Újezd"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/43"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539864",
+      "kod": 539864,
+      "nazev": {
+        "cs": "Praha-Zbraslav"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/539899",
+      "kod": 539899,
+      "nazev": {
+        "cs": "Praha-Zličín"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/545911",
+      "kod": 545911,
+      "nazev": {
+        "cs": "Moravská Ostrava a Přívoz"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/545970",
+      "kod": 545970,
+      "nazev": {
+        "cs": "Plzeň 1"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/545988",
+      "kod": 545988,
+      "nazev": {
+        "cs": "Plzeň 2-Slovany"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/546003",
+      "kod": 546003,
+      "nazev": {
+        "cs": "Plzeň 3"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/546046",
+      "kod": 546046,
+      "nazev": {
+        "cs": "Slezská Ostrava"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/546135",
+      "kod": 546135,
+      "nazev": {
+        "cs": "Ostrava-Jih"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/546208",
+      "kod": 546208,
+      "nazev": {
+        "cs": "Plzeň 4"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/546224",
+      "kod": 546224,
+      "nazev": {
+        "cs": "Poruba"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547034",
+      "kod": 547034,
+      "nazev": {
+        "cs": "Praha 11"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/43"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547042",
+      "kod": 547042,
+      "nazev": {
+        "cs": "Praha-Kunratice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/43"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547051",
+      "kod": 547051,
+      "nazev": {
+        "cs": "Praha-Libuš"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/43"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547107",
+      "kod": 547107,
+      "nazev": {
+        "cs": "Praha 12"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/43"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547115",
+      "kod": 547115,
+      "nazev": {
+        "cs": "Praha-Velká Chuchle"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/51"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547140",
+      "kod": 547140,
+      "nazev": {
+        "cs": "Praha-Lysolaje"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/60"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547158",
+      "kod": 547158,
+      "nazev": {
+        "cs": "Praha-Nebušice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/60"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547174",
+      "kod": 547174,
+      "nazev": {
+        "cs": "Praha 17"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/60"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547271",
+      "kod": 547271,
+      "nazev": {
+        "cs": "Praha-Suchdol"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/60"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547298",
+      "kod": 547298,
+      "nazev": {
+        "cs": "Praha-Ďáblice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/86"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547301",
+      "kod": 547301,
+      "nazev": {
+        "cs": "Praha-Dolní Chabry"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/86"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547310",
+      "kod": 547310,
+      "nazev": {
+        "cs": "Praha-Čakovice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547328",
+      "kod": 547328,
+      "nazev": {
+        "cs": "Praha-Troja"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/78"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547344",
+      "kod": 547344,
+      "nazev": {
+        "cs": "Praha 19"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547361",
+      "kod": 547361,
+      "nazev": {
+        "cs": "Praha 14"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547379",
+      "kod": 547379,
+      "nazev": {
+        "cs": "Praha-Dolní Měcholupy"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547387",
+      "kod": 547387,
+      "nazev": {
+        "cs": "Praha 15"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547395",
+      "kod": 547395,
+      "nazev": {
+        "cs": "Praha-Petrovice"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547409",
+      "kod": 547409,
+      "nazev": {
+        "cs": "Praha-Štěrboholy"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/108"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/547417",
+      "kod": 547417,
+      "nazev": {
+        "cs": "Praha 18"
+      },
+      "obec": "Obec/554782",
+      "mestskyObvodVPraze": "MestskyObvodVPraze/94"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/550973",
+      "kod": 550973,
+      "nazev": {
+        "cs": "Brno-střed"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/550990",
+      "kod": 550990,
+      "nazev": {
+        "cs": "Brno-Žabovřesky"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551007",
+      "kod": 551007,
+      "nazev": {
+        "cs": "Brno-Královo Pole"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551031",
+      "kod": 551031,
+      "nazev": {
+        "cs": "Brno-sever"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551058",
+      "kod": 551058,
+      "nazev": {
+        "cs": "Brno-Židenice"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551066",
+      "kod": 551066,
+      "nazev": {
+        "cs": "Brno-Černovice"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551074",
+      "kod": 551074,
+      "nazev": {
+        "cs": "Brno-jih"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551082",
+      "kod": 551082,
+      "nazev": {
+        "cs": "Brno-Bohunice"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551091",
+      "kod": 551091,
+      "nazev": {
+        "cs": "Brno-Starý Lískovec"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551112",
+      "kod": 551112,
+      "nazev": {
+        "cs": "Brno-Nový Lískovec"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551147",
+      "kod": 551147,
+      "nazev": {
+        "cs": "Brno-Kohoutovice"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551171",
+      "kod": 551171,
+      "nazev": {
+        "cs": "Brno-Jundrov"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551198",
+      "kod": 551198,
+      "nazev": {
+        "cs": "Brno-Bystrc"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551210",
+      "kod": 551210,
+      "nazev": {
+        "cs": "Brno-Kníničky"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551228",
+      "kod": 551228,
+      "nazev": {
+        "cs": "Brno-Komín"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551236",
+      "kod": 551236,
+      "nazev": {
+        "cs": "Brno-Medlánky"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551244",
+      "kod": 551244,
+      "nazev": {
+        "cs": "Brno-Řečkovice a Mokrá Hora"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551252",
+      "kod": 551252,
+      "nazev": {
+        "cs": "Brno-Maloměřice a Obřany"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551279",
+      "kod": 551279,
+      "nazev": {
+        "cs": "Brno-Vinohrady"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551287",
+      "kod": 551287,
+      "nazev": {
+        "cs": "Brno-Líšeň"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551295",
+      "kod": 551295,
+      "nazev": {
+        "cs": "Brno-Slatina"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551309",
+      "kod": 551309,
+      "nazev": {
+        "cs": "Brno-Tuřany"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551317",
+      "kod": 551317,
+      "nazev": {
+        "cs": "Brno-Chrlice"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551325",
+      "kod": 551325,
+      "nazev": {
+        "cs": "Brno-Bosonohy"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551368",
+      "kod": 551368,
+      "nazev": {
+        "cs": "Brno-Žebětín"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551376",
+      "kod": 551376,
+      "nazev": {
+        "cs": "Brno-Ivanovice"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551406",
+      "kod": 551406,
+      "nazev": {
+        "cs": "Brno-Jehnice"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551422",
+      "kod": 551422,
+      "nazev": {
+        "cs": "Brno-Ořešín"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/551431",
+      "kod": 551431,
+      "nazev": {
+        "cs": "Brno-Útěchov"
+      },
+      "obec": "Obec/582786"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554219",
+      "kod": 554219,
+      "nazev": {
+        "cs": "Nová Bělá"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554227",
+      "kod": 554227,
+      "nazev": {
+        "cs": "Vítkovice"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554235",
+      "kod": 554235,
+      "nazev": {
+        "cs": "Stará Bělá"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554243",
+      "kod": 554243,
+      "nazev": {
+        "cs": "Pustkovec"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554286",
+      "kod": 554286,
+      "nazev": {
+        "cs": "Mariánské Hory a Hulváky"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554308",
+      "kod": 554308,
+      "nazev": {
+        "cs": "Petřkovice"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554324",
+      "kod": 554324,
+      "nazev": {
+        "cs": "Lhotka"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554332",
+      "kod": 554332,
+      "nazev": {
+        "cs": "Hošťálkovice"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554367",
+      "kod": 554367,
+      "nazev": {
+        "cs": "Nová Ves"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554375",
+      "kod": 554375,
+      "nazev": {
+        "cs": "Proskovice"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554430",
+      "kod": 554430,
+      "nazev": {
+        "cs": "Michálkovice"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554537",
+      "kod": 554537,
+      "nazev": {
+        "cs": "Radvanice a Bartovice"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554561",
+      "kod": 554561,
+      "nazev": {
+        "cs": "Krásné Pole"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554570",
+      "kod": 554570,
+      "nazev": {
+        "cs": "Martinov"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554588",
+      "kod": 554588,
+      "nazev": {
+        "cs": "Polanka nad Odrou"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554669",
+      "kod": 554669,
+      "nazev": {
+        "cs": "Hrabová"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554685",
+      "kod": 554685,
+      "nazev": {
+        "cs": "Svinov"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554715",
+      "kod": 554715,
+      "nazev": {
+        "cs": "Třebovice"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554723",
+      "kod": 554723,
+      "nazev": {
+        "cs": "Plesná"
+      },
+      "obec": "Obec/554821"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554731",
+      "kod": 554731,
+      "nazev": {
+        "cs": "Plzeň 5-Křimice"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554758",
+      "kod": 554758,
+      "nazev": {
+        "cs": "Plzeň 6-Litice"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554766",
+      "kod": 554766,
+      "nazev": {
+        "cs": "Plzeň 7-Radčice"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/554774",
+      "kod": 554774,
+      "nazev": {
+        "cs": "Plzeň 8-Černice"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555096",
+      "kod": 555096,
+      "nazev": {
+        "cs": "Pardubice IV"
+      },
+      "obec": "Obec/555134"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555100",
+      "kod": 555100,
+      "nazev": {
+        "cs": "Pardubice VI"
+      },
+      "obec": "Obec/555134"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555118",
+      "kod": 555118,
+      "nazev": {
+        "cs": "Pardubice VII"
+      },
+      "obec": "Obec/555134"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555126",
+      "kod": 555126,
+      "nazev": {
+        "cs": "Pardubice II"
+      },
+      "obec": "Obec/555134"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555321",
+      "kod": 555321,
+      "nazev": {
+        "cs": "Opava (nečleněná část města)"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555339",
+      "kod": 555339,
+      "nazev": {
+        "cs": "Malé Hoštice"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555355",
+      "kod": 555355,
+      "nazev": {
+        "cs": "Komárov"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555371",
+      "kod": 555371,
+      "nazev": {
+        "cs": "Suché Lazce"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555401",
+      "kod": 555401,
+      "nazev": {
+        "cs": "Podvihov"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555410",
+      "kod": 555410,
+      "nazev": {
+        "cs": "Zlatníky"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555436",
+      "kod": 555436,
+      "nazev": {
+        "cs": "Milostovice"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/555461",
+      "kod": 555461,
+      "nazev": {
+        "cs": "Vlaštovičky"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/556700",
+      "kod": 556700,
+      "nazev": {
+        "cs": "Vávrovice"
+      },
+      "obec": "Obec/505927"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/556891",
+      "kod": 556891,
+      "nazev": {
+        "cs": "Liberec-Vratislavice nad Nisou"
+      },
+      "obec": "Obec/563889"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/556904",
+      "kod": 556904,
+      "nazev": {
+        "cs": "Liberec (nečleněné město)"
+      },
+      "obec": "Obec/563889"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/557064",
+      "kod": 557064,
+      "nazev": {
+        "cs": "Pardubice III"
+      },
+      "obec": "Obec/555134"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/557072",
+      "kod": 557072,
+      "nazev": {
+        "cs": "Pardubice V"
+      },
+      "obec": "Obec/555134"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/557978",
+      "kod": 557978,
+      "nazev": {
+        "cs": "Plzeň 10-Lhota"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/559199",
+      "kod": 559199,
+      "nazev": {
+        "cs": "Plzeň 9-Malesice"
+      },
+      "obec": "Obec/554791"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/567892",
+      "kod": 567892,
+      "nazev": {
+        "cs": "Ústí nad Labem-město"
+      },
+      "obec": "Obec/554804"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/574716",
+      "kod": 574716,
+      "nazev": {
+        "cs": "Pardubice I"
+      },
+      "obec": "Obec/555134"
+    },
+    {
+      "id": "MestskyObvodMestskaCast/575020",
+      "kod": 575020,
+      "nazev": {
+        "cs": "Pardubice VIII"
+      },
+      "obec": "Obec/555134"
+    }
+  ]
+}

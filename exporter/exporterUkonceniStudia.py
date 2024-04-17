@@ -29,7 +29,7 @@ class ExporterUkonceniStudia(Exporter):
     def printResult(self):
         rows = self.cur.fetchall()
         for row in rows:
-            print(row[0], row[1], row[2])
+            print(row)
         
     def db_select(self):
         self.cur.execute("SELECT * FROM ukonceni_studia")

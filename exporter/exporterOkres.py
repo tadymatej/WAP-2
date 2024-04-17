@@ -10,15 +10,18 @@ class ExporterOkres(Exporter):
 
     def db_create(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS okres 
-                            (ID INT PRIMARY KEY, 
+                            (ID SERIAL PRIMARY KEY, 
                             Nazev VARCHAR(100), 
                             KrajID INT,
+                            Kod3 VARCHAR(20),
                             Kod VARCHAR(20),
                             FOREIGN KEY (KrajID) REFERENCES kraj(ID)
                          );""")
         
-    def db_export_one(self, id : int, kod : str, nazev : str, krajID : int):
-        self.cur.execute("INSERT INTO okres (ID, Nazev, Kod, KrajID) VALUES(%s, %s, %s, %s)", (id, nazev, kod, krajID))
+    def db_export_one(self, kod : int, kodLau : str, nazev : str, krajKod : str):
+        self.cur.execute("SELECT ID FROM kraj WHERE Kod = %s", (krajKod, ))
+        krajID = self.cur.fetchone()[0]
+        self.cur.execute("INSERT INTO okres (Kod, Nazev, Kod3, KrajID) VALUES(%s, %s, %s, %s)", (kod, nazev, kodLau, krajID))
 
     def json_export(self):
         df = pd.read_json("okresy.json")
@@ -26,16 +29,16 @@ class ExporterOkres(Exporter):
         for key in polozky.keys():
             kod = polozky[key].get("kod")
             kraj : str = polozky[key].get("kraj")
-            krajID : int = kraj.split("/")[1]
+            krajKod : str = kraj.split("/")[1]
             kod3 = polozky[key].get("kodLau")
             nazev = polozky[key].get("nazev")["cs"]
 
-            self.db_export_one(kod, kod3, nazev, krajID)
+            self.db_export_one(kod, kod3, nazev, krajKod)
 
     def printResult(self):
         rows = self.cur.fetchall()
         for row in rows:
-            print(row[0], row[1], row[2], row[3])
+            print(row)
         
     def db_select(self):
         self.cur.execute("SELECT * FROM okres")

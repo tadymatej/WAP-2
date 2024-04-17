@@ -5,6 +5,8 @@ import pandas as pd
 from .exporter import Exporter
 from .exporterSkolaVyucovanyJazyk import ExporterSkolaVyucovanyJazyk
 from .exporterPodskola import ExporterPodskola
+from .exporterAdresa import ExporterAdresa
+from .exporterAdresa import ModelAdresa
 
 class ModelSkola():
     
@@ -131,6 +133,27 @@ class ExporterSkola(Exporter):
 
             podskolyExporter = ExporterPodskola()
             podskolyExporter.exportList(skolaID, polozky[key].get("soucastiSkoly"))
+
+            adresaExporter = ExporterAdresa()
+            modelAdresa = ModelAdresa()
+            modelAdresa.skolaID = skolaID
+
+            adresaDict : dict = polozky[key].get("adresaSidla")
+            modelAdresa.cisloDomovni = adresaDict.get("cisloDomovni")
+            modelAdresa.cisloOrientacni = adresaDict.get("cisloOrientacni")
+            modelAdresa.kodAdresnihoMista = adresaDict.get("kodAdresnihoMista")
+            modelAdresa.psc = adresaDict.get("psc")
+            
+            adresaObecDict : dict = adresaDict.get("obec")
+            adresaObecStr : str = adresaObecDict.get("id")
+            modelAdresa.obecKod = adresaObecStr.split("/")[1]
+
+            mestskyObvodMestskaCastDict : dict = adresaDict.get("mestskyObvodMestskaCast")
+            if mestskyObvodMestskaCastDict is not None:
+                mestskyObvodMestskaCastStr : str = mestskyObvodMestskaCastDict.get("id")
+                modelAdresa.mestskyObvodMestskaCast = mestskyObvodMestskaCastStr.split("/")[1]
+
+            adresaExporter.db_export_one(modelAdresa)
         
     def printResult(self):
         rows = self.cur.fetchall()

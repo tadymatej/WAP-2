@@ -24,29 +24,32 @@ from exporter.exporterSkolaVyucovanyJazyk import ExporterSkolaVyucovanyJazyk
 from exporter.exporterObor import ExporterObor
 from exporter.exporterOborPrijimaciZkouska import ExporterOborPrijimaciZkouska
 from exporter.exporterOborVhodnostProZaky import ExporterOborVhodnostProZaky
+from exporter.exporterMestskaCastObvod import ExporterMestskaCastObvod
+from exporter.exporterAdresa import ExporterAdresa
 
 def main():
 
-    #exporters : list[Exporter] = [ExporterKraj(), ExporterOkres(), ExporterObec()]
-    exporters : list[Exporter] = [ExporterKraj(), ExporterOkres(), ExporterJazyk(), ExporterTypZrizovatele(), 
+    exporters : list[Exporter] = [ExporterKraj(), ExporterOkres(), ExporterObec(), ExporterJazyk(), ExporterTypZrizovatele(), ExporterMestskaCastObvod(), 
                                   ExporterTypSkoly(), ExporterDruhPodskoly(), ExporterDruhStudia(), 
                                   ExporterFormaStudia(), ExporterUkonceniStudia(), ExporterVhodnostProZaky(),
                                   ExporterStupenVzdelani(), ExporterPrijimaciZkouska(), ExporterSkola()]
 
     exportersClearCreate = exporters.copy()
     exportersClearCreate.extend([ExporterSkolaVyucovanyJazyk(), ExporterPodskola(), ExporterObor(), ExporterOborPrijimaciZkouska(),
-                                ExporterOborVhodnostProZaky()])
+                                ExporterOborVhodnostProZaky(), ExporterAdresa()])
 
-    # for exporter in exportersClearCreate:
-    #     exporter.db_clear()
+    for exporter in exportersClearCreate:
+        exporter.db_clear()
 
-    # for exporter in exportersClearCreate:
-    #     exporter.db_create()
+    for exporter in exportersClearCreate:
+        exporter.db_create()
 
-    # for exporter in exporters:
-    #     exporter.json_export()
+    #exporters = [ExporterKraj(), ExporterOkres(), ExporterObec(), ExporterMestskaCastObvod()]
+
+    for exporter in exporters:
+        exporter.json_export()
     
-    exportersPrint : list[Exporter] = [ExporterOborVhodnostProZaky()]
+    exportersPrint : list[Exporter] = [ExporterObec()]
 
     for exporter in exportersPrint:
         exporter.db_select()
