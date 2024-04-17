@@ -1,0 +1,6 @@
+
+myenv/*
+myenv
+myenv/**/*
+exporter/__pycache__/*
+exporter/__pycache__
