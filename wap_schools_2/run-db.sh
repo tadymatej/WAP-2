@@ -4,7 +4,7 @@
 POSTGRES_DB=schools
 POSTGRES_USER=myuser
 POSTGRES_PASSWORD=mypassword
-POSTGRES_CONTAINER_NAME=my_postgres_container2
+POSTGRES_CONTAINER_NAME=my_postgres_container5
 
 # Pull the PostgreSQL image from Docker Hub
 docker pull postgres

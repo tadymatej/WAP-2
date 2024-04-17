@@ -8,3 +8,10 @@ load-env:
 
 enter-env:
 	source myenv/bin/activate
+load-data:
+	python3 data-prepare.py
+start-postgres:
+	systemctl start docker
+	./wap_schools_2/run-db.sh
+start-docker:
+	systemctl start docker
