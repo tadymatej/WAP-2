@@ -15,7 +15,7 @@ class ExporterJazyk(Exporter):
                          );""")
         
     def db_export_one(self, kod: str, nazev : str):
-        self.cur.execute("INSERT INTO jazyk(Nazev, Kod) VALUES(%s, %s)", (kod, nazev))
+        self.cur.execute("INSERT INTO jazyk(Nazev, Kod) VALUES(%s, %s)", (nazev, kod))
 
     def json_export(self):
         df = pd.read_json("jazyky.json")
@@ -25,11 +25,11 @@ class ExporterJazyk(Exporter):
             nazev = polozky[key].get("nazev")["cs"]
 
             self.db_export_one(kod, nazev)
-            
+
     def printResult(self):
         rows = self.cur.fetchall()
         for row in rows:
-            print(row[0], row[1], row[2])
+            print(row)
 
 
     def db_select(self):

@@ -12,13 +12,13 @@ class ExporterOkres(Exporter):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS okres 
                             (ID INT PRIMARY KEY, 
                             Nazev VARCHAR(100), 
-                            Kraj_ID INT,
+                            KrajID INT,
                             Kod VARCHAR(20),
-                            FOREIGN KEY (Kraj_ID) REFERENCES kraj(ID)
+                            FOREIGN KEY (KrajID) REFERENCES kraj(ID)
                          );""")
         
     def db_export_one(self, id : int, kod : str, nazev : str, krajID : int):
-        self.cur.execute("INSERT INTO okres (ID, Nazev, Kod, Kraj_ID) VALUES(%s, %s, %s, %s)", (id, nazev, kod, krajID))
+        self.cur.execute("INSERT INTO okres (ID, Nazev, Kod, KrajID) VALUES(%s, %s, %s, %s)", (id, nazev, kod, krajID))
 
     def json_export(self):
         df = pd.read_json("okresy.json")

@@ -26,9 +26,6 @@ class Exporter():
     def db_select(self):
         raise NotImplementedError()
 
-    def db_clear(self):
-        raise NotImplementedError()
-
     def __init__(self) -> None:
         host = "localhost"
         database = "schools"
@@ -46,6 +43,3 @@ class Exporter():
 
         # Create a cursor for executing SQL commands
         self.cur = self.conn.cursor()
-
-        self.db_clear()
-        self.db_create()

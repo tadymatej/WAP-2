@@ -17,6 +17,13 @@ from exporter.exporterUkonceniStudia import ExporterUkonceniStudia
 from exporter.exporterVhodnostProZaky import ExporterVhodnostProZaky
 from exporter.exporterStupenVzdelani import ExporterStupenVzdelani
 from exporter.exporterPrijimaciZkouska import ExporterPrijimaciZkouska
+from exporter.exporterSkola import ExporterSkola
+from exporter.exporterSkolaVyucovanyJazyk import ExporterSkolaVyucovanyJazyk
+from exporter.exporterPodskola import ExporterPodskola
+from exporter.exporterSkolaVyucovanyJazyk import ExporterSkolaVyucovanyJazyk
+from exporter.exporterObor import ExporterObor
+from exporter.exporterOborPrijimaciZkouska import ExporterOborPrijimaciZkouska
+from exporter.exporterOborVhodnostProZaky import ExporterOborVhodnostProZaky
 
 def main():
 
@@ -24,9 +31,24 @@ def main():
     exporters : list[Exporter] = [ExporterKraj(), ExporterOkres(), ExporterJazyk(), ExporterTypZrizovatele(), 
                                   ExporterTypSkoly(), ExporterDruhPodskoly(), ExporterDruhStudia(), 
                                   ExporterFormaStudia(), ExporterUkonceniStudia(), ExporterVhodnostProZaky(),
-                                  ExporterStupenVzdelani(), ExporterPrijimaciZkouska()]
-    for exporter in exporters:
-        exporter.json_export()
+                                  ExporterStupenVzdelani(), ExporterPrijimaciZkouska(), ExporterSkola()]
+
+    exportersClearCreate = exporters.copy()
+    exportersClearCreate.extend([ExporterSkolaVyucovanyJazyk(), ExporterPodskola(), ExporterObor(), ExporterOborPrijimaciZkouska(),
+                                ExporterOborVhodnostProZaky()])
+
+    # for exporter in exportersClearCreate:
+    #     exporter.db_clear()
+
+    # for exporter in exportersClearCreate:
+    #     exporter.db_create()
+
+    # for exporter in exporters:
+    #     exporter.json_export()
+    
+    exportersPrint : list[Exporter] = [ExporterOborVhodnostProZaky()]
+
+    for exporter in exportersPrint:
         exporter.db_select()
         exporter.printResult()
 
