@@ -1,7 +1,6 @@
 
 import json
 import pandas as pd
-import psycopg2
 
 from exporter.exporterKraj import ExporterKraj
 from exporter.exporterOkres import ExporterOkres
@@ -26,17 +25,33 @@ from exporter.exporterOborPrijimaciZkouska import ExporterOborPrijimaciZkouska
 from exporter.exporterOborVhodnostProZaky import ExporterOborVhodnostProZaky
 from exporter.exporterMestskaCastObvod import ExporterMestskaCastObvod
 from exporter.exporterAdresa import ExporterAdresa
+from exporter.exporterCastObce import ExporterCastObce
+
+from exporter.xmlExporters.xmlExporterSkola import XMLExporterSkola
+
+from exporter.exporterSkolaDruhTyp import ExporterSkolaDruhTyp
+from exporter.exporterZarizeniDruhTyp import ExporterZarizeniDruhTyp
+from exporter.exporterSkolkaZakladka import ExporterSkolkaZakladka
+from exporter.exporterSkolkaZakladkaAdresa import ExporterSkolkaZakladkaAdresa
+from exporter.exporterOborSkolkyZakladky import ExporterOborSkolkyZakladky
+from exporter.exporterZarizeniSkolkyZakladky import ExporterZarizeniSkolkyZakladky
+from exporter.exporterZarizeniSkolkyZakladkyAdresa import ExporterZarizeniSkolkyZakladkyAdresa
 
 def main():
 
-    exporters : list[Exporter] = [ExporterKraj(), ExporterOkres(), ExporterObec(), ExporterJazyk(), ExporterTypZrizovatele(), ExporterMestskaCastObvod(), 
+    exporters : list[Exporter] = [ExporterKraj(), ExporterOkres(), ExporterObec(),  ExporterCastObce(), ExporterJazyk(), ExporterTypZrizovatele(), ExporterMestskaCastObvod(), 
                                   ExporterTypSkoly(), ExporterDruhPodskoly(), ExporterDruhStudia(), 
                                   ExporterFormaStudia(), ExporterUkonceniStudia(), ExporterVhodnostProZaky(),
                                   ExporterStupenVzdelani(), ExporterPrijimaciZkouska(), ExporterSkola()]
 
     exportersClearCreate = exporters.copy()
     exportersClearCreate.extend([ExporterSkolaVyucovanyJazyk(), ExporterPodskola(), ExporterObor(), ExporterOborPrijimaciZkouska(),
-                                ExporterOborVhodnostProZaky(), ExporterAdresa()])
+                                ExporterOborVhodnostProZaky(), ExporterAdresa(), 
+                                
+                                ExporterZarizeniDruhTyp(), ExporterSkolaDruhTyp(), 
+                                ExporterSkolkaZakladka(), ExporterZarizeniSkolkyZakladky(),
+                                ExporterOborSkolkyZakladky(),
+                                ExporterZarizeniSkolkyZakladkyAdresa(), ExporterSkolkaZakladkaAdresa()])
 
     for exporter in exportersClearCreate:
         exporter.db_clear()
@@ -44,11 +59,11 @@ def main():
     for exporter in exportersClearCreate:
         exporter.db_create()
 
-    #exporters = [ExporterKraj(), ExporterOkres(), ExporterObec(), ExporterMestskaCastObvod()]
-
     for exporter in exporters:
         exporter.json_export()
-    
+
+    xmlExorterSkola = XMLExporterSkola()
+
     exportersPrint : list[Exporter] = [ExporterObec()]
 
     for exporter in exportersPrint:
@@ -56,5 +71,5 @@ def main():
         exporter.printResult()
 
 
-main()
 
+main()

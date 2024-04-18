@@ -2,11 +2,12 @@
 
 import psycopg2
 
+from dbController import DbController
+
 class Exporter():
 
     def __del__(self):
-        self.cur.close()
-        self.conn.close()
+        self.dbController.__del__()
 
     def printResult(self):
         raise NotImplementedError()
@@ -26,20 +27,6 @@ class Exporter():
     def db_select(self):
         raise NotImplementedError()
 
-    def __init__(self) -> None:
-        host = "localhost"
-        database = "schools"
-        user = "myuser"
-        password = "mypassword"
-
-        # Connect to PostgreSQL server
-        self.conn = psycopg2.connect(
-            host=host,
-            database=database,
-            user=user,
-            password=password
-        )
-        self.conn.autocommit = True 
-
-        # Create a cursor for executing SQL commands
-        self.cur = self.conn.cursor()
+    def __init__(self, dbController : DbController) -> None:
+        self.dbController = dbController
+        self.cur = dbController.cur

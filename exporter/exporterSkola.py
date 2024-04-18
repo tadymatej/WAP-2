@@ -153,6 +153,11 @@ class ExporterSkola(Exporter):
                 mestskyObvodMestskaCastStr : str = mestskyObvodMestskaCastDict.get("id")
                 modelAdresa.mestskyObvodMestskaCast = mestskyObvodMestskaCastStr.split("/")[1]
 
+            castObceDict : dict = adresaDict.get("castObce")
+            if castObceDict is not None:
+                castObceStr : str = castObceDict.get("id")
+                modelAdresa.castObceKod = castObceStr.split("/")[1]
+
             adresaExporter.db_export_one(modelAdresa)
         
     def printResult(self):
