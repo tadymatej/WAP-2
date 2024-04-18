@@ -10,6 +10,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ComboboxDemo } from "@/examples/combobox";
+import { ScrollAreaHorizontalDemo } from "@/examples/scroll_example";
 
 export function FilterCard() {
   return (
@@ -35,6 +37,9 @@ export function FilterCard() {
                   defaultValue="Vsechny kraje"
                 />
               </div>
+              <ComboboxDemo />
+              <ScrollAreaHorizontalDemo />
+
               <div className="space-y-1">
                 <Label htmlFor="username">Username</Label>
                 <Input

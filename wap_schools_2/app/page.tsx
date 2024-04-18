@@ -1,6 +1,11 @@
 import { FilterCard } from "@/components/app/filters/FIlterCard";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default async function Home() {
+  const thousandStrings = Array.from(
+    { length: 300 },
+    (_, i) => `String ${i + 1}`
+  );
   return (
     <main className="flex min-h-screen p-8">
       <div className="grid grid-cols-5 gap-8">
@@ -12,7 +17,13 @@ export default async function Home() {
             <FilterCard />
           </div>
         </div>
-        <div className="bg-blue-500 col-span-4 h-full"></div>
+        <div className="bg-blue-500 col-span-4 h-full">
+          <ScrollArea>
+            {thousandStrings.map((str, index) => (
+              <p key={index}>{str}</p>
+            ))}
+          </ScrollArea>
+        </div>
       </div>
     </main>
   );

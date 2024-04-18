@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,73 +14,51 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Check, PlusCircle } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { useState } from "react";
 
-interface DataTableFacetedFilterProps<TData, TValue> {
-  title?: string;
-  options: {
-    label: string;
-    value: string;
-    icon?: React.ComponentType<{ className?: string }>;
-  }[];
+interface FilterMultiSelectProps {
+  title: string;
+  options: string[];
+  selectedValuesList: string[];
+  onSelect: (values: string[]) => void;
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
+export function FilterMultiSelect({
   title,
   options,
-}: DataTableFacetedFilterProps<TData, TValue>) {
-  //facets are counts
+  selectedValuesList,
+  onSelect,
+}: FilterMultiSelectProps) {
+  const [open, setOpen] = useState(false);
+
+  const selectedValues = new Set(selectedValuesList);
+  //facets are Filte
   //   const facets = ["task", "priority", "status"];
-  const selectedValues = new Set([] as string[]);
+  // const selectedValues = new Set([] as string[]);
 
   return (
-    <Popover>
+    <Popover
+      open={open}
+      onOpenChange={setOpen}
+    >
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          size="sm"
-          className="h-8 border-dashed"
+          role="combobox"
+          aria-expanded={open}
+          className="w-[200px] justify-between"
         >
-          <PlusCircle className="mr-2 h-4 w-4" />
-          {title}
-          {selectedValues?.size > 0 && (
-            <>
-              <Separator
-                orientation="vertical"
-                className="mx-2 h-4"
-              />
-              <Badge
-                variant="secondary"
-                className="rounded-sm px-1 font-normal lg:hidden"
-              >
-                {selectedValues.size}
-              </Badge>
-              <div className="hidden space-x-1 lg:flex">
-                {selectedValues.size > 2 ? (
-                  <Badge
-                    variant="secondary"
-                    className="rounded-sm px-1 font-normal"
-                  >
-                    {selectedValues.size} selected
-                  </Badge>
-                ) : (
-                  options
-                    .filter((option) => selectedValues.has(option.value))
-                    .map((option) => (
-                      <Badge
-                        variant="secondary"
-                        key={option.value}
-                        className="rounded-sm px-1 font-normal"
-                      >
-                        {option.label}
-                      </Badge>
-                    ))
-                )}
-              </div>
-            </>
-          )}
+          {selectedValuesList.map((value) => (
+            <Badge
+              key={value}
+              className="mr-1"
+            >
+              {value}
+            </Badge>
+          ))}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -95,17 +71,19 @@ export function DataTableFacetedFilter<TData, TValue>({
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
-                const isSelected = selectedValues.has(option.value);
+                const isSelected = selectedValues.has(option);
                 return (
                   <CommandItem
-                    key={option.value}
+                    key={option}
                     onSelect={() => {
                       if (isSelected) {
-                        selectedValues.delete(option.value);
+                        selectedValues.delete(option);
                       } else {
-                        selectedValues.add(option.value);
+                        selectedValues.add(option);
                       }
                       const filterValues = Array.from(selectedValues);
+
+                      onSelect(filterValues);
                     }}
                   >
                     <div
@@ -118,10 +96,10 @@ export function DataTableFacetedFilter<TData, TValue>({
                     >
                       <Check className={cn("h-4 w-4")} />
                     </div>
-                    {option.icon && (
+                    {/* {option.icon && (
                       <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-                    )}
-                    <span>{option.label}</span>
+                    )} */}
+                    <span>{option}</span>
                     {/* Add counts */}
                     {/* {facets?.get(option.value) && (
                       <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
