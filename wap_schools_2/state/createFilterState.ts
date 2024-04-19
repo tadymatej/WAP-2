@@ -6,6 +6,7 @@ import {
 const initialFilterState: FilterStateDefinition = {
   krajeSelected: [],
   mestaSelected: [],
+  mestskeCastiSelected: [],
   vyucovaneOborySelected: [],
   typySkolSelected: [],
   okresySelected: [],
@@ -61,6 +62,12 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   clearOkresyAll() {
     set((state) => {
       state.filter.okresySelected = [];
+    });
+  },
+  //setMestskeCasti
+  setMestskeCasti(mestskeCasti) {
+    set((state) => {
+      state.filter.mestskeCastiSelected = mestskeCasti;
     });
   },
 });

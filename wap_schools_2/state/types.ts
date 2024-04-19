@@ -3,6 +3,7 @@ import { StateCreator } from "zustand";
 export interface FilterStateDefinition {
   krajeSelected: string[];
   mestaSelected: string[];
+  mestskeCastiSelected: string[];
   vyucovaneOborySelected: string[];
   typySkolSelected: string[];
   okresySelected: string[];
@@ -19,6 +20,7 @@ export interface FilterStateActions {
   setTypySkol: (typySkol: string[]) => void;
   clearOkresyAll: () => void;
   setOkresy: (okresy: string[]) => void;
+  setMestskeCasti: (mestskeCasti: string[]) => void;
 }
 
 export type FilterStateType = FilterStateDefinition & FilterStateActions;
