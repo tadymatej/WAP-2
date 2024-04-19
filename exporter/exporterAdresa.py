@@ -5,7 +5,7 @@
 from .exporter import Exporter
 import pandas as pd
 
-from dbController import DbController
+from .dbController import DbController
 
 class ModelAdresa():
     skolaID : int = None
@@ -24,6 +24,14 @@ class ModelAdresa():
     castObceStr : str = None
     castObceKod : str = None
 
+    def print(self):
+        print("cisloDomovni=", self.cisloDomovni)
+        print("cisloOrientacni=", self.cisloOrientacni)
+        print("ulice=", self.ulice)
+        print("mestskyObvodMestskaCastStr=", self.mestskyObvodMestskaCastNameStr)
+        print("castObceStr=", self.castObceStr)
+        print("obecName=", self.obecNameStr)
+
 class ExporterAdresa(Exporter):
 
     def __init__(self, dbController : DbController):
@@ -41,11 +49,16 @@ class ExporterAdresa(Exporter):
                             ObecID INT,
                             MestskaCastObvodID INT,
                             CastObceID INT,
+                            Lat DOUBLE PRECISION,
+                            Lon DOUBLE PRECISION, 
                             FOREIGN KEY (SkolaID) REFERENCES skola(ID),
                             FOREIGN KEY (ObecID) REFERENCES obec(ID),
                             FOREIGN KEY (CastObceID) REFERENCES cast_obce(ID),
                             FOREIGN KEY (MestskaCastObvodID) REFERENCES mestska_cast_obvod(ID)
                          );""")
+
+    def setLocation(self, adresaID, lat, lon):
+        self.cur.execute("UPDATE adresa SET lat = %s, lon = %s WHERE ID = %s", (lat, lon, adresaID))
         
     def db_export_one(self, model : ModelAdresa):
         mestskaCastObvodID = None

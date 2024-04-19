@@ -7,6 +7,7 @@ from .exporterSkolaVyucovanyJazyk import ExporterSkolaVyucovanyJazyk
 from .exporterPodskola import ExporterPodskola
 from .exporterAdresa import ExporterAdresa
 from .exporterAdresa import ModelAdresa
+from .dbController import DbController
 
 class ModelSkola():
     
@@ -44,8 +45,8 @@ class ModelSkola():
 
 class ExporterSkola(Exporter):
     
-    def __init__(self):
-        super().__init__()
+    def __init__(self, dbController : DbController):
+        super().__init__(dbController)
 
     def db_create(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS skola 
@@ -85,7 +86,7 @@ class ExporterSkola(Exporter):
 
         skolaID = self.cur.fetchone()[0]
 
-        skolaVyucovanyJazykExporter = ExporterSkolaVyucovanyJazyk()
+        skolaVyucovanyJazykExporter = ExporterSkolaVyucovanyJazyk(self.dbController)
         for jazyk in model.vyucovaneJazyky:
             self.cur.execute("SELECT ID FROM jazyk WHERE Kod = %s", (jazyk, ))
 
@@ -131,10 +132,10 @@ class ExporterSkola(Exporter):
 
             skolaID = self.db_export_one(modelSkola)
 
-            podskolyExporter = ExporterPodskola()
+            podskolyExporter = ExporterPodskola(self.dbController)
             podskolyExporter.exportList(skolaID, polozky[key].get("soucastiSkoly"))
 
-            adresaExporter = ExporterAdresa()
+            adresaExporter = ExporterAdresa(self.dbController)
             modelAdresa = ModelAdresa()
             modelAdresa.skolaID = skolaID
 

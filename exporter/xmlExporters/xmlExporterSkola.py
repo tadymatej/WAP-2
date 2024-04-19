@@ -20,24 +20,25 @@ from ..exporterZarizeniSkolkyZakladkyAdresa import ExporterZarizeniSkolkyZakladk
 from ..exporterSkolkaZakladkaAdresa import ExporterSkolkaZakladkaAdresa
 from ..exporterAdresa import ExporterAdresa
 from ..exporterAdresa import ModelAdresa
+from ..dbController import DbController
 
-class XMLExporterSkola(Exporter):
+class XMLExporterSkola():
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, dbController : DbController) -> None:
+        self.dbController = dbController
 
-        exporterAdresa = ExporterAdresa()
-        exporterSkolkaZakladkaAdresa = ExporterSkolkaZakladkaAdresa()
-        exporterZarizeniSkolkyZakladkyAdresa = ExporterZarizeniSkolkyZakladkyAdresa()
+        exporterAdresa = ExporterAdresa(dbController)
+        exporterSkolkaZakladkaAdresa = ExporterSkolkaZakladkaAdresa(dbController)
+        exporterZarizeniSkolkyZakladkyAdresa = ExporterZarizeniSkolkyZakladkyAdresa(dbController)
 
 
-        exporterZarizeniDruhTyp = ExporterZarizeniDruhTyp()
-        exporterSkolaDruhTyp = ExporterSkolaDruhTyp()
+        exporterZarizeniDruhTyp = ExporterZarizeniDruhTyp(dbController)
+        exporterSkolaDruhTyp = ExporterSkolaDruhTyp(dbController)
         
-        exporterSkolkaZakladka = ExporterSkolkaZakladka()
+        exporterSkolkaZakladka = ExporterSkolkaZakladka(dbController)
 
-        exporterOborSkolkyZakladky = ExporterOborSkolkyZakladky()
-        exporterZarizeniSkolkyZakladky = ExporterZarizeniSkolkyZakladky()
+        exporterOborSkolkyZakladky = ExporterOborSkolkyZakladky(dbController)
+        exporterZarizeniSkolkyZakladky = ExporterZarizeniSkolkyZakladky(dbController)
 
         tree = ET.parse('vrejcelk.xml')
         root = tree.getroot()
@@ -242,7 +243,7 @@ class XMLExporterSkola(Exporter):
                 modelAdresa.psc = modelAdresa.psc.replace(" ", "")
                 modelAdresa.obecNameStr = adresaLine2[7:]
             else:
-                modelAdresa.castMestaStr = adresaLine2
+                modelAdresa.castObceStr = adresaLine2
                 modelAdresa.psc = adresaLine3[:6]
                 modelAdresa.psc = modelAdresa.psc.replace(" ", "")
                 if adresaLine3.find("Praha") != -1:
@@ -251,5 +252,5 @@ class XMLExporterSkola(Exporter):
                 else:
                     modelAdresa.obecNameStr = adresaLine3[7:]
                     #obvodMestskaCast je None!!! Misto toho tam je castMestaStr
-
+        modelAdresa.print()
         return modelAdresa

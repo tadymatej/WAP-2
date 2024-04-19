@@ -5,6 +5,7 @@ import pandas as pd
 
 from .exporterOborPrijimaciZkouska import ExporterOborPrijimaciZkouska
 from .exporterOborVhodnostProZaky import ExporterOborVhodnostProZaky
+from .dbController import DbController
 
 class ModelObor():
     aktualniRokPrijmou : int = None
@@ -30,8 +31,8 @@ class ModelObor():
 
 class ExporterObor(Exporter):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, dbController : DbController):
+        super().__init__(dbController)
 
     def db_create(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS obor 
@@ -89,14 +90,14 @@ class ExporterObor(Exporter):
                                                     ukonceniStudiaID, stupenVzdelaniID))
 
         oborID = self.cur.fetchone()[0]
-        exporterOborPrijimaciZkouska = ExporterOborPrijimaciZkouska()
+        exporterOborPrijimaciZkouska = ExporterOborPrijimaciZkouska(self.dbController)
         for prijimaciZkouska in model.prijimaciZkousky:
             self.cur.execute("SELECT ID FROM prijimaci_zkouska WHERE Kod = %s", (prijimaciZkouska, ))
             prijimaciZkouskaID = self.cur.fetchone()[0]
 
             exporterOborPrijimaciZkouska.db_export_one(oborID, prijimaciZkouskaID)
 
-        exporterVhodnostProZaky = ExporterOborVhodnostProZaky()
+        exporterVhodnostProZaky = ExporterOborVhodnostProZaky(self.dbController)
         for vhodnostProZaky in model.vhodnostProZaky:
             self.cur.execute("SELECT ID FROM vhodnost_pro_zaky WHERE Kod = %s", (vhodnostProZaky, ))
             vhodnostProZakyID = self.cur.fetchone()[0]

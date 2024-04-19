@@ -2,11 +2,12 @@ from .exporter import Exporter
 from .exporterObor import ExporterObor
 
 import pandas as pd
+from .dbController import DbController
 
 class ExporterPodskola(Exporter):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, dbController : DbController):
+        super().__init__(dbController)
 
     def db_create(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS Podskola
@@ -31,7 +32,7 @@ class ExporterPodskola(Exporter):
         druhPodskoly = druhPodskolyStr.split("/")[1]
         podskolaID = self.db_export_one(skolaID, izo, druhPodskoly)
 
-        exporterObor = ExporterObor()
+        exporterObor = ExporterObor(self.dbController)
         exporterObor.exportList(podskolaID, data.get("vyucovaneObory"))
 
     def exportList(self, skolaID : int, data : list[dict]):

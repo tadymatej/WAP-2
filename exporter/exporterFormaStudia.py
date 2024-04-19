@@ -1,11 +1,12 @@
 from .exporter import Exporter
 
 import pandas as pd
+from .dbController import DbController
 
 class ExporterFormaStudia(Exporter):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, dbController : DbController):
+        super().__init__(dbController)
 
     def db_create(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS forma_studia

@@ -36,22 +36,26 @@ from exporter.exporterSkolkaZakladkaAdresa import ExporterSkolkaZakladkaAdresa
 from exporter.exporterOborSkolkyZakladky import ExporterOborSkolkyZakladky
 from exporter.exporterZarizeniSkolkyZakladky import ExporterZarizeniSkolkyZakladky
 from exporter.exporterZarizeniSkolkyZakladkyAdresa import ExporterZarizeniSkolkyZakladkyAdresa
+from exporter.dbController import DbController
 
 def main():
 
-    exporters : list[Exporter] = [ExporterKraj(), ExporterOkres(), ExporterObec(),  ExporterCastObce(), ExporterJazyk(), ExporterTypZrizovatele(), ExporterMestskaCastObvod(), 
-                                  ExporterTypSkoly(), ExporterDruhPodskoly(), ExporterDruhStudia(), 
-                                  ExporterFormaStudia(), ExporterUkonceniStudia(), ExporterVhodnostProZaky(),
-                                  ExporterStupenVzdelani(), ExporterPrijimaciZkouska(), ExporterSkola()]
+    dbController = DbController()
+
+
+    exporters : list[Exporter] = [ExporterKraj(dbController), ExporterOkres(dbController), ExporterObec(dbController),  ExporterCastObce(dbController), ExporterJazyk(dbController), ExporterTypZrizovatele(dbController), ExporterMestskaCastObvod(dbController), 
+                                  ExporterTypSkoly(dbController), ExporterDruhPodskoly(dbController), ExporterDruhStudia(dbController), 
+                                  ExporterFormaStudia(dbController), ExporterUkonceniStudia(dbController), ExporterVhodnostProZaky(dbController),
+                                  ExporterStupenVzdelani(dbController), ExporterPrijimaciZkouska(dbController), ExporterSkola(dbController)]
 
     exportersClearCreate = exporters.copy()
-    exportersClearCreate.extend([ExporterSkolaVyucovanyJazyk(), ExporterPodskola(), ExporterObor(), ExporterOborPrijimaciZkouska(),
-                                ExporterOborVhodnostProZaky(), ExporterAdresa(), 
+    exportersClearCreate.extend([ExporterSkolaVyucovanyJazyk(dbController), ExporterPodskola(dbController), ExporterObor(dbController), ExporterOborPrijimaciZkouska(dbController),
+                                ExporterOborVhodnostProZaky(dbController), ExporterAdresa(dbController), 
                                 
-                                ExporterZarizeniDruhTyp(), ExporterSkolaDruhTyp(), 
-                                ExporterSkolkaZakladka(), ExporterZarizeniSkolkyZakladky(),
-                                ExporterOborSkolkyZakladky(),
-                                ExporterZarizeniSkolkyZakladkyAdresa(), ExporterSkolkaZakladkaAdresa()])
+                                ExporterZarizeniDruhTyp(dbController), ExporterSkolaDruhTyp(dbController), 
+                                ExporterSkolkaZakladka(dbController), ExporterZarizeniSkolkyZakladky(dbController),
+                                ExporterOborSkolkyZakladky(dbController),
+                                ExporterZarizeniSkolkyZakladkyAdresa(dbController), ExporterSkolkaZakladkaAdresa(dbController)])
 
     for exporter in exportersClearCreate:
         exporter.db_clear()
@@ -60,16 +64,15 @@ def main():
         exporter.db_create()
 
     for exporter in exporters:
+        print("exporting ", exporter)
         exporter.json_export()
 
-    xmlExorterSkola = XMLExporterSkola()
+    xmlExorterSkola = XMLExporterSkola(dbController)
 
-    exportersPrint : list[Exporter] = [ExporterObec()]
+    exportersPrint : list[Exporter] = [ExporterObec(dbController)]
 
     for exporter in exportersPrint:
         exporter.db_select()
         exporter.printResult()
-
-
 
 main()

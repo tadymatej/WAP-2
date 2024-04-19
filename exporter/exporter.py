@@ -2,12 +2,9 @@
 
 import psycopg2
 
-from dbController import DbController
+from .dbController import DbController
 
 class Exporter():
-
-    def __del__(self):
-        self.dbController.__del__()
 
     def printResult(self):
         raise NotImplementedError()

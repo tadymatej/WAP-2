@@ -2,7 +2,7 @@
 from .exporter import Exporter
 
 import pandas as pd
-
+from .dbController import DbController
 
 class SkolkaZakladkaModel():
     reditelEmail : str = None
@@ -19,8 +19,8 @@ class SkolkaZakladkaModel():
 
 class ExporterSkolkaZakladka(Exporter):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, dbController : DbController):
+        super().__init__(dbController)
 
     def db_create(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS skolka_zakladka
