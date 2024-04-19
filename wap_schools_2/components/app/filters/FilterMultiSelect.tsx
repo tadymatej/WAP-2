@@ -39,10 +39,7 @@ export function FilterMultiSelect({
   // const selectedValues = new Set([] as string[]);
 
   return (
-    <Popover
-      open={open}
-      onOpenChange={setOpen}
-    >
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -51,20 +48,14 @@ export function FilterMultiSelect({
           className="w-[200px] justify-between"
         >
           {selectedValuesList.map((value) => (
-            <Badge
-              key={value}
-              className="mr-1"
-            >
+            <Badge key={value} className="mr-1">
               {value}
             </Badge>
           ))}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent
-        className="w-[200px] p-0"
-        align="start"
-      >
+      <PopoverContent className="w-[200px] p-0" align="start">
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>

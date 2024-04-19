@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import { OptionState } from "@/state/types";
 import { useStore } from "@/state/useStore";
 import { CheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -37,7 +38,7 @@ export default function FilterMultiSelectWrapper({
   //for okresy get filter.selectedOkresy, for mestskeCasti get filter.selectedMestskeCasti
   //for obory get filter.selectedObory, for typSkoly get filter.selectedTypSkoly
 
-  const getSelected = (type: FilterMultiSelectWrapperType): string[] => {
+  const getSelected = (type: FilterMultiSelectWrapperType): OptionState[] => {
     switch (type) {
       case FilterMultiSelectWrapperType.Kraj: {
         return filter.krajeSelected;
@@ -105,9 +106,9 @@ export default function FilterMultiSelectWrapper({
   const [open, setOpen] = useState(false);
 
   const [searchText, setSearchText] = useState("");
-  const [options, setOptions] = useState<string[]>([]);
+  const [options, setOptions] = useState<OptionState[]>([]);
 
-  const setInState = (values: string[]) => {
+  const setInState = (values: OptionState[]) => {
     switch (type) {
       case FilterMultiSelectWrapperType.Kraj: {
         filter.setKraje(values);
@@ -149,7 +150,8 @@ export default function FilterMultiSelectWrapper({
       debouncedFetchOptions.cancel();
     };
   }, [type, searchText]);
-
+  console.log("Selected: ", selected);
+  const totalLength = selected.reduce((sum, e) => sum + e.nazev.length, 0);
   return (
     <Popover open={open} onOpenChange={setOpen} modal>
       <PopoverTrigger asChild>
@@ -161,7 +163,9 @@ export default function FilterMultiSelectWrapper({
           aria-label="Select Department"
         >
           <div className="flex w-full flex-row justify-between">
-            <div>{name}</div>
+            <div className="font-normal">
+              {selected.length == 0 ? defaultText : "Vybrano"}
+            </div>
             <div className="w-4" />
             {selected.length > 0 && (
               <>
@@ -172,7 +176,7 @@ export default function FilterMultiSelectWrapper({
                   {selected.length}
                 </Badge>
                 <div className="hidden space-x-1 lg:flex">
-                  {selected.length > 2 ? (
+                  {selected.length > 2 || totalLength > 40 ? (
                     <Badge
                       variant="secondary"
                       className="rounded-sm px-1 font-normal"
@@ -183,10 +187,10 @@ export default function FilterMultiSelectWrapper({
                     selected.map((option) => (
                       <Badge
                         variant="secondary"
-                        key={option}
+                        key={option.id}
                         className="rounded-sm px-1 font-normal"
                       >
-                        {option}
+                        {option.nazev}
                       </Badge>
                     ))
                   )}
@@ -196,7 +200,7 @@ export default function FilterMultiSelectWrapper({
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[300px] p-0">
         <Command shouldFilter={false}>
           <CommandInput
             value={searchText}
@@ -210,19 +214,19 @@ export default function FilterMultiSelectWrapper({
               <CommandEmpty>No department found.</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => {
-                  const isSelected = selected.includes(option);
+                  const isSelected = selected.some((s) => s.id === option.id);
 
                   return (
                     <CommandItem
-                      key={option}
-                      value={option}
+                      key={option.nazev}
+                      value={option.nazev}
                       onSelect={(currentValue) => {
                         if (isSelected) {
                           setInState(
-                            selected.filter((s) => s !== currentValue)
+                            selected.filter((s) => s.nazev !== currentValue)
                           );
                         } else {
-                          setInState([...selected, currentValue]);
+                          setInState([...selected, option]);
                         }
                       }}
                     >
@@ -237,7 +241,7 @@ export default function FilterMultiSelectWrapper({
                         <CheckIcon className={cn("h-4 w-4")} />
                       </div>
 
-                      <span>{option}</span>
+                      <span>{option.nazev}</span>
                     </CommandItem>
                   );
                 })}
