@@ -25,7 +25,8 @@ function whereJoinAdresa(filter: SkolkaZakladkaFilterModel) {
     filter.castObceIDs.length > 0 ||
     filter.krajIDs.length > 0 ||
     filter.mestskaCastIDs.length > 0 ||
-    filter.okresIDs.length > 0
+    filter.okresIDs.length > 0 || 
+    filter.obecIDs.length > 0
   )
     return Prisma.sql` 
         LEFT JOIN skolkazakladka_adresa ON skolkazakladka_adresa.SkolkaZakladkaID = skolka_zakladka.ID
@@ -184,6 +185,7 @@ export async function getSkolkaZakladkaList(
       ${getOffset(filter.offset)}
       `;
   }
+  console.log(sql);
   let res: SkolaZakladniMaterskaType[] = await db.$queryRaw(sql);
   return res;
 }

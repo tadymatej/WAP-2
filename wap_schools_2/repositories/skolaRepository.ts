@@ -40,7 +40,8 @@ function whereJoinAdresa(filter: SkolaFilterModel) {
     filter.castObceIDs.length > 0 ||
     filter.krajIDs.length > 0 ||
     filter.mestskaCastIDs.length > 0 ||
-    filter.okresIDs.length > 0
+    filter.okresIDs.length > 0 || 
+    filter.obecIDs.length > 0
   )
     return Prisma.sql` 
         LEFT JOIN adresa ON adresa.SkolaID = skola.ID
