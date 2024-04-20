@@ -1,5 +1,5 @@
 "use client";
-import { debounce } from "lodash";
+import { capitalize, debounce } from "lodash";
 
 import {
   Command,
@@ -23,8 +23,8 @@ import { OptionState } from "@/state/types";
 import { useStore } from "@/state/useStore";
 import { CheckIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { FilterMultiSelectWrapperType } from "./filter-types";
-import { optionsBasedOnTypeAndSearch } from "./filtering-actions";
+import { optionsBasedOnTypeAndSearch } from "../../../actions/filtering-actions";
+import { FilterMultiSelectWrapperType } from "../../../enums/filter-types";
 
 interface FilterMultiSelectWrapperProps {
   type: FilterMultiSelectWrapperType;
@@ -52,6 +52,22 @@ export default function FilterMultiSelectWrapper({
       case FilterMultiSelectWrapperType.Okres: {
         return filter.okresySelected;
       }
+      case FilterMultiSelectWrapperType.VyucovaneObory: {
+        return filter.vyucovaneOborySelected;
+      }
+      case FilterMultiSelectWrapperType.TypSkoly: {
+        return filter.typySkolSelected;
+      }
+      case FilterMultiSelectWrapperType.PrijmaciZkousky: {
+        return filter.prijmaciZkouskySelected;
+      }
+      case FilterMultiSelectWrapperType.Hodnoceni: {
+        return filter.hodnoceniSelected;
+      }
+      case FilterMultiSelectWrapperType.Skolne: {
+        return filter.skolneSelected;
+      }
+
       default: {
         return [];
       }
@@ -72,26 +88,22 @@ export default function FilterMultiSelectWrapper({
       case FilterMultiSelectWrapperType.Okres: {
         return "okresy";
       }
-      default: {
-        return "";
+      case FilterMultiSelectWrapperType.VyucovaneObory: {
+        return "vyucovane obory";
       }
-    }
-  };
+      case FilterMultiSelectWrapperType.TypSkoly: {
+        return "typy skol";
+      }
+      case FilterMultiSelectWrapperType.PrijmaciZkousky: {
+        return "prijmaci zkousky";
+      }
+      case FilterMultiSelectWrapperType.Hodnoceni: {
+        return "hodnoceni";
+      }
+      case FilterMultiSelectWrapperType.Skolne: {
+        return "skolne";
+      }
 
-  const getName = (type: FilterMultiSelectWrapperType): string => {
-    switch (type) {
-      case FilterMultiSelectWrapperType.Kraj: {
-        return "Kraje";
-      }
-      case FilterMultiSelectWrapperType.Mesto: {
-        return "Mesta";
-      }
-      case FilterMultiSelectWrapperType.MestskaCast: {
-        return "Mestske casti";
-      }
-      case FilterMultiSelectWrapperType.Okres: {
-        return "Okresy";
-      }
       default: {
         return "";
       }
@@ -101,7 +113,7 @@ export default function FilterMultiSelectWrapper({
   const selected = getSelected(type);
   const searchingPlaceholder = "Vyhledat " + getTitleBase(type) + "...";
   const defaultText = "Vyberte " + getTitleBase(type);
-  const name = getName(type);
+  const name = capitalize(getTitleBase(type));
 
   const [open, setOpen] = useState(false);
 
@@ -126,6 +138,27 @@ export default function FilterMultiSelectWrapper({
         filter.setOkresy(values);
         break;
       }
+      case FilterMultiSelectWrapperType.VyucovaneObory: {
+        filter.setVyucovaneObory(values);
+        break;
+      }
+      case FilterMultiSelectWrapperType.TypSkoly: {
+        filter.setTypySkol(values);
+        break;
+      }
+      case FilterMultiSelectWrapperType.PrijmaciZkousky: {
+        filter.setPrijmaciZkousky(values);
+        break;
+      }
+      case FilterMultiSelectWrapperType.Hodnoceni: {
+        filter.setHodnoceni(values);
+        break;
+      }
+      case FilterMultiSelectWrapperType.Skolne: {
+        filter.setSkolne(values);
+        break;
+      }
+
       default: {
         console.log("Unknown type");
       }
@@ -138,6 +171,20 @@ export default function FilterMultiSelectWrapper({
       const result = await optionsBasedOnTypeAndSearch({
         type,
         searchedText: searchText,
+        filterState: {
+          krajeSelected: filter.krajeSelected,
+          mestaSelected: filter.mestaSelected,
+          mestskeCastiSelected: filter.mestskeCastiSelected,
+          vyucovaneOborySelected: filter.vyucovaneOborySelected,
+          typySkolSelected: filter.typySkolSelected,
+          okresySelected: filter.okresySelected,
+          hodnoceniSelected: filter.hodnoceniSelected,
+          prijmaciZkouskySelected: filter.prijmaciZkouskySelected,
+          skolneSelected: filter.skolneSelected,
+          currentLocation: filter.currentLocation,
+          sortBy: filter.sortBy,
+          offset: filter.offset,
+        },
       });
       setOptions(result);
     }, 200); // Wait 300ms after the last call to run the function
@@ -149,7 +196,7 @@ export default function FilterMultiSelectWrapper({
     return () => {
       debouncedFetchOptions.cancel();
     };
-  }, [type, searchText]);
+  }, [filter, type, searchText]);
   console.log("Selected: ", selected);
   const totalLength = selected.reduce((sum, e) => sum + e.nazev.length, 0);
   return (
@@ -176,7 +223,7 @@ export default function FilterMultiSelectWrapper({
                   {selected.length}
                 </Badge>
                 <div className="hidden space-x-1 lg:flex">
-                  {selected.length > 2 || totalLength > 40 ? (
+                  {selected.length > 3 || totalLength > 40 ? (
                     <Badge
                       variant="secondary"
                       className="rounded-sm px-1 font-normal"

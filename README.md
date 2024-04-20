@@ -36,7 +36,7 @@
 
 [ ] For favourites use zustand + middleware for saving to local storage
 
-
-
     overflow-y: scroll;
     max-height: 50vh;
+
+---
