@@ -18,7 +18,7 @@ const initialFilterState: FilterStateDefinition = {
   prijmaciZkouskySelected: [],
   skolneSelected: [],
   currentLocation: undefined,
-  sortBy: SkolySortType.Distance,
+  sortBy: SkolySortType.Nazev,
   offset: 0,
   favourites: [],
   druhPodskolySelected: [],

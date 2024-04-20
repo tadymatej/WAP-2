@@ -45,12 +45,6 @@ export function FilterCard() {
             type={FilterMultiSelectWrapperType.Skolne}
           />
         </div>
-        <div className="space-y-1">
-          <Label htmlFor="name">Hodnocení</Label>
-          <FilterMultiSelectWrapper
-            type={FilterMultiSelectWrapperType.Hodnoceni}
-          />
-        </div>
       </div>
     </div>
   );

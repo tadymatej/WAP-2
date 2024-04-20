@@ -38,6 +38,7 @@ export function SchoolList() {
     setLoading(true);
 
     if (searchingType === SearchingType.StredniVysoke) {
+      console.log("fething skoly vysoke stredni");
       const result = await filterSkoly(
         {
           castObceIDs: [],
@@ -73,10 +74,21 @@ export function SchoolList() {
         }
       );
 
+      console.log("Result: ", result);
+
+      console.log("Vysoke skoly fetched");
+
       setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
+
+      // Usually your response will tell you if there is no more data.
+      if (result.length < 3) {
+        setHasMore(false);
+      }
+      setLoading(false);
     }
 
     if (searchingType === SearchingType.MaterskeZakladni) {
+      console.log("materske skoly");
       const result = await filterSkolkyZakladkyAction(
         {
           castObceIDs: [],
@@ -104,39 +116,47 @@ export function SchoolList() {
         }
       );
 
-      setSkolyZakladniMaterske([...skolyZakladniMaterske, ...result]);
-    }
+      console.log("Result: ", result);
 
-    setSchools([...schools, ...result]);
-    console.log("I have schools: next");
+      console.log("Materske skoly fetched");
+
+      setSkolyZakladniMaterske([...skolyZakladniMaterske, ...result]);
+
+      // Usually your response will tell you if there is no more data.
+      if (result.length < 3) {
+        setHasMore(false);
+      }
+      setLoading(false);
+    }
 
     setPage((prev) => prev + 1);
-
-    console.log("I have schools: next");
-
-    // Usually your response will tell you if there is no more data.
-    if (result.length < 3) {
-      setHasMore(false);
-    }
-    setLoading(false);
   };
 
   useEffect(() => {
     setPage(0);
-    setSchools([]);
+    setSkolyVysokeStredni([]);
+    setSkolyZakladniMaterske([]);
     return () => {};
   }, [filter]);
 
   return (
     <div className="flex flex-col">
       <ScrollArea className="space-y-3">
-        {schools.map((school) => (
-          <SkolaVysokaStredniTile
-            inFavorites={false}
-            key={school.id}
-            skola={school}
-          />
-        ))}
+        {searchingType === SearchingType.StredniVysoke
+          ? skolyVysokeStredni.map((school) => (
+              <SkolaVysokaStredniTile
+                inFavorites={false}
+                key={school.id}
+                skola={school}
+              />
+            ))
+          : skolyZakladniMaterske.map((school) => (
+              <div key={school.id}>
+                {" "}
+                <p> {school.nazev} </p>{" "}
+              </div>
+            ))}
+        ;
       </ScrollArea>
       <InfiniteScroll
         hasMore={hasMore}

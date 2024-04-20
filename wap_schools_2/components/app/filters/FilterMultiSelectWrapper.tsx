@@ -196,7 +196,6 @@ export default function FilterMultiSelectWrapper({
       debouncedFetchOptions.cancel();
     };
   }, [filter, type, searchText]);
-  console.log("Selected: ", selected);
   const totalLength = selected.reduce((sum, e) => sum + e.nazev.length, 0);
   return (
     <Popover open={open} onOpenChange={setOpen} modal>
