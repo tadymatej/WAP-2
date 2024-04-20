@@ -7,16 +7,331 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model projects {
-  id    Int     @id @default(autoincrement())
-  name  String  @db.VarChar(255)
-  tasks tasks[]
+model adresa {
+  id                            Int                             @id @default(autoincrement())
+  cislodomovni                  Int?
+  cisloorientacni               String?                         @db.VarChar(41)
+  kodadresnihomista             Int?
+  psc                           String?                         @db.VarChar(5)
+  ulice                         String?                         @db.VarChar(48)
+  skolaid                       Int?
+  obecid                        Int?
+  mestskacastobvodid            Int?
+  castobceid                    Int?
+  lat                           Float?
+  lon                           Float?
+  cast_obce                     cast_obce?                      @relation(fields: [castobceid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  mestska_cast_obvod            mestska_cast_obvod?             @relation(fields: [mestskacastobvodid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  obec                          obec?                           @relation(fields: [obecid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skola                         skola?                          @relation(fields: [skolaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skolkazakladka_adresa         skolkazakladka_adresa[]
+  zarizeniskolkyzakladky_adresa zarizeniskolkyzakladky_adresa[]
 }
 
-model tasks {
-  id         Int       @id @default(autoincrement())
-  name       String    @db.VarChar(255)
-  completed  Boolean   @default(false)
-  project_id Int?
-  projects   projects? @relation(fields: [project_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model druh_podskoly {
+  id       Int        @id @default(autoincrement())
+  nazev    String?    @db.VarChar(100)
+  kod      String?    @db.VarChar(20)
+  podskola podskola[]
+}
+
+model druh_studia {
+  id    Int     @id @default(autoincrement())
+  nazev String? @db.VarChar(100)
+  kod   String? @db.VarChar(20)
+  obor  obor[]
+}
+
+model forma_studia {
+  id    Int     @id @default(autoincrement())
+  nazev String? @db.VarChar(100)
+  kod   String? @db.VarChar(20)
+  obor  obor[]
+}
+
+model jazyk {
+  id                   Int                    @id @default(autoincrement())
+  nazev                String?                @db.VarChar(100)
+  kod                  String?                @db.VarChar(20)
+  obor_skolky_zakladky obor_skolky_zakladky[]
+  skola_vyucovanyjazyk skola_vyucovanyjazyk[]
+  skolka_zakladka      skolka_zakladka[]
+}
+
+model kraj {
+  id    Int     @id @default(autoincrement())
+  nazev String? @db.VarChar(100)
+  kod   String? @db.VarChar(20)
+  kod3  String? @db.VarChar(20)
+  okres okres[]
+}
+
+model mestska_cast_obvod {
+  id     Int      @id @default(autoincrement())
+  nazev  String?  @db.VarChar(100)
+  kod    Int?
+  obecid Int?
+  adresa adresa[]
+  obec   obec?    @relation(fields: [obecid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model obec {
+  id                 Int                  @id @default(autoincrement())
+  nazev              String?              @db.VarChar(100)
+  okresid            Int?
+  kod                String?              @db.VarChar(20)
+  adresa             adresa[]
+  cast_obce          cast_obce[]
+  mestska_cast_obvod mestska_cast_obvod[]
+  okres              okres?               @relation(fields: [okresid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model obor {
+  id                       Int                     @id @default(autoincrement())
+  aktualnirokprijmou       Int?
+  aktualniskolnirok        Int?
+  delkastudia              Int?
+  kod                      String?                 @db.VarChar(13)
+  minulyrokprihlaseno      Int?
+  minulyrokprijato         Int?
+  minulyskolnirok          Int?
+  nazevoboru               String?                 @db.VarChar(120)
+  nenabizet                Boolean?
+  prospech                 Float?
+  skolne                   Int?
+  zobrazitvkataloguskol    Boolean?
+  povinnalekarskaprohlidka Boolean?
+  vhodneprozakyozp         Boolean?
+  podskolaid               Int?
+  druhstudiaid             Int?
+  formastudiaid            Int?
+  ukoncenistudiaid         Int?
+  stupenvzdelaniid         Int?
+  druh_studia              druh_studia?            @relation(fields: [druhstudiaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  forma_studia             forma_studia?           @relation(fields: [formastudiaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  podskola                 podskola?               @relation(fields: [podskolaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  stupen_vzdelani          stupen_vzdelani?        @relation(fields: [stupenvzdelaniid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ukonceni_studia          ukonceni_studia?        @relation(fields: [ukoncenistudiaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  obor_prijimacizkouska    obor_prijimacizkouska[]
+  obor_vhodnostprozaky     obor_vhodnostprozaky[]
+}
+
+model obor_prijimacizkouska {
+  id                 Int                @id @default(autoincrement())
+  oborid             Int?
+  prijimacizkouskaid Int?
+  obor               obor?              @relation(fields: [oborid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  prijimaci_zkouska  prijimaci_zkouska? @relation(fields: [prijimacizkouskaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model obor_vhodnostprozaky {
+  id                Int                @id @default(autoincrement())
+  oborid            Int?
+  vhodnostprozakyid Int?
+  obor              obor?              @relation(fields: [oborid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  vhodnost_pro_zaky vhodnost_pro_zaky? @relation(fields: [vhodnostprozakyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model okres {
+  id     Int     @id @default(autoincrement())
+  nazev  String? @db.VarChar(100)
+  krajid Int?
+  kod3   String? @db.VarChar(20)
+  kod    String? @db.VarChar(20)
+  obec   obec[]
+  kraj   kraj?   @relation(fields: [krajid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model podskola {
+  id             Int            @id @default(autoincrement())
+  izo            Int?
+  druhpodskolyid Int?
+  skolaid        Int?
+  obor           obor[]
+  druh_podskoly  druh_podskoly? @relation(fields: [druhpodskolyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skola          skola?         @relation(fields: [skolaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model prijimaci_zkouska {
+  id                    Int                     @id @default(autoincrement())
+  nazev                 String?                 @db.VarChar(100)
+  kod                   String?                 @db.VarChar(20)
+  obor_prijimacizkouska obor_prijimacizkouska[]
+}
+
+model skola {
+  id                   Int                    @id @default(autoincrement())
+  nazev                String?                @db.VarChar(255)
+  ico                  String?                @db.VarChar(8)
+  email                String?                @db.VarChar(254)
+  kontaktniosoba       String?                @db.VarChar(64)
+  kontaktniosobatel    String?                @db.VarChar(50)
+  poznamka             String?                @db.VarChar(4000)
+  reditel              String?                @db.VarChar(64)
+  rediteltel           String?                @db.VarChar(50)
+  stravovani           Int?
+  ubytovani            Int?
+  url                  String?                @db.VarChar(2048)
+  typzrizovateleid     Int?
+  typskolyid           Int?
+  adresa               adresa[]
+  hodnoceni            hodnoceni[]
+  podskola             podskola[]
+  typ_skoly            typ_skoly?             @relation(fields: [typskolyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  typ_zrizovatele      typ_zrizovatele?       @relation(fields: [typzrizovateleid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skola_vyucovanyjazyk skola_vyucovanyjazyk[]
+}
+
+model skola_vyucovanyjazyk {
+  id      Int    @id @default(autoincrement())
+  skolaid Int?
+  jazykid Int?
+  jazyk   jazyk? @relation(fields: [jazykid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skola   skola? @relation(fields: [skolaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model stupen_vzdelani {
+  id    Int     @id @default(autoincrement())
+  nazev String? @db.VarChar(100)
+  kod   String? @db.VarChar(20)
+  obor  obor[]
+}
+
+model typ_skoly {
+  id    Int     @id @default(autoincrement())
+  nazev String? @db.VarChar(100)
+  kod   String? @db.VarChar(20)
+  skola skola[]
+}
+
+model typ_zrizovatele {
+  id              Int               @id @default(autoincrement())
+  nazev           String?           @db.VarChar(100)
+  kod             String?           @db.VarChar(20)
+  skola           skola[]
+  skolka_zakladka skolka_zakladka[]
+}
+
+model ukonceni_studia {
+  id    Int     @id @default(autoincrement())
+  nazev String? @db.VarChar(100)
+  kod   String? @db.VarChar(20)
+  obor  obor[]
+}
+
+model vhodnost_pro_zaky {
+  id                   Int                    @id @default(autoincrement())
+  nazev                String?                @db.VarChar(100)
+  kod                  String?                @db.VarChar(20)
+  obor_vhodnostprozaky obor_vhodnostprozaky[]
+}
+
+model cast_obce {
+  id     Int      @id @default(autoincrement())
+  nazev  String?  @db.VarChar(100)
+  kod    String?  @db.VarChar(20)
+  obecid Int?
+  adresa adresa[]
+  obec   obec?    @relation(fields: [obecid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model hodnoceni {
+  id                 Int                 @id @default(autoincrement())
+  hvezdicek          Int
+  popis              String?             @db.VarChar(1000)
+  jinaroleuzivatele  String?             @db.VarChar(100)
+  autor              String?             @db.VarChar(100)
+  typroleuzivateleid Int?
+  skolaid            Int?
+  skolkazakladkaid   Int?
+  skola              skola?              @relation(fields: [skolaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skolka_zakladka    skolka_zakladka?    @relation(fields: [skolkazakladkaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  typ_role_uzivatele typ_role_uzivatele? @relation(fields: [typroleuzivateleid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model mestske_casti_obvody {
+  id     Int     @id @default(autoincrement())
+  nazev  String? @db.VarChar(100)
+  kod    Int?
+  obecid Int?
+}
+
+model obor_skolky_zakladky {
+  id               Int              @id @default(autoincrement())
+  kapacita         Int?
+  delkavzdelavani  Int?
+  obordobihajici   Boolean?
+  nazev            String?          @db.VarChar(255)
+  kod              String?          @db.VarChar(100)
+  skolkazakladkaid Int?
+  jazykid          Int?
+  jazyk            jazyk?           @relation(fields: [jazykid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skolka_zakladka  skolka_zakladka? @relation(fields: [skolkazakladkaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model skola_druh_typ {
+  id              Int               @id @default(autoincrement())
+  nazev           String?           @db.VarChar(100)
+  kod             String?           @db.VarChar(20)
+  skolka_zakladka skolka_zakladka[]
+}
+
+model skolka_zakladka {
+  id                       Int                        @id @default(autoincrement())
+  nazev                    String?                    @db.VarChar(255)
+  zkracenynazev            String?                    @db.VarChar(200)
+  reditel                  String?                    @db.VarChar(150)
+  reditelemail             String?                    @db.VarChar(200)
+  datumzahajeni            DateTime?                  @db.Date
+  kapacita                 Int?
+  jazykid                  Int?
+  typzrizovateleid         Int?
+  skoladruhtypid           Int?
+  hodnoceni                hodnoceni[]
+  obor_skolky_zakladky     obor_skolky_zakladky[]
+  jazyk                    jazyk?                     @relation(fields: [jazykid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skola_druh_typ           skola_druh_typ?            @relation(fields: [skoladruhtypid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  typ_zrizovatele          typ_zrizovatele?           @relation(fields: [typzrizovateleid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skolkazakladka_adresa    skolkazakladka_adresa[]
+  zarizeni_skolky_zakladky zarizeni_skolky_zakladky[]
+}
+
+model skolkazakladka_adresa {
+  id               Int              @id @default(autoincrement())
+  adresaid         Int?
+  skolkazakladkaid Int?
+  adresa           adresa?          @relation(fields: [adresaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skolka_zakladka  skolka_zakladka? @relation(fields: [skolkazakladkaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model typ_role_uzivatele {
+  id        Int         @id @default(autoincrement())
+  nazev     String?     @db.VarChar(100)
+  hodnoceni hodnoceni[]
+}
+
+model zarizeni_druh_typ {
+  id                       Int                        @id @default(autoincrement())
+  nazev                    String?                    @db.VarChar(100)
+  kod                      String?                    @db.VarChar(20)
+  zarizeni_skolky_zakladky zarizeni_skolky_zakladky[]
+}
+
+model zarizeni_skolky_zakladky {
+  id                            Int                             @id @default(autoincrement())
+  kapacita                      Int?
+  nazev                         String?                         @db.VarChar(255)
+  skolkazakladkaid              Int?
+  zarizenidruhtypid             Int?
+  skolka_zakladka               skolka_zakladka?                @relation(fields: [skolkazakladkaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  zarizeni_druh_typ             zarizeni_druh_typ?              @relation(fields: [zarizenidruhtypid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  zarizeniskolkyzakladky_adresa zarizeniskolkyzakladky_adresa[]
+}
+
+model zarizeniskolkyzakladky_adresa {
+  id                       Int                       @id @default(autoincrement())
+  adresaid                 Int?
+  zarizeniskolkyzakladkyid Int?
+  adresa                   adresa?                   @relation(fields: [adresaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  zarizeni_skolky_zakladky zarizeni_skolky_zakladky? @relation(fields: [zarizeniskolkyzakladkyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

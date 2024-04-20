@@ -1,0 +1,67 @@
+{
+  "polozky": [
+    {
+      "id": "DruhStudia/1",
+      "kod": "1",
+      "nazev": {
+        "cs": "Nástavbové"
+      }
+    },
+    {
+      "id": "DruhStudia/2",
+      "kod": "2",
+      "nazev": {
+        "cs": "Vyšší odborné"
+      }
+    },
+    {
+      "id": "DruhStudia/3",
+      "kod": "3",
+      "nazev": {
+        "cs": "Specializační"
+      }
+    },
+    {
+      "id": "DruhStudia/4",
+      "kod": "4",
+      "nazev": {
+        "cs": "Zdokonalovací"
+      }
+    },
+    {
+      "id": "DruhStudia/5",
+      "kod": "5",
+      "nazev": {
+        "cs": "Kvalifikační"
+      }
+    },
+    {
+      "id": "DruhStudia/6",
+      "kod": "6",
+      "nazev": {
+        "cs": "Nevyplňovat"
+      }
+    },
+    {
+      "id": "DruhStudia/7",
+      "kod": "7",
+      "nazev": {
+        "cs": "Zkrácené s VL"
+      }
+    },
+    {
+      "id": "DruhStudia/8",
+      "kod": "8",
+      "nazev": {
+        "cs": "Zkrácené s MT"
+      }
+    },
+    {
+      "id": "DruhStudia/9",
+      "kod": "9",
+      "nazev": {
+        "cs": "Pomaturitní"
+      }
+    }
+  ]
+}

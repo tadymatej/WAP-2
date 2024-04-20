@@ -1,0 +1,85 @@
+//ulice + cislo domovni + '/' + cislo orientacni + psc + mestska cast | cast obce + mesto/obec
+
+//- mestska cast se muze == mesto/obec
+
+{
+  "adresa": [
+    {
+      "obec": {
+        "nazev": "Praha",
+        "okres": {
+          "nazev": "území Hlavního města Prahy",
+          "kraj": {
+            "nazev": "Hlavní město Praha"
+          }
+        }
+      },
+      "cislodomovni": 474,
+      "cisloorientacni": "3",
+      "psc": "16000",
+      "ulice": null,
+      "mestska_cast_obvod": {
+        "nazev": "Praha 6"
+      }
+    }
+  ],
+  "id": 2,
+  "typ_skoly": {
+    "id": 1,
+    "nazev": "Církevní",
+    "kod": "cirk"
+  },
+  "reditel": "Doc. ThDr. Daviv Tonzar, Th.Dr. ",
+  "rediteltel": null,
+  "nazev": "Vyšší odborná škola Husův institut teologických studií",
+  "skola_vyucovanyjazyk": [],
+  "url": null,
+  "typ_zrizovatele": {
+    "id": 1,
+    "nazev": "Jiný zřizovatel",
+    "kod": "jiny"
+  },
+  "email": "hits@hitspraha.cz",
+  "kontaktniosoba": null,
+  "kontaktniosobatel": "233 371 541",
+  "poznamka": null,
+  "ubytovani": null,
+  "stravovani": null,
+  "podskola": [
+    {
+      "obor": [
+        {
+          "minulyrokprihlaseno": null,
+          "minulyrokprijato": null,
+          "nazevoboru": "Teologie a pastorace",
+          "obor_prijimacizkouska": [],
+          "obor_vhodnostprozaky": [
+            {
+              "vhodnost_pro_zaky": {
+                "nazev": "Maturanti"
+              }
+            }
+          ],
+          "povinnalekarskaprohlidka": false,
+          "skolne": null,
+          "prospech": null,
+          "stupen_vzdelani": {
+            "nazev": "Vyšší odborné"
+          },
+          "ukonceni_studia": {
+            "nazev": "Absolutorium"
+          },
+          "vhodneprozakyozp": false,
+          "aktualnirokprijmou": null,
+          "delkastudia": 3,
+          "druh_studia": {
+            "nazev": "Vyšší odborné"
+          },
+          "forma_studia": {
+            "nazev": "Dálková"
+          }
+        }
+      ]
+    }
+  ]
+}
