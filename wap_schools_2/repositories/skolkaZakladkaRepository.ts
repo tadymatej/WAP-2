@@ -65,7 +65,7 @@ function getOrderBy(order: SkolkaZakladkaOrderByModel) {
       return Prisma.sql` ORDER BY hodnoceni.hvezdicek`;
     case SkolkaZakladkaOrderByEnum.Location: {
       if (order.lon == null || order.lat == null) throw "Missing coordinates";
-      return Prisma.sql` ORDER BY (POW((adresa.lon - ${order.lon}),2) + POW((adresa.lat-${order.lat}),2))`;
+      return Prisma.sql` ORDER BY vzdalenost`;
     }
     case SkolkaZakladkaOrderByEnum.Nazev:
       return Prisma.sql` ORDER BY skolka_zakladka.nazev`;
@@ -161,9 +161,7 @@ export async function getSkolkaZakladkaList(
         FROM (
           SELECT DISTINCT
             skolka_zakladka.*,
-            POW((adresa.lon - ${order.lon}), 2) + POW((adresa.lat - ${
-      order.lat
-    }), 2) AS vzdalenost
+            POW((adresa.lon - ${order.lon}), 2) + POW((adresa.lat - ${order.lat}), 2) AS vzdalenost
           FROM skolka_zakladka
           ${getOrderByJoinHodnoceni(order.type)}
           ${getOrderByJoinAdresa(order.type)}
@@ -185,8 +183,8 @@ export async function getSkolkaZakladkaList(
       ${getOffset(filter.offset)}
       `;
   }
+  console.log(sql);
   let res: SkolaZakladniMaterskaType[] = await db.$queryRaw(sql);
   console.log(filter);
-  console.log(sql);
   return res;
 }

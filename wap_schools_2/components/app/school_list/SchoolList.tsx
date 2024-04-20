@@ -71,6 +71,8 @@ export function SchoolList() {
         },
         {
           type: SkolaOrderByFromSortBy[filter.sortBy],
+          lat: filter.latitude,
+          lon: filter.longitude,
         }
       );
 
@@ -114,6 +116,8 @@ export function SchoolList() {
         },
         {
           type: SkolkaZakladkaOrderByFromSortBy[filter.sortBy],
+          lat: filter.latitude,
+          lon: filter.longitude,
         }
       );
 
