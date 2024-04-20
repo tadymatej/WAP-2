@@ -6,7 +6,7 @@ import { OborFilterModel } from "@/repositories/filterModels/oborFilterModel";
 import { SkolaFilterModel } from "@/repositories/filterModels/skolaFilterModel"
 import { getHodnoceniList } from "@/repositories/hodnoceniRepository";
 import { getOborList } from "@/repositories/oborRepository";
-import { SkolaOrderByModel } from "@/repositories/orderByTypes/skolaOrderByEnum"
+import { SkolaOrderByModel } from "@/repositories/orderByTypes/skolaOrderByTypes"
 import { getPodskolaList } from "@/repositories/podskolaRepository";
 import { getSkolaList } from "@/repositories/skolaRepository"
 
@@ -15,7 +15,8 @@ export async function filterSkoly(filter : SkolaFilterModel, order : SkolaOrderB
     let res = await Promise.all(skoly.map(async (s) => {
       let filterModel : AdresaFilterModel = {
         skolaIDs: [s.id],
-        IDs: []
+        IDs: [],
+        skolkaZakladkaIDs: []
       };
       let hodnoceniFilterModel : HodnoceniFilterModel = {
         skolaIDs: [s.id],

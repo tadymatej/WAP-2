@@ -1,21 +1,19 @@
 import { BaseFilterModel } from "./baseFilterModel";
 import { FilterItemRange } from "./filterItems/filterItemRange";
 
-export type SkolaFilterModel = BaseFilterModel & {
-  IDs: number[];
+export type SkolkaZakladkaFilterModel = BaseFilterModel & {
   krajIDs: number[];
   okresIDs: number[];
   obecIDs: number[];
   castObceIDs: number[];
   mestskaCastIDs: number[];
-  typSkolyIDs: number[];
-  skolneRange: FilterItemRange[];
-  hodnoceniRange?: FilterItemRange;
   vzdalenostMax?: number;
-  prijimaciZkouskaIDs: number[];
-  druhSkolyIDs: number[];
-  oborIDs: number[];
+  hodnoceniRange?: FilterItemRange;
+  skolaDruhTypIDs: number[];
+  zarizeniIDs: number[];  
   nazev?: string;
+  typZrizovateleIDs: number[];
+  IDs: number[];
 
   lat?: number;
   lon?:number;

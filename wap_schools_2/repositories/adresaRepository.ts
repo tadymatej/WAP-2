@@ -3,7 +3,41 @@
 import { db } from "@/lib/db";
 import { AdresaFilterModel } from "./filterModels/adresaFilterModel";
 
+async function getAdresaSkolkaZakladkaList(filter : AdresaFilterModel) {
+  return await db.skolkazakladka_adresa.findMany({
+    where: {
+      skolkazakladkaid: filter.skolkaZakladkaIDs.length == 0 ? undefined : {
+        in : filter.skolkaZakladkaIDs
+      },
+      adresaid: filter.IDs.length == 0 ? undefined : {
+        in: filter.IDs
+      }
+    },
+    select: {
+      adresa: {
+        select: {
+          id: true,
+          ulice: true,
+          cislodomovni: true,
+          cisloorientacni: true,
+          psc: true,
+          obec: { select: { nazev: true } },
+          mestska_cast_obvod: { select: { nazev: true } },
+          cast_obce: { select: { nazev: true } },
+          skolkazakladka_adresa: {
+            select: {
+              id: true,
+            }
+          }
+        }
+      },
+      
+    }
+  })
+}
+
 export async function getAdresaList(filter : AdresaFilterModel) {
+  if(filter.skolkaZakladkaIDs.length > 0) return getAdresaSkolkaZakladkaList(filter);
   return await db.adresa.findMany({
     where: {
       id: filter.IDs.length == 0 ? undefined : {
@@ -11,7 +45,7 @@ export async function getAdresaList(filter : AdresaFilterModel) {
       },
       skolaid: filter.skolaIDs.length == 0 ? undefined : {
         in: filter.skolaIDs
-      }
+      },
     },
     select: {
       id: true,

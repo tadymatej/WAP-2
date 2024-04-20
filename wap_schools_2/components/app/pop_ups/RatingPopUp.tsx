@@ -15,17 +15,23 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@radix-ui/react-select";
 import { useEffect, useState,  } from 'react'
 import { HodnoceniModel } from '../../../repositories/models/hodnoceniModel';
+import {
+    SkolkaZakladkaOrderByEnum,
+    SkolkaZakladkaOrderByModel
+} from '../../../repositories/orderByTypes/skolkaZakladkaOrderByTypes';
 import { getHodnoceniList, insertHodnoceni } from "@/repositories/hodnoceniRepository";
 import { HodnoceniFilterModel } from "@/repositories/filterModels/hodnoceniFilterModel";
 import { getTypRoleUzivateleiList } from "@/repositories/typRoleUzivateleRepository";
 import { TypRoleUzivateleFilterModel } from "@/repositories/filterModels/typRoleUzivateleFilterModel";
-import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByEnum";
+import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
 
-import { SkolaOrderByModel } from "@/repositories/orderByTypes/skolaOrderByEnum";
+import { SkolaOrderByModel } from "@/repositories/orderByTypes/skolaOrderByTypes";
 import { SkolaFilterModel } from "@/repositories/filterModels/skolaFilterModel";
 import { getSkolaList } from "@/repositories/skolaRepository";
 import { FilterItemRange } from "@/repositories/filterModels/filterItems/filterItemRange";
 import { filterSkoly } from "@/actions/filterSkolyAction";
+import { SkolkaZakladkaFilterModel } from "@/repositories/filterModels/skolkaZakladkaFilterModel";
+import { filterSkolkyZakladkyAction } from "@/actions/filtrySkolkyZakladkyAction";
 
 const FormSchema = z.object({
   jinaRoleUzivatele: z.string().optional(),
@@ -104,7 +110,25 @@ export function RatingPopUp(props: RatingPopUpProps) {
       let skolaOrderByModel : SkolaOrderByModel = {
         type: SkolaOrderByEnum.Nazev
       }
-      console.log(await filterSkoly(skolaFilter, skolaOrderByModel));
+      //console.log(await filterSkoly(skolaFilter, skolaOrderByModel));
+
+      let skolkaZakladkaFilter : SkolkaZakladkaFilterModel = {
+        krajIDs: [1, 2, 3],
+        IDs: [],
+        okresIDs: [],
+        obecIDs: [],
+        castObceIDs: [],
+        mestskaCastIDs: [],
+        skolaDruhTypIDs: [],
+        zarizeniIDs: [],
+        typZrizovateleIDs: [],
+        limit: 10,
+        offset: 20
+      };
+      let skolkaZakladkaOrderByModel : SkolkaZakladkaOrderByModel = {
+        type: SkolkaZakladkaOrderByEnum.Nazev
+      }
+      console.log(await filterSkolkyZakladkyAction(skolkaZakladkaFilter, skolkaZakladkaOrderByModel));
     }
     fetchData();
   }, []);
