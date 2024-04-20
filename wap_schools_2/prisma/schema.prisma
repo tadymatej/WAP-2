@@ -89,10 +89,12 @@ model obec {
 model obor {
   id                       Int                     @id @default(autoincrement())
   aktualnirokprijmou       Int?
+  aktualniskolnirok        Int?
   delkastudia              Int?
   kod                      String?                 @db.VarChar(13)
   minulyrokprihlaseno      Int?
   minulyrokprijato         Int?
+  minulyskolnirok          Int?
   nazevoboru               String?                 @db.VarChar(120)
   nenabizet                Boolean?
   prospech                 Float?
@@ -173,6 +175,7 @@ model skola {
   typzrizovateleid     Int?
   typskolyid           Int?
   adresa               adresa[]
+  hodnoceni            hodnoceni[]
   podskola             podskola[]
   typ_skoly            typ_skoly?             @relation(fields: [typskolyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
   typ_zrizovatele      typ_zrizovatele?       @relation(fields: [typzrizovateleid], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -232,6 +235,27 @@ model cast_obce {
   obec   obec?    @relation(fields: [obecid], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
+model hodnoceni {
+  id                 Int                 @id @default(autoincrement())
+  hvezdicek          Int
+  popis              String?             @db.VarChar(1000)
+  jinaroleuzivatele  String?             @db.VarChar(100)
+  autor              String?             @db.VarChar(100)
+  typroleuzivateleid Int?
+  skolaid            Int?
+  skolkazakladkaid   Int?
+  skola              skola?              @relation(fields: [skolaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  skolka_zakladka    skolka_zakladka?    @relation(fields: [skolkazakladkaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  typ_role_uzivatele typ_role_uzivatele? @relation(fields: [typroleuzivateleid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model mestske_casti_obvody {
+  id     Int     @id @default(autoincrement())
+  nazev  String? @db.VarChar(100)
+  kod    Int?
+  obecid Int?
+}
+
 model obor_skolky_zakladky {
   id               Int              @id @default(autoincrement())
   kapacita         Int?
@@ -263,6 +287,7 @@ model skolka_zakladka {
   jazykid                  Int?
   typzrizovateleid         Int?
   skoladruhtypid           Int?
+  hodnoceni                hodnoceni[]
   obor_skolky_zakladky     obor_skolky_zakladky[]
   jazyk                    jazyk?                     @relation(fields: [jazykid], references: [id], onDelete: NoAction, onUpdate: NoAction)
   skola_druh_typ           skola_druh_typ?            @relation(fields: [skoladruhtypid], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -277,6 +302,12 @@ model skolkazakladka_adresa {
   skolkazakladkaid Int?
   adresa           adresa?          @relation(fields: [adresaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
   skolka_zakladka  skolka_zakladka? @relation(fields: [skolkazakladkaid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model typ_role_uzivatele {
+  id        Int         @id @default(autoincrement())
+  nazev     String?     @db.VarChar(100)
+  hodnoceni hodnoceni[]
 }
 
 model zarizeni_druh_typ {
