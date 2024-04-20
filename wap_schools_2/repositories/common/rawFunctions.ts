@@ -18,7 +18,7 @@ export function whereConditionOkresIDs(okresIDs : number[]) {
 
 export function whereConditionObecIDs(obecIDs : number[]) {
   if(obecIDs.length > 0) {
-    return Prisma.sql` AND okres.ID IN (${Prisma.join(obecIDs)})`;
+    return Prisma.sql` AND obec.ID IN (${Prisma.join(obecIDs)})`;
   }
   return Prisma.sql``;
 }
@@ -41,7 +41,7 @@ export function whereConditionMestskaCastIDs(mestskaCastIDs : number[]) {
 export function whereConditionHodnoceni(hodnoceniRange : FilterItemRange | undefined) {
   if(hodnoceniRange === undefined || (hodnoceniRange.end === undefined && hodnoceniRange.start === undefined)) 
     return Prisma.sql``;
-  Prisma.sql` AND ( 0 = 1
+  return Prisma.sql` AND ( 0 = 1
     ${hodnoceniRange.start !== undefined ? Prisma.sql` OR hodnoceni.hvezdicek >= ${hodnoceniRange.start}` : Prisma.empty}
     ${hodnoceniRange.end !== undefined ? Prisma.sql` OR hodnoceni.hvezdicek <= ${hodnoceniRange.end}` : Prisma.empty}
   )`;

@@ -185,7 +185,8 @@ export async function getSkolkaZakladkaList(
       ${getOffset(filter.offset)}
       `;
   }
-  console.log(sql);
   let res: SkolaZakladniMaterskaType[] = await db.$queryRaw(sql);
+  console.log(filter);
+  console.log(sql);
   return res;
 }
