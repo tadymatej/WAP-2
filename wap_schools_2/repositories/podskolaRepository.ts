@@ -16,6 +16,11 @@ export async function getPodskolaList(filter : PodskolaFilterModel) {
     select: {
       id: true,
       izo: true,
+      druh_podskoly: {
+        select: {
+          nazev: true
+        }
+      },
       obor: {
         select: {
           id: true

@@ -91,7 +91,7 @@ function whereConditionOborIDs(oborIDs: number[]) {
 function whereConditionSkolne(skolneRange: FilterItemRange[]) {
   if (skolneRange.length == 0) return Prisma.sql``;
   return Prisma.sql`
-    AND (0 = 1
+    AND (0 = 1 
       ${Prisma.join(
         skolneRange.map((range) => {
           return Prisma.sql`
@@ -215,5 +215,8 @@ export async function getSkolaList(filter: SkolaFilterModel, order: SkolaOrderBy
     ${getLimit(filter.limit)}
     ${getOffset(filter.offset)}
   `;
-  return await db.$queryRaw(sql);
+  console.log(sql);
+  let res : SkolaVysokaStredniType[] = await db.$queryRaw(sql);
+  console.log(res);
+  return res;
 }
