@@ -1,11 +1,15 @@
 "use client";
 
-import { searchingForSchools, UsersWithPosts } from "@/actions/search-schools";
+import {
+  searchingForSchools,
+  SkolaVysokaStredniList,
+} from "@/actions/search-schools";
 import InfiniteScroll from "@/components/ui/infinite-scroll";
 import { useStore } from "@/state/useStore";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import SkolaVysokaStredniTile from "./SkolaVysokaStredniTile";
 
 export function SchoolList() {
   const filter = useStore((state) => state.filter);
@@ -16,7 +20,7 @@ export function SchoolList() {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [schools, setSchools] = useState<UsersWithPosts>([]);
+  const [schools, setSchools] = useState<SkolaVysokaStredniList>([]);
 
   const next = async () => {
     setLoading(true);
@@ -41,13 +45,21 @@ export function SchoolList() {
         skolneSelected: filter.skolneSelected,
         offset: page,
         sortBy: filter.sortBy,
-        favoutiteSchools: filter.favoutiteSchools,
+        druhPodskolySelected: filter.druhPodskolySelected,
+        skolaDruhTypeSelected: filter.skolaDruhTypeSelected,
+        lokaceSelected: filter.lokaceSelected,
+        vysokeStredniSelected: filter.vysokeStredniSelected,
+        zakladniMaterskaSelected: filter.zakladniMaterskaSelected,
+        searchingType: filter.searchingType,
+        favourites: filter.favourites,
       },
     });
     setSchools([...schools, ...result]);
     console.log("I have schools: next");
 
     setPage((prev) => prev + 1);
+
+    console.log("I have schools: next");
 
     // Usually your response will tell you if there is no more data.
     if (result.length < 3) {
@@ -61,15 +73,16 @@ export function SchoolList() {
     setSchools([]);
     return () => {};
   }, [filter]);
-  //pretier print it
-  if (schools.length !== 0)
-    console.log("Example school: ", JSON.stringify(schools[0], null, 2));
 
   return (
     <div className="flex flex-col">
-      <ScrollArea>
+      <ScrollArea className="space-y-3">
         {schools.map((school) => (
-          <pre key={school.id}>{JSON.stringify(school, null, 2)}</pre>
+          <SkolaVysokaStredniTile
+            inFavorites={false}
+            key={school.id}
+            skola={school}
+          />
         ))}
       </ScrollArea>
       <InfiniteScroll

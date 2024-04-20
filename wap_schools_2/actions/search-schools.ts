@@ -8,8 +8,16 @@ interface OptionsBasedOnTypeAndSearchInputProps {
   filterState: FilterStateDefinition;
 }
 
+export type SkolaVysokaStredniType = SkolaVysokaStredniList extends (infer T)[]
+  ? T
+  : never;
+
+export type SkolaVysokaStredniAdresaType = SkolaVysokaStredniType["adresa"];
+
+export type SkolaVysokaStredniPodskolaType =
+  SkolaVysokaStredniType["podskola"] extends (infer T)[] ? T : never;
 //Derive type from searchingForSchools
-export type UsersWithPosts = Prisma.PromiseReturnType<
+export type SkolaVysokaStredniList = Prisma.PromiseReturnType<
   typeof searchingForSchools
 >;
 
@@ -18,52 +26,13 @@ export async function searchingForSchools({
 }: OptionsBasedOnTypeAndSearchInputProps) {
   const sortBy = filterState.sortBy;
   console.log("Searching for schools");
+  const listIds = [1, 2, 3, 4, 5];
   return await db.skola.findMany({
     where: {
-      adresa: {
-        some: {
-          obec: {
-            id: {
-              in:
-                filterState.mestaSelected.length == 0
-                  ? undefined
-                  : filterState.mestaSelected.map((m) => m.id),
-            },
-            okres: {
-              id: {
-                in:
-                  filterState.okresySelected.length == 0
-                    ? undefined
-                    : filterState.okresySelected.map((o) => o.id),
-              },
-              kraj: {
-                id: {
-                  in:
-                    filterState.krajeSelected.length == 0
-                      ? undefined
-                      : filterState.krajeSelected.map((k) => k.id),
-                },
-              },
-            },
-          },
-        },
-      },
-      podskola: {
-        some: {
-          obor: {
-            some: {
-              id: {
-                in:
-                  filterState.vyucovaneOborySelected.length == 0
-                    ? undefined
-                    : filterState.vyucovaneOborySelected.map((o) => o.id),
-              },
-            },
-          },
-        },
+      id: {
+        in: listIds,
       },
     },
-
     select: {
       adresa: {
         select: {
@@ -95,6 +64,7 @@ export async function searchingForSchools({
           },
         },
       },
+
       typ_skoly: {
         select: {
           nazev: true,
@@ -103,7 +73,15 @@ export async function searchingForSchools({
       reditel: true,
       rediteltel: true,
       nazev: true,
-      skola_vyucovanyjazyk: true,
+      skola_vyucovanyjazyk: {
+        select: {
+          jazyk: {
+            select: {
+              nazev: true,
+            },
+          },
+        },
+      },
       url: true,
       typ_zrizovatele: {
         select: {
@@ -120,6 +98,11 @@ export async function searchingForSchools({
 
       podskola: {
         select: {
+          druh_podskoly: {
+            select: {
+              nazev: true,
+            },
+          },
           obor: {
             select: {
               minulyrokprihlaseno: true,
@@ -127,13 +110,14 @@ export async function searchingForSchools({
               nazevoboru: true,
               obor_prijimacizkouska: {
                 select: {
-                  obor: {
+                  prijimaci_zkouska: {
                     select: {
-                      nazevoboru: true,
+                      nazev: true,
                     },
                   },
                 },
               },
+
               obor_vhodnostprozaky: {
                 select: {
                   vhodnost_pro_zaky: {
@@ -178,6 +162,6 @@ export async function searchingForSchools({
     orderBy: {
       nazev: sortBy === SkolySortType.Nazev ? "asc" : undefined,
     },
-    take: 50,
+    take: 20,
   });
 }

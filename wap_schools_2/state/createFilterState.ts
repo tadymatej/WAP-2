@@ -1,3 +1,6 @@
+import { SkolaVysokaStredniType } from "@/actions/search-schools";
+import { SkolaZakladniMaterskaType } from "@/actions/search-zaklani_schools";
+import { SearchingType } from "@/enums/filter-types";
 import {
   FilterStateDefinition,
   FilterStateType,
@@ -17,7 +20,14 @@ const initialFilterState: FilterStateDefinition = {
   currentLocation: undefined,
   sortBy: SkolySortType.Distance,
   offset: 0,
-  favoutiteSchools: [],
+  favourites: [],
+  druhPodskolySelected: [],
+  skolaDruhTypeSelected: [],
+  lokaceSelected: [],
+  vysokeStredniSelected: undefined,
+  zakladniMaterskaSelected: undefined,
+  //set searching
+  searchingType: SearchingType.MaterskeZakladni,
 };
 
 export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
@@ -94,10 +104,45 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
       state.filter.offset = offset;
     });
   },
-  //setFavouriteSchools
-  setFavouriteSchools(favouriteSchools) {
+
+  //setFavourite
+  setFavourite(favourite) {
     set((state) => {
-      state.filter.favoutiteSchools = favouriteSchools;
+      state.filter.favourites = favourite;
     });
+  },
+
+  //setVysokeStredniSelected
+  setVysokeStredniSelected(skola) {
+    set((state) => {
+      state.filter.vysokeStredniSelected = skola;
+      state.filter.zakladniMaterskaSelected = undefined;
+    });
+  },
+
+  //setMaterskaZakladniSelected
+  setMaterskaZakladniSelected(skola) {
+    set((state) => {
+      state.filter.zakladniMaterskaSelected = skola;
+      state.filter.vysokeStredniSelected = undefined;
+    });
+  },
+  //setSearchingType
+  setSearchingType(searchingType) {
+    set((state) => {
+      state.filter.searchingType = searchingType;
+    });
+  },
+
+  getFavouritesMaterskeSkoly() {
+    return get().filter.favourites.filter(
+      (favourite) => !("rediteltel" in favourite)
+    ) as SkolaZakladniMaterskaType[];
+  },
+
+  getFavouritesVysokeStredniSkoly() {
+    return get().filter.favourites.filter(
+      (favourite) => "rediteltel" in favourite
+    ) as SkolaVysokaStredniType[];
   },
 });

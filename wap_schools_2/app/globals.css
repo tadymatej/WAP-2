@@ -84,3 +84,8 @@ body,
       @apply bg-background text-foreground;
     }
   }
+
+.AccordionTrigger[data-state='open'] > .AccordionChevron {
+  transform: rotate(180deg);
+}
+  

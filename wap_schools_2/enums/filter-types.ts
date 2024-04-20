@@ -1,3 +1,27 @@
+import { Baby, GraduationCap } from "lucide-react";
+
+export enum SearchingType {
+  MaterskeZakladni,
+  StredniVysoke,
+}
+
+//SearchingType to description
+export const SearchingTypeDescription = {
+  [SearchingType.MaterskeZakladni]: "Mateřské a základní školy",
+  [SearchingType.StredniVysoke]: "Střední a vysoké školy",
+};
+
+//Searching type icon
+export const SearchingTypeIcon = {
+  [SearchingType.MaterskeZakladni]: Baby,
+  [SearchingType.StredniVysoke]: GraduationCap,
+};
+
+//SearchingType values
+export const SearchingTypeValues: SearchingType[] = Object.values(
+  SearchingType
+).filter((value) => typeof value === "number") as SearchingType[];
+
 export enum SkolneTypes {
   Zdarma,
   to19k,

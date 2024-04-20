@@ -1,4 +1,4 @@
-export interface SchoolAllData {
+export interface SchoolVysokaStredniAllData {
   id: number;
   nazev: string | null;
   reditel: string | null;
@@ -10,7 +10,20 @@ export interface SchoolAllData {
   poznamka: string | null;
   ubytovani: number | null;
   stravovani: number | null;
-  skola_vyucovanyjazyk: boolean;
+  skola_vyucovanyjazyk: {
+    jazyk: {
+      nazev: string | null;
+    } | null;
+  }[];
+  hodnoceni: {
+    hvezdicek: number;
+    popis: string | null;
+    jina_role: string | null;
+    autor: string | null;
+    role_uzivatele_typy: {
+      nazev: string;
+    } | null;
+  }[];
   adresa: {
     cislodomovni: number | null;
     cisloorientacni: string | null;
@@ -36,127 +49,112 @@ export interface SchoolAllData {
     nazev: string | null;
   } | null;
   podskola: {
-    obor:
-      | {
-          minulyrokprihlaseno: number | null;
-          minulyrokprijato: number | null;
-          nazevoboru: string | null;
-          povinnalekarskaprohlidka: boolean | null;
-          skolne: number | null;
-          prospech: number | null;
-          vhodneprozakyozp: boolean | null;
-          aktualnirokprijmou: number | null;
-          delkastudia: number | null;
-          obor_prijimacizkouska:
-            | {
-                obor: {
-                  nazevoboru: string | null;
-                } | null;
-              }[]
-            | null;
-          obor_vhodnostprozaky:
-            | {
-                vhodnost_pro_zaky: {
-                  nazev: string | null;
-                } | null;
-              }[]
-            | null;
-          stupen_vzdelani: {
-            nazev: string | null;
-          } | null;
-          ukonceni_studia: {
-            nazev: string | null;
-          } | null;
-          druh_studia: {
-            nazev: string | null;
-          } | null;
-          forma_studia: {
-            nazev: string | null;
-          } | null;
-        }[]
-      | null;
-  } | null;
+    obor: {
+      minulyrokprihlaseno: number | null;
+      minulyrokprijato: number | null;
+      nazevoboru: string | null;
+      povinnalekarskaprohlidka: boolean | null;
+      skolne: number | null;
+      prospech: number | null;
+      vhodneprozakyozp: boolean | null;
+      aktualnirokprijmou: number | null;
+      delkastudia: number | null;
+      obor_prijimacizkouska: {
+        prijimaci_zkouska: {
+          nazev: string | null;
+        } | null;
+      }[];
+      obor_vhodnostprozaky: {
+        vhodnost_pro_zaky: {
+          nazev: string | null;
+        } | null;
+      }[];
+      stupen_vzdelani: {
+        nazev: string | null;
+      } | null;
+      ukonceni_studia: {
+        nazev: string | null;
+      } | null;
+      druh_studia: {
+        nazev: string | null;
+      } | null;
+      forma_studia: {
+        nazev: string | null;
+      } | null;
+    }[];
+  }[];
 }
 
-export const schools: SchoolAllData[] = [
-  {
-    id: 1,
-    nazev: "School 1",
-    reditel: "Director 1",
-    rediteltel: "123456789",
-    url: "http://school1.com",
-    email: "school1@example.com",
-    kontaktniosoba: "Contact 1",
-    kontaktniosobatel: "987654321",
-    poznamka: "Note 1",
-    ubytovani: 1,
-    stravovani: 1,
-    skola_vyucovanyjazyk: true,
+export interface SkolkaZakladkaData {
+  datumzahajeni: Date | null;
+  jazyk: {
+    nazev: string | null;
+  } | null;
+  kapacita: number | null;
+  obor_skolky_zakladky: {
+    obordobihajici: boolean | null;
+    delkavzdelavani: number | null;
+    jazyk: {
+      nazev: string | null;
+    } | null;
+    kapacita: number | null;
+    nazev: string | null;
+  }[];
+  nazev: string | null;
+  reditel: string | null;
+  reditelemail: string | null;
+  skola_druh_typ: {
+    nazev: string | null;
+  } | null;
+  typ_zrizovatele: {
+    nazev: string | null;
+  } | null;
+  zarizeni_skolky_zakladky: {
+    kapacita: number | null;
+    nazev: string | null;
+    zarizeni_druh_typ: {
+      nazev: string | null;
+    } | null;
+    zarizeniskolkyzakladky_adresa: {
+      adresa: {
+        obec: {
+          nazev: string | null;
+          okres: {
+            nazev: string | null;
+            kraj: {
+              nazev: string | null;
+            } | null;
+          } | null;
+        } | null;
+        cislodomovni: number | null;
+        cisloorientacni: string | null;
+        psc: string | null;
+        ulice: string | null;
+        mestska_cast_obvod: {
+          nazev: string | null;
+        } | null;
+      } | null;
+    }[];
+  }[];
+  zkracenynazev: string | null;
+  skolkazakladka_adresa: {
     adresa: {
-      cislodomovni: 1,
-      cisloorientacni: "1A",
-      psc: "10000",
-      ulice: "Street 1",
       obec: {
-        nazev: "City 1",
+        nazev: string | null;
         okres: {
-          nazev: "District 1",
+          nazev: string | null;
           kraj: {
-            nazev: "Region 1",
-          },
-        },
-      },
+            nazev: string | null;
+          } | null;
+        } | null;
+      } | null;
+      cislodomovni: number | null;
+      cisloorientacni: string | null;
+      psc: string | null;
+      ulice: string | null;
       mestska_cast_obvod: {
-        nazev: "Municipality 1",
-      },
-    },
-    typ_skoly: {
-      nazev: "Type 1",
-    },
-    typ_zrizovatele: {
-      nazev: "Founder Type 1",
-    },
-    podskola: {
-      obor: [
-        {
-          minulyrokprihlaseno: 100,
-          minulyrokprijato: 80,
-          nazevoboru: "Course 1",
-          povinnalekarskaprohlidka: true,
-          skolne: 5000,
-          prospech: 1.5,
-          vhodneprozakyozp: true,
-          aktualnirokprijmou: 120,
-          delkastudia: 4,
-          obor_prijimacizkouska: [
-            {
-              obor: {
-                nazevoboru: "Course 1",
-              },
-            },
-          ],
-          obor_vhodnostprozaky: [
-            {
-              vhodnost_pro_zaky: {
-                nazev: "Suitability 1",
-              },
-            },
-          ],
-          stupen_vzdelani: {
-            nazev: "Level 1",
-          },
-          ukonceni_studia: {
-            nazev: "Graduation 1",
-          },
-          druh_studia: {
-            nazev: "Study Type 1",
-          },
-          forma_studia: {
-            nazev: "Study Form 1",
-          },
-        },
-      ],
-    },
-  },
-  // More schools...
-];
+        nazev: string | null;
+      } | null;
+    } | null;
+  }[];
+}

@@ -1,60 +1,40 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useStore } from "@/state/useStore";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { Share } from "lucide-react";
+import SkolaVysokaStredniTile from "../school_list/SkolaVysokaStredniTile";
 
 export function FavouritesCard() {
+  const favourites = useStore((state) => state.filter.favourites);
   return (
     <Card className="h-full">
-      <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      <CardHeader className="flex flex-row justify-between items-center pt-4">
+        <CardTitle>Oblibene</CardTitle>
+        <div className="flex flex-row">
+          <Button variant="outline">
+            <Share size={20} />
+          </Button>
+        </div>
       </CardHeader>
       <CardContent>
-        <form>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                placeholder="Name of your project"
+        <ScrollArea>
+          {favourites.map((school, index) => {
+            if (!("rediteltel" in school)) {
+              return <div key={index} />;
+            }
+            return (
+              <SkolaVysokaStredniTile
+                inFavorites
+                key={school.id}
+                skola={school}
               />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="framework">Framework</Label>
-              <Select>
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="next">Next.js</SelectItem>
-                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem value="astro">Astro</SelectItem>
-                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </form>
+            );
+          })}
+        </ScrollArea>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Deploy</Button>
-      </CardFooter>
     </Card>
   );
 }

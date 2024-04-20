@@ -1,3 +1,6 @@
+import { SkolaVysokaStredniType } from "@/actions/search-schools";
+import { SkolaZakladniMaterskaType } from "@/actions/search-zaklani_schools";
+import { SearchingType } from "@/enums/filter-types";
 import { StateCreator } from "zustand";
 
 export interface OptionState {
@@ -38,18 +41,37 @@ export interface FilterStateDefinition {
   krajeSelected: OptionState[];
   mestaSelected: OptionState[];
   mestskeCastiSelected: OptionState[];
-  vyucovaneOborySelected: OptionState[];
-  typySkolSelected: OptionState[];
   okresySelected: OptionState[];
+
+  vyucovaneOborySelected: OptionState[];
+
+  // When filtering for stredni a vysoke skoly
+  druhPodskolySelected: OptionState[];
+  //for filtering materska, zakladni a zakladni umnelecka skola
+  skolaDruhTypeSelected: OptionState[];
+  //Statni, soukroma, verejna....
+  typySkolSelected: OptionState[];
+  //custom values
   hodnoceniSelected: OptionState[];
   prijmaciZkouskySelected: OptionState[];
+  //custom values
   skolneSelected: OptionState[];
+
+  //It can be not used, custom values
+  lokaceSelected: OptionState[];
+
   currentLocation: { x: number; y: number } | undefined;
   //viewing the school list
   sortBy: SkolySortType;
   offset: number;
 
-  favoutiteSchools: OptionState[];
+  favourites: Array<SkolaVysokaStredniType | SkolaZakladniMaterskaType>;
+
+  //Selected
+  vysokeStredniSelected: SkolaVysokaStredniType | undefined;
+  zakladniMaterskaSelected: SkolaZakladniMaterskaType | undefined;
+  //
+  searchingType: SearchingType;
 }
 
 export interface FilterStateActions {
@@ -65,7 +87,23 @@ export interface FilterStateActions {
   setCurrentLocation: (location: { x: number; y: number }) => void;
   setSortBy: (sortBy: SkolySortType) => void;
   setOffset: (offset: number) => void;
-  setFavouriteSchools: (favouriteSchools: OptionState[]) => void;
+  //setFavouriteSchools: (favouriteSchools: OptionState[]) => void;
+  setFavourite: (
+    favouriteSchools: Array<SkolaVysokaStredniType | SkolaZakladniMaterskaType>
+  ) => void;
+
+  setMaterskaZakladniSelected: (
+    skola: SkolaZakladniMaterskaType | undefined
+  ) => void;
+  setVysokeStredniSelected: (skola: SkolaVysokaStredniType | undefined) => void;
+  //Getters for getting values for filtering
+  //getKraje: () => number[];
+  //getMesta: () => number[];
+  //getVyucovaneObory: () => number[];
+  //getTypySkol: () => number[];
+  setSearchingType: (searchingType: SearchingType) => void;
+  getFavouritesMaterskeSkoly: () => SkolaZakladniMaterskaType[];
+  getFavouritesVysokeStredniSkoly: () => SkolaVysokaStredniType[];
 }
 
 export type FilterStateType = FilterStateDefinition & FilterStateActions;
