@@ -23,9 +23,9 @@ export async function filterSkolkyZakladkyAction(filter : SkolkaZakladkaFilterMo
     }
     return {
       ...skolka,
-      obor_skolky_zakladky: await getOborSkolkyZakladkyList(oborSkolkyZakladkyFilter),
-      zarizeni_skolky_zakladky: await getZarizeniSkolkyZakladkyList(oborSkolkyZakladkyFilter),
-      skolkazakladka_adresa: await getAdresaList(adresaFilterModel)
+      ...await getOborSkolkyZakladkyList(oborSkolkyZakladkyFilter),
+      ...await getZarizeniSkolkyZakladkyList(oborSkolkyZakladkyFilter),
+      ...await getAdresaList(adresaFilterModel)
     }
   }))
 }

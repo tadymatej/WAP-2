@@ -25,16 +25,16 @@ export async function filterSkoly(filter : SkolaFilterModel, order : SkolaOrderB
       let podskoly = await getPodskolaList(filterModel);
       return {
         ...s,
-        adresa: await getAdresaList(filterModel),
-        hodnoceni: await getHodnoceniList(hodnoceniFilterModel),
-        podskola: await Promise.all(podskoly.map(async (podskola) => {
+        ...await getAdresaList(filterModel),
+        ...await getHodnoceniList(hodnoceniFilterModel),
+        ...await Promise.all(podskoly.map(async (podskola) => {
           let oborFilter : OborFilterModel = {
             podskolaIDs: [podskola.id],
             IDs: []
           }
           return {
             ...podskola,
-            obor: await getOborList(oborFilter)
+            ...await getOborList(oborFilter)
           }
         }))
       }

@@ -104,7 +104,7 @@ export function SchoolList() {
         }
       );
 
-      setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
+      setSkolyZakladniMaterske([...skolyZakladniMaterske, ...result]);
     }
 
     setSchools([...schools, ...result]);

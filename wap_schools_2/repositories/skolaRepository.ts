@@ -202,10 +202,7 @@ function getOrderByJoinHodnoceni(order: SkolaOrderByEnum) {
   return Prisma.sql`LEFT JOIN hodnoceni ON hodnoceni.SkolaID = skola.ID`;
 }
 
-export async function getSkolaList(
-  filter: SkolaFilterModel,
-  order: SkolaOrderByModel
-): Promise<SkolaVysokaStredniType[]> {
+export async function getSkolaList(filter: SkolaFilterModel, order: SkolaOrderByModel): Promise<SkolaVysokaStredniType[]> {
   let sql = Prisma.sql`
     SELECT 
       *
