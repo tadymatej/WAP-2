@@ -61,9 +61,6 @@ export default function FilterMultiSelectWrapper({
       case FilterMultiSelectWrapperType.PrijmaciZkousky: {
         return filter.prijmaciZkouskySelected;
       }
-      case FilterMultiSelectWrapperType.Hodnoceni: {
-        return filter.hodnoceniSelected;
-      }
       case FilterMultiSelectWrapperType.Skolne: {
         return filter.skolneSelected;
       }
@@ -97,9 +94,7 @@ export default function FilterMultiSelectWrapper({
       case FilterMultiSelectWrapperType.PrijmaciZkousky: {
         return "prijmaci zkousky";
       }
-      case FilterMultiSelectWrapperType.Hodnoceni: {
-        return "hodnoceni";
-      }
+
       case FilterMultiSelectWrapperType.Skolne: {
         return "skolne";
       }
@@ -150,10 +145,6 @@ export default function FilterMultiSelectWrapper({
         filter.setPrijmaciZkousky(values);
         break;
       }
-      case FilterMultiSelectWrapperType.Hodnoceni: {
-        filter.setHodnoceni(values);
-        break;
-      }
       case FilterMultiSelectWrapperType.Skolne: {
         filter.setSkolne(values);
         break;
@@ -184,6 +175,14 @@ export default function FilterMultiSelectWrapper({
           currentLocation: filter.currentLocation,
           sortBy: filter.sortBy,
           offset: filter.offset,
+          druhPodskolySelected: filter.druhPodskolySelected,
+          searchingType: filter.searchingType,
+          favourites: filter.favourites,
+          vysokeStredniSelected: filter.vysokeStredniSelected,
+          zakladniMaterskaSelected: filter.zakladniMaterskaSelected,
+          latitude: filter.latitude,
+          longitude: filter.longitude,
+          skolaDruhTypeSelected: filter.skolaDruhTypeSelected,
         },
       });
       setOptions(result);

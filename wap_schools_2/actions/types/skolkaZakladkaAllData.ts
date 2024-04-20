@@ -1,5 +1,5 @@
-export interface SkolkaZakladkaAllData {
-  id: number,
+export interface SkolaZakladniMaterskaType {
+  id: number;
   datumzahajeni: Date | null;
   jazyk: {
     nazev: string | null;

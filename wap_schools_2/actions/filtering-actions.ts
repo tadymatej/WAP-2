@@ -4,9 +4,7 @@ import { db } from "@/lib/db";
 import { FilterStateDefinition, OptionState } from "@/state/types";
 import {
   FilterMultiSelectWrapperType,
-  HodnoceniTypesDescription,
-  HodnoceniTypesValues,
-  SkolneTypesDescription,
+  SkolneTypesData,
   SkolneTypesValues,
 } from "../enums/filter-types";
 
@@ -172,27 +170,13 @@ export async function optionsBasedOnTypeAndSearch({
     }
 
     case FilterMultiSelectWrapperType.Skolne: {
-      const allOptions = SkolneTypesValues;
-      return allOptions.map((s, index) => {
-        const nazev = SkolneTypesDescription[s];
+      return SkolneTypesValues.map((s, index) => {
+        const a = SkolneTypesData[s];
         return {
-          nazev: nazev,
-          id: index,
+          nazev: a.desc,
+          id: s as number,
         };
       });
-    }
-
-    case FilterMultiSelectWrapperType.Hodnoceni: {
-      const allOptions = HodnoceniTypesValues;
-      const res = allOptions.map((s, index) => {
-        const nazev = HodnoceniTypesDescription[s];
-        return {
-          nazev: nazev,
-          id: index,
-        };
-      });
-      console.log(res);
-      return res;
     }
   }
 }

@@ -1,10 +1,18 @@
 "use client";
 
-import {
-  searchingForSchools,
-  SkolaVysokaStredniList,
-} from "@/actions/search-schools";
+import { filterSkoly } from "@/actions/filterSkolyAction";
+
+import { filterSkolkyZakladkyAction } from "@/actions/filtrySkolkyZakladkyAction";
+import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
+import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
 import InfiniteScroll from "@/components/ui/infinite-scroll";
+import {
+  HodnoceniTypesData,
+  SearchingType,
+  SkolneTypesData,
+} from "@/enums/filter-types";
+import { SkolaOrderByFromSortBy } from "@/repositories/orderByTypes/skolaOrderByTypes";
+import { SkolkaZakladkaOrderByFromSortBy } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
 import { useStore } from "@/state/useStore";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Loader2 } from "lucide-react";
@@ -13,47 +21,92 @@ import SkolaVysokaStredniTile from "./SkolaVysokaStredniTile";
 
 export function SchoolList() {
   const filter = useStore((state) => state.filter);
-  //searchingForSchools(filterState: filter);
-  //Use useeffect to call searchingForSchools when filter changes
-  //use 500ms debounce
+
+  const searchingType = filter.searchingType;
 
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [schools, setSchools] = useState<SkolaVysokaStredniList>([]);
+  const [skolyVysokeStredni, setSkolyVysokeStredni] = useState<
+    SkolaVysokaStredniType[]
+  >([]);
+  const [skolyZakladniMaterske, setSkolyZakladniMaterske] = useState<
+    SkolaZakladniMaterskaType[]
+  >([]);
 
   const next = async () => {
     setLoading(true);
 
-    console.log("Searching for schools: next");
+    if (searchingType === SearchingType.StredniVysoke) {
+      const result = await filterSkoly(
+        {
+          castObceIDs: [],
+          druhSkolyIDs: filter.druhPodskolySelected.map((druh) => druh.id),
+          krajIDs: filter.krajeSelected.map((kraj) => kraj.id),
+          mestskaCastIDs: filter.mestskeCastiSelected.map(
+            (mestskaCast) => mestskaCast.id
+          ),
+          obecIDs: filter.mestaSelected.map((mesto) => mesto.id),
+          okresIDs: filter.okresySelected.map((okres) => okres.id),
+          oborIDs: filter.vyucovaneOborySelected.map((obor) => obor.id),
+          prijimaciZkouskaIDs: filter.prijmaciZkouskySelected.map(
+            (prijimaciZkouska) => prijimaciZkouska.id
+          ),
+          skolneRange: filter.skolneSelected.map((skolne) => {
+            //convert to Skolne. I need to do it  based on the value of the key
 
-    /**
-     * Intentionally delay the search by 800ms before execution so that you can see the loading spinner.
-     * In your app, you can remove this setTimeout.
-     **/
-    const result = await searchingForSchools({
-      filterState: {
-        currentLocation: filter.currentLocation,
-        krajeSelected: filter.krajeSelected,
-        mestaSelected: filter.mestaSelected,
-        mestskeCastiSelected: filter.mestskeCastiSelected,
-        okresySelected: filter.okresySelected,
-        typySkolSelected: filter.typySkolSelected,
-        vyucovaneOborySelected: filter.vyucovaneOborySelected,
-        hodnoceniSelected: filter.hodnoceniSelected,
-        prijmaciZkouskySelected: filter.prijmaciZkouskySelected,
-        skolneSelected: filter.skolneSelected,
-        offset: page,
-        sortBy: filter.sortBy,
-        druhPodskolySelected: filter.druhPodskolySelected,
-        skolaDruhTypeSelected: filter.skolaDruhTypeSelected,
-        lokaceSelected: filter.lokaceSelected,
-        vysokeStredniSelected: filter.vysokeStredniSelected,
-        zakladniMaterskaSelected: filter.zakladniMaterskaSelected,
-        searchingType: filter.searchingType,
-        favourites: filter.favourites,
-      },
-    });
+            return SkolneTypesData[skolne.id as keyof typeof SkolneTypesData]
+              .range;
+          }),
+          typSkolyIDs: filter.typySkolSelected.map((typSkoly) => typSkoly.id),
+          hodnoceniRange: HodnoceniTypesData[filter.hodnoceniSelected].range,
+          offset: filter.offset,
+          IDs: [],
+          lat: filter.latitude,
+          lon: filter.longitude,
+          limit: 15,
+          nazev: undefined,
+          vzdalenostMax: undefined,
+        },
+        {
+          type: SkolaOrderByFromSortBy[filter.sortBy],
+        }
+      );
+
+      setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
+    }
+
+    if (searchingType === SearchingType.MaterskeZakladni) {
+      const result = await filterSkolkyZakladkyAction(
+        {
+          castObceIDs: [],
+          krajIDs: filter.krajeSelected.map((kraj) => kraj.id),
+          mestskaCastIDs: filter.mestskeCastiSelected.map(
+            (mestskaCast) => mestskaCast.id
+          ),
+          obecIDs: filter.mestaSelected.map((mesto) => mesto.id),
+          okresIDs: filter.okresySelected.map((okres) => okres.id),
+
+          hodnoceniRange: HodnoceniTypesData[filter.hodnoceniSelected].range,
+          offset: filter.offset,
+          IDs: [],
+          lat: filter.latitude,
+          lon: filter.longitude,
+          limit: 15,
+          nazev: undefined,
+          vzdalenostMax: undefined,
+          skolaDruhTypIDs: filter.skolaDruhTypeSelected.map((druh) => druh.id),
+          typZrizovateleIDs: filter.typySkolSelected.map((typ) => typ.id),
+          zarizeniIDs: [],
+        },
+        {
+          type: SkolkaZakladkaOrderByFromSortBy[filter.sortBy],
+        }
+      );
+
+      setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
+    }
+
     setSchools([...schools, ...result]);
     console.log("I have schools: next");
 

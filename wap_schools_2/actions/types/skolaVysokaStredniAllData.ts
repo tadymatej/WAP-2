@@ -1,5 +1,9 @@
+export type SkolaVysokaStredniAdresaType = SkolaVysokaStredniType["adresa"];
 
-export interface SkolaVysokaStredniAllData {
+export type SkolaVysokaStredniPodskolaType =
+  SkolaVysokaStredniType["podskola"] extends (infer T)[] ? T : never;
+
+export interface SkolaVysokaStredniType {
   id: number;
   nazev: string | null;
   reditel: string | null;
@@ -11,7 +15,11 @@ export interface SkolaVysokaStredniAllData {
   poznamka: string | null;
   ubytovani: number | null;
   stravovani: number | null;
-  skola_vyucovanyjazyk: boolean;
+  skola_vyucovanyjazyk: {
+    jazyk: {
+      nazev: string | null;
+    } | null;
+  }[];
   hodnoceni: {
     hvezdicek: number;
     popis: string | null;
@@ -46,6 +54,9 @@ export interface SkolaVysokaStredniAllData {
     nazev: string | null;
   } | null;
   podskola: {
+    druh_podskoly: {
+      nazev: string | null;
+    };
     obor: {
       minulyrokprihlaseno: number | null;
       minulyrokprijato: number | null;
@@ -57,8 +68,8 @@ export interface SkolaVysokaStredniAllData {
       aktualnirokprijmou: number | null;
       delkastudia: number | null;
       obor_prijimacizkouska: {
-        obor: {
-          nazevoboru: string | null;
+        prijimaci_zkouska: {
+          nazev: string | null;
         } | null;
       }[];
       obor_vhodnostprozaky: {

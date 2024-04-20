@@ -1,6 +1,6 @@
-import { SkolaVysokaStredniType } from "@/actions/search-schools";
-import { SkolaZakladniMaterskaType } from "@/actions/search-zaklani_schools";
-import { SearchingType } from "@/enums/filter-types";
+import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
+import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
+import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
 import { StateCreator } from "zustand";
 
 export interface OptionState {
@@ -12,7 +12,7 @@ export enum SkolySortType {
   Distance,
   Hodnoceni,
   Nazev,
-  Skolne,
+  //Skolne,
 }
 
 //give me all values of SkolySortType
@@ -25,7 +25,7 @@ export const SkolySortTypeDescription = {
   [SkolySortType.Distance]: "Vzdálenost",
   [SkolySortType.Hodnoceni]: "Hodnocení",
   [SkolySortType.Nazev]: "Název",
-  [SkolySortType.Skolne]: "Školné",
+  //[SkolySortType.Skolne]: "Školné",
 };
 
 //revers to SkolySortTypeDescription. I.e. "Vzdálenost" -> SkolySortType.Distance
@@ -52,13 +52,14 @@ export interface FilterStateDefinition {
   //Statni, soukroma, verejna....
   typySkolSelected: OptionState[];
   //custom values
-  hodnoceniSelected: OptionState[];
+  hodnoceniSelected: HodnoceniTypes;
   prijmaciZkouskySelected: OptionState[];
   //custom values
   skolneSelected: OptionState[];
 
   //It can be not used, custom values
-  lokaceSelected: OptionState[];
+  longitude: number | undefined;
+  latitude: number | undefined;
 
   currentLocation: { x: number; y: number } | undefined;
   //viewing the school list
@@ -81,7 +82,7 @@ export interface FilterStateActions {
   setTypySkol: (typySkol: OptionState[]) => void;
   setOkresy: (okresy: OptionState[]) => void;
   setMestskeCasti: (mestskeCasti: OptionState[]) => void;
-  setHodnoceni: (hodnoceni: OptionState[]) => void;
+  setHodnoceni: (hodnoceni: HodnoceniTypes) => void;
   setPrijmaciZkousky: (prijmaciZkousky: OptionState[]) => void;
   setSkolne: (skolne: OptionState[]) => void;
   setCurrentLocation: (location: { x: number; y: number }) => void;
@@ -104,6 +105,9 @@ export interface FilterStateActions {
   setSearchingType: (searchingType: SearchingType) => void;
   getFavouritesMaterskeSkoly: () => SkolaZakladniMaterskaType[];
   getFavouritesVysokeStredniSkoly: () => SkolaVysokaStredniType[];
+
+  setLatitude: (latitude: number) => void;
+  setLongitude: (longitude: number) => void;
 }
 
 export type FilterStateType = FilterStateDefinition & FilterStateActions;

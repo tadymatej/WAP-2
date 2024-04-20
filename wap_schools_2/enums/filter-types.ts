@@ -31,53 +31,99 @@ export enum SkolneTypes {
   moreThan32k,
 }
 
-//Skolne to description
-export const SkolneTypesDescription = {
-  [SkolneTypes.Zdarma]: "Zdarma",
-  [SkolneTypes.to19k]: "Do 19 000 Kč",
-  [SkolneTypes.to21k]: "Do 21 000 Kč",
-  [SkolneTypes.to25k]: "Do 25 000 Kč",
-  [SkolneTypes.to32k]: "Do 32 000 Kč",
-  [SkolneTypes.moreThan32k]: "Více než 32 000 Kč",
-};
-
 //get all values of SkolneTypes
 export const SkolneTypesValues: SkolneTypes[] = Object.values(
   SkolneTypes
 ).filter((value) => typeof value === "number") as SkolneTypes[];
 
+export const SkolneTypesData = {
+  [SkolneTypes.Zdarma]: {
+    desc: "Zdarma",
+    range: {
+      start: 0,
+      end: 0,
+    },
+  },
+  [SkolneTypes.to19k]: {
+    desc: "Od 0 do 19 000 Kč",
+    range: {
+      start: 0,
+      end: 19000,
+    },
+  },
+  [SkolneTypes.to21k]: {
+    desc: "Od 19 000 do 21 000 Kč",
+    range: {
+      start: 0,
+      end: 21000,
+    },
+  },
+  [SkolneTypes.to25k]: {
+    desc: "Od 21 000 do 25 000 Kč",
+    range: {
+      start: 0,
+      end: 25000,
+    },
+  },
+  [SkolneTypes.to32k]: {
+    desc: "Od 25 000 do 32 000 Kč",
+    range: {
+      start: 0,
+      end: 32000,
+    },
+  },
+  [SkolneTypes.moreThan32k]: {
+    desc: "Více než 32 000 Kč",
+    range: {
+      start: 32000,
+      end: undefined,
+    },
+  },
+};
+
 export enum HodnoceniTypes {
-  Hodnoceni0,
-  Hodnoceni0_5,
-  Hodnoceni1,
-  Hodnoceni1_5,
-  Hodnoceni2,
-  Hodnoceni2_5,
-  Hodnoceni3,
-  Hodnoceni3_5,
-  Hodnoceni4,
-  Hodnoceni4_5,
-  Hodnoceni5,
+  zadneOmezeni,
+  nejmene3hvezdicky,
+  nejmene4hvezdicky,
+  nejmene5hvezdicky,
 }
+
+export const HodnoceniTypesData = {
+  [HodnoceniTypes.zadneOmezeni]: {
+    desc: "Žádné omezení",
+    range: {
+      start: undefined,
+      end: undefined,
+    },
+  },
+
+  [HodnoceniTypes.nejmene3hvezdicky]: {
+    desc: "Nejméně 3 hvězdičky",
+    range: {
+      start: 3,
+      end: 5,
+    },
+  },
+  [HodnoceniTypes.nejmene4hvezdicky]: {
+    desc: "Nejméně 4 hvězdičky",
+    range: {
+      start: 4,
+      end: 5,
+    },
+  },
+  [HodnoceniTypes.nejmene5hvezdicky]: {
+    desc: "5 hvězdiček",
+    range: {
+      start: 5,
+      end: 5,
+    },
+  },
+};
 
 //get all values of HodnoceniTypes
 export const HodnoceniTypesValues: HodnoceniTypes[] = Object.values(
   HodnoceniTypes
 ).filter((value) => typeof value === "number") as HodnoceniTypes[];
-//Hodnoceni to description
-export const HodnoceniTypesDescription = {
-  [HodnoceniTypes.Hodnoceni0]: "0 hvězdiček",
-  [HodnoceniTypes.Hodnoceni0_5]: "půl hvězdičky",
-  [HodnoceniTypes.Hodnoceni1]: "1 hvězdička",
-  [HodnoceniTypes.Hodnoceni1_5]: "1 a půl hvězdičky",
-  [HodnoceniTypes.Hodnoceni2]: "2 hvězdičky",
-  [HodnoceniTypes.Hodnoceni2_5]: "2 a půl hvězdičky",
-  [HodnoceniTypes.Hodnoceni3]: "3 hvězdičky",
-  [HodnoceniTypes.Hodnoceni3_5]: "3 a půl hvězdičky",
-  [HodnoceniTypes.Hodnoceni4]: "4 hvězdičky",
-  [HodnoceniTypes.Hodnoceni4_5]: "4 a půl hvězdičky",
-  [HodnoceniTypes.Hodnoceni5]: "5 hvězdiček",
-};
 
 export enum FilterMultiSelectWrapperType {
   //Basic options, only one is active at a time
@@ -98,6 +144,4 @@ export enum FilterMultiSelectWrapperType {
   PrijmaciZkousky,
   //SkolneTypes enum
   Skolne,
-  //HodnoceniTypes enum
-  Hodnoceni,
 }

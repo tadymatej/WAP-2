@@ -1,4 +1,4 @@
-import { SkolaVysokaStredniPodskolaType } from "@/actions/search-schools";
+import { SkolaVysokaStredniPodskolaType } from "@/actions/types/skolaVysokaStredniAllData";
 import {
   Accordion,
   AccordionContent,

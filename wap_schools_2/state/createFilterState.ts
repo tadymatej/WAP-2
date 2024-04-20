@@ -1,6 +1,6 @@
-import { SkolaVysokaStredniType } from "@/actions/search-schools";
-import { SkolaZakladniMaterskaType } from "@/actions/search-zaklani_schools";
-import { SearchingType } from "@/enums/filter-types";
+import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
+import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
+import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
 import {
   FilterStateDefinition,
   FilterStateType,
@@ -14,7 +14,7 @@ const initialFilterState: FilterStateDefinition = {
   vyucovaneOborySelected: [],
   typySkolSelected: [],
   okresySelected: [],
-  hodnoceniSelected: [],
+  hodnoceniSelected: HodnoceniTypes.zadneOmezeni,
   prijmaciZkouskySelected: [],
   skolneSelected: [],
   currentLocation: undefined,
@@ -23,11 +23,12 @@ const initialFilterState: FilterStateDefinition = {
   favourites: [],
   druhPodskolySelected: [],
   skolaDruhTypeSelected: [],
-  lokaceSelected: [],
   vysokeStredniSelected: undefined,
   zakladniMaterskaSelected: undefined,
   //set searching
   searchingType: SearchingType.MaterskeZakladni,
+  longitude: undefined,
+  latitude: undefined,
 };
 
 export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
@@ -144,5 +145,16 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
     return get().filter.favourites.filter(
       (favourite) => "rediteltel" in favourite
     ) as SkolaVysokaStredniType[];
+  },
+
+  setLatitude(latitude) {
+    set((state) => {
+      state.filter.latitude = latitude;
+    });
+  },
+  setLongitude(longitude) {
+    set((state) => {
+      state.filter.longitude = longitude;
+    });
   },
 });
