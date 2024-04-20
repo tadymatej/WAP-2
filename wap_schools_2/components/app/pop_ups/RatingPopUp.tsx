@@ -25,6 +25,7 @@ import { SkolaOrderByModel } from "@/repositories/orderByTypes/skolaOrderByEnum"
 import { SkolaFilterModel } from "@/repositories/filterModels/skolaFilterModel";
 import { getSkolaList } from "@/repositories/skolaRepository";
 import { FilterItemRange } from "@/repositories/filterModels/filterItems/filterItemRange";
+import { filterSkoly } from "@/actions/filterSkolyAction";
 
 const FormSchema = z.object({
   jinaRoleUzivatele: z.string().optional(),
@@ -96,14 +97,14 @@ export function RatingPopUp(props: RatingPopUpProps) {
         mestskaCastIDs: [],
         prijimaciZkouskaIDs: [],
         druhSkolyIDs: [],
-        skolneRange: [{start: 0, end: 2}],
-        limit: 1,
+        skolneRange: [{start: 10, end: 20000}],
+        limit: 10,
         offset: 20
       };
       let skolaOrderByModel : SkolaOrderByModel = {
         type: SkolaOrderByEnum.Nazev
       }
-      let res2 = await getSkolaList(skolaFilter, skolaOrderByModel);
+      console.log(await filterSkoly(skolaFilter, skolaOrderByModel));
     }
     fetchData();
   }, []);

@@ -5,6 +5,9 @@ import { SkolaFilterModel } from "./filterModels/skolaFilterModel";
 import { Prisma } from "@prisma/client";
 import { SkolaOrderByEnum, SkolaOrderByModel } from "./orderByTypes/skolaOrderByEnum";
 import { FilterItemRange } from "./filterModels/filterItems/filterItemRange";
+import { SkolaVysokaStredniAllData } from "@/actions/types/skolaVysokaStredniAllData";
+
+import { PrismaClient, skola, adresa } from '@prisma/client';
 
 function getOrderBy(order : SkolaOrderByModel) {
   switch(order.type) {
@@ -207,7 +210,11 @@ function getOffset(offset : number | undefined) {
 
 }
 
-export async function getSkolaList(filter : SkolaFilterModel, order : SkolaOrderByModel) {
+interface T extends skola {
+  adresa: adresa
+}
+
+export async function getSkolaList(filter : SkolaFilterModel, order : SkolaOrderByModel) : Promise<SkolaVysokaStredniAllData[]> {
   let sql = Prisma.sql`
     SELECT 
       *
@@ -217,8 +224,5 @@ export async function getSkolaList(filter : SkolaFilterModel, order : SkolaOrder
     ${getLimit(filter.limit)}
     ${getOffset(filter.offset)}
   `;
-  console.log(sql);
-  let res = await db.$queryRaw(sql);
-  console.log(res);
-  return res;
+  return await db.$queryRaw(sql);
 }

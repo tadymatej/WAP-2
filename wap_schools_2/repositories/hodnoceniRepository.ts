@@ -9,8 +9,12 @@ export async function getHodnoceniList(filter : HodnoceniFilterModel): Promise<H
     const res = await db.hodnoceni.findMany({
       where: {
         id: filter.ID,
-        skolaid: filter.skolaID,
-        skolkazakladkaid: filter.skolkaZakladkaID
+        skolaid: filter.skolaIDs.length == 0 ? undefined : {
+          in: filter.skolaIDs,
+        },
+        skolkazakladkaid: filter.skolkaZakladkaIDs.length == 0 ? undefined : {
+          in: filter.skolkaZakladkaIDs
+        }
       },
       select: {
         id: true,
@@ -29,7 +33,8 @@ export async function getHodnoceniList(filter : HodnoceniFilterModel): Promise<H
       orderBy: {
         id: "desc",
       },
-      take: 50
+      take: filter.limit,
+      skip: filter.offset
     });
     return res.map((r) => ({
       ID: r.id,
@@ -49,8 +54,12 @@ export async function getHodnoceni(filter : HodnoceniFilterModel) : Promise<Hodn
   const res = await db.hodnoceni.findFirst({
     where: {
       id: filter.ID,
-      skolaid: filter.skolaID,
-      skolkazakladkaid: filter.skolkaZakladkaID
+      skolaid: filter.skolaIDs.length == 0 ? undefined : {
+        in: filter.skolaIDs
+      },
+      skolkazakladkaid: filter.skolkaZakladkaIDs.length == 0 ? undefined : {
+        in: filter.skolkaZakladkaIDs
+      }
     },
     select: {
       id: true,
