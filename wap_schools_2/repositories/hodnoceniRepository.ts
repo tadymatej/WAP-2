@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { HodnoceniFilterModel } from "./filterModels/hodnoceniFilterModel";
+import { hodnoceni, Prisma } from "@prisma/client";
 
 export async function getHodnoceniList(filter: HodnoceniFilterModel) {
   const res = await db.hodnoceni.findMany({
@@ -78,24 +79,22 @@ export async function getHodnoceni(filter: HodnoceniFilterModel) {
   return res;
 }
 
-//export async function insertHodnoceni(
-//  model: hodnoceni
-//): Promise<boolean> {
-//  try {
-//    const res = await db.hodnoceni.create({
-//      data: {
-//        popis: model.popis,
-//        autor: model.autor,
-//        hvezdicek: model.hvezdicek,
-//        jinaroleuzivatele: model.jinaRoleUzivatele,
-//        typroleuzivateleid: model.typRoleUzivatele?.ID,
-//      },
-//    });
-//  } catch (e) {
-//    console.log(model);
-//    if (e instanceof Prisma.PrismaClientKnownRequestError) {
-//    }
-//    return false;
-//  }
-//  return true;
-//}
+export async function insertHodnoceni(model: hodnoceni): Promise<boolean> {
+ try {
+   const res = await db.hodnoceni.create({
+     data: {
+       popis: model.popis,
+       autor: model.autor,
+       hvezdicek: model.hvezdicek,
+       jinaroleuzivatele: model.jinaroleuzivatele,
+       typroleuzivateleid: model.typroleuzivateleid,
+     },
+   });
+ } catch (e) {
+   console.log(model);
+   if (e instanceof Prisma.PrismaClientKnownRequestError) {
+   }
+   return false;
+ }
+ return true;
+}

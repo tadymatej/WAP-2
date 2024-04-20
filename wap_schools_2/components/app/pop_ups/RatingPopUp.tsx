@@ -14,11 +14,7 @@ import { Stars } from "./Stars";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@radix-ui/react-select";
 import { useEffect, useState,  } from 'react'
-import { HodnoceniModel } from '../../../repositories/models/hodnoceniModel';
-import {
-    SkolkaZakladkaOrderByEnum,
-    SkolkaZakladkaOrderByModel
-} from '../../../repositories/orderByTypes/skolkaZakladkaOrderByTypes';
+import { SkolkaZakladkaOrderByEnum, SkolkaZakladkaOrderByModel} from '../../../repositories/orderByTypes/skolkaZakladkaOrderByTypes';
 import { getHodnoceniList, insertHodnoceni } from "@/repositories/hodnoceniRepository";
 import { HodnoceniFilterModel } from "@/repositories/filterModels/hodnoceniFilterModel";
 import { getTypRoleUzivateleiList } from "@/repositories/typRoleUzivateleRepository";
@@ -32,6 +28,7 @@ import { FilterItemRange } from "@/repositories/filterModels/filterItems/filterI
 import { filterSkoly } from "@/actions/filterSkolyAction";
 import { SkolkaZakladkaFilterModel } from "@/repositories/filterModels/skolkaZakladkaFilterModel";
 import { filterSkolkyZakladkyAction } from "@/actions/filtrySkolkyZakladkyAction";
+import { hodnoceni, typ_role_uzivatele } from "@prisma/client";
 
 const FormSchema = z.object({
   jinaRoleUzivatele: z.string().optional(),
@@ -47,8 +44,8 @@ const FormSchema = z.object({
 })
 
 interface RatingPopUpProps {
-  skolaID?: number;
-  skolkaZakladkaID?: number;
+  skolaID: number | null;
+  skolkaZakladkaID: number | null;
 }
 
 export function RatingPopUp(props: RatingPopUpProps) {
@@ -63,16 +60,16 @@ export function RatingPopUp(props: RatingPopUpProps) {
   })
  
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    let model : HodnoceniModel = {
-      popis: data.popis,
-      autor: data.autor,
-      skolaID: props.skolaID,
-      skolkaZakladkaID: props.skolkaZakladkaID,
+    let model : hodnoceni = {
+      popis: data.popis === undefined ? null : data.popis,
+      autor: data.autor === undefined ? null : data.autor,
+      skolaid: props.skolaID,
+      skolkazakladkaid: props.skolkaZakladkaID,
       hvezdicek: parseFloat(data.hvezdicek) * 10,
-    }
+    } as hodnoceni
     let typRoleUzivateleID = parseInt(data.typRoleUzivateleID);
-    if(typRoleUzivateleID != -1) model.typRoleUzivatele = {ID: typRoleUzivateleID};
-    else model.jinaRoleUzivatele = data.jinaRoleUzivatele;
+    if(typRoleUzivateleID != -1) model.jinaroleuzivatele = null;
+    else model.jinaroleuzivatele = data.jinaRoleUzivatele == undefined ? null : data.jinaRoleUzivatele;
     let res = await insertHodnoceni(model);
     toast({
       title: res == true ? "Vaše hodnocení bylo uloženo. " : "Při odesílání hodnocení nastala chyba, prosíme, zkuste to znovu později. "
@@ -86,7 +83,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
   }
 
   const [isSelectedVztahJine, setIsSelectedVztahJine] = useState(false)
-  const [possibleVztahKeSkoleArray, setPossibleVztahKeSkoleArray] : [TypRoleUzivateleModel[], any] = useState([])
+  const [possibleVztahKeSkoleArray, setPossibleVztahKeSkoleArray] : [typ_role_uzivatele[], any] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -156,7 +153,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
                       </FormControl>
                       <SelectContent>
                         {possibleVztahKeSkoleArray.map((item) => {
-                          let key = (item.ID as number).toString();
+                          let key = (item.id as number).toString();
                           return <SelectItem value={key} key={key}>{item.nazev}</SelectItem>;
                         })}
                         <SelectItem value="-1">Jiný</SelectItem>
