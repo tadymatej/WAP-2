@@ -37,6 +37,8 @@ from exporter.exporterOborSkolkyZakladky import ExporterOborSkolkyZakladky
 from exporter.exporterZarizeniSkolkyZakladky import ExporterZarizeniSkolkyZakladky
 from exporter.exporterZarizeniSkolkyZakladkyAdresa import ExporterZarizeniSkolkyZakladkyAdresa
 from exporter.dbController import DbController
+from exporter.exporterHodnoceni import ExporterHodnoceni
+from exporter.exporterTypRoleUzivatele import ExporterTypRoleUzivatele
 
 def main():
 
@@ -55,7 +57,9 @@ def main():
                                 ExporterZarizeniDruhTyp(dbController), ExporterSkolaDruhTyp(dbController), 
                                 ExporterSkolkaZakladka(dbController), ExporterZarizeniSkolkyZakladky(dbController),
                                 ExporterOborSkolkyZakladky(dbController),
-                                ExporterZarizeniSkolkyZakladkyAdresa(dbController), ExporterSkolkaZakladkaAdresa(dbController)])
+                                ExporterZarizeniSkolkyZakladkyAdresa(dbController), ExporterSkolkaZakladkaAdresa(dbController),
+
+                                ExporterTypRoleUzivatele(dbController), ExporterHodnoceni(dbController)])
 
     for exporter in exportersClearCreate:
         exporter.db_clear()

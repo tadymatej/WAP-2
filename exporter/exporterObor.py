@@ -9,6 +9,7 @@ from .dbController import DbController
 
 class ModelObor():
     aktualniRokPrijmou : int = None
+    aktualniSkolniRok : int = None
     delkaStudia : int = None
     kod : str = None 
     minulyRokPrihlaseno : int = None 
@@ -38,10 +39,12 @@ class ExporterObor(Exporter):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS obor 
                             (ID SERIAL PRIMARY KEY, 
                             AktualniRokPrijmou INT, 
+                            AktualniSkolniRok INT,
                             DelkaStudia INT,
                             Kod VARCHAR(13),
                             MinulyRokPrihlaseno INT,
                             MinulyRokPrijato INT,
+                            MinulySkolniRok INT,
                             NazevOboru VARCHAR(120),
                             Nenabizet BOOLEAN,
                             Prospech DOUBLE PRECISION,
@@ -75,16 +78,16 @@ class ExporterObor(Exporter):
         self.cur.execute("SELECT ID FROM stupen_vzdelani WHERE Kod = %s", (model.stupenVzdelani, ))
         stupenVzdelaniID = self.cur.fetchone()[0]
 
-        self.cur.execute("""INSERT INTO obor (AktualniRokPrijmou, DelkaStudia, Kod, MinulyRokPrihlaseno, MinulyRokPrijato,
-                                                NazevOboru, Nenabizet, Prospech, Skolne, ZobrazitVKataloguSkol, 
+        self.cur.execute("""INSERT INTO obor (AktualniSkolniRok, AktualniRokPrijmou, DelkaStudia, Kod, MinulyRokPrihlaseno, MinulyRokPrijato,
+                                                MinulySkolniRok, NazevOboru, Nenabizet, Prospech, Skolne, ZobrazitVKataloguSkol, 
                                                 PovinnaLekarskaProhlidka, VhodneProZakyOZP, PodskolaID, 
                                                 DruhStudiaID, FormaStudiaID, UkonceniStudiaID, StupenVzdelaniID
-                         ) VALUES(%s, %s, %s, %s, %s,
-                                    %s, %s, %s, %s, %s,
+                         ) VALUES(%s, %s, %s, %s, %s, %s,
+                                    %s, %s, %s, %s, %s, %s,
                                     %s, %s, %s,
                                     %s, %s, %s, %s)
-                             RETURNING ID""", (model.aktualniRokPrijmou, model.delkaStudia, model.kod, model.minulyRokPrihlaseno, 
-                                                    model.minulyRokPrijato, model.nazevOboru, model.nenabizet, model.prospech, 
+                             RETURNING ID""", (model.aktualniSkolniRok, model.aktualniRokPrijmou, model.delkaStudia, model.kod, model.minulyRokPrihlaseno, 
+                                                    model.minulyRokPrijato, model.minulySkolniRok, model.nazevOboru, model.nenabizet, model.prospech, 
                                                     model.skolne, model.zobrazitVKataloguSkol, model.povinnaLekarskaProhlidka, 
                                                     model.vhodneProZakyOZP, podskolaID, druhStudiaID, formaStudiaID,
                                                     ukonceniStudiaID, stupenVzdelaniID))
@@ -109,6 +112,7 @@ class ExporterObor(Exporter):
     def export(self, podskolaID : int, data : dict):
         oborModel = ModelObor()
         oborModel.aktualniRokPrijmou = data.get("aktualniRokPrijmou")
+        oborModel.aktualniSkolniRok = data.get("aktualniSkolniRok")
         oborModel.delkaStudia = data.get("delkaStudia")
         oborModel.kod = data.get("kod")
         oborModel.zobrazitVKataloguSkol = data.get("ks")
