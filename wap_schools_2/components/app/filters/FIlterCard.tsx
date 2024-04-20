@@ -1,7 +1,10 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useStore } from "@/state/useStore";
 import { FilterMultiSelectWrapperType } from "../../../enums/filter-types";
 import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
 
@@ -48,13 +51,19 @@ export function FilterCard() {
       </div>
     </div>
   );
+
+  const setToDefault = useStore((state) => state.filter.setToDefault);
   return (
     <Card className="h-full">
       <CardHeader>
         <CardTitle>Možnosti vyhledani</CardTitle>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="kraj" className="w-full">
+        <Tabs
+          defaultValue="kraj"
+          className="w-full"
+          onValueChange={() => setToDefault()}
+        >
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger disabled={false} value="mesto">
               Mesto

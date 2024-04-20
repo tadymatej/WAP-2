@@ -108,6 +108,8 @@ export interface FilterStateActions {
 
   setLatitude: (latitude: number) => void;
   setLongitude: (longitude: number) => void;
+
+  setToDefault: () => void;
 }
 
 export type FilterStateType = FilterStateDefinition & FilterStateActions;

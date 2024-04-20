@@ -61,7 +61,7 @@ export function SchoolList() {
           }),
           typSkolyIDs: filter.typySkolSelected.map((typSkoly) => typSkoly.id),
           hodnoceniRange: HodnoceniTypesData[filter.hodnoceniSelected].range,
-          offset: filter.offset,
+          offset: page * 15,
           IDs: [],
           lat: filter.latitude,
           lon: filter.longitude,
@@ -89,6 +89,7 @@ export function SchoolList() {
 
     if (searchingType === SearchingType.MaterskeZakladni) {
       console.log("materske skoly");
+      console.log(filter);
       const result = await filterSkolkyZakladkyAction(
         {
           castObceIDs: [],
@@ -100,7 +101,7 @@ export function SchoolList() {
           okresIDs: filter.okresySelected.map((okres) => okres.id),
 
           hodnoceniRange: HodnoceniTypesData[filter.hodnoceniSelected].range,
-          offset: filter.offset,
+          offset: page * 15,
           IDs: [],
           lat: filter.latitude,
           lon: filter.longitude,
@@ -133,7 +134,9 @@ export function SchoolList() {
   };
 
   useEffect(() => {
+    console.log("filter changed");
     setPage(0);
+    setHasMore(true);
     setSkolyVysokeStredni([]);
     setSkolyZakladniMaterske([]);
     return () => {};

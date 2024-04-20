@@ -157,4 +157,19 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
       state.filter.longitude = longitude;
     });
   },
+
+  setToDefault() {
+    set((state) => {
+      console.log("Setting to default");
+      state.filter.krajeSelected = [];
+      state.filter.mestaSelected = [];
+      state.filter.mestskeCastiSelected = [];
+      state.filter.vyucovaneOborySelected = [];
+      state.filter.typySkolSelected = [];
+      state.filter.okresySelected = [];
+      state.filter.hodnoceniSelected = HodnoceniTypes.zadneOmezeni;
+      state.filter.prijmaciZkouskySelected = [];
+      state.filter.skolneSelected = [];
+    });
+  },
 });
