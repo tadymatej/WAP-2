@@ -1,4 +1,5 @@
 import { FilterCard } from "@/components/app/filters/FIlterCard";
+import { RatingPopUp } from "@/components/app/pop_ups/RatingPopUp";
 
 export default async function Home() {
   const thousandStrings = Array.from(
@@ -6,23 +7,30 @@ export default async function Home() {
     (_, i) => `String ${i + 1}`
   );
   return (
-    <main className="flex min-h-screen p-8">
-      <div className="grid grid-cols-5 gap-8">
-        <div className="bg-red-500 col-span-1 h-full grid grid-rows-2 min-w-fit">
-          <div className="row-span-1">
-            <FilterCard />
-          </div>
-          <div className="row-span-1">{/* <FilterCard /> */}</div>
-        </div>
-        {/* TODO change z index */}
-        <div className="col-span-4 h-full z-20">
-          {/* <ScrollArea>
-                            {thousandStrings.map((str, index) => (
-                            <p key={index}>{str}</p>
-                            ))}
-                        </ScrollArea> */}
-        </div>
-      </div>
-    </main>
+    <RatingPopUp />
   );
 }
+
+
+// import { HodnoceniModel } from '../repositories/models/hodnoceniModel';
+// import { FilterCard } from "@/components/app/filters/FIlterCard";
+// import { RatingPopUp } from "@/components/app/pop_ups/RatingPopUp";
+// import { RatingListItem } from "@/components/app/ratings/ratingListItem";
+
+// export default async function Home() {
+//   const thousandStrings = Array.from(
+//     { length: 300 },
+//     (_, i) => `String ${i + 1}`
+//   );
+//   let model = {
+//     popis: "Tohle je popis",
+//     autor: "Matěj Žalmánek",
+//     hvezdicek: 2,
+//     typRoleUzivatele: "Můj typ role",
+//   } as HodnoceniModel;
+
+//   return (
+//     <RatingListItem model={model}></RatingListItem>
+//   );
+// }
+
