@@ -186,6 +186,9 @@ export default function FilterMultiSelectWrapper({
           longitude: filter.longitude,
           skolaDruhTypeSelected: filter.skolaDruhTypeSelected,
           showFilter: filter.showFilter,
+          windowWidth: filter.windowWidth,
+          showFilterDrawer: filter.showFilterDrawer,
+          showFavouritesDrawer: filter.showFavouritesDrawer,
         },
       });
       setOptions(result);

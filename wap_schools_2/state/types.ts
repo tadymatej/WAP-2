@@ -27,6 +27,16 @@ export const SkolaSortByMap = [
   },
 ];
 
+//Mobile Only
+export const SM = 640;
+export const MD = 768;
+// Two spaces only filled
+export const LG = 1024;
+
+export const XL = 1280;
+// Three spaces filled
+export const XXL = 1536;
+
 export interface FilterStateDefinition {
   krajeSelected: OptionState[];
   mestaSelected: OptionState[];
@@ -65,6 +75,9 @@ export interface FilterStateDefinition {
   searchingType: SearchingType;
   //Responsivity
   showFilter: boolean;
+  windowWidth: number;
+  showFilterDrawer: boolean;
+  showFavouritesDrawer: boolean;
 }
 
 export interface FilterStateActions {
@@ -106,6 +119,11 @@ export interface FilterStateActions {
 
   //responsitivy
   setShowFilter: (showFilter: boolean) => void;
+
+  //set window width
+  setWindowWidth: (width: number) => void;
+  setShowFavoritesDrawer: (show: boolean) => void;
+  setShowFilterDrawer: (show: boolean) => void;
 }
 
 export type FilterStateType = FilterStateDefinition & FilterStateActions;

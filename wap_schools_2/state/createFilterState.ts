@@ -6,6 +6,8 @@ import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZak
 import {
   FilterStateDefinition,
   FilterStateType,
+  MD,
+  XXL,
   type StateSlice,
 } from "./types";
 
@@ -32,6 +34,9 @@ const initialFilterState: FilterStateDefinition = {
   latitude: undefined,
 
   showFilter: false,
+  windowWidth: 0,
+  showFavouritesDrawer: false,
+  showFilterDrawer: false,
 };
 
 export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
@@ -118,6 +123,10 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   setVysokeStredniSelected(skola) {
     set((state) => {
       state.filter.vysokeStredniSelected = skola;
+      if (state.filter.windowWidth < XXL) {
+        state.filter.showFilter = false;
+        state.filter.showFilterDrawer = false;
+      }
     });
   },
 
@@ -125,6 +134,11 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   setMaterskaZakladniSelected(skola) {
     set((state) => {
       state.filter.zakladniMaterskaSelected = skola;
+
+      if (state.filter.windowWidth < XXL) {
+        state.filter.showFilter = false;
+        state.filter.showFilterDrawer = false;
+      }
     });
   },
   //setSearchingType
@@ -186,7 +200,43 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
 
   setShowFilter(showFilter) {
     set((state) => {
-      state.filter.showFilter = showFilter;
+      if (state.filter.windowWidth > XXL) {
+        state.filter.showFilter = showFilter;
+        return;
+      }
+      if (state.filter.windowWidth > MD) {
+        state.filter.showFilter = showFilter;
+        if (showFilter) {
+          if (
+            state.filter.zakladniMaterskaSelected !== undefined ||
+            state.filter.vysokeStredniSelected !== undefined
+          ) {
+            state.filter.zakladniMaterskaSelected = undefined;
+            state.filter.vysokeStredniSelected = undefined;
+          }
+        }
+      }
+      if (state.filter.windowWidth <= MD) {
+        console.log("Setting show filter drawer");
+        state.filter.showFilterDrawer = true;
+      }
+    });
+  },
+
+  setWindowWidth(width) {
+    set((state) => {
+      state.filter.windowWidth = width;
+    });
+  },
+
+  setShowFavoritesDrawer(show) {
+    set((state) => {
+      state.filter.showFavouritesDrawer = show;
+    });
+  },
+  setShowFilterDrawer(show) {
+    set((state) => {
+      state.filter.showFilterDrawer = show;
     });
   },
 });

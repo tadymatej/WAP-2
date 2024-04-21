@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
 import { SkolaSortByMap } from "@/state/types";
 import { useStore } from "@/state/useStore";
+import { LocateFixedIcon } from "lucide-react";
 import React from "react";
 import { LocationPopUp } from "../pop_ups/LocationPopUp";
 import { SchoolList } from "./SchoolList";
@@ -72,13 +73,13 @@ export default function SchoolsCard() {
         <CardContent className="pt-4 grid grid-cols-2">
           <div
             className={cn(
-              "flex flex-col ",
-              showingDetails ? "col-span-1" : "col-span-2"
+              "flex flex-col",
+              showingDetails ? " md:col-span-1 col-span-2 " : "col-span-2"
             )}
           >
             <div className="flex flex-row justify-between items-center">
               <CardTitle>Odpovidajici školy</CardTitle>
-              <div className="flex flex-row">
+              <div className="flex lg:flex-row ">
                 {/*<LocationPopUp className="z-20 absolute w-2/4 top-2" onSave={onLocationSave}></LocationPopUp>*/}
                 <Dialog
                   open={locationDialogOpen}
@@ -89,6 +90,7 @@ export default function SchoolsCard() {
                       <span className="hidden lg:inline">
                         {selectedLat ? "Změnit polohu" : "Vybrat lokaci"}
                       </span>
+                      <LocateFixedIcon className="w-5 h-5 lg:hidden"></LocateFixedIcon>
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[500px]">
@@ -101,7 +103,7 @@ export default function SchoolsCard() {
                   </DialogContent>
                 </Dialog>
 
-                <div className="w-4" />
+                <div className="md:w-4 w-2" />
                 <Select
                   defaultValue={sortBy.toString()}
                   onValueChange={(value) => {
@@ -117,12 +119,12 @@ export default function SchoolsCard() {
                     }
                   }}
                 >
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="md:w-[180px] w-[100px]">
                     <SelectValue placeholder="Select a sorting" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Možnosti řazeni</SelectLabel>
+                      <SelectLabel>Možnosti</SelectLabel>
                       {SkolaSortByMap.map((item) => (
                         <SelectItem
                           key={item.value}
@@ -156,23 +158,25 @@ export default function SchoolsCard() {
             )}
           </div>
 
-          {showingDetails && (
-            <div className="col-span-1 flex flex-row">
-              <div className="w-6" />
-              <Separator orientation="vertical" />
-              <div className="w-6" />
-              {selectedVysokaStredni &&
-                searchingType == SearchingType.StredniVysoke && (
-                  <SkolaVysokaStredniDetail skola={selectedVysokaStredni} />
-                )}
-              {selectedMaterskaZakladni &&
-                searchingType == SearchingType.MaterskeZakladni && (
-                  <SkolaZakladniMaterskaDetail
-                    skola={selectedMaterskaZakladni}
-                  />
-                )}
-            </div>
-          )}
+          <div className="md:visible hidden">
+            {showingDetails && (
+              <div className="col-span-1 flex flex-row">
+                <div className="w-6" />
+                <Separator orientation="vertical" />
+                <div className="w-6" />
+                {selectedVysokaStredni &&
+                  searchingType == SearchingType.StredniVysoke && (
+                    <SkolaVysokaStredniDetail skola={selectedVysokaStredni} />
+                  )}
+                {selectedMaterskaZakladni &&
+                  searchingType == SearchingType.MaterskeZakladni && (
+                    <SkolaZakladniMaterskaDetail
+                      skola={selectedMaterskaZakladni}
+                    />
+                  )}
+              </div>
+            )}
+          </div>
         </CardContent>
       </Card>
     </React.Fragment>

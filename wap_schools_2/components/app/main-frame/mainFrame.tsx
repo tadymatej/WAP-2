@@ -1,6 +1,7 @@
 "use client";
 
 import { toast } from "@/components/ui/use-toast";
+import { MD, XXL } from "@/state/types";
 import { useStore } from "@/state/useStore";
 import React, { useEffect, useState } from "react";
 import { FavouritesCard } from "../favourites/FavouritesCard";
@@ -14,10 +15,15 @@ import { VysokaStredniVsMaterskaZakladniSelect } from "../VysokaStredniVsMatersk
  */
 export function MainFrame() {
   const [isShowedLocationPopUp, setIsShowedLocationPopUp] = useState(false);
-  const setShowFilter = useStore((state) => state.filter.setShowFilter);
   const setLatitude = useStore((state) => state.filter.setLatitude);
   const setLongitude = useStore((state) => state.filter.setLongitude);
   const showFilter = useStore((state) => state.filter.showFilter);
+  const setShowFavouritesDrawer = useStore(
+    (state) => state.filter.setShowFavoritesDrawer
+  );
+  const setShowFilterDrawer = useStore(
+    (state) => state.filter.setShowFilterDrawer
+  );
   function onLocationSave(lat: number, lon: number) {
     setLatitude(lat);
     setLongitude(lon);
@@ -26,14 +32,46 @@ export function MainFrame() {
       description: "Vaše poloha byla uložena pro vyhledávání",
     });
   }
+  const selectedVysokaStredni = useStore(
+    (state) => state.filter.vysokeStredniSelected
+  );
+  const selectedMaterskaZakladni = useStore(
+    (state) => state.filter.zakladniMaterskaSelected
+  );
+  const setShowFilter = useStore((state) => state.filter.setShowFilter);
+  const setWindowWidth = useStore((state) => state.filter.setWindowWidth);
 
-  //Check on init if screen is bigger than 1024px px set showFilter to true
   useEffect(() => {
-    if (window.innerWidth > 1024) {
-      setShowFilter(true);
-    }
-    console.log("Setting to default");
-  }, [setShowFilter]);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+
+      if (window.innerWidth > XXL) {
+        setShowFilter(true);
+      }
+      if (window.innerWidth < XXL && window.innerWidth > MD) {
+        if (
+          selectedMaterskaZakladni == undefined &&
+          selectedVysokaStredni == undefined
+        ) {
+          setShowFilter(true);
+        } else {
+          setShowFilter(false);
+        }
+      }
+      if (window.innerWidth <= MD) {
+        setShowFilter(false);
+        if (
+          selectedMaterskaZakladni == undefined &&
+          selectedVysokaStredni == undefined
+        ) {
+          setShowFilterDrawer(true);
+        }
+      }
+    };
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+  }, [setShowFilter, setWindowWidth, setShowFilterDrawer]);
 
   function onLocationOpen() {
     setIsShowedLocationPopUp(true);
@@ -41,13 +79,13 @@ export function MainFrame() {
 
   return (
     <React.Fragment>
-      <main className="h-full flex flex-col">
+      <main className="h-full flex flex-col p-4 ">
         <VysokaStredniVsMaterskaZakladniSelect />
         <div className="flex flex-row">
           <div
             className={
               showFilter
-                ? "basis-1/4 flex-grow mr-4 transition-all duration-500 ease-in-out"
+                ? "md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-grow mr-4 transition-all duration-500 ease-in-out"
                 : "w-0 h-full overflow-hidden transition-all duration-500 ease-in-out"
             }
           >
@@ -55,7 +93,7 @@ export function MainFrame() {
             <div className="h-4" />
             <FavouritesCard />
           </div>
-          <div className="basis-3/4 flex-grow">
+          <div className="basis-1/2 xl:basis-2/3 2xl:basis-3/4 flex-grow">
             <SchoolsCard />
           </div>
         </div>

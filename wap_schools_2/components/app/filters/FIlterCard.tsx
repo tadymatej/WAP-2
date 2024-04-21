@@ -1,9 +1,11 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 import { useStore } from "@/state/useStore";
 import { FilterMultiSelectWrapperType } from "../../../enums/filter-types";
 import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
@@ -13,7 +15,16 @@ import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
  *
  * @returns The filter card component.
  */
-export function FilterCard() {
+
+interface FilterCardProps {
+  inDialog?: boolean;
+  onFilterClose?: () => void;
+}
+
+export function FilterCard({
+  inDialog = false,
+  onFilterClose,
+}: FilterCardProps) {
   const advancedOptions = (
     <div className="flex flex-col">
       <div className="h-3" />
@@ -153,6 +164,11 @@ export function FilterCard() {
               </Card>
             </TabsContent> */}
         </Tabs>
+        <div
+          className={cn("justify-center pt-4 w-full ", !inDialog && "hidden")}
+        >
+          <Button onClick={onFilterClose}>Vyhledat</Button>
+        </div>
       </CardContent>
     </Card>
   );
