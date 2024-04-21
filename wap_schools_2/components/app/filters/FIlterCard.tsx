@@ -7,7 +7,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/state/useStore";
-import { FilterMultiSelectWrapperType } from "../../../enums/filter-types";
+import {
+  FilterMultiSelectWrapperType,
+  SearchingType,
+} from "../../../enums/filter-types";
 import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
 
 /**
@@ -25,48 +28,52 @@ export function FilterCard({
   inDialog = false,
   onFilterClose,
 }: FilterCardProps) {
-  const advancedOptions = (
-    <div className="flex flex-col">
-      <div className="h-3" />
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
+  const searchingType = useStore((state) => state.filter.searchingType);
+  const advancedOptions =
+    searchingType === SearchingType.MaterskeZakladni ? (
+      <div />
+    ) : (
+      <div className="flex flex-col">
+        <div className="h-3" />
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">
+              Pokročilé možnosti
+            </span>
+          </div>
         </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Pokročilé možnosti
-          </span>
+        <div className="h-2" />
+        <div className="grid gap-4">
+          <div className="space-y-1">
+            <Label htmlFor="name">Vyučované obory</Label>
+            <FilterMultiSelectWrapper
+              type={FilterMultiSelectWrapperType.VyucovaneObory}
+            />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="name">Typ školy</Label>
+            <FilterMultiSelectWrapper
+              type={FilterMultiSelectWrapperType.TypSkoly}
+            />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="name">Příjmací zkoušky</Label>
+            <FilterMultiSelectWrapper
+              type={FilterMultiSelectWrapperType.PrijmaciZkousky}
+            />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="name">Školné</Label>
+            <FilterMultiSelectWrapper
+              type={FilterMultiSelectWrapperType.Skolne}
+            />
+          </div>
         </div>
       </div>
-      <div className="h-2" />
-      <div className="grid gap-4">
-        <div className="space-y-1">
-          <Label htmlFor="name">Vyučované obory</Label>
-          <FilterMultiSelectWrapper
-            type={FilterMultiSelectWrapperType.VyucovaneObory}
-          />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="name">Typ školy</Label>
-          <FilterMultiSelectWrapper
-            type={FilterMultiSelectWrapperType.TypSkoly}
-          />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="name">Příjmací zkoušky</Label>
-          <FilterMultiSelectWrapper
-            type={FilterMultiSelectWrapperType.PrijmaciZkousky}
-          />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="name">Školné</Label>
-          <FilterMultiSelectWrapper
-            type={FilterMultiSelectWrapperType.Skolne}
-          />
-        </div>
-      </div>
-    </div>
-  );
+    );
 
   const setToDefault = useStore((state) => state.filter.setToDefault);
   return (
