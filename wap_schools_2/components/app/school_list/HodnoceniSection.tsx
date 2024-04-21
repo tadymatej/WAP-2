@@ -21,7 +21,7 @@ export default function HodnoceniSection({
     <div className="flex flex-col">
       <div className="flex flex-row justify-between">
         <div className="text-slate-600 font-semibold text-xl text-start flex-1">
-          {hodnoceni.length} Hodnoceni
+          {hodnoceni.length} Hodnocení
         </div>
         <div className="flex flex-row">
           <Dialog>
@@ -56,7 +56,7 @@ export default function HodnoceniSection({
         </div>
       ) : searchingType === SearchingType.MaterskeZakladni ? (
         <div className="text-slate-600 font-normal text-base text-center">
-          Tato školka zatím nemá žádná hodnocení.
+          Tato škola zatím nemá žádná hodnocení.
         </div>
       ) : (
         <div className="text-slate-600 font-normal text-base text-center">

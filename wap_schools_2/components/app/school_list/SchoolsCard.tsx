@@ -70,7 +70,7 @@ export default function SchoolsCard() {
             )}
           >
             <div className="flex flex-row justify-between items-center">
-              <CardTitle>Odpovidajici školy</CardTitle>
+              <CardTitle>Nalezené školy</CardTitle>
               <div className="flex flex-row">
                 {/*<LocationPopUp className="z-20 absolute w-2/4 top-2" onSave={onLocationSave}></LocationPopUp>*/}
                 <Dialog
@@ -115,7 +115,7 @@ export default function SchoolsCard() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Možnosti řazeni</SelectLabel>
+                      <SelectLabel>Možnosti řazení</SelectLabel>
                       {SkolaSortByMap.map((item) => (
                         <SelectItem
                           key={item.value}
@@ -134,15 +134,15 @@ export default function SchoolsCard() {
               <div className="flex flex-col items-start justify-center text-start">
                 <div className="h-8" />
                 <div className="font-semibold text-xl text-start">
-                  Potřebujeme znát lokaci vůči které chcete řadit
+                  Potřebujeme znát lokaci pro řazení výsledků vyhledávání
                 </div>
                 <div className="h-2" />
                 <div className="text-start font-normal text-base">
-                  Lokaci potřebujeme, aby jsme mohli najít školy, které jsou vám
-                  nejbliže. Nebo zvolte jiný způsob řazeni.
+                  Lokaci potřebujeme, abychom mohli najít školy, které jsou vám
+                  nejbliže. Nebo zvolte jiný způsob řazení.
                 </div>
                 <div className="h-4" />
-                <Button>Vyberat lokaci</Button>
+                <Button>Zvolit lokaci</Button>
               </div>
             ) : (
               <SchoolList />

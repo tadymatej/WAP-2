@@ -56,7 +56,7 @@ export function FilterCard() {
   return (
     <Card className="h-full">
       <CardHeader>
-        <CardTitle>Možnosti vyhledani</CardTitle>
+        <CardTitle>Možnosti vyhledávání</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs
@@ -66,7 +66,7 @@ export function FilterCard() {
         >
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger disabled={false} value="mesto">
-              Mesto
+              Město
             </TabsTrigger>
             <TabsTrigger disabled={false} value="okres">
               Okres
@@ -76,7 +76,7 @@ export function FilterCard() {
               value="mestska-cast"
               className="col-span-2"
             >
-              Mestska cast
+              Městská část
             </TabsTrigger>
             <TabsTrigger disabled={false} value="kraj">
               Kraj
@@ -88,7 +88,7 @@ export function FilterCard() {
               className={"[&>[data-radix-scroll-area-viewport]]:max-h-[30vh]"}
             >
               <div className="space-y-1">
-                <Label htmlFor="name">Mesto/Obec</Label>
+                <Label htmlFor="name">Město / Obec</Label>
                 <FilterMultiSelectWrapper
                   type={FilterMultiSelectWrapperType.Mesto}
                 />
@@ -114,7 +114,7 @@ export function FilterCard() {
               className={"[&>[data-radix-scroll-area-viewport]]:max-h-[30vh]"}
             >
               <div className="space-y-1">
-                <Label htmlFor="name">Mestska cast</Label>
+                <Label htmlFor="name">Městská část</Label>
                 <FilterMultiSelectWrapper
                   type={FilterMultiSelectWrapperType.MestskaCast}
                 />
