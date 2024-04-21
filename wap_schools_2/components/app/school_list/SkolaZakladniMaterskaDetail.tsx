@@ -15,6 +15,7 @@ import {
   UserRound,
 } from "lucide-react";
 import InfoDetailTile from "../generic/InfoDetailTile";
+import HodnoceniSection from "./HodnoceniSection";
 import OboryDetailsTile from "./OboryDetailsTile";
 import ZarizeniDetailsTile from "./ZarizeniDetailsTile";
 
@@ -137,6 +138,10 @@ export default function SkolaZakladniMaterskaDetail({
       )}
 
       <div className="h-2" />
+      <Separator />
+      <div className="h-6" />
+      <HodnoceniSection hodnoceni={skola.hodnoceni} skolaId={skola.id} />
+      <div className="h-6" />
       <Separator />
       <div className="h-6" />
     </div>

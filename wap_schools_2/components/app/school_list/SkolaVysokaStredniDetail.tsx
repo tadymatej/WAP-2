@@ -24,6 +24,7 @@ import Link from "next/link";
 import DotInfoTile from "../generic/DotInfoTile";
 import InfoDetailTile from "../generic/InfoDetailTile";
 import HodnoceniSection from "./HodnoceniSection";
+import LocationSection from "./LocationSection";
 import PodskolaDetailsTile from "./PodskolaDetailsTile";
 
 interface SkolaVysokaStredniDetailProps {
@@ -222,6 +223,13 @@ export default function SkolaVysokaStredniDetail({
       <Separator />
       <div className="h-6" />
       <HodnoceniSection hodnoceni={skola.hodnoceni} skolaId={skola.id} />
+      <div className="h-6" />
+      <Separator />
+      <div className="h-6" />
+      <LocationSection
+        schoolLatitude={goalLatitude}
+        schoolLongitude={goalLongitude}
+      />
     </div>
   );
 }
