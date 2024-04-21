@@ -21,11 +21,13 @@ export async function filterSkolkyZakladkyAction(filter : SkolkaZakladkaFilterMo
       IDs: [],
       skolaIDs: []
     }
+    let adresy = await getAdresaList(adresaFilterModel);
+    let adresa = adresy.length > 0 ? adresy[0] : null;
     return {
       ...skolka,
       obor_skolky_zakladky: await getOborSkolkyZakladkyList(oborSkolkyZakladkyFilter),
       zarizeni_skolky_zakladky: await getZarizeniSkolkyZakladkyList(oborSkolkyZakladkyFilter),
-      skolkazakladka_adresa: await getAdresaList(adresaFilterModel)
+      ...adresa
     }
   }))
 }

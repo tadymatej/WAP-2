@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { AdresaFilterModel } from "./filterModels/adresaFilterModel";
 
 async function getAdresaSkolkaZakladkaList(filter : AdresaFilterModel) {
-  return await db.skolkazakladka_adresa.findMany({
+  return (await db.skolkazakladka_adresa.findMany({
     where: {
       skolkazakladkaid: filter.skolkaZakladkaIDs.length == 0 ? undefined : {
         in : filter.skolkaZakladkaIDs
@@ -14,26 +14,29 @@ async function getAdresaSkolkaZakladkaList(filter : AdresaFilterModel) {
       }
     },
     select: {
+
       adresa: {
         select: {
-          id: true,
-          ulice: true,
-          cislodomovni: true,
-          cisloorientacni: true,
-          psc: true,
-          obec: { select: { nazev: true } },
-          mestska_cast_obvod: { select: { nazev: true } },
-          cast_obce: { select: { nazev: true } },
           skolkazakladka_adresa: {
             select: {
-              id: true,
+              adresa: {
+                select: {
+                  id: true,
+                  ulice: true,
+                  cislodomovni: true,
+                  cisloorientacni: true,
+                  psc: true,
+                  obec: { select: { nazev: true } },
+                  mestska_cast_obvod: { select: { nazev: true } },
+                  cast_obce: { select: { nazev: true } },
+                }
+              }
             }
-          }
+          },
         }
-      },
-      
+      },      
     }
-  })
+  })).map((a) => a.adresa);
 }
 
 export async function getAdresaList(filter : AdresaFilterModel) {
