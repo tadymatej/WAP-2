@@ -14,7 +14,7 @@ export type SkolaFilterModel = BaseFilterModel & {
   vzdalenostMax?: number;
   prijimaciZkouskaIDs: number[];
   druhSkolyIDs: number[];
-  oborIDs: number[];
+  oborKods: string[];
   nazev?: string;
 
   lat?: number;

@@ -50,7 +50,7 @@ export function SchoolList() {
           ),
           obecIDs: filter.mestaSelected.map((mesto) => mesto.id),
           okresIDs: filter.okresySelected.map((okres) => okres.id),
-          oborIDs: filter.vyucovaneOborySelected.map((obor) => obor.id),
+          oborKods: filter.vyucovaneOborySelected.map((obor) => obor.kod as string),
           prijimaciZkouskaIDs: filter.prijmaciZkouskySelected.map(
             (prijimaciZkouska) => prijimaciZkouska.id
           ),

@@ -25,23 +25,24 @@ import {
 function getOrderBy(order: SkolaOrderByModel) {
   switch (order.type) {
     case SkolaOrderByEnum.Hodnoceni:
-      return Prisma.sql` ORDER BY hodnoceni.hvezdicek`;
+      return Prisma.sql` ORDER BY prumer_hvezdicek `;
     case SkolaOrderByEnum.Location: {
       if (order.lon == null || order.lat == null) throw "Missing coordinates";
-      return Prisma.sql` ORDER BY (POW((adresa.lon - ${order.lon}),2) + POW((adresa.lat-${order.lat}),2))`;
+      return Prisma.sql` ORDER BY vzdalenost `;
     }
     case SkolaOrderByEnum.Nazev:
       return Prisma.sql` ORDER BY skola.nazev`;
   }
 }
 
-function whereJoinAdresa(filter: SkolaFilterModel) {
+function whereJoinAdresa(filter: SkolaFilterModel, order : SkolaOrderByModel) {
   if (
     filter.castObceIDs.length > 0 ||
     filter.krajIDs.length > 0 ||
     filter.mestskaCastIDs.length > 0 ||
     filter.okresIDs.length > 0 || 
-    filter.obecIDs.length > 0
+    filter.obecIDs.length > 0 ||
+    order.type == SkolaOrderByEnum.Location
   )
     return Prisma.sql` 
         LEFT JOIN adresa ON adresa.SkolaID = skola.ID
@@ -52,26 +53,6 @@ function whereJoinAdresa(filter: SkolaFilterModel) {
   return Prisma.sql``;
 }
 
-function whereJoinHodnoceni(filter: SkolaFilterModel) {
-  if (filter.hodnoceniRange !== undefined)
-    return Prisma.sql` LEFT JOIN hodnoceni ON hodnoceni.SkolaID = skola.ID`;
-  return Prisma.sql``;
-}
-
-// function whereJoinPodskola(filter : SkolaFilterModel) {
-//   if(filter.druhSkolyIDs.length > 0 || filter.oborIDs.length > 0 || filter.prijimaciZkouskaIDs.length > 0 || filter.skolneRange.length > 0) {
-//     return Prisma.sql` LEFT JOIN podskola ON podskola.SkolaID = skola.ID`;
-//   }
-//   return Prisma.sql``;
-// }
-
-// function whereJoinObor(filter : SkolaFilterModel) {
-//   if(filter.oborIDs.length > 0 || filter.prijimaciZkouskaIDs.length > 0 || filter.skolneRange.length > 0) {
-//     return Prisma.sql` LEFT JOIN obor ON obor.PodskolaID = podskola.ID`;
-//   }
-//   return Prisma.sql``;
-// }
-
 function whereJoinPrijimaciZkousky(filter: SkolaFilterModel) {
   if (filter.prijimaciZkouskaIDs.length > 0) {
     return Prisma.sql` 
@@ -81,9 +62,9 @@ function whereJoinPrijimaciZkousky(filter: SkolaFilterModel) {
   return Prisma.sql``;
 }
 
-function whereConditionOborIDs(oborIDs: number[]) {
-  if (oborIDs.length > 0) {
-    return Prisma.sql` AND obor.ID IN (${Prisma.join(oborIDs)})`;
+function whereConditionOborKods(oborKods: string[]) {
+  if (oborKods.length > 0) {
+    return Prisma.sql` AND obor.Kod IN (${Prisma.join(oborKods)})`;
   }
   return Prisma.sql``;
 }
@@ -141,34 +122,26 @@ function getWhere(filter: SkolaFilterModel) {
     throw "Missing coordinates";
   return Prisma.sql`
     WHERE 
-    1 = 1
-    ${getWhereSkolaIDs(filter.IDs)} 
-    ${getWhereTypSkolyIDs(filter.typSkolyIDs)}
-    ${getWhereSkolaNazev(filter.nazev)}
-    AND skola.ID IN (
-      SELECT DISTINCT skola.ID FROM skola
-        LEFT JOIN podskola ON podskola.SkolaID = skola.ID
-        LEFT JOIN obor ON obor.PodskolaID = podskola.ID
-        ${whereJoinAdresa(filter)}
-        ${whereJoinHodnoceni(filter)}
-        ${whereJoinPrijimaciZkousky(filter)}
-      WHERE obor.aktualniSkolniRok = ${new Date().getFullYear()}
-        ${whereConditionKrajIDs(filter.krajIDs)}
-        ${whereConditionOkresIDs(filter.okresIDs)}
-        ${whereConditionObecIDs(filter.obecIDs)}
-        ${whereConditionCastObceIDs(filter.castObceIDs)}
-        ${whereConditionMestskaCastIDs(filter.mestskaCastIDs)}
-        ${whereConditionOborIDs(filter.oborIDs)}
-        ${whereConditionSkolne(filter.skolneRange)}
-        ${whereConditionHodnoceni(filter.hodnoceniRange)}
-        ${whereConditionVzdalenostMax(
-          filter.vzdalenostMax,
-          filter.lat as number,
-          filter.lon as number
-        )}
-        ${whereConditionPrijimaciZkouskaIDs(filter.prijimaciZkouskaIDs)}
-        ${whereConditionDruhSkolyIDs(filter.druhSkolyIDs)}
-    )
+      obor.aktualniSkolniRok = ${new Date().getFullYear()} 
+      ${getWhereSkolaIDs(filter.IDs)} 
+      ${getWhereTypSkolyIDs(filter.typSkolyIDs)}
+      ${getWhereSkolaNazev(filter.nazev)}
+
+      ${whereConditionKrajIDs(filter.krajIDs)}
+      ${whereConditionOkresIDs(filter.okresIDs)}
+      ${whereConditionObecIDs(filter.obecIDs)}
+      ${whereConditionCastObceIDs(filter.castObceIDs)}
+      ${whereConditionMestskaCastIDs(filter.mestskaCastIDs)}
+      ${whereConditionOborKods(filter.oborKods)}
+      ${whereConditionSkolne(filter.skolneRange)}
+      ${whereConditionHodnoceni(filter.hodnoceniRange)}
+      ${whereConditionVzdalenostMax(
+        filter.vzdalenostMax,
+        filter.lat as number,
+        filter.lon as number
+      )}
+      ${whereConditionPrijimaciZkouskaIDs(filter.prijimaciZkouskaIDs)}
+      ${whereConditionDruhSkolyIDs(filter.druhSkolyIDs)}
   `;
 }
 
@@ -193,24 +166,21 @@ function getWhereTypSkolyIDs(typSkolyIDs: number[]) {
   return Prisma.sql``;
 }
 
-function getOrderByJoinAdresa(order: SkolaOrderByEnum) {
-  if (order != SkolaOrderByEnum.Location) return Prisma.empty;
-  return Prisma.sql`LEFT JOIN adresa ON adresa.SkolaID = skola.ID`;
-}
-
-function getOrderByJoinHodnoceni(order: SkolaOrderByEnum) {
-  if (order != SkolaOrderByEnum.Hodnoceni) return Prisma.empty;
-  return Prisma.sql`LEFT JOIN hodnoceni ON hodnoceni.SkolaID = skola.ID`;
-}
-
 export async function getSkolaList(filter: SkolaFilterModel, order: SkolaOrderByModel): Promise<SkolaVysokaStredniType[]> {
   let sql = Prisma.sql`
-    SELECT 
-      *
-    FROM skola 
-    ${getOrderByJoinAdresa(order.type)}
-    ${getOrderByJoinHodnoceni(order.type)}
+    SELECT DISTINCT
+      AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
+      ${order.type == SkolaOrderByEnum.Location ? Prisma.sql`(POW((adresa.lon - ${order.lon}),2) + POW((adresa.lat-${order.lat}),2)) as vzdalenost,` : Prisma.empty}
+      skola.*
+    FROM skola
+      LEFT JOIN podskola ON podskola.SkolaID = skola.ID
+      LEFT JOIN obor ON obor.PodskolaID = podskola.ID
+      LEFT JOIN hodnoceni ON hodnoceni.SkolaID = skola.ID
+      ${whereJoinAdresa(filter, order)}
+      ${whereJoinPrijimaciZkousky(filter)}
     ${getWhere(filter)}
+    GROUP BY skola.ID
+      ${order.type == SkolaOrderByEnum.Location ? Prisma.sql`, adresa.lon, adresa.lat` : Prisma.empty}
     ${getOrderBy(order)}
     ${getLimit(filter.limit)}
     ${getOffset(filter.offset)}

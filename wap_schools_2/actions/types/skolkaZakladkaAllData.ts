@@ -1,6 +1,7 @@
 export interface SkolaZakladniMaterskaType {
   id: number;
   datumzahajeni: Date | null;
+  prumer_hvezdicek: number;
   jazyk: {
     nazev: string | null;
   } | null;

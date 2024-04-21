@@ -94,7 +94,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
         IDs: [],
         okresIDs: [],
         obecIDs: [],
-        oborIDs: [],
+        oborKods: [],
         typSkolyIDs: [],
         castObceIDs: [],
         mestskaCastIDs: [],

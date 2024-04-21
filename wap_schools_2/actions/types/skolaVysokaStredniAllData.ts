@@ -6,6 +6,7 @@ export type SkolaVysokaStredniPodskolaType =
 export interface SkolaVysokaStredniType {
   id: number;
   nazev: string | null;
+  prumer_hvezdicek: number;
   reditel: string | null;
   rediteltel: string | null;
   url: string | null;
