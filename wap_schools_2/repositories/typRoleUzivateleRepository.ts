@@ -3,7 +3,7 @@
 import { db } from "@/lib/db";
 import { TypRoleUzivateleFilterModel } from "./filterModels/typRoleUzivateleFilterModel";
 
-export async function getTypRoleUzivateleiList(filter : TypRoleUzivateleFilterModel): Promise<TypRoleUzivateleModel[]> {
+export async function getTypRoleUzivateleiList(filter : TypRoleUzivateleFilterModel) {
     const res = await db.typ_role_uzivatele.findMany({
       where: {
         id: filter.ID

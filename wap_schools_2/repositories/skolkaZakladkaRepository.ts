@@ -20,13 +20,14 @@ import {
   SkolkaZakladkaOrderByModel,
 } from "./orderByTypes/skolkaZakladkaOrderByTypes";
 
-function whereJoinAdresa(filter: SkolkaZakladkaFilterModel) {
+function whereJoinAdresa(filter: SkolkaZakladkaFilterModel, order : SkolkaZakladkaOrderByModel) {
   if (
     filter.castObceIDs.length > 0 ||
     filter.krajIDs.length > 0 ||
     filter.mestskaCastIDs.length > 0 ||
     filter.okresIDs.length > 0 || 
-    filter.obecIDs.length > 0
+    filter.obecIDs.length > 0 || 
+    order.type == SkolkaZakladkaOrderByEnum.Location
   )
     return Prisma.sql` 
         LEFT JOIN skolkazakladka_adresa ON skolkazakladka_adresa.SkolkaZakladkaID = skolka_zakladka.ID
@@ -35,12 +36,6 @@ function whereJoinAdresa(filter: SkolkaZakladkaFilterModel) {
         LEFT JOIN okres ON okres.ID = obec.OkresID
         LEFT JOIN kraj ON kraj.ID = okres.KrajID
       `;
-  return Prisma.sql``;
-}
-
-function whereJoinHodnoceni(filter: SkolkaZakladkaFilterModel) {
-  if (filter.hodnoceniRange !== undefined)
-    return Prisma.sql` LEFT JOIN hodnoceni ON hodnoceni.SkolkaZakladkaID = skolka_zakladka.ID`;
   return Prisma.sql``;
 }
 
@@ -62,7 +57,7 @@ function whereConditionZarizeniIDs(zarizeniIDs: number[]) {
 function getOrderBy(order: SkolkaZakladkaOrderByModel) {
   switch (order.type) {
     case SkolkaZakladkaOrderByEnum.Hodnoceni:
-      return Prisma.sql` ORDER BY hodnoceni.hvezdicek`;
+      return Prisma.sql` ORDER BY prumer_hvezdicek`;
     case SkolkaZakladkaOrderByEnum.Location: {
       if (order.lon == null || order.lat == null) throw "Missing coordinates";
       return Prisma.sql` ORDER BY vzdalenost`;
@@ -70,17 +65,6 @@ function getOrderBy(order: SkolkaZakladkaOrderByModel) {
     case SkolkaZakladkaOrderByEnum.Nazev:
       return Prisma.sql` ORDER BY skolka_zakladka.nazev`;
   }
-}
-
-function getOrderByJoinHodnoceni(order: SkolkaZakladkaOrderByEnum) {
-  if (order != SkolkaZakladkaOrderByEnum.Hodnoceni) return Prisma.empty;
-  return Prisma.sql`LEFT JOIN hodnoceni ON hodnoceni.SkolkaZakladkaID = skolka_zakladka.ID`;
-}
-
-function getOrderByJoinAdresa(order: SkolkaZakladkaOrderByEnum) {
-  if (order != SkolkaZakladkaOrderByEnum.Location) return Prisma.empty;
-  return Prisma.sql` LEFT JOIN skolkazakladka_adresa ON skolkazakladka_adresa.SkolkaZakladkaID = skolka_zakladka.ID 
-                      LEFT JOIN adresa ON skolkazakladka_adresa.AdresaID = adresa.ID`;
 }
 
 function getWhereSkolkaZakladkaNazev(nazev: string | null | undefined) {
@@ -128,25 +112,19 @@ function getWhere(filter: SkolkaZakladkaFilterModel) {
     ${getWhereTypZrizovateleIDs(filter.typZrizovateleIDs)}
     ${getWhereSkolaDruhTypIDs(filter.skolaDruhTypIDs)}
     ${getWhereSkolkaZakladkaNazev(filter.nazev)}
-    AND skolka_zakladka.ID IN (
-      SELECT DISTINCT skolka_zakladka.ID FROM skolka_zakladka
-        ${whereJoinAdresa(filter)}
-        ${whereJoinHodnoceni(filter)}
-        ${whereJoinZarizeni(filter)}
-      WHERE 1 = 1
-        ${whereConditionKrajIDs(filter.krajIDs)}
-        ${whereConditionOkresIDs(filter.okresIDs)}
-        ${whereConditionObecIDs(filter.obecIDs)}
-        ${whereConditionCastObceIDs(filter.castObceIDs)}
-        ${whereConditionMestskaCastIDs(filter.mestskaCastIDs)}
-        ${whereConditionHodnoceni(filter.hodnoceniRange)}
-        ${whereConditionVzdalenostMax(
-          filter.vzdalenostMax,
-          filter.lat as number,
-          filter.lon as number
-        )}
-        ${whereConditionZarizeniIDs(filter.zarizeniIDs)}
-    )
+
+    ${whereConditionKrajIDs(filter.krajIDs)}
+    ${whereConditionOkresIDs(filter.okresIDs)}
+    ${whereConditionObecIDs(filter.obecIDs)}
+    ${whereConditionCastObceIDs(filter.castObceIDs)}
+    ${whereConditionMestskaCastIDs(filter.mestskaCastIDs)}
+    ${whereConditionHodnoceni(filter.hodnoceniRange)}
+    ${whereConditionVzdalenostMax(
+      filter.vzdalenostMax,
+      filter.lat as number,
+      filter.lon as number
+    )}
+    ${whereConditionZarizeniIDs(filter.zarizeniIDs)}
   `;
 }
 
@@ -162,11 +140,14 @@ export async function getSkolkaZakladkaList(
         FROM (
           SELECT DISTINCT
             skolka_zakladka.*,
+            AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
             POW((adresa.lon - ${order.lon}), 2) + POW((adresa.lat - ${order.lat}), 2) AS vzdalenost
           FROM skolka_zakladka
-          ${getOrderByJoinHodnoceni(order.type)}
-          ${getOrderByJoinAdresa(order.type)}
+          LEFT JOIN hodnoceni ON hodnoceni.SkolkaZakladkaID = skolka_zakladka.ID
+          ${whereJoinAdresa(filter, order)}
+          ${whereJoinZarizeni(filter)}
           ${getWhere(filter)}
+          GROUP BY skolka_zakladka.ID, adresa.lat, adresa.lon
           ${getOrderBy(order)}
           ${getLimit(filter.limit)}
           ${getOffset(filter.offset)}
@@ -175,11 +156,12 @@ export async function getSkolkaZakladkaList(
   } else {
     sql = Prisma.sql`
       SELECT DISTINCT
-        ${order.type == SkolkaZakladkaOrderByEnum.Hodnoceni ? Prisma.sql`hodnoceni.hvezdicek,` : Prisma.empty}
+        AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
         skolka_zakladka.*
       FROM skolka_zakladka
-      ${getOrderByJoinHodnoceni(order.type)}
+      LEFT JOIN hodnoceni ON hodnoceni.SkolkaZakladkaID = skolka_zakladka.ID
       ${getWhere(filter)}
+      GROUP BY skolka_zakladka.ID
       ${getOrderBy(order)}
       ${getLimit(filter.limit)}
       ${getOffset(filter.offset)}
