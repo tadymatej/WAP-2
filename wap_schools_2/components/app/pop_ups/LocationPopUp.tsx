@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { CardDescription, CardTitle } from "@/components/ui/card";
 import { DialogFooter, DialogHeader } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { useStore } from "@/state/useStore";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { LocateFixed } from "lucide-react";
 import React, { useEffect } from "react";
@@ -29,16 +30,19 @@ export function LocationPopUp(props: LocationPopUpProps) {
     googleMapsApiKey: "AIzaSyCbqCg_gtkDa48oTFEDuaZXx6pvr8B49DI",
   });
 
+  const initLatLong = useStore((state) => state.filter.latitude);
+  const initLonLong = useStore((state) => state.filter.longitude);
+
   const [map, setMap] = React.useState<google.maps.Map | null>(null);
-  const [lat, setLat] = React.useState<number>(49);
-  const [lon, setLon] = React.useState<number>(16);
+  const [lat, setLat] = React.useState<number>(initLatLong ?? 49);
+  const [lon, setLon] = React.useState<number>(initLonLong ?? 16);
   const [zoom, setZoom] = React.useState<number>(12);
 
   useEffect(() => {
     setTimeout(() => {
       setZoom(9);
     }, 300);
-  }, []);
+  }, [initLatLong, initLonLong]);
 
   const onLoad = React.useCallback(function callback(map: google.maps.Map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!

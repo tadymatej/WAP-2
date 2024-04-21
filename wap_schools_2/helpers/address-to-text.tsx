@@ -35,3 +35,30 @@ export const addressToText = (adress: SkolaVysokaStredniAdresaType) => {
 
   return text;
 };
+
+export const vzdalenostInKmFunc = ({
+  userLatitude,
+  userLongitude,
+  goalLatitude,
+  goalLongitude,
+}: {
+  userLatitude: number | undefined;
+  userLongitude: number | undefined;
+  goalLatitude: number | undefined;
+  goalLongitude: number | undefined;
+}) => {
+  if (!userLatitude || !userLongitude || !goalLatitude || !goalLongitude) {
+    return null;
+  }
+  //acos(sin(lat1)sin(lat2)+cos(lat1)cos(lat2)cos(lon2-lon1))6371 (6371 is Earth radius in km.)
+  const lat1 = (userLatitude * Math.PI) / 180;
+  const lat2 = (goalLatitude * Math.PI) / 180;
+  const lon1 = (userLongitude * Math.PI) / 180;
+  const lon2 = (goalLongitude * Math.PI) / 180;
+  const distance =
+    Math.acos(
+      Math.sin(lat1) * Math.sin(lat2) +
+        Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1)
+    ) * 6371;
+  return distance;
+};

@@ -2,7 +2,7 @@ import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllDat
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { addressToText } from "@/helpers/address-to-text";
+import { addressToText, vzdalenostInKmFunc } from "@/helpers/address-to-text";
 import { Colors } from "@/lib/colors";
 import { useStore } from "@/state/useStore";
 import {
@@ -15,6 +15,7 @@ import {
   Mail,
   Notebook,
   Phone,
+  Route,
   Speech,
   Star,
   UserRound,
@@ -39,10 +40,26 @@ export default function SkolaVysokaStredniDetail({
     .some((id) => id === skola.id);
 
   const setFavourite = useStore((state) => state.filter.setFavourite);
-  const vyucovaneJazyky = ["Angličtina", "Němčina"];
+  const vyucovaneJazyky = skola.skola_vyucovanyjazyk
+    .map((jazyk) => jazyk.jazyk?.nazev)
+    .filter((jazyk) => jazyk !== null && jazyk !== undefined);
   //skola.skola_vyucovanyjazyk
   //  .map((jazyk) => jazyk.jazyk?.nazev)
   //  .filter((jazyk) => jazyk !== null && jazyk !== undefined);
+
+  //acos(sin(lat1)sin(lat2)+cos(lat1)cos(lat2)cos(lon2-lon1))6371 (6371 is Earth radius in km.)
+  const userLatitude = useStore((state) => state.filter.latitude);
+  const userLongitude = useStore((state) => state.filter.longitude);
+  const goalLatitude = skola.lat;
+  const goalLongitude = skola.lon;
+
+  const vzdalenostInKm = vzdalenostInKmFunc({
+    userLatitude,
+    userLongitude,
+    goalLatitude,
+    goalLongitude,
+  });
+
   return (
     <div className="flex flex-col items-stretch w-full">
       <div className="flex flex-row justify-between items-center">
@@ -69,6 +86,20 @@ export default function SkolaVysokaStredniDetail({
       </div>
       <div className="h-4" />
       <div className="flex flex-col gap-y-4">
+        {skola.prumer_hvezdicek && (
+          <InfoDetailTile
+            text={"Hodnocení"}
+            Icon={Star}
+            description={(skola.prumer_hvezdicek / -10).toFixed(1) + " / 5"}
+          />
+        )}
+        {vzdalenostInKm && (
+          <InfoDetailTile
+            text={"Vzdálenost od vybrané lokace"}
+            Icon={Route}
+            description={vzdalenostInKm.toFixed(1) + " km"}
+          />
+        )}
         {skola.reditel && (
           <InfoDetailTile
             text={"Ředitel/ka"}
@@ -98,13 +129,6 @@ export default function SkolaVysokaStredniDetail({
           />
         )}
 
-        {skola.hodnoceni.length != 0 && (
-          <InfoDetailTile
-            text={"Hodnocení"}
-            Icon={Star}
-            description={skola.prumer_hvezdicek.toFixed(1)}
-          />
-        )}
         {skola.poznamka && (
           <InfoDetailTile
             text={"Poznámka"}
