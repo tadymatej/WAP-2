@@ -56,9 +56,9 @@ export interface SkolaZakladniMaterskaType {
   hodnoceni: {
     hvezdicek: number;
     popis: string | null;
-    jina_role: string | null;
+    jinaroleuzivatele: string | null;
     autor: string | null;
-    role_uzivatele_typy: {
+    typ_role_uzivatele: {
       nazev: string;
     } | null;
   }[];

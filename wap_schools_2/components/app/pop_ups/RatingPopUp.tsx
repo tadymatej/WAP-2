@@ -30,6 +30,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Stars } from "./Stars";
 
+import { SkolaZakladniMaterskaHodnoceniType } from "@/actions/types/skolaZakladniMaterskaType";
 import { hodnoceni, typ_role_uzivatele } from "@prisma/client";
 
 const FormSchema = z.object({
@@ -47,11 +48,11 @@ const FormSchema = z.object({
 interface RatingPopUpProps {
   skolaID: number | null;
   skolkaZakladkaID: number | null;
+  onClose?: (hod: SkolaZakladniMaterskaHodnoceniType) => void;
 }
 
 export function RatingPopUp(props: RatingPopUpProps) {
   const possibleRatings = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
-
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -73,7 +74,23 @@ export function RatingPopUp(props: RatingPopUpProps) {
     else
       model.jinaroleuzivatele =
         data.jinaRoleUzivatele == undefined ? null : data.jinaRoleUzivatele;
-    let res = await insertHodnoceni(model);
+    let res = await insertHodnoceni({
+      //  hvezdicek: number;
+      //popis: string | null;
+      //jina_role: string | null;
+      //autor: string | null;
+      //role_uzivatele_typy: {
+      //    nazev: string;
+      //} | null;
+      autor: model.autor,
+      hvezdicek: model.hvezdicek,
+      jinaroleuzivatele: model.jinaroleuzivatele,
+      popis: model.popis,
+      typroleuzivateleid:  1,
+    });
+    if (res && props?.onClose) {
+      props.onClose(model);
+    }
     toast({
       title:
         res == true
@@ -99,7 +116,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
         {} as TypRoleUzivateleFilterModel
       );
       console.log(res);
-      setPossibleVztahKeSkoleArray(res)
+      setPossibleVztahKeSkoleArray(res);
     };
     fetchData();
   }, []);

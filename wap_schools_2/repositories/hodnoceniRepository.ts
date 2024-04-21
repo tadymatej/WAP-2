@@ -53,23 +53,23 @@ export async function getHodnoceniList(filter: HodnoceniFilterModel) {
  * @param model data of hodnoceni to insert
  */
 export async function insertHodnoceni(model: hodnoceni): Promise<boolean> {
- try {
-   const res = await db.hodnoceni.create({
-     data: {
-       popis: model.popis,
-       autor: model.autor,
-       hvezdicek: model.hvezdicek,
-       jinaroleuzivatele: model.jinaroleuzivatele,
-       typroleuzivateleid: model.typroleuzivateleid,
-       skolaid: model.skolaid,
-       skolkazakladkaid: model.skolkazakladkaid
-     },
-   });
- } catch (e) {
-   console.log(model);
-   if (e instanceof Prisma.PrismaClientKnownRequestError) {
-   }
-   return false;
- }
- return true;
+  try {
+    const res = await db.hodnoceni.create({
+      data: {
+        popis: model.popis,
+        autor: model.autor,
+        hvezdicek: model.hvezdicek,
+        jinaroleuzivatele: model.jinaroleuzivatele,
+        typroleuzivateleid: model.typroleuzivateleid,
+        skolaid: model.skolaid,
+        skolkazakladkaid: model.skolkazakladkaid,
+      },
+    });
+  } catch (e) {
+    console.log(model);
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+    }
+    return false;
+  }
+  return true;
 }
