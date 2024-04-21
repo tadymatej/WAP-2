@@ -8,6 +8,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandSeparator,
 } from "@/components/ui/command";
 import {
   Popover,
@@ -292,6 +293,22 @@ export default function FilterMultiSelectWrapper({
                   );
                 })}
               </CommandGroup>
+              {selected.length > 0 && (
+                <>
+                  <CommandSeparator />
+                  <CommandGroup>
+                    <CommandItem
+                      onSelect={() => {
+                        setInState([]);
+                        setOpen(false);
+                      }}
+                      className="justify-center text-center"
+                    >
+                      Clear filters
+                    </CommandItem>
+                  </CommandGroup>
+                </>
+              )}
             </ScrollArea>
           </CommandList>
         </Command>

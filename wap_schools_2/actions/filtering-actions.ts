@@ -115,14 +115,16 @@ export async function optionsBasedOnTypeAndSearch({
         select: {
           nazevoboru: true,
           id: true,
+          kod: true,
         },
-        take: 50,
-        distinct: ["nazevoboru"],
+        take: 100,
+        distinct: ["nazevoboru", "kod"],
       });
 
       return allOptions.map((s) => ({
         nazev: s.nazevoboru ?? "",
         id: s.id,
+        kod: s.kod ?? undefined,
       }));
     }
 

@@ -36,6 +36,8 @@ export function SchoolList() {
   const next = async () => {
     setLoading(true);
 
+    console.log("Fetching data");
+
     if (searchingType === SearchingType.StredniVysoke) {
       console.log("fething skoly vysoke stredni");
       const result = await filterSkoly(
@@ -140,6 +142,7 @@ export function SchoolList() {
     console.log("filter changed");
     setPage(0);
     setHasMore(true);
+    setLoading(false);
     setSkolyVysokeStredni([]);
     setSkolyZakladniMaterske([]);
     return () => {};

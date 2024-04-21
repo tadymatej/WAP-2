@@ -1,14 +1,7 @@
-
 import { MainFrame } from "@/components/app/main-frame/mainFrame";
 
 export default async function Home() {
-  const thousandStrings = Array.from(
-    { length: 300 },
-    (_, i) => `String ${i + 1}`
-  );
-  return (
-    <MainFrame></MainFrame>
-  );
+  return <MainFrame></MainFrame>;
 }
 
 // import { HodnoceniModel } from '../repositories/models/hodnoceniModel';

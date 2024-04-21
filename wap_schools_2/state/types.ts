@@ -8,23 +8,24 @@ import { StateCreator } from "zustand";
 export interface OptionState {
   id: number;
   nazev: string;
+  /// Used only for obory, where each obor has a number of ids
+  kod?: string;
 }
 
 export const SkolaSortByMap = [
   {
     value: "Vzdálenost",
-    type: SkolaOrderByEnum.Location
+    type: SkolaOrderByEnum.Location,
   },
   {
     value: "Hodnocení",
-    type: SkolaOrderByEnum.Hodnoceni
+    type: SkolaOrderByEnum.Hodnoceni,
   },
   {
     value: "Název",
-    type: SkolaOrderByEnum.Nazev
-  }
-]
-
+    type: SkolaOrderByEnum.Nazev,
+  },
+];
 
 export interface FilterStateDefinition {
   krajeSelected: OptionState[];
@@ -77,7 +78,9 @@ export interface FilterStateActions {
   setSkolne: (skolne: OptionState[]) => void;
   setCurrentLocation: (location: { x: number; y: number }) => void;
   setSortBy: (sortBy: SkolaOrderByEnum) => void;
-  setSortSkolkaZakladkaBy: (sortSkolkaZakladkaBy : SkolkaZakladkaOrderByEnum) => void;
+  setSortSkolkaZakladkaBy: (
+    sortSkolkaZakladkaBy: SkolkaZakladkaOrderByEnum
+  ) => void;
   setOffset: (offset: number) => void;
   //setFavouriteSchools: (favouriteSchools: OptionState[]) => void;
   setFavourite: (
