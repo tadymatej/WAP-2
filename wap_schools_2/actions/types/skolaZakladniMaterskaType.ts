@@ -58,6 +58,7 @@ export interface SkolaZakladniMaterskaType {
     popis: string | null;
     jina_role: string | null;
     autor: string | null;
+    vytvoreno: Date;
     role_uzivatele_typy: {
       nazev: string;
     } | null;

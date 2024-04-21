@@ -77,6 +77,7 @@ export function SchoolList() {
         }
       );
 
+      // @ts-ignore
       setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
 
       // Usually your response will tell you if there is no more data.
@@ -116,6 +117,7 @@ export function SchoolList() {
         }
       );
 
+      // @ts-ignore
       setSkolyZakladniMaterske([...skolyZakladniMaterske, ...result]);
 
       // Usually your response will tell you if there is no more data.
