@@ -29,6 +29,10 @@ export default function SkolaZakladniMaterskaDetail({
   const favouriteZakladniMaterske = useStore((state) =>
     state.filter.getFavouritesMaterskeSkoly()
   );
+  const favouritesVysokeStredni = useStore((state) =>
+    state.filter.getFavouritesVysokeStredniSkoly()
+  );
+
   const isFavourite = favouriteZakladniMaterske
     .map((skola) => skola.id)
     .some((id) => id === skola.id);
@@ -58,10 +62,17 @@ export default function SkolaZakladniMaterskaDetail({
           variant="outline"
           onClick={() =>
             !isFavourite
-              ? setFavourite([...favouriteZakladniMaterske, skola])
-              : setFavourite(
-                  favouriteZakladniMaterske.filter((fav) => fav.id !== skola.id)
-                )
+              ? setFavourite([
+                  ...favouriteZakladniMaterske,
+                  ...favouritesVysokeStredni,
+                  skola,
+                ])
+              : setFavourite([
+                  ...favouriteZakladniMaterske.filter(
+                    (fav) => fav.id !== skola.id
+                  ),
+                  ...favouritesVysokeStredni,
+                ])
           }
         >
           {isFavourite ? (

@@ -143,14 +143,14 @@ export function SchoolList() {
         {searchingType === SearchingType.StredniVysoke
           ? skolyVysokeStredni.map((school) => (
               <SkolaVysokaStredniTile
-                inFavorites={false}
+                favIndex={undefined}
                 key={school.id}
                 skola={school}
               />
             ))
           : skolyZakladniMaterske.map((school) => (
               <SkolaZakladniMaterskaTiple
-                inFavorites={false}
+                favIndex={undefined}
                 key={school.id}
                 skola={school}
               />

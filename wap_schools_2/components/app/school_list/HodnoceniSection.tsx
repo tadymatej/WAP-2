@@ -1,4 +1,4 @@
-import { SkolaZakladniMaterskaHodnoceniType } from "@/actions/types/skolkaZakladkaAllData";
+import { SkolaZakladniMaterskaHodnoceniType } from "@/actions/types/skolaZakladniMaterskaType";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { SearchingType } from "@/enums/filter-types";

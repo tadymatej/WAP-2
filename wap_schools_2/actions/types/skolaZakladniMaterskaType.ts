@@ -15,6 +15,12 @@ export type SkolaZakladniMaterskaOboryType =
     : never;
 
 /**
+ * Holds rating informations about obor, viz documentation to the dataset or python extractors
+ */
+export type SkolaZakladniMaterskaHodnoceniType =
+  SkolaZakladniMaterskaType["hodnoceni"] extends (infer T)[] ? T : never;
+
+/**
  * Interface that holds all informations about skolka_zakladka entity and its corresponding data from another tables
  * Meaning of the data viz documentation to the dataset or python extractors
  * @interface
@@ -47,6 +53,15 @@ export interface SkolaZakladniMaterskaType {
   typ_zrizovatele: {
     nazev: string | null;
   } | null;
+  hodnoceni: {
+    hvezdicek: number;
+    popis: string | null;
+    jina_role: string | null;
+    autor: string | null;
+    role_uzivatele_typy: {
+      nazev: string;
+    } | null;
+  }[];
   zarizeni_skolky_zakladky: {
     kapacita: number | null;
     nazev: string | null;

@@ -64,6 +64,8 @@ export interface FilterStateDefinition {
   zakladniMaterskaSelected: SkolaZakladniMaterskaType | undefined;
   //
   searchingType: SearchingType;
+  //Responsivity
+  showFilter: boolean;
 }
 
 export interface FilterStateActions {
@@ -104,6 +106,13 @@ export interface FilterStateActions {
   setLongitude: (longitude: number) => void;
 
   setToDefault: () => void;
+
+  //to top
+  moveFavToTop: (index: number) => void;
+  moveFavToBottom: (index: number) => void;
+
+  //responsitivy
+  setShowFilter: (showFilter: boolean) => void;
 }
 
 export type FilterStateType = FilterStateDefinition & FilterStateActions;

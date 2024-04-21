@@ -5,8 +5,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
@@ -31,12 +29,12 @@ import InfoTile from "../generic/InfoTile";
 
 interface SkolaVysokaStredniTileProps {
   skola: SkolaZakladniMaterskaType;
-  inFavorites: boolean;
+  favIndex: number | undefined;
 }
 
 export default function SkolaZakladniMaterskaTiple({
   skola,
-  inFavorites = false,
+  favIndex,
 }: SkolaVysokaStredniTileProps) {
   const favouriteVysokeStredniIds = useStore((state) =>
     state.filter.getFavouritesMaterskeSkoly()
@@ -47,6 +45,9 @@ export default function SkolaZakladniMaterskaTiple({
   const selectedZakladniMaterska = useStore(
     (state) => state.filter.zakladniMaterskaSelected
   );
+
+  const moveToTop = useStore((state) => state.filter.moveFavToTop);
+  const moveToBottom = useStore((state) => state.filter.moveFavToBottom);
 
   const setMaterskaZakladniSelected = useStore(
     (state) => state.filter.setMaterskaZakladniSelected
@@ -111,7 +112,7 @@ export default function SkolaZakladniMaterskaTiple({
       }}
     >
       <CardContent className="p-4">
-        {!inFavorites ? (
+        {favIndex == undefined ? (
           badges
         ) : (
           <div className="flex flex-row">
@@ -124,12 +125,20 @@ export default function SkolaZakladniMaterskaTiple({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    moveToTop(favIndex);
+                  }}
+                >
+                  Posunot nahoru
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    moveToBottom(favIndex);
+                  }}
+                >
+                  Posunot dolů
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

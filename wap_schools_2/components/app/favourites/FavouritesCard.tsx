@@ -6,11 +6,16 @@ import { useStore } from "@/state/useStore";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Share } from "lucide-react";
 import SkolaVysokaStredniTile from "../school_list/SkolaVysokaStredniTile";
+import SkolaZakladniMaterskaTiple from "../school_list/SkolaZakladniMaterskaTile";
 
 export function FavouritesCard() {
   const favourites = useStore((state) => state.filter.favourites);
+
+  const moveToTop = useStore((state) => state.filter.moveFavToBottom);
+  const moveToBottom = useStore((state) => state.filter.moveFavToBottom);
+
   return (
-    <Card className="h-full">
+    <Card className="">
       <CardHeader className="flex flex-row justify-between items-center pt-4">
         <CardTitle>Oblibene</CardTitle>
         <div className="flex flex-row">
@@ -20,19 +25,30 @@ export function FavouritesCard() {
         </div>
       </CardHeader>
       <CardContent>
-        <ScrollArea>
+        <ScrollArea className="space-y-3">
           {favourites.map((school, index) => {
             if (!("rediteltel" in school)) {
-              return <div key={index} />;
+              return (
+                <SkolaZakladniMaterskaTiple
+                  favIndex={index}
+                  key={school.id}
+                  skola={school}
+                />
+              );
             }
             return (
               <SkolaVysokaStredniTile
-                inFavorites
+                favIndex={index}
                 key={school.id}
                 skola={school}
               />
             );
           })}
+          {favourites.length === 0 && (
+            <div className="text-slate-600 font-normal text-start text-base">
+              Zde se zobrazí vaše oblíbené školy.
+            </div>
+          )}
         </ScrollArea>
       </CardContent>
     </Card>
