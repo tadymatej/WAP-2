@@ -4,6 +4,10 @@ import { db } from "@/lib/db";
 import { HodnoceniFilterModel } from "./filterModels/hodnoceniFilterModel";
 import { hodnoceni, Prisma } from "@prisma/client";
 
+/**
+ * Gets hodnoceni (and fields from corresponding tables for hodnoceni) list for skola or skolka_zakladka
+ * @param filter hodnoceni filter options
+ */
 export async function getHodnoceniList(filter: HodnoceniFilterModel) {
   const res = await db.hodnoceni.findMany({
     where: {
@@ -44,41 +48,10 @@ export async function getHodnoceniList(filter: HodnoceniFilterModel) {
   return res;
 }
 
-export async function getHodnoceni(filter: HodnoceniFilterModel) {
-  const res = await db.hodnoceni.findFirst({
-    where: {
-      id: filter.ID,
-      skolaid:
-        filter.skolaIDs.length == 0
-          ? undefined
-          : {
-              in: filter.skolaIDs,
-            },
-      skolkazakladkaid:
-        filter.skolkaZakladkaIDs.length == 0
-          ? undefined
-          : {
-              in: filter.skolkaZakladkaIDs,
-            },
-    },
-    select: {
-      id: true,
-      popis: true,
-      autor: true,
-      hvezdicek: true,
-      jinaroleuzivatele: true,
-      typroleuzivateleid: true,
-      typ_role_uzivatele: {
-        select: {
-          id: true,
-          nazev: true,
-        },
-      },
-    },
-  });
-  return res;
-}
-
+/**
+ * Inserts new hodnoceni to the database
+ * @param model data of hodnoceni to insert
+ */
 export async function insertHodnoceni(model: hodnoceni): Promise<boolean> {
  try {
    const res = await db.hodnoceni.create({

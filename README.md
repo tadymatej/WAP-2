@@ -9,8 +9,15 @@ Z těchto důvodů jsme se rozhodli tvořit tuto aplikaci, která se snaží ule
 V dohledné době se chystáme tuto aplikaci také publikovat.
 
 ## Authors
-Matěj Žalmánek (xzalma00)
-Jan Zimola (xzimol04)
+- Matěj Žalmánek (xzalma00)
+  - Extrakce a zpracování dat ze souborů XML, JSON
+  - Backend implementace
+  - implementace části Frontendu
+
+- Jan Zimola (xzimol04)
+  - Návrh uživatelského rozhraní ve Figmě
+  - implementace Části backendu
+  - Frontend implementace
 
 ## Spuštění
 

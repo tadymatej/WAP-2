@@ -3,6 +3,10 @@
 import { db } from "@/lib/db";
 import { AdresaFilterModel } from "./filterModels/adresaFilterModel";
 
+/**
+ * Gets adresa (and fields from corresponding tables for adresa) list for skolka_zakladka
+ * @param filter adresa filter options
+ */
 async function getAdresaSkolkaZakladkaList(filter : AdresaFilterModel) {
   return (await db.skolkazakladka_adresa.findMany({
     where: {
@@ -39,6 +43,10 @@ async function getAdresaSkolkaZakladkaList(filter : AdresaFilterModel) {
   })).map((a) => a.adresa);
 }
 
+/**
+ * Gets adresa (and fields from corresponding tables for adresa) list for skola
+ * @param filter adresa filter options
+ */
 export async function getAdresaList(filter : AdresaFilterModel) {
   if(filter.skolkaZakladkaIDs.length > 0) return getAdresaSkolkaZakladkaList(filter);
   return await db.adresa.findMany({

@@ -1,5 +1,5 @@
-import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
-import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
+import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniType";
+import { SkolaZakladniMaterskaType } from "@/actions/types/skolaZakladniMaterskaType";
 import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
 import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
 import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";

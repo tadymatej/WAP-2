@@ -9,7 +9,7 @@ import {
   SkolaOrderByModel,
 } from "./orderByTypes/skolaOrderByTypes";
 
-import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
+import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniType";
 import {
   getLimit,
   getOffset,
@@ -22,6 +22,11 @@ import {
   whereConditionVzdalenostMax,
 } from "./common/rawFunctions";
 
+/**
+ * Returns SQL part of ORDER BY clause for ordering
+ * @param order Order model to set the ordering behaviour
+ * @returns {Prisma.Sql}
+ */
 function getOrderBy(order: SkolaOrderByModel) {
   switch (order.type) {
     case SkolaOrderByEnum.Hodnoceni:
@@ -35,6 +40,10 @@ function getOrderBy(order: SkolaOrderByModel) {
   }
 }
 
+/**
+ * Returns SQL part of JOIN clause for joining adresa and its corresponding tables
+ * @returns {Prisma.Sql}
+ */
 function whereJoinAdresa(filter: SkolaFilterModel, order : SkolaOrderByModel) {
   if (
     filter.castObceIDs.length > 0 ||
@@ -53,6 +62,10 @@ function whereJoinAdresa(filter: SkolaFilterModel, order : SkolaOrderByModel) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of JOIN clause for joining prijimaci_zkouska
+ * @returns {Prisma.Sql}
+ */
 function whereJoinPrijimaciZkousky(filter: SkolaFilterModel) {
   if (filter.prijimaciZkouskaIDs.length > 0) {
     return Prisma.sql` 
@@ -62,6 +75,10 @@ function whereJoinPrijimaciZkousky(filter: SkolaFilterModel) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by obor.Kod
+ * @returns {Prisma.Sql}
+ */
 function whereConditionOborKods(oborKods: string[]) {
   if (oborKods.length > 0) {
     return Prisma.sql` AND obor.Kod IN (${Prisma.join(oborKods)})`;
@@ -69,6 +86,10 @@ function whereConditionOborKods(oborKods: string[]) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by ranges of obor.skolne 
+ * @returns {Prisma.Sql}
+ */
 function whereConditionSkolne(skolneRange: FilterItemRange[]) {
   if (skolneRange.length == 0) return Prisma.sql``;
   return Prisma.sql`
@@ -95,6 +116,10 @@ function whereConditionSkolne(skolneRange: FilterItemRange[]) {
   `;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by prijimaci_zkouska.ID
+ * @returns {Prisma.Sql}
+ */
 function whereConditionPrijimaciZkouskaIDs(prijimaciZkouskaIDs: number[]) {
   if (prijimaciZkouskaIDs.length > 0) {
     return Prisma.sql` AND prijimaci_zkouska.ID IN (${Prisma.join(
@@ -104,6 +129,10 @@ function whereConditionPrijimaciZkouskaIDs(prijimaciZkouskaIDs: number[]) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by podskola.DruhPodskolyID
+ * @returns {Prisma.Sql}
+ */
 function whereConditionDruhSkolyIDs(druhSkolyIDs: number[]) {
   if (druhSkolyIDs.length > 0) {
     return Prisma.sql` AND podskola.DruhPodskolyID IN (${Prisma.join(
@@ -113,7 +142,10 @@ function whereConditionDruhSkolyIDs(druhSkolyIDs: number[]) {
   return Prisma.sql``;
 }
 
-// kraj, mesto, mestska cast, okres, vyucovane obory, typy skol (církevní, státní, ), druhy škol (vysoká, střední, ...), hodnoceni, přijimaci zkoušky, školné, [vzdálenost]
+/**
+ * Returns SQL part of WHERE clause for filtering by filterModel
+ * @returns {Prisma.Sql}
+ */
 function getWhere(filter: SkolaFilterModel) {
   if (
     filter.vzdalenostMax != null &&
@@ -166,6 +198,11 @@ function getWhereTypSkolyIDs(typSkolyIDs: number[]) {
   return Prisma.sql``;
 }
 
+/**
+ * Gets all skola datas filtered and sorted by given model
+ * @param filter Filter model by which to perform filtering
+ * @param order Order model by which to perform ordering
+ */
 export async function getSkolaList(filter: SkolaFilterModel, order: SkolaOrderByModel): Promise<SkolaVysokaStredniType[]> {
   let sql = Prisma.sql`
     SELECT DISTINCT

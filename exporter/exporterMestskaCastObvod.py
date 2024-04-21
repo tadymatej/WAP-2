@@ -4,6 +4,9 @@ import pandas as pd
 from .dbController import DbController
 
 class ExporterMestskaCastObvod(Exporter):
+    """
+    Exporter from not db format to database for table obec (Třebíč, Dukovany, ...)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -18,6 +21,13 @@ class ExporterMestskaCastObvod(Exporter):
                          );""")
         
     def db_export_one(self, kod : str, nazev : str, obecKod : str):
+        """
+        Exports one entry of mestskaCastObvod
+        Args:
+            kod: Code of mestskaCastObvod
+            nazev: Name of mestskaCastObvod
+            obecKod: code of the city in which is mestskaCastObvod located
+        """
         self.cur.execute("SELECT ID FROM obec WHERE Kod = %s", (obecKod, ))
         obecID = self.cur.fetchone()[0]
 

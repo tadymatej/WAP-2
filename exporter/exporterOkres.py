@@ -5,6 +5,9 @@ import pandas as pd
 from .dbController import DbController
 
 class ExporterOkres(Exporter):
+    """
+    Exporter from not db format to database for table okres (Třebíč, Jihlava, ...)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -20,6 +23,14 @@ class ExporterOkres(Exporter):
                          );""")
         
     def db_export_one(self, kod : int, kodLau : str, nazev : str, krajKod : str):
+        """
+        Exports one entry to the database
+        Args:
+            kod: code of the okres
+            kodLau: second code of the okres
+            nazev: name of the okres
+            krajKod: code of the kraj, in which is this okres located
+        """
         self.cur.execute("SELECT ID FROM kraj WHERE Kod = %s", (krajKod, ))
         krajID = self.cur.fetchone()[0]
         self.cur.execute("INSERT INTO okres (Kod, Nazev, Kod3, KrajID) VALUES(%s, %s, %s, %s)", (kod, nazev, kodLau, krajID))

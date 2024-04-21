@@ -1,6 +1,6 @@
 "use server";
 
-import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
+import { SkolaZakladniMaterskaType } from "@/actions/types/skolaZakladniMaterskaType";
 import { db } from "@/lib/db";
 import { Prisma } from "@prisma/client";
 import {
@@ -20,6 +20,12 @@ import {
   SkolkaZakladkaOrderByModel,
 } from "./orderByTypes/skolkaZakladkaOrderByTypes";
 
+/**
+ * Returns SQL part of JOIN clause for joining adresa and its coresponding tables
+ * @param filter filter model by which we are filtering 
+ * @param order order model by which we are ordering
+ * @returns {Prisma.Sql}
+ */
 function whereJoinAdresa(filter: SkolkaZakladkaFilterModel, order : SkolkaZakladkaOrderByModel) {
   if (
     filter.castObceIDs.length > 0 ||
@@ -39,12 +45,21 @@ function whereJoinAdresa(filter: SkolkaZakladkaFilterModel, order : SkolkaZaklad
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of JOIN clause for joining zarizeni
+ * @param filter Filter model by which we are filtering
+ * @returns {Prisma.Sql}
+ */
 function whereJoinZarizeni(filter: SkolkaZakladkaFilterModel) {
   if (filter.zarizeniIDs.length > 0)
     return Prisma.sql` LEFT JOIN zarizeni_skolky_zakladky ON zarizeni_skolky_zakladky.SkolkaZakladkaID = skolka_zakladka.ID`;
   return Prisma.empty;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by zarizeni_skolky_zakladky.IDs
+ * @returns {Prisma.Sql}
+ */
 function whereConditionZarizeniIDs(zarizeniIDs: number[]) {
   if (zarizeniIDs.length > 0) {
     return Prisma.sql` AND zarizeni_skolky_zakladky.ID IN (${Prisma.join(
@@ -54,6 +69,11 @@ function whereConditionZarizeniIDs(zarizeniIDs: number[]) {
   return Prisma.empty;
 }
 
+/**
+ * Returns SQL part of ORDER BY clause for ordering
+ * @param order Order model to set the ordering behaviour
+ * @returns {Prisma.Sql}
+ */
 function getOrderBy(order: SkolkaZakladkaOrderByModel) {
   switch (order.type) {
     case SkolkaZakladkaOrderByEnum.Hodnoceni:
@@ -67,6 +87,10 @@ function getOrderBy(order: SkolkaZakladkaOrderByModel) {
   }
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by skolka_zakladka.Nazev
+ * @returns {Prisma.Sql}
+ */
 function getWhereSkolkaZakladkaNazev(nazev: string | null | undefined) {
   if (nazev != null) {
     return Prisma.sql` AND skolka_zakladka.Nazev LIKE CONCAT('%', ${nazev} ,'%')`;
@@ -74,6 +98,10 @@ function getWhereSkolkaZakladkaNazev(nazev: string | null | undefined) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by skolka_zakladka.IDs
+ * @returns {Prisma.Sql}
+ */
 function getWhereSkolkaZakladkaIDs(IDs: number[]) {
   if (IDs.length > 0) {
     return Prisma.sql` AND skolka_zakladka.ID IN (${Prisma.join(IDs)})`;
@@ -81,6 +109,10 @@ function getWhereSkolkaZakladkaIDs(IDs: number[]) {
   return Prisma.empty;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by skolka_zakladka.typZrizovateleID
+ * @returns {Prisma.Sql}
+ */
 function getWhereTypZrizovateleIDs(typZrizovateleIDs: number[]) {
   if (typZrizovateleIDs.length > 0) {
     return Prisma.sql` AND skolka_zakladka.TypZrizovateleID IN (${Prisma.join(
@@ -90,6 +122,10 @@ function getWhereTypZrizovateleIDs(typZrizovateleIDs: number[]) {
   return Prisma.empty;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by skolka_zakladka.skolaDruhTypID
+ * @returns {Prisma.Sql}
+ */
 function getWhereSkolaDruhTypIDs(skolaDruhTypIDs: number[]) {
   if (skolaDruhTypIDs.length > 0) {
     return Prisma.sql` AND skolka_zakladka.SkolaDruhTypID IN (${Prisma.join(
@@ -99,6 +135,10 @@ function getWhereSkolaDruhTypIDs(skolaDruhTypIDs: number[]) {
   return Prisma.empty;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by filterModel
+ * @returns {Prisma.Sql}
+ */
 function getWhere(filter: SkolkaZakladkaFilterModel) {
   if (
     filter.vzdalenostMax != null &&
@@ -128,6 +168,11 @@ function getWhere(filter: SkolkaZakladkaFilterModel) {
   `;
 }
 
+/**
+ * Gets all skolka_zakladka datas filtered and sorted by given model
+ * @param filter Filter model by which to perform filtering
+ * @param order Order model by which to perform ordering
+ */
 export async function getSkolkaZakladkaList(
   filter: SkolkaZakladkaFilterModel,
   order: SkolkaZakladkaOrderByModel
@@ -171,9 +216,6 @@ export async function getSkolkaZakladkaList(
       ${getOffset(filter.offset)}
       `;
   }
-  console.log(filter);
-  console.log(sql);
   let res: SkolaZakladniMaterskaType[] = await db.$queryRaw(sql);
-  console.log(filter);
   return res;
 }

@@ -4,7 +4,9 @@ import pandas as pd
 from .dbController import DbController
 
 class ExporterDruhStudia(Exporter):
-
+    """
+    Exporter from not db format to database for table druh_studia (Nástavbové, Maturitní, Magisterské,...)
+    """
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
 
@@ -16,6 +18,12 @@ class ExporterDruhStudia(Exporter):
                          );""")
         
     def db_export_one(self, kod : str, nazev : str):
+        """
+        Exports one entry to the database
+        Args:
+            kod: Code of the druhStudia entry
+            nazev: Name of the druhStudia entry
+        """
         self.cur.execute("INSERT INTO druh_studia(Nazev, Kod) VALUES(%s, %s)", (nazev, kod))
 
     def json_export(self):

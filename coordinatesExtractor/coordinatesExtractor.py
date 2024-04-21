@@ -6,6 +6,9 @@ from exporter.exporterAdresa import ModelAdresa
 
 
 class CoordinatesExtractor():
+    """
+    Provides interface for extracting coordinates from addresses
+    """
 
     GOOGLE_MAPS_URL : str = ""
     
@@ -13,6 +16,14 @@ class CoordinatesExtractor():
         self.geolocator = Nominatim(user_agent="my_geocoder")
 
     def extract(self, addressModel : ModelAdresa, nazevKraj : str):
+        """
+        Extract coordinates (latitude, longitude) from given address model
+        Args:
+            addressModel: address to extract
+            nazevKraj: name of the kraj to help algorithm to detect city to extract (if more cities with the same name)
+        Returns:
+            latitude : float, longitude : float
+        """
         addressStr = ""
         castObce = None
         if(addressModel.ulice is not None):

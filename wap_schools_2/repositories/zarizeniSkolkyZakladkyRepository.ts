@@ -3,7 +3,10 @@
 import { db } from "@/lib/db";
 import { ZarizeniSkolkyZakladkyFilterModel } from "./filterModels/zarizeniSkolkyZakladkyRepository";
 
-
+/**
+ * Gets zarizeni_skolky_zakladky (and fields from corresponding tables for zarizeni_skolky_zakladky) list for skolka_zakladka
+ * @param filter zarizen_skolky_zakladky filter options
+ */
 export async function getZarizeniSkolkyZakladkyList(filter : ZarizeniSkolkyZakladkyFilterModel) {
   return db.zarizeni_skolky_zakladky.findMany({
     where: {

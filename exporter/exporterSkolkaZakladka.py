@@ -18,6 +18,9 @@ class SkolkaZakladkaModel():
     izo : int = None
 
 class ExporterSkolkaZakladka(Exporter):
+    """
+    Exporter from not db format to database for table skolka_zakladka (Základní škola Hrotovice, Mateřská škola Hrotovice,..)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -40,6 +43,11 @@ class ExporterSkolkaZakladka(Exporter):
                          );""")
         
     def db_export_one(self, model : SkolkaZakladkaModel):
+        """
+        Exports one entry of skolkaZakldka to the database
+        Args:
+            model: model containing informations about skolkaZakladka
+        """
         self.cur.execute("SELECT ID FROM podskola WHERE izo = %s", (model.izo,))
         if self.cur.fetchone() is None:
             self.cur.execute("SELECT ID FROM typ_zrizovatele WHERE Kod = %s", (model.typZrizovateleKod, ))

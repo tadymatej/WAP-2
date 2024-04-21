@@ -5,6 +5,9 @@ import pandas as pd
 from .dbController import DbController
 
 class ExporterZarizeniDruhTyp(Exporter):
+    """
+    Exporter from not db format to database for table zarizeni_druh_typ (Školní jídelna, družina, ...)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -17,6 +20,12 @@ class ExporterZarizeniDruhTyp(Exporter):
                          );""")
         
     def db_export_one(self, kod : str, nazev : str):
+        """
+        Exports one entry to the database
+        Args:
+            kod: code of the zarizeniDruhTyp
+            nazev: name of the zarizeniDruhTyp
+        """
         self.cur.execute("SELECT ID FROM zarizeni_druh_typ WHERE Kod = %s", (kod, ))
         res = self.cur.fetchone()
         if res is None:

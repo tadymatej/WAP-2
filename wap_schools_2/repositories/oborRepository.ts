@@ -3,6 +3,10 @@
 import { db } from "@/lib/db"
 import { OborFilterModel } from "./filterModels/oborFilterModel"
 
+/**
+ * Gets obor (and fields from corresponding tables for obor) list for podskola
+ * @param filter obor filter options
+ */
 export async function getOborList(filter : OborFilterModel) {
   return await db.obor.findMany({
     where: {

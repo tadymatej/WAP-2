@@ -22,25 +22,34 @@ from ..exporterAdresa import ExporterAdresa
 from ..exporterAdresa import ModelAdresa
 from ..dbController import DbController
 
+"""
+Exporter for XML file with informations about the schools to the database
+"""
 class XMLExporterSkola():
 
     def __init__(self, dbController : DbController) -> None:
         self.dbController = dbController
 
-        exporterAdresa = ExporterAdresa(dbController)
-        exporterSkolkaZakladkaAdresa = ExporterSkolkaZakladkaAdresa(dbController)
-        exporterZarizeniSkolkyZakladkyAdresa = ExporterZarizeniSkolkyZakladkyAdresa(dbController)
+        self.exporterAdresa = ExporterAdresa(dbController)
+        self.exporterSkolkaZakladkaAdresa = ExporterSkolkaZakladkaAdresa(dbController)
+        self.exporterZarizeniSkolkyZakladkyAdresa = ExporterZarizeniSkolkyZakladkyAdresa(dbController)
 
 
-        exporterZarizeniDruhTyp = ExporterZarizeniDruhTyp(dbController)
-        exporterSkolaDruhTyp = ExporterSkolaDruhTyp(dbController)
+        self.exporterZarizeniDruhTyp = ExporterZarizeniDruhTyp(dbController)
+        self.exporterSkolaDruhTyp = ExporterSkolaDruhTyp(dbController)
         
-        exporterSkolkaZakladka = ExporterSkolkaZakladka(dbController)
+        self.exporterSkolkaZakladka = ExporterSkolkaZakladka(dbController)
 
-        exporterOborSkolkyZakladky = ExporterOborSkolkyZakladky(dbController)
-        exporterZarizeniSkolkyZakladky = ExporterZarizeniSkolkyZakladky(dbController)
+        self.exporterOborSkolkyZakladky = ExporterOborSkolkyZakladky(dbController)
+        self.exporterZarizeniSkolkyZakladky = ExporterZarizeniSkolkyZakladky(dbController)
 
-        tree = ET.parse('vrejcelk.xml')
+    def export(self, fileName='vrejcelk.xml'):
+        """
+        Performs the export. 
+        Args: 
+            
+        """
+        tree = ET.parse(fileName)
         root = tree.getroot()
         pravniSubjektyEls : list[Element] = root.findall("PravniSubjekt")
 
@@ -107,10 +116,10 @@ class XMLExporterSkola():
                     modelSkolkaZakladka.kapacita = kapacita
                     modelSkolkaZakladka.datumZahajeni = datumZahajeni
 
-                    skolaDruhTypID = exporterSkolaDruhTyp.db_export_one(skolaDruhTyp, skolaTypPlnyNazev)
+                    skolaDruhTypID = self.exporterSkolaDruhTyp.db_export_one(skolaDruhTyp, skolaTypPlnyNazev)
                     modelSkolkaZakladka.skolaDruhTypID = skolaDruhTypID
 
-                    skolkaZakladkaID = exporterSkolkaZakladka.db_export_one(modelSkolkaZakladka)
+                    skolkaZakladkaID = self.exporterSkolkaZakladka.db_export_one(modelSkolkaZakladka)
                     if skolkaZakladkaID != None:
                         createdSkolkaZakladkaIDs.append(skolkaZakladkaID)
 
@@ -146,7 +155,7 @@ class XMLExporterSkola():
                             oborSkolkyZakladkyModel.oborDobihajici = oborDobihajici
                             oborSkolkyZakladkyModel.skolkaZakladkaID = skolkaZakladkaID
                             
-                            exporterOborSkolkyZakladky.db_export_one(oborSkolkyZakladkyModel)
+                            self.exporterOborSkolkyZakladky.db_export_one(oborSkolkyZakladkyModel)
 
 
                         oboryVzdelavaniZUS = skolaZarizeni.findall("SkolaOboryVzdelaniZUS/SkolaOborVzdelaniZUS")
@@ -162,7 +171,7 @@ class XMLExporterSkola():
                             oborSkolkyZakladkyModel.kapacita = kapacita
                             oborSkolkyZakladkyModel.skolkaZakladkaID = skolkaZakladkaID
 
-                            exporterOborSkolkyZakladky.db_export_one(oborSkolkyZakladkyModel)
+                            self.exporterOborSkolkyZakladky.db_export_one(oborSkolkyZakladkyModel)
 
                         adresyEls = skolaZarizeni.findall("SkolaMistaVykonuCinnosti/SkolaMistoVykonuCinnosti")
                         for adresa in adresyEls:
@@ -173,14 +182,14 @@ class XMLExporterSkola():
                             try:
                                 modelAdresa = self.adresaLinesToModelAdresa(adresaLine1, adresaLine2, adresaLine3)
 
-                                adresaID = exporterAdresa.db_export_one(modelAdresa)
+                                adresaID = self.exporterAdresa.db_export_one(modelAdresa)
 
-                                exporterSkolkaZakladkaAdresa.db_export_one(skolkaZakladkaID, adresaID)
+                                self.exporterSkolkaZakladkaAdresa.db_export_one(skolkaZakladkaID, adresaID)
                             except:
                                 pass
 
                 else:
-                    zarizeniDruhTypID = exporterZarizeniDruhTyp.db_export_one(skolaDruhTyp, skolaTypPlnyNazev)
+                    zarizeniDruhTypID = self.exporterZarizeniDruhTyp.db_export_one(skolaDruhTyp, skolaTypPlnyNazev)
                     modelZarizeniSkolkyZakladky = ZarizeniSkolkyZakladkyModel()
                     modelZarizeniSkolkyZakladky.kapacita = int(kapacita)
                     modelZarizeniSkolkyZakladky.nazev = skolaTypPlnyNazev
@@ -192,7 +201,7 @@ class XMLExporterSkola():
             for skolkaZakladkaID in createdSkolkaZakladkaIDs:
                 for zarizeniSkolkyZakladkyModel in createdZarizeniSkolkyZakladkyModels:
                     zarizeniSkolkyZakladkyModel.skolkaZakladkaID = skolkaZakladkaID
-                    zarizeniSkolkyZakladkyID = exporterZarizeniSkolkyZakladky.db_export_one(zarizeniSkolkyZakladkyModel)
+                    zarizeniSkolkyZakladkyID = self.exporterZarizeniSkolkyZakladky.db_export_one(zarizeniSkolkyZakladkyModel)
 
                     adresyEls = skolaZarizeni.findall("SkolaMistaVykonuCinnosti/SkolaMistoVykonuCinnosti")
                     for adresa in adresyEls:
@@ -203,18 +212,19 @@ class XMLExporterSkola():
                         try:
                             self.adresaLinesToModelAdresa(adresaLine1, adresaLine2, adresaLine3)
 
-                            adresaID = exporterAdresa.db_export_one(modelAdresa)
+                            adresaID = self.exporterAdresa.db_export_one(modelAdresa)
 
-                            exporterZarizeniSkolkyZakladkyAdresa.db_export_one(zarizeniSkolkyZakladkyID, adresaID)
+                            self.exporterZarizeniSkolkyZakladkyAdresa.db_export_one(zarizeniSkolkyZakladkyID, adresaID)
                         except:
                             pass
 
 
     def adresaLinesToModelAdresa(self, adresaLine1 : str, adresaLine2 : str, adresaLine3 : str):
         """
-        adresaLine1 = ulice CisloPopisne/CisloOrientacni | č.p. cisloPopisne
-        adresaLine2 = castMesta | psc mesto | psc mesto
-        adresaLine3 = psc mesto | psc cast_v_praze | None
+        Args:
+            adresaLine1: ulice CisloPopisne/CisloOrientacni | č.p. cisloPopisne
+            adresaLine2: castMesta | psc mesto | psc mesto
+            adresaLine3: psc mesto | psc cast_v_praze | None
         """
         print("---")
         print(adresaLine1)

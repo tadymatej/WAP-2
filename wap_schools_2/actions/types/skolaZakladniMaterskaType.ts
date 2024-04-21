@@ -1,15 +1,24 @@
+/**
+ * Holds informations about zarizeni for certain skolka_zakladka entity, viz documentation to the dataset or python extractors
+ */
 export type SkolaZakladniMaterskaZarizeniType =
   SkolaZakladniMaterskaType["zarizeni_skolky_zakladky"] extends (infer T)[]
     ? T
     : never;
+
+/**
+ * Holds informations about obor for certain skolka_zakladka entity, viz documentation to the dataset or python extractors
+ */
 export type SkolaZakladniMaterskaOboryType =
   SkolaZakladniMaterskaType["obor_skolky_zakladky"] extends (infer T)[]
     ? T
     : never;
 
-export type SkolaZakladniMaterskaHodnoceniType =
-  SkolaZakladniMaterskaType["hodnoceni"] extends (infer T)[] ? T : never;
-
+/**
+ * Interface that holds all informations about skolka_zakladka entity and its corresponding data from another tables
+ * Meaning of the data viz documentation to the dataset or python extractors
+ * @interface
+ */
 export interface SkolaZakladniMaterskaType {
   id: number;
   datumzahajeni: Date | null;
@@ -19,15 +28,6 @@ export interface SkolaZakladniMaterskaType {
   jazyk: {
     nazev: string | null;
   } | null;
-  hodnoceni: {
-    hvezdicek: number;
-    popis: string | null;
-    jina_role: string | null;
-    autor: string | null;
-    role_uzivatele_typy: {
-      nazev: string;
-    } | null;
-  }[];
   kapacita: number | null;
   obor_skolky_zakladky: {
     obordobihajici: boolean | null;

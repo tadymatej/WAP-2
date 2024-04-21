@@ -1,10 +1,10 @@
 "use client";
 
-import { filterSkoly } from "@/actions/filterSkolyAction";
+import { filterSkolyAction } from "@/actions/filterSkolyAction";
 
 import { filterSkolkyZakladkyAction } from "@/actions/filtrySkolkyZakladkyAction";
-import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
-import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
+import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniType";
+import { SkolaZakladniMaterskaType } from "@/actions/types/skolaZakladniMaterskaType";
 import InfiniteScroll from "@/components/ui/infinite-scroll";
 import {
   HodnoceniTypesData,
@@ -41,7 +41,7 @@ export function SchoolList() {
 
     if (searchingType === SearchingType.StredniVysoke) {
       console.log("fething skoly vysoke stredni");
-      const result = await filterSkoly(
+      const result = await filterSkolyAction(
         {
           castObceIDs: [],
           druhSkolyIDs: filter.druhPodskolySelected.map((druh) => druh.id),
@@ -124,6 +124,8 @@ export function SchoolList() {
           lon: filter.longitude,
         }
       );
+
+      console.log(filter.sortSkolkaZakladkaBy);
 
       console.log("Result: ", result);
 

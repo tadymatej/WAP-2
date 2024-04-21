@@ -3,6 +3,10 @@
 import { db } from "@/lib/db";
 import { PodskolaFilterModel } from "./filterModels/podskolaFilterModel";
 
+/**
+ * Gets podskola (and fields from corresponding tables for podskola) list for skola
+ * @param filter podskola filter options
+ */
 export async function getPodskolaList(filter : PodskolaFilterModel) {
   return await db.podskola.findMany({
     where: {

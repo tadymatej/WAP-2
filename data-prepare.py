@@ -42,6 +42,9 @@ from exporter.xmlExporters.xmlExporterSkola import XMLExporterSkola
 
 
 def main():
+    """
+    performs export of xml, json files to database
+    """
 
     dbController = DbController()
 
@@ -73,17 +76,18 @@ def main():
     for exporter in exportersClearCreate:
         exporter.db_create()
 
-    # for exporter in exporters:
-    #    print("exporting ", exporter)
-    #    exporter.json_export()
+    for exporter in exporters:
+       print("exporting ", exporter)
+       exporter.json_export()
 
-    # xmlExorterSkola = XMLExporterSkola(dbController)
+    xmlExorterSkola = XMLExporterSkola(dbController)
+    xmlExorterSkola.export()
 
-    # exportersPrint : list[Exporter] = [ExporterObec(dbController)]
+    exportersPrint : list[Exporter] = [ExporterObec(dbController)]
 
-    # for exporter in exportersPrint:
-    #    exporter.db_select()
-    #    exporter.printResult()
+    for exporter in exportersPrint:
+       exporter.db_select()
+       exporter.printResult()
 
 
 main()

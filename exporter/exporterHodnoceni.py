@@ -4,7 +4,9 @@ import pandas as pd
 from .dbController import DbController
 
 class ExporterHodnoceni(Exporter):
-
+    """
+    Exporter from not db format to database for table hodnoceni (rating)
+    """
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
 

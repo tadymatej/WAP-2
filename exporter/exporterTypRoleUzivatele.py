@@ -5,6 +5,9 @@ import pandas as pd
 from .dbController import DbController
 
 class ExporterTypRoleUzivatele(Exporter):
+    """
+    Exporter from not db format to database for table typ_role_uzivatele (For hodnoceni table, for example teacher, student, ...)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)

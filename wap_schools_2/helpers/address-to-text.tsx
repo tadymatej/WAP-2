@@ -1,4 +1,4 @@
-import { SkolaVysokaStredniAdresaType } from "@/actions/types/skolaVysokaStredniAllData";
+import { SkolaVysokaStredniAdresaType } from "@/actions/types/skolaVysokaStredniType";
 
 export const addressToText = (adress: SkolaVysokaStredniAdresaType) => {
   //ulice + cislo domovni + '/' + cislo orientacni + psc + mestska cast | cast obce + mesto/obec

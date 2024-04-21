@@ -4,6 +4,9 @@ import pandas as pd
 from .dbController import DbController
 
 class ExporterJazyk(Exporter):
+    """
+    Exporter from not db format to database for table jazyk (čeština, angličtina, ...)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -16,6 +19,12 @@ class ExporterJazyk(Exporter):
                          );""")
         
     def db_export_one(self, kod: str, nazev : str):
+        """
+        Exports one entry to the database
+        Args:
+            kod: code of the jazyk
+            nazev: name of the jazyk
+        """
         self.cur.execute("INSERT INTO jazyk(Nazev, Kod) VALUES(%s, %s)", (nazev, kod))
 
     def json_export(self):

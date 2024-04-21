@@ -7,6 +7,7 @@ import pandas as pd
 
 from .dbController import DbController
 
+
 class ModelAdresa():
     skolaID : int = None
     cisloDomovni : int = None
@@ -32,7 +33,11 @@ class ModelAdresa():
         print("castObceStr=", self.castObceStr)
         print("obecName=", self.obecNameStr)
 
+
 class ExporterAdresa(Exporter):
+    """
+    Exporter from not db format to database for table Adresa
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -58,9 +63,19 @@ class ExporterAdresa(Exporter):
                          );""")
 
     def setLocation(self, adresaID, lat, lon):
+        """
+        sets location for certain adresa by latitude, longitude
+        Args:
+            adresaID: Adres to which we are setting the latitude, longitude
+            lat: Latitude of the given address to set
+            lon: Longitude of the given address to set
+        """
         self.cur.execute("UPDATE adresa SET lat = %s, lon = %s WHERE ID = %s", (lat, lon, adresaID))
         
     def db_export_one(self, model : ModelAdresa):
+        """
+        Exports one ModelAdresa to database
+        """
         mestskaCastObvodID = None
         if (model.mestskyObvodMestskaCast is None):
             if(model.mestskyObvodMestskaCastNameStr is not None):

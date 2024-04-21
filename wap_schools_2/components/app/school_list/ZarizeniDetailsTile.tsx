@@ -1,4 +1,4 @@
-import { SkolaZakladniMaterskaZarizeniType } from "@/actions/types/skolkaZakladkaAllData";
+import { SkolaZakladniMaterskaZarizeniType } from "@/actions/types/skolaZakladniMaterskaType";
 import {
   Accordion,
   AccordionContent,

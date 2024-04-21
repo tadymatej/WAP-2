@@ -1,8 +1,21 @@
+
+
+/**
+ * Holds informations about adresa for certain skola entity, viz documentation to the dataset or python extractors
+ */
 export type SkolaVysokaStredniAdresaType = SkolaVysokaStredniType["adresa"];
 
+/**
+ * Holds informations about podskola for certain skola entity, viz documentation to the dataset or python extractors
+ */
 export type SkolaVysokaStredniPodskolaType =
   SkolaVysokaStredniType["podskola"] extends (infer T)[] ? T : never;
 
+/**
+ * Interface that holds all informations about skola entity and its corresponding data from another tables
+ * Meaning of the data viz documentation to the dataset or python extractors
+ * @interface
+ */
 export interface SkolaVysokaStredniType {
   id: number;
   nazev: string | null;

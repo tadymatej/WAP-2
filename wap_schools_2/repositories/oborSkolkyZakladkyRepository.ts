@@ -2,6 +2,10 @@
 import { db } from "@/lib/db";
 import { OborSkolkyZakladkyFilterModel } from "./filterModels/oborSkolkyZakladkyFilterModel";
 
+/**
+ * Gets obor_skolky_zakladky (and fields from corresponding tables for obor_skolky_zakladky) list for skolka_zakladka
+ * @param filter obor_skolky_zakladky filter options
+ */
 
 export async function getOborSkolkyZakladkyList(filter : OborSkolkyZakladkyFilterModel) {
   return await db.obor_skolky_zakladky.findMany({

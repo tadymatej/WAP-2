@@ -11,8 +11,16 @@ import { SkolaOrderByModel } from "@/repositories/orderByTypes/skolaOrderByTypes
 import { getPodskolaList } from "@/repositories/podskolaRepository";
 import { getSkolaList } from "@/repositories/skolaRepository"
 import { getTypZrizovatele } from "@/repositories/typZrizovateleRepository";
+import { SkolaVysokaStredniType } from "./types/skolaVysokaStredniType";
 
-export async function filterSkoly(filter : SkolaFilterModel, order : SkolaOrderByModel) {
+/**
+ * Finds skola entities and its corresponding data joined from another tables
+ * that follows conditions in filterModel and will be ordered by orderModel
+ * @param filter filterModel by which we want to perform filtering
+ * @param order orderModel by which we want to perform sorting
+ * @returns {SkolaVysokaStredniType[]} 
+ */
+export async function filterSkolyAction(filter : SkolaFilterModel, order : SkolaOrderByModel) {
     let skoly = await getSkolaList(filter, order);
     let res = await Promise.all(skoly.map(async (s) => {
       let filterModel : AdresaFilterModel = {

@@ -3,6 +3,9 @@ from .exporter import Exporter
 from .dbController import DbController
 
 class ExporterSkolkaZakladkaAdresa(Exporter):
+    """
+    Exporter from not db format to database for table skolkazakladka_adresa (table for n-n relation between tables skolka_zakladka and adresa)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -17,6 +20,9 @@ class ExporterSkolkaZakladkaAdresa(Exporter):
                             );""")
 
     def db_export_one(self, skolkaZakladkaID : int, adresaID : int):
+        """
+        Creates one column in database in relational table
+        """
         self.cur.execute("INSERT INTO skolkazakladka_adresa(skolkaZakladkaID, AdresaID) VALUES(%s, %s)", (skolkaZakladkaID, adresaID))
         
     def db_select(self):

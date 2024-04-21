@@ -6,7 +6,10 @@ from .exporter import Exporter
 from .dbController import DbController
 
 class ExporterKraj(Exporter):
-    
+    """
+    Exporter from not db format to database for table kraj (Vysočina, Jihomoravský, ..)
+    """
+        
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
 
@@ -19,6 +22,12 @@ class ExporterKraj(Exporter):
                             );""")
 
     def db_export_one(self, kod : str, kod3 : str, nazev : str):
+        """
+        Exports one entry to the database
+        Args:
+            kod: code of the kraj
+            kod3: another code of the kraj
+        """
         self.cur.execute("INSERT INTO kraj(Nazev, Kod, Kod3) VALUES(%s, %s, %s)", (nazev, kod, kod3))
 
     def json_export(self):
@@ -32,10 +41,7 @@ class ExporterKraj(Exporter):
             self.db_export_one(kod, kod3, nazev)
         
     def printResult(self):
-                # Fetch all rows from the result
         rows = self.cur.fetchall()
-
-        # Print the list of databases
         for row in rows:
             print(row)
         

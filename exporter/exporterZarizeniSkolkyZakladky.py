@@ -11,6 +11,9 @@ class ZarizeniSkolkyZakladkyModel():
     zarizeniDruhTypID : int = None
 
 class ExporterZarizeniSkolkyZakladky(Exporter):
+    """
+    Exporter from not db format to database for table zarizeni_skolky_zakladky (concrete zarizeni_druh_typ for concrete skolkaZakladka)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -27,6 +30,11 @@ class ExporterZarizeniSkolkyZakladky(Exporter):
                          );""")
         
     def db_export_one(self, model : ZarizeniSkolkyZakladkyModel):
+        """
+        Exports one entry to the database
+        Args:
+            model: model that holds informations about ZarizeniSkolkyZakladky
+        """
         self.cur.execute("""INSERT INTO zarizeni_skolky_zakladky (Kapacita, Nazev, SkolkaZakladkaID, ZarizeniDruhTypID
                          ) VALUES(%s, %s, %s, %s) RETURNING ID
                 """, (model.kapacita, model.nazev, model.skolkaZakladkaID, model.zarizeniDruhTypID))  

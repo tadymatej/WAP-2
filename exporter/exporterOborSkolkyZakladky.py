@@ -14,6 +14,9 @@ class OborSkolkyZakladkyModel():
     jazykKod : str = None
 
 class ExporterOborSkolkyZakladky(Exporter):
+    """
+    Exporter from not db format to database for table obor_skolky_zakladky (Základní, základní speciální, umělecká, hudební, ...)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -33,6 +36,11 @@ class ExporterOborSkolkyZakladky(Exporter):
                          );""")
         
     def db_export_one(self, model : OborSkolkyZakladkyModel):
+        """
+        Exports one entry to the database
+        Args:
+            model: Model containing informations about the OborSkolkyZakladky
+        """
 
         self.cur.execute("SELECT ID FROM jazyk WHERE Kod = %s", (model.jazykKod, ))
         jazykID = self.cur.fetchone()[0]

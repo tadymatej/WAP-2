@@ -1,4 +1,4 @@
-import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
+import { SkolaZakladniMaterskaType } from "@/actions/types/skolaZakladniMaterskaType";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {

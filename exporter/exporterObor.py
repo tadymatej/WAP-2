@@ -7,6 +7,7 @@ from .exporterOborPrijimaciZkouska import ExporterOborPrijimaciZkouska
 from .exporterOborVhodnostProZaky import ExporterOborVhodnostProZaky
 from .dbController import DbController
 
+
 class ModelObor():
     aktualniRokPrijmou : int = None
     aktualniSkolniRok : int = None
@@ -31,6 +32,9 @@ class ModelObor():
     prijimaciZkousky : list[str] = []
 
 class ExporterObor(Exporter):
+    """
+    Exporter from not db format to database for table obor (Informační technologie, Kuchař-čišník, ...)
+    """
 
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -65,6 +69,12 @@ class ExporterObor(Exporter):
                          );""")
         
     def db_export_one(self, podskolaID : int, model : ModelObor):
+        """
+        Exports one entry to the database
+        Args:
+            podskolaID: podskola, to which set this obor
+            model: model containing informations about obor which is being inserting
+        """
 
         self.cur.execute("SELECT ID FROM druh_studia WHERE Kod = %s", (model.druhStudia, ))
         druhStudiaID = self.cur.fetchone()[0]
@@ -110,6 +120,9 @@ class ExporterObor(Exporter):
 
 
     def export(self, podskolaID : int, data : dict):
+        """
+        Exports dict containing obor informations to database
+        """
         oborModel = ModelObor()
         oborModel.aktualniRokPrijmou = data.get("aktualniRokPrijmou")
         oborModel.aktualniSkolniRok = data.get("aktualniSkolniRok")
@@ -165,6 +178,9 @@ class ExporterObor(Exporter):
 
 
     def exportList(self, podskolaID : int, data : list[dict]):
+        """
+        Exports list of dicts containing obor informations to database
+        """
         for d in data:
             self.export(podskolaID, d)
 

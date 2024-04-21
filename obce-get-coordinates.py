@@ -11,6 +11,10 @@ from exporter.dbController import DbController
 import sys
 
 def main():
+    """
+    \brief Aa
+    Performs coordinates extraction and stores it to the database
+    """
     dbController = DbController(cursor_factory=RealDictCursor)
     exporter = Exporter(dbController)
     exporter.cur.execute("""SELECT 

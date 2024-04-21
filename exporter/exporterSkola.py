@@ -27,23 +27,10 @@ class ModelSkola():
     typZrizovatele : str = None
     typSkoly : str = None
 
-    def print(self):
-        print(f"email: {self.email}")
-        print(f"ico: {self.ico}")
-        print(f"kontaktniOsoba: {self.kontaktniOsoba}")
-        print(f"kontaktniOsobaTel: {self.kontaktniOsobaTel}")
-        print(f"nazev: {self.nazev}")
-        print(f"poznamka: {self.poznamka}")
-        print(f"reditel: {self.reditel}")
-        print(f"reditelTel: {self.reditelTel}")
-        print(f"stravovani: {self.stravovani}")
-        print(f"ubytovani: {self.ubytovani}")
-        print(f"url: {self.url}")
-        print(f"vyucovaneJazyky: {self.vyucovaneJazyky}")
-        print(f"typZrizovatele: {self.typZrizovatele}")
-        print(f"typSkoly: {self.typSkoly}")
-
 class ExporterSkola(Exporter):
+    """
+    Exporter from not db format to database for table skola (FIT, FSI, Střední průmyslová škola Třebíč, ...)
+    """
     
     def __init__(self, dbController : DbController):
         super().__init__(dbController)
@@ -77,6 +64,11 @@ class ExporterSkola(Exporter):
             self.cur.execute("UPDATE skola SET url = %s WHERE nazev = %s", (url, nazev))
 
     def db_export_one(self, model : ModelSkola):
+        """
+        Exports one entry to the database
+        Args:
+            model: Model containing data about skola
+        """
         self.cur.execute("SELECT ID FROM typ_zrizovatele WHERE Kod = %s", (model.typZrizovatele, ))
         typZrizovateleID = self.cur.fetchone()[0]
         self.cur.execute("SELECT ID FROM typ_skoly WHERE Kod = %s", (model.typSkoly, ))

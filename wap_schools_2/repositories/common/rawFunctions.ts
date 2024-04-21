@@ -1,7 +1,10 @@
 import { Prisma } from "@prisma/client";
 import { FilterItemRange } from "../filterModels/filterItems/filterItemRange";
 
-
+/**
+ * Returns SQL part of WHERE clause for filtering by adresa.krajIDs
+ * @returns {Prisma.Sql}
+ */
 export function whereConditionKrajIDs(krajIDs : number[]) {
   if(krajIDs.length > 0) {
     return Prisma.sql` AND kraj.ID IN (${Prisma.join(krajIDs)})`;
@@ -9,6 +12,10 @@ export function whereConditionKrajIDs(krajIDs : number[]) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by adresa.okresIDs
+ * @returns {Prisma.Sql}
+ */
 export function whereConditionOkresIDs(okresIDs : number[]) {
   if(okresIDs.length > 0) {
     return Prisma.sql` AND okres.ID IN (${Prisma.join(okresIDs)})`;
@@ -16,6 +23,10 @@ export function whereConditionOkresIDs(okresIDs : number[]) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by adresa.obecIDs
+ * @returns {Prisma.Sql}
+ */
 export function whereConditionObecIDs(obecIDs : number[]) {
   if(obecIDs.length > 0) {
     return Prisma.sql` AND obec.ID IN (${Prisma.join(obecIDs)})`;
@@ -23,6 +34,10 @@ export function whereConditionObecIDs(obecIDs : number[]) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by adresa.castObceIDs
+ * @returns {Prisma.Sql}
+ */
 export function whereConditionCastObceIDs(castObceIDs : number[]) {
   if(castObceIDs.length > 0) {
     return Prisma.sql` AND adresa.CastObceID IN (${Prisma.join(castObceIDs)})`;
@@ -30,6 +45,10 @@ export function whereConditionCastObceIDs(castObceIDs : number[]) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by adresa.mestskaCastIDs
+ * @returns {Prisma.Sql}
+ */
 export function whereConditionMestskaCastIDs(mestskaCastIDs : number[]) {
   if(mestskaCastIDs.length > 0) {
     return Prisma.sql` AND adresa.MestskaCastObvodID IN (${Prisma.join(mestskaCastIDs)})`;
@@ -37,7 +56,10 @@ export function whereConditionMestskaCastIDs(mestskaCastIDs : number[]) {
   return Prisma.sql``;
 }
 
-
+/**
+ * Returns SQL part of WHERE clause for filtering by range of AVG(hodnoceni) (AVG(hodnoceni) >= start && AVG(hodnoceni) <= end)
+ * @returns {Prisma.Sql}
+ */
 export function whereConditionHodnoceni(hodnoceniRange : FilterItemRange | undefined) {
   if(hodnoceniRange === undefined || (hodnoceniRange.end === undefined && hodnoceniRange.start === undefined)) 
     return Prisma.sql``;
@@ -47,6 +69,13 @@ export function whereConditionHodnoceni(hodnoceniRange : FilterItemRange | undef
   )`;
 }
 
+/**
+ * Returns SQL part of WHERE clause for filtering by max distance from selected location
+ * @param vzdalenostMax the max distance value
+ * @param lat lattitude of the selected location 
+ * @param lon longitude of the selected location
+ * @returns {Prisma.Sql}
+ */
 export function whereConditionVzdalenostMax(vzdalenostMax : number | undefined, lat : number, lon : number) {
   if(vzdalenostMax !== undefined) {
     return Prisma.sql` AND (POW((adresa.lon - ${lon}),2) + POW((adresa.lat-${lat}),2)) <= ${vzdalenostMax}`;
@@ -54,8 +83,10 @@ export function whereConditionVzdalenostMax(vzdalenostMax : number | undefined, 
   return Prisma.sql``;
 }
 
-
-
+/**
+ * Returns SQL part of LIMIT clause
+ * @returns {Prisma.Sql}
+ */
 export function getLimit(limit : number | undefined) {
   if(limit != null) {
     return Prisma.sql`LIMIT ${limit}`;
@@ -63,6 +94,10 @@ export function getLimit(limit : number | undefined) {
   return Prisma.sql``;
 }
 
+/**
+ * Returns SQL part of OFFSET clause
+ * @returns {Prisma.Sql}
+ */
 export function getOffset(offset : number | undefined) {
   if(offset != null)  {
     return Prisma.sql`OFFSET ${offset}`;

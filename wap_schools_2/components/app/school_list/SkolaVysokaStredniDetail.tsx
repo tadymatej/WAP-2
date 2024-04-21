@@ -1,4 +1,4 @@
-import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
+import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniType";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
