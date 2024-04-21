@@ -39,7 +39,13 @@ export function MainFrame() {
       <main className="h-full flex flex-col p-8">
         <VysokaStredniVsMaterskaZakladniSelect />
         <div className="flex flex-row">
-          <div className={showFilter ? "basis-1/4 flex-grow mr-4" : "hidden"}>
+          <div
+            className={
+              showFilter
+                ? "basis-1/4 flex-grow mr-4 transition-all duration-500 ease-in-out"
+                : "w-0 h-full overflow-hidden transition-all duration-500 ease-in-out"
+            }
+          >
             <FilterCard />
             <div className="h-4" />
             <FavouritesCard />

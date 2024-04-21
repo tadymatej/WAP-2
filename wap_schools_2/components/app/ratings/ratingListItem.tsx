@@ -1,4 +1,4 @@
-import { SkolaZakladniMaterskaHodnoceniType } from "@/actions/types/skolkaZakladkaAllData";
+import { SkolaZakladniMaterskaHodnoceniType } from "@/actions/types/skolaZakladniMaterskaType";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Stars } from "../pop_ups/Stars";
 

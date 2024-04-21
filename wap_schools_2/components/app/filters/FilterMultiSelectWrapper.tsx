@@ -152,7 +152,6 @@ export default function FilterMultiSelectWrapper({
       }
 
       default: {
-
       }
     }
   };
@@ -175,7 +174,7 @@ export default function FilterMultiSelectWrapper({
           skolneSelected: filter.skolneSelected,
           currentLocation: filter.currentLocation,
           sortBy: filter.sortBy,
-          sortSkolkaZakladkaBy:  filter.sortSkolkaZakladkaBy,
+          sortSkolkaZakladkaBy: filter.sortSkolkaZakladkaBy,
           offset: filter.offset,
           druhPodskolySelected: filter.druhPodskolySelected,
           searchingType: filter.searchingType,
@@ -185,6 +184,7 @@ export default function FilterMultiSelectWrapper({
           latitude: filter.latitude,
           longitude: filter.longitude,
           skolaDruhTypeSelected: filter.skolaDruhTypeSelected,
+          showFilter: filter.showFilter,
         },
       });
       setOptions(result);
