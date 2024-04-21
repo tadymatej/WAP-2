@@ -22,11 +22,9 @@ import { LocationPopUp } from "../pop_ups/LocationPopUp";
 import { SchoolList } from "./SchoolList";
 import SkolaVysokaStredniDetail from "./SkolaVysokaStredniDetail";
 
-export interface SchoolsCardProps {
-  onLocationOpen: () => void;
-}
+export interface SchoolsCardProps {}
 
-export default function SchoolsCard(props: SchoolsCardProps) {
+export default function SchoolsCard() {
   const setSortBy = useStore((state) => state.filter.setSortBy);
   const setSortSkolkaZakladkaBy = useStore(
     (state) => state.filter.setSortSkolkaZakladkaBy
@@ -79,9 +77,9 @@ export default function SchoolsCard(props: SchoolsCardProps) {
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[500px]">
                     <LocationPopUp
-                      onSave={() => {
+                      onSave={(lat, lon) => {
                         setLocationDialogOpen(false);
-                        props.onLocationOpen();
+                        onLocationSave(lat, lon);
                       }}
                     ></LocationPopUp>
                   </DialogContent>

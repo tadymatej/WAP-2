@@ -20,6 +20,7 @@ export interface SkolaVysokaStredniType {
       nazev: string | null;
     } | null;
   }[];
+
   hodnoceni: {
     hvezdicek: number;
     popis: string | null;
@@ -34,6 +35,10 @@ export interface SkolaVysokaStredniType {
     cisloorientacni: string | null;
     psc: string | null;
     ulice: string | null;
+    cast_obce: {
+      nazev: string | null;
+    } | null;
+
     obec: {
       nazev: string | null;
       okres: {

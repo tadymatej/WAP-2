@@ -18,7 +18,9 @@ export default function InfoDetailTile({
         <InfoTile Icon={Icon} text={text} />
       </div>
       <div className="w-3" />
-      <div className="font-normal text-sm text-slate-600">{description}</div>
+      <div className="font-normal text-right text-sm text-slate-600 w-1/2">
+        {description}
+      </div>
     </div>
   );
 }

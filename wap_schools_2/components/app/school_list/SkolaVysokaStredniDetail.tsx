@@ -4,7 +4,15 @@ import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Colors } from "@/lib/colors";
 import { useStore } from "@/state/useStore";
-import { Heart } from "lucide-react";
+import {
+  Bed,
+  CookingPot,
+  Heart,
+  Notebook,
+  Phone,
+  Star,
+  UserRound,
+} from "lucide-react";
 import InfoDetailTile from "../generic/InfoDetailTile";
 import PodskolaDetailsTile from "./PodskolaDetailsTile";
 
@@ -50,7 +58,71 @@ export default function SkolaVysokaStredniDetail({
       </div>
       <div className="h-4" />
       <div className="flex flex-col gap-y-4">
-        <InfoDetailTile text={"Hodno"} Icon={Heart} description="Adresa" />
+        {skola.reditel && (
+          <InfoDetailTile
+            text={"Ředitel/ka"}
+            Icon={UserRound}
+            description={skola.reditel}
+          />
+        )}
+        {skola.rediteltel && (
+          <InfoDetailTile
+            text={"Ředitel/ka telefon"}
+            Icon={Phone}
+            description={skola.rediteltel}
+          />
+        )}
+        {skola.kontaktniosoba && (
+          <InfoDetailTile
+            text={"Kontaktní osoba"}
+            Icon={UserRound}
+            description={skola.kontaktniosoba}
+          />
+        )}
+        {skola.kontaktniosobatel && (
+          <InfoDetailTile
+            text={"Kontaktni osoba telefon"}
+            Icon={Phone}
+            description={skola.kontaktniosobatel}
+          />
+        )}
+
+        {skola.hodnoceni.length != 0 && (
+          <InfoDetailTile
+            text={"Hodnocení"}
+            Icon={Star}
+            description={(
+              skola.hodnoceni.reduce(
+                (acc, hodnoceni) => acc + hodnoceni.hvezdicek,
+                0
+              ) / skola.hodnoceni.length
+            ).toFixed(1)}
+          />
+        )}
+        {skola.poznamka && (
+          <InfoDetailTile
+            text={"Poznámka"}
+            Icon={Notebook}
+            description={skola.poznamka}
+          />
+        )}
+        {skola.stravovani && (
+          <InfoDetailTile
+            text={"Cena za stravováni"}
+            Icon={CookingPot}
+            description={skola.stravovani.toFixed(1) + " Kč"}
+          />
+        )}
+        {skola.ubytovani && (
+          <InfoDetailTile
+            text={"Cena za ubytování"}
+            Icon={Bed}
+            description={skola.ubytovani.toFixed(1) + " Kč"}
+          />
+        )}
+
+        {skola.adresa}
+
         <InfoDetailTile text={"Hodno"} Icon={Heart} description="Adresa" />
         <InfoDetailTile text={"Hodno"} Icon={Heart} description="Adresa" />
         <InfoDetailTile text={"Hodno"} Icon={Heart} description="Adresa" />
