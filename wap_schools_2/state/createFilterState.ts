@@ -4,9 +4,11 @@ import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
 import {
   FilterStateDefinition,
   FilterStateType,
-  SkolySortType,
   type StateSlice,
 } from "./types";
+import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
+import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
+
 const initialFilterState: FilterStateDefinition = {
   krajeSelected: [],
   mestaSelected: [],
@@ -18,7 +20,8 @@ const initialFilterState: FilterStateDefinition = {
   prijmaciZkouskySelected: [],
   skolneSelected: [],
   currentLocation: undefined,
-  sortBy: SkolySortType.Distance,
+  sortBy: SkolaOrderByEnum.Nazev,
+  sortSkolkaZakladkaBy: SkolkaZakladkaOrderByEnum.Nazev,
   offset: 0,
   favourites: [],
   druhPodskolySelected: [],
@@ -97,6 +100,11 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   setSortBy(sortBy) {
     set((state) => {
       state.filter.sortBy = sortBy;
+    });
+  },
+  setSortSkolkaZakladkaBy(sortSkolkaZakladkaBy) {
+    set((state) => {
+      state.filter.sortSkolkaZakladkaBy = sortSkolkaZakladkaBy;
     });
   },
   //setOffset

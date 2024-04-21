@@ -174,6 +174,7 @@ export default function FilterMultiSelectWrapper({
           skolneSelected: filter.skolneSelected,
           currentLocation: filter.currentLocation,
           sortBy: filter.sortBy,
+          sortSkolkaZakladkaBy:  filter.sortSkolkaZakladkaBy,
           offset: filter.offset,
           druhPodskolySelected: filter.druhPodskolySelected,
           searchingType: filter.searchingType,

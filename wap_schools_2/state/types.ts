@@ -1,6 +1,8 @@
 import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
 import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
 import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
+import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
+import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
 import { StateCreator } from "zustand";
 
 export interface OptionState {
@@ -8,34 +10,21 @@ export interface OptionState {
   nazev: string;
 }
 
-export enum SkolySortType {
-  Distance,
-  Hodnoceni,
-  Nazev,
-  //Skolne,
-}
+export const SkolaSortByMap = [
+  {
+    value: "Vzdálenost",
+    type: SkolaOrderByEnum.Location
+  },
+  {
+    value: "Hodnocení",
+    type: SkolaOrderByEnum.Hodnoceni
+  },
+  {
+    value: "Název",
+    type: SkolaOrderByEnum.Nazev
+  }
+]
 
-//give me all values of SkolySortType
-export const SkolySortTypeValues: SkolySortType[] = Object.values(
-  SkolySortType
-).filter((value) => typeof value === "number") as SkolySortType[];
-
-//SkolySortType to description
-export const SkolySortTypeDescription = {
-  [SkolySortType.Distance]: "Vzdálenost",
-  [SkolySortType.Hodnoceni]: "Hodnocení",
-  [SkolySortType.Nazev]: "Název",
-  //[SkolySortType.Skolne]: "Školné",
-};
-
-//revers to SkolySortTypeDescription. I.e. "Vzdálenost" -> SkolySortType.Distance
-export const SkolySortTypeReverseDescription: Record<string, SkolySortType> =
-  Object.fromEntries(
-    Object.entries(SkolySortTypeDescription).map(([k, v]) => [
-      v,
-      SkolySortType[k as keyof typeof SkolySortType],
-    ])
-  );
 
 export interface FilterStateDefinition {
   krajeSelected: OptionState[];
@@ -63,7 +52,8 @@ export interface FilterStateDefinition {
 
   currentLocation: { x: number; y: number } | undefined;
   //viewing the school list
-  sortBy: SkolySortType;
+  sortBy: SkolaOrderByEnum;
+  sortSkolkaZakladkaBy: SkolkaZakladkaOrderByEnum;
   offset: number;
 
   favourites: Array<SkolaVysokaStredniType | SkolaZakladniMaterskaType>;
@@ -86,7 +76,8 @@ export interface FilterStateActions {
   setPrijmaciZkousky: (prijmaciZkousky: OptionState[]) => void;
   setSkolne: (skolne: OptionState[]) => void;
   setCurrentLocation: (location: { x: number; y: number }) => void;
-  setSortBy: (sortBy: SkolySortType) => void;
+  setSortBy: (sortBy: SkolaOrderByEnum) => void;
+  setSortSkolkaZakladkaBy: (sortSkolkaZakladkaBy : SkolkaZakladkaOrderByEnum) => void;
   setOffset: (offset: number) => void;
   //setFavouriteSchools: (favouriteSchools: OptionState[]) => void;
   setFavourite: (

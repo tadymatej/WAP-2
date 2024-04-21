@@ -11,8 +11,7 @@ import {
   SearchingType,
   SkolneTypesData,
 } from "@/enums/filter-types";
-import { SkolaOrderByFromSortBy } from "@/repositories/orderByTypes/skolaOrderByTypes";
-import { SkolkaZakladkaOrderByFromSortBy } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
+
 import { useStore } from "@/state/useStore";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Loader2 } from "lucide-react";
@@ -70,7 +69,7 @@ export function SchoolList() {
           vzdalenostMax: undefined,
         },
         {
-          type: SkolaOrderByFromSortBy[filter.sortBy],
+          type: filter.sortBy,
           lat: filter.latitude,
           lon: filter.longitude,
         }
@@ -115,7 +114,7 @@ export function SchoolList() {
           zarizeniIDs: [],
         },
         {
-          type: SkolkaZakladkaOrderByFromSortBy[filter.sortBy],
+          type: filter.sortSkolkaZakladkaBy,
           lat: filter.latitude,
           lon: filter.longitude,
         }

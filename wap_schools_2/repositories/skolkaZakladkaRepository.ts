@@ -154,6 +154,7 @@ export async function getSkolkaZakladkaList(
   filter: SkolkaZakladkaFilterModel,
   order: SkolkaZakladkaOrderByModel
 ): Promise<SkolaZakladniMaterskaType[]> {
+  console.log(order);
   let sql = Prisma.empty;
   if (order.type == SkolkaZakladkaOrderByEnum.Location) {
     sql = Prisma.sql`
@@ -174,6 +175,7 @@ export async function getSkolkaZakladkaList(
   } else {
     sql = Prisma.sql`
       SELECT DISTINCT
+        ${order.type == SkolkaZakladkaOrderByEnum.Hodnoceni ? Prisma.sql`hodnoceni.hvezdicek,` : Prisma.empty}
         skolka_zakladka.*
       FROM skolka_zakladka
       ${getOrderByJoinHodnoceni(order.type)}
@@ -183,6 +185,7 @@ export async function getSkolkaZakladkaList(
       ${getOffset(filter.offset)}
       `;
   }
+  console.log(filter);
   console.log(sql);
   let res: SkolaZakladniMaterskaType[] = await db.$queryRaw(sql);
   console.log(filter);

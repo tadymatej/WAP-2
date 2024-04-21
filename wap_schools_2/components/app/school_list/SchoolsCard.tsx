@@ -14,9 +14,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import {
-  SkolySortTypeDescription,
-  SkolySortTypeReverseDescription,
-  SkolySortTypeValues,
+  SkolaSortByMap,
 } from "@/state/types";
 import { useStore } from "@/state/useStore";
 import { SchoolList } from "./SchoolList";
@@ -29,7 +27,9 @@ export interface SchoolsCardProps {
 
 export default function SchoolsCard(props : SchoolsCardProps) {
   const setSortBy = useStore((state) => state.filter.setSortBy);
+  const setSortSkolkaZakladkaBy = useStore((state) => state.filter.setSortSkolkaZakladkaBy)
   const sortBy = useStore((state) => state.filter.sortBy);
+  const sortSkolkaZakladkaBy = useStore((state) => state.filter.sortSkolkaZakladkaBy)
 
   const selectedVysokaStredni = useStore(
     (state) => state.filter.vysokeStredniSelected
@@ -37,7 +37,7 @@ export default function SchoolsCard(props : SchoolsCardProps) {
   const selectedMaterskaZakladni = useStore(
     (state) => state.filter.zakladniMaterskaSelected
   );
-
+    console.log(sortBy.toString());
   return (
     <React.Fragment>
       <Card className=" col-span-6 w-full">
@@ -59,9 +59,10 @@ export default function SchoolsCard(props : SchoolsCardProps) {
                 </Button>
                 <div className="w-4" />
                 <Select
-                  defaultValue={SkolySortTypeDescription[sortBy]}
+                  defaultValue={sortBy.toString()}
                   onValueChange={(value) => {
-                    setSortBy(SkolySortTypeReverseDescription[value]);
+                    setSortSkolkaZakladkaBy(parseInt(value));
+                    setSortBy(parseInt(value));
                   }}
                 >
                   <SelectTrigger className="w-[180px]">
@@ -70,12 +71,12 @@ export default function SchoolsCard(props : SchoolsCardProps) {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Možnosti řazeni</SelectLabel>
-                      {SkolySortTypeValues.map((sortType) => (
+                      {SkolaSortByMap.map((item) => (
                         <SelectItem
-                          key={sortType}
-                          value={SkolySortTypeDescription[sortType]}
+                          key={item.value}
+                          value={item.type.toString()}
                         >
-                          {SkolySortTypeDescription[sortType]}
+                          {item.value}
                         </SelectItem>
                       ))}
                     </SelectGroup>
