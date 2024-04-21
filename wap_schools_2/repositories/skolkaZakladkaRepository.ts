@@ -140,8 +140,10 @@ export async function getSkolkaZakladkaList(
         FROM (
           SELECT DISTINCT
             skolka_zakladka.*,
-            AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
-            POW((adresa.lon - ${order.lon}), 2) + POW((adresa.lat - ${order.lat}), 2) AS vzdalenost
+            -AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
+            POW((adresa.lon - ${order.lon}), 2) + POW((adresa.lat - ${order.lat}), 2) AS vzdalenost,
+            adresa.lat,
+            adresa.lon
           FROM skolka_zakladka
           LEFT JOIN hodnoceni ON hodnoceni.SkolkaZakladkaID = skolka_zakladka.ID
           ${whereJoinAdresa(filter, order)}
@@ -160,6 +162,8 @@ export async function getSkolkaZakladkaList(
         skolka_zakladka.*
       FROM skolka_zakladka
       LEFT JOIN hodnoceni ON hodnoceni.SkolkaZakladkaID = skolka_zakladka.ID
+      ${whereJoinAdresa(filter, order)}
+      ${whereJoinZarizeni(filter)}
       ${getWhere(filter)}
       GROUP BY skolka_zakladka.ID
       ${getOrderBy(order)}

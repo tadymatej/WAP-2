@@ -25,7 +25,7 @@ import {
 function getOrderBy(order: SkolaOrderByModel) {
   switch (order.type) {
     case SkolaOrderByEnum.Hodnoceni:
-      return Prisma.sql` ORDER BY prumer_hvezdicek `;
+      return Prisma.sql` ORDER BY prumer_hvezdicek`;
     case SkolaOrderByEnum.Location: {
       if (order.lon == null || order.lat == null) throw "Missing coordinates";
       return Prisma.sql` ORDER BY vzdalenost `;
@@ -169,8 +169,8 @@ function getWhereTypSkolyIDs(typSkolyIDs: number[]) {
 export async function getSkolaList(filter: SkolaFilterModel, order: SkolaOrderByModel): Promise<SkolaVysokaStredniType[]> {
   let sql = Prisma.sql`
     SELECT DISTINCT
-      AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
-      ${order.type == SkolaOrderByEnum.Location ? Prisma.sql`(POW((adresa.lon - ${order.lon}),2) + POW((adresa.lat-${order.lat}),2)) as vzdalenost,` : Prisma.empty}
+      -AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
+      ${order.type == SkolaOrderByEnum.Location ? Prisma.sql`adresa.lat, adresa.lon,` : Prisma.empty}
       skola.*
     FROM skola
       LEFT JOIN podskola ON podskola.SkolaID = skola.ID
