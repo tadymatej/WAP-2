@@ -2,6 +2,7 @@ export interface SkolaZakladniMaterskaType {
   id: number;
   datumzahajeni: Date | null;
   prumer_hvezdicek: number;
+  vzdalenost?: number;
   jazyk: {
     nazev: string | null;
   } | null;

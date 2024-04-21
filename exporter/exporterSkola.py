@@ -68,6 +68,14 @@ class ExporterSkola(Exporter):
                                 FOREIGN KEY (TypSkolyID) REFERENCES typ_skoly(ID)
                             );""")
 
+    def db_update_urls(self):
+        df = pd.read_json("skoly.json")
+        polozky = df.get("polozky")
+        for key in polozky.keys():
+            nazev = polozky[key].get("nazev")
+            url = polozky[key].get("urlAdresa")
+            self.cur.execute("UPDATE skola SET url = %s WHERE nazev = %s", (url, nazev))
+
     def db_export_one(self, model : ModelSkola):
         self.cur.execute("SELECT ID FROM typ_zrizovatele WHERE Kod = %s", (model.typZrizovatele, ))
         typZrizovateleID = self.cur.fetchone()[0]
@@ -102,6 +110,7 @@ class ExporterSkola(Exporter):
         for key in polozky.keys():
             modelSkola = ModelSkola()
             modelSkola.email = polozky[key].get("email")
+            modelSkola.url = polozky[key].get("urlAdresa")
             modelSkola.ico = polozky[key].get("ico")
             modelSkola.kontaktniOsoba = polozky[key].get("kontaktniOsoba")
             modelSkola.kontaktniOsobaTel = polozky[key].get("kontaktniOsobaTelefon")
