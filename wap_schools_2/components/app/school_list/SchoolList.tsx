@@ -15,10 +15,9 @@ import {
 import { useStore } from "@/state/useStore";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SkolaVysokaStredniTile from "./SkolaVysokaStredniTile";
 import SkolaZakladniMaterskaTiple from "./SkolaZakladniMaterskaTile";
-<<<<<<< HEAD
 /**
  * Renders a list of schools based on the selected filters and search type.
  *
@@ -53,17 +52,8 @@ export function SchoolList() {
   const sortSkolkaZakladkaBy = useStore(
     (state) => state.filter.sortSkolkaZakladkaBy
   );
-  const searchingType = useStore((state) => state.filter.searchingType);
-=======
-import React from "react";
-
-export function SchoolList() {
-  const filter = useStore((state) => state.filter);
-
   const showList = useStore((state) => state.responsive.showList);
-
-  const searchingType = filter.searchingType;
->>>>>>> origin/refactor
+  const searchingType = useStore((state) => state.filter.searchingType);
 
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -193,7 +183,7 @@ export function SchoolList() {
     searchingType,
   ]);
 
-  if(!showList) return (<React.Fragment></React.Fragment>);
+  if (!showList) return <React.Fragment></React.Fragment>;
   return (
     <div className="flex flex-col">
       <ScrollArea className="space-y-3">
