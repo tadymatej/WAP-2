@@ -66,7 +66,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
       autor: data.autor === undefined ? null : data.autor,
       skolaid: props.skolaID,
       skolkazakladkaid: props.skolkaZakladkaID,
-      hvezdicek: parseFloat(data.hvezdicek) * 10,
+      hvezdicek: parseFloat(data.hvezdicek) * 10
     } as hodnoceni;
     console.log(model);
     let typRoleUzivateleID = parseInt(data.typRoleUzivateleID);
@@ -74,23 +74,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
     else
       model.jinaroleuzivatele =
         data.jinaRoleUzivatele == undefined ? null : data.jinaRoleUzivatele;
-    let res = await insertHodnoceni({
-      //  hvezdicek: number;
-      //popis: string | null;
-      //jina_role: string | null;
-      //autor: string | null;
-      //role_uzivatele_typy: {
-      //    nazev: string;
-      //} | null;
-      autor: model.autor,
-      hvezdicek: model.hvezdicek,
-      jinaroleuzivatele: model.jinaroleuzivatele,
-      popis: model.popis,
-      typroleuzivateleid:  1,
-    });
-    if (res && props?.onClose) {
-      props.onClose(model);
-    }
+    let res = await insertHodnoceni(model);
     toast({
       title:
         res == true

@@ -5,11 +5,15 @@ import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useStore } from "@/state/useStore";
-import { FilterMultiSelectWrapperType } from "../../../enums/filter-types";
+import { FilterMultiSelectWrapperType, SearchingType } from "../../../enums/filter-types";
 import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
+import { boolean } from "zod";
 
 export function FilterCard() {
-  const advancedOptions = (
+  const setToDefault = useStore((state) => state.filter.setToDefault);
+  const searchingType = useStore((state) => state.filter.searchingType);
+
+  const advancedOptions = searchingType == SearchingType.StredniVysoke && (
     <div className="flex flex-col">
       <div className="h-3" />
       <div className="relative">
@@ -50,9 +54,8 @@ export function FilterCard() {
         </div>
       </div>
     </div>
-  );
+    );
 
-  const setToDefault = useStore((state) => state.filter.setToDefault);
   return (
     <Card className="">
       <CardHeader>

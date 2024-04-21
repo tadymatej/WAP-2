@@ -20,10 +20,7 @@ export function VysokaStredniVsMaterskaZakladniSelect() {
     <div className="relative">
       <Button
         onClick={() => {
-          if (window.innerWidth > 1024) {
             setShowFilter(!showFilter);
-          } else {
-          }
         }}
       >
         Filter
