@@ -18,9 +18,12 @@ import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import SkolaVysokaStredniTile from "./SkolaVysokaStredniTile";
 import SkolaZakladniMaterskaTiple from "./SkolaZakladniMaterskaTile";
+import React from "react";
 
 export function SchoolList() {
   const filter = useStore((state) => state.filter);
+
+  const showList = useStore((state) => state.responsive.showList);
 
   const searchingType = filter.searchingType;
 
@@ -139,6 +142,7 @@ export function SchoolList() {
     return () => {};
   }, [filter]);
 
+  if(!showList) return (<React.Fragment></React.Fragment>);
   return (
     <div className="flex flex-col">
       <ScrollArea className="space-y-3">

@@ -4,6 +4,7 @@ import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
 import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
 import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
 import { StateCreator } from "zustand";
+import { ResponsiveStateType } from "./createResponsiveState";
 
 export interface OptionState {
   id: number;
@@ -119,6 +120,7 @@ export type FilterStateType = FilterStateDefinition & FilterStateActions;
 
 export interface CombinedState {
   filter: FilterStateType;
+  responsive: ResponsiveStateType;
 }
 
 export type StateSlice<T> = StateCreator<
