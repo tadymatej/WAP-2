@@ -170,7 +170,7 @@ export async function getSkolaList(filter: SkolaFilterModel, order: SkolaOrderBy
   let sql = Prisma.sql`
     SELECT DISTINCT
       -AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
-      ${order.type == SkolaOrderByEnum.Location ? Prisma.sql`adresa.lat, adresa.lon,` : Prisma.empty}
+      ${order.type == SkolaOrderByEnum.Location ? Prisma.sql`(POW((adresa.lon - ${order.lon}),2) + POW((adresa.lat-${order.lat}),2)) as vzdalenost, adresa.lat, adresa.lon,` : Prisma.empty}
       skola.*
     FROM skola
       LEFT JOIN podskola ON podskola.SkolaID = skola.ID
