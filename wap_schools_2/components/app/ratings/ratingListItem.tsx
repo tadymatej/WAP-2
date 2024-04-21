@@ -23,8 +23,8 @@ export function RatingListItem(props: RatingListItemProps) {
         </div>
         <div className="row-start-2 col-start-2 ml-4">
           <div className="row-start-2 col-start-2 font-bold text-base flex mt-1">
-            <div>{props.model.hvezdicek * 20} %</div>
-            <Stars count={props.model.hvezdicek}></Stars>
+            <div>{props.model.hvezdicek * 2} %</div>
+            <Stars count={props.model.hvezdicek / 10}></Stars>
           </div>
           <div className="row-start-2 col-start-2 font-normal text-sm pt-2">
             {props.model.popis}

@@ -49,7 +49,7 @@ export default function HodnoceniSection({
       </div>
       <div className="h-6" />
       {hodnoceni.length > 0 ? (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-y-4">
           {hodnoceni.map((hodnoceni, index) => {
             return <RatingListItem model={hodnoceni} key={index} />;
           })}
