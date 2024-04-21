@@ -1,4 +1,5 @@
 
+
 INSERT INTO typ_role_uzivatele(nazev) VALUES('Student');
 INSERT INTO typ_role_uzivatele(nazev) VALUES('Pracovník školy');
 INSERT INTO typ_role_uzivatele(nazev) VALUES('Učitel');
