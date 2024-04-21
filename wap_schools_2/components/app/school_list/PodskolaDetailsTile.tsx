@@ -17,7 +17,7 @@ export default function PodskolaDetailsTile({
 }: PodskolaDetailsTileProps) {
   return (
     <div className="flex flex-col">
-      <h4 className="text-slate-600 font-semibold text-xl">
+      <h4 className="text-slate-600 font-semibold text-xl text-start">
         {podskola.druh_podskoly?.nazev}
       </h4>
       <Accordion type="single" collapsible className="w-full">
@@ -34,12 +34,10 @@ export default function PodskolaDetailsTile({
               key={index.toString(10)}
               borderBottom={false}
             >
-              <AccordionTrigger className="text-base font-medium">
+              <AccordionTrigger className="text-base font-medium text-start">
                 {obor.nazevoboru}
               </AccordionTrigger>
               <AccordionContent className="gap-y-4 flex flex-col pl-2">
-                <DotInfoDetailTile text={"Hodno"} description="Adresa" />
-
                 {obor.delkastudia && (
                   <DotInfoDetailTile
                     text={"Délka studia"}

@@ -70,8 +70,8 @@ def main():
     for exporter in exportersClearCreate:
         exporter.db_clear()
 
-    # for exporter in exportersClearCreate:
-    #    exporter.db_create()
+    for exporter in exportersClearCreate:
+        exporter.db_create()
 
     # for exporter in exporters:
     #    print("exporting ", exporter)

@@ -10,11 +10,24 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
+import { addressToText, vzdalenostInKmFunc } from "@/helpers/address-to-text";
 import { Colors } from "@/lib/colors";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/state/useStore";
-import { EllipsisVertical, Heart, UserRound } from "lucide-react";
+import {
+  EllipsisVertical,
+  Heart,
+  LinkIcon,
+  LocateFixed,
+  Mail,
+  Phone,
+  Route,
+  Star,
+  UserRound,
+} from "lucide-react";
+import Link from "next/link";
 import BadgeCustom from "../generic/BadgeCustom";
+import InfoDetailTile from "../generic/InfoDetailTile";
 import InfoTile from "../generic/InfoTile";
 import PodskolTile from "./PodskolTile";
 
@@ -79,9 +92,25 @@ export default function SkolaVysokaStredniTile({
       ))}
     </div>
   );
+
+  const userLatitude = useStore((state) => state.filter.latitude);
+  const userLongitude = useStore((state) => state.filter.longitude);
+  const goalLatitude = skola.lat;
+  const goalLongitude = skola.lon;
+
+  const vzdalenostInKm = vzdalenostInKmFunc({
+    userLatitude,
+    userLongitude,
+    goalLatitude,
+    goalLongitude,
+  });
+
   return (
     <Card
-      className={cn("transition-all hover:bg-accent", isSelected && "bg-muted")}
+      className={cn(
+        "transition-all hover:bg-accent/60",
+        isSelected && "bg-muted/60"
+      )}
       onClick={() => {
         selectVysokaStredni(isSelected ? undefined : skola);
       }}
@@ -115,12 +144,34 @@ export default function SkolaVysokaStredniTile({
           {skola.nazev}
         </div>
         <div className="h-2" />
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           {skola.reditel && <InfoTile Icon={UserRound} text={skola.reditel} />}
-          {skola.reditel && <InfoTile Icon={UserRound} text={skola.reditel} />}
-          {skola.reditel && <InfoTile Icon={UserRound} text={skola.reditel} />}
-          {skola.reditel && <InfoTile Icon={UserRound} text={skola.reditel} />}
-          {skola.reditel && <InfoTile Icon={UserRound} text={skola.reditel} />}
+          {skola.kontaktniosobatel && (
+            <InfoTile Icon={Phone} text={skola.kontaktniosobatel} />
+          )}
+          {skola.email && <InfoTile Icon={Mail} text={skola.email} />}
+          {skola.prumer_hvezdicek && (
+            <InfoTile
+              Icon={Star}
+              text={(skola.prumer_hvezdicek / -10).toFixed(1) + " / 5"}
+            />
+          )}
+          {vzdalenostInKm && (
+            <InfoTile Icon={Route} text={vzdalenostInKm.toFixed(1) + " km"} />
+          )}
+          {skola.adresa && (
+            <InfoDetailTile
+              text={"Adresa"}
+              Icon={LocateFixed}
+              description={addressToText(skola.adresa)}
+            />
+          )}
+
+          {skola.url && (
+            <Link href={skola.url}>
+              <InfoTile Icon={LinkIcon} text={skola.url} />
+            </Link>
+          )}
         </div>
         <div className="h-4" />
         <Separator />
