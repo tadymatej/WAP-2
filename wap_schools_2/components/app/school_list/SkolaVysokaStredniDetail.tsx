@@ -163,7 +163,7 @@ export default function SkolaVysokaStredniDetail({
         )}
         {skola.stravovani && (
           <InfoDetailTile
-            text={"Cena za stravováni"}
+            text={"Cena za stravování"}
             Icon={CookingPot}
             description={skola.stravovani.toFixed(1) + " Kč"}
           />
@@ -187,7 +187,7 @@ export default function SkolaVysokaStredniDetail({
         {skola.url && (
           <Link href={skola.url}>
             <InfoDetailTile
-              text={"URL"}
+              text={"URL adresa"}
               Icon={LinkIcon}
               description={skola.url}
             />

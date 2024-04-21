@@ -32,6 +32,7 @@ export async function getHodnoceniList(filter: HodnoceniFilterModel) {
       hvezdicek: true,
       jinaroleuzivatele: true,
       typroleuzivateleid: true,
+      vytvoreno: true,
       typ_role_uzivatele: {
         select: {
           id: true,

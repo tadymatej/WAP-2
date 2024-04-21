@@ -24,7 +24,7 @@ export function RatingListItem(props: RatingListItemProps) {
         <div className="row-span-1 col-start-2 col-auto gap-y-4 text-left mr-2 ml-4 mb-auto">
           <div className="font-bold text-base">{author}</div>
           <div className="text-sm font-normal text-primary/60">
-            Přidáno 12.11.2012
+            Přidáno {props.model.vytvoreno.getDate()}.{props.model.vytvoreno.getMonth() + 1}.{props.model.vytvoreno.getFullYear()}
           </div>
         </div>
         <div className="row-start-2 col-start-2 ml-4">

@@ -18,6 +18,7 @@ import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import SkolaVysokaStredniTile from "./SkolaVysokaStredniTile";
 import SkolaZakladniMaterskaTiple from "./SkolaZakladniMaterskaTile";
+<<<<<<< HEAD
 /**
  * Renders a list of schools based on the selected filters and search type.
  *
@@ -53,6 +54,16 @@ export function SchoolList() {
     (state) => state.filter.sortSkolkaZakladkaBy
   );
   const searchingType = useStore((state) => state.filter.searchingType);
+=======
+import React from "react";
+
+export function SchoolList() {
+  const filter = useStore((state) => state.filter);
+
+  const showList = useStore((state) => state.responsive.showList);
+
+  const searchingType = filter.searchingType;
+>>>>>>> origin/refactor
 
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -104,6 +115,7 @@ export function SchoolList() {
         }
       );
 
+      // @ts-ignore
       setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
 
       if (result.length < 3) {
@@ -143,6 +155,7 @@ export function SchoolList() {
         }
       );
 
+      // @ts-ignore
       setSkolyZakladniMaterske([...skolyZakladniMaterske, ...result]);
 
       if (result.length < 3) {
@@ -180,6 +193,7 @@ export function SchoolList() {
     searchingType,
   ]);
 
+  if(!showList) return (<React.Fragment></React.Fragment>);
   return (
     <div className="flex flex-col">
       <ScrollArea className="space-y-3">

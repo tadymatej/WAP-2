@@ -81,26 +81,26 @@ export default function FilterMultiSelectWrapper({
         return "kraje";
       }
       case FilterMultiSelectWrapperType.Mesto: {
-        return "mesta";
+        return "města";
       }
       case FilterMultiSelectWrapperType.MestskaCast: {
-        return "mestske casti";
+        return "městské části";
       }
       case FilterMultiSelectWrapperType.Okres: {
         return "okresy";
       }
       case FilterMultiSelectWrapperType.VyucovaneObory: {
-        return "vyucovane obory";
+        return "vyučované obory";
       }
       case FilterMultiSelectWrapperType.TypSkoly: {
-        return "typy skol";
+        return "typy škol";
       }
       case FilterMultiSelectWrapperType.PrijmaciZkousky: {
-        return "prijmaci zkousky";
+        return "přijímací zkoušky";
       }
 
       case FilterMultiSelectWrapperType.Skolne: {
-        return "skolne";
+        return "školné";
       }
 
       default: {
@@ -210,7 +210,7 @@ export default function FilterMultiSelectWrapper({
         >
           <div className="flex w-full flex-row justify-between">
             <div className="font-normal">
-              {selected.length == 0 ? defaultText : "Vybrano"}
+              {selected.length == 0 ? defaultText : "Vybráno"}
             </div>
             <div className="w-4" />
             {selected.length > 0 && (
@@ -227,7 +227,7 @@ export default function FilterMultiSelectWrapper({
                       variant="secondary"
                       className="rounded-sm px-1 font-normal"
                     >
-                      {selected.length} selected
+                      {selected.length} vybráno
                     </Badge>
                   ) : (
                     selected.map((option) => (
@@ -257,7 +257,7 @@ export default function FilterMultiSelectWrapper({
             <ScrollArea
               className={"[&>[data-radix-scroll-area-viewport]]:max-h-[300px]"}
             >
-              <CommandEmpty>No department found.</CommandEmpty>
+              <CommandEmpty> Výsledky nebyly nalezeny </CommandEmpty>
               <CommandGroup>
                 {options.map((option) => {
                   const isSelected = selected.some((s) => s.id === option.id);
@@ -303,7 +303,7 @@ export default function FilterMultiSelectWrapper({
                       }}
                       className="justify-center text-center"
                     >
-                      Clear filters
+                      Vymazat výběr
                     </CommandItem>
                   </CommandGroup>
                 </>

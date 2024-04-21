@@ -202,7 +202,7 @@ export async function getSkolkaZakladkaList(
   } else {
     sql = Prisma.sql`
       SELECT DISTINCT
-        AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
+        -AVG(hodnoceni.hvezdicek) as prumer_hvezdicek,
         skolka_zakladka.*
       FROM skolka_zakladka
       LEFT JOIN hodnoceni ON hodnoceni.SkolkaZakladkaID = skolka_zakladka.ID

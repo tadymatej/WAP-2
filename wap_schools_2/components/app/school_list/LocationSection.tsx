@@ -85,7 +85,7 @@ export default function LocationSection({
         </div>
       ) : (
         <div className="text-slate-600 font-normal text-base text-center">
-          Není možné zobrazit polohu školky, protože buď školka nemá polohu,
+          Není možné zobrazit polohu školy, protože buď škola nemá polohu,
           nebo nejste přepnuti na vyhledáváni podle vzdálenosti.
         </div>
       )}

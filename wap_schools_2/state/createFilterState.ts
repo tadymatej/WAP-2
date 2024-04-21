@@ -159,7 +159,6 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
 
   setToDefault() {
     set((state) => {
-      console.log("Setting to default");
       state.filter.krajeSelected = [];
       state.filter.mestaSelected = [];
       state.filter.mestskeCastiSelected = [];

@@ -21,16 +21,13 @@ export function VysokaStredniVsMaterskaZakladniSelect() {
     <div className="relative">
       <Button
         onClick={() => {
-          if (window.innerWidth > 1024) {
             setShowFilter(!showFilter);
-          } else {
-          }
         }}
       >
         Filter
       </Button>
       <ScrollArea className="max-w-[600px] lg:max-w-none">
-        <div className={cn("mb-4 flex items-center")}>
+        <div className={cn("mb-4 flex items-center flex-wrap")}>
           <CustomNavItem
             onClick={() => setSearchingType(SearchingType.MaterskeZakladni)}
             Icon={SearchingTypeIcon[SearchingType.MaterskeZakladni]}

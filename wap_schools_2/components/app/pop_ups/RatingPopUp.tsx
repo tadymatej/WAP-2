@@ -58,6 +58,7 @@ interface RatingPopUpProps {
  * @param {RatingPopUpProps} props - The component props.
  * @returns {JSX.Element} The rendered RatingPopUp component.
  */
+
 export function RatingPopUp(props: RatingPopUpProps) {
   const possibleRatings = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -92,6 +93,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
         hvezdicek: model.hvezdicek,
         jinaroleuzivatele: model.jinaroleuzivatele,
         popis: model.popis,
+        vytvoreno: new Date(),
         typ_role_uzivatele: {
           nazev: "Role",
         },

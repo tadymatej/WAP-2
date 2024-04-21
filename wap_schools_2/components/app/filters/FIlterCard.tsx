@@ -5,8 +5,10 @@ import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useStore } from "@/state/useStore";
-import { FilterMultiSelectWrapperType } from "../../../enums/filter-types";
+import { FilterMultiSelectWrapperType, SearchingType } from "../../../enums/filter-types";
 import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
+import { boolean } from "zod";
+import { Button } from "@/components/ui/button";
 
 /**
  * Renders a filter card component.
@@ -14,7 +16,17 @@ import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
  * @returns The filter card component.
  */
 export function FilterCard() {
-  const advancedOptions = (
+  const setToDefault = useStore((state) => state.filter.setToDefault);
+  const searchingType = useStore((state) => state.filter.searchingType);
+  const setShowList = useStore((state) => state.responsive.setShowList);
+  const setShowFilters = useStore((state) => state.responsive.setShowFilters);
+
+  function onSubmitFilters() {
+    setShowList(true);
+    setShowFilters(false);
+  }
+
+  const advancedOptions = searchingType == SearchingType.StredniVysoke && (
     <div className="flex flex-col">
       <div className="h-3" />
       <div className="relative">
@@ -55,19 +67,18 @@ export function FilterCard() {
         </div>
       </div>
     </div>
-  );
+    );
 
-  const setToDefault = useStore((state) => state.filter.setToDefault);
   return (
     <Card className="">
       <CardHeader>
-        <CardTitle>Možnosti vyhledani</CardTitle>
+        <CardTitle>Možnosti vyhledávání</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="kraj" onValueChange={() => setToDefault()}>
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger disabled={false} value="mesto">
-              Mesto
+              Město
             </TabsTrigger>
             <TabsTrigger disabled={false} value="okres">
               Okres
@@ -77,7 +88,7 @@ export function FilterCard() {
               value="mestska-cast"
               className="col-span-2"
             >
-              Mestska cast
+              Městská část
             </TabsTrigger>
             <TabsTrigger disabled={false} value="kraj">
               Kraj
@@ -87,7 +98,7 @@ export function FilterCard() {
           <TabsContent value="mesto">
             <ScrollArea>
               <div className="space-y-1">
-                <Label htmlFor="name">Mesto/Obec</Label>
+                <Label htmlFor="name">Město / Obec</Label>
                 <FilterMultiSelectWrapper
                   type={FilterMultiSelectWrapperType.Mesto}
                 />
@@ -109,7 +120,7 @@ export function FilterCard() {
           <TabsContent value="mestska-cast">
             <ScrollArea>
               <div className="space-y-1">
-                <Label htmlFor="name">Mestska cast</Label>
+                <Label htmlFor="name">Městská část</Label>
                 <FilterMultiSelectWrapper
                   type={FilterMultiSelectWrapperType.MestskaCast}
                 />
@@ -128,31 +139,8 @@ export function FilterCard() {
               </div>
             </ScrollArea>
           </TabsContent>
-
-          {/* <TabsContent value="advanced">
-              <Card>
-              <CardHeader>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>
-              Change your password here. After saving, out.
-              </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-              <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-              </div>
-              <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-              </div>
-              </CardContent>
-              <CardFooter>
-              <Button>Save password</Button>
-              </CardFooter>
-              </Card>
-            </TabsContent> */}
         </Tabs>
+        <Button onClick={onSubmitFilters}>Potvrdit</Button>
       </CardContent>
     </Card>
   );

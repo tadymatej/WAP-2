@@ -39,6 +39,7 @@ export interface SkolaVysokaStredniType {
     hvezdicek: number;
     popis: string | null;
     jinaroleuzivatele: string | null;
+    vytvoreno: Date;
     autor: string | null;
     typ_role_uzivatele: {
       nazev: string;
