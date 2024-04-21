@@ -3,6 +3,9 @@ import { SkolaVysokaStredniAdresaType } from "@/actions/types/skolaVysokaStredni
 export const addressToText = (adress: SkolaVysokaStredniAdresaType) => {
   //ulice + cislo domovni + '/' + cislo orientacni + psc + mestska cast | cast obce + mesto/obec
   //- mestska cast se muze == mesto/obec
+
+  console.log("Adresa", adress);
+
   if (!adress) return "";
 
   let text = "";
@@ -18,10 +21,17 @@ export const addressToText = (adress: SkolaVysokaStredniAdresaType) => {
   if (adress.psc) {
     text += ", " + adress.psc;
   }
-  if (adress.mestska_cast_obvod) {
+  if (adress.mestska_cast_obvod?.nazev) {
     text += ", " + adress.mestska_cast_obvod.nazev;
   }
-  if (adress.cast_obce && adress.mestska_cast_obvod == adress.cast_obce) {
+  if (adress.cast_obce?.nazev) {
     text += ", " + adress.cast_obce.nazev;
   }
+  if (adress.obec?.nazev && adress.cast_obce?.nazev !== adress.obec.nazev) {
+    text += ", " + adress.obec.nazev;
+  }
+
+  console.log("Adresa text", text);
+
+  return text;
 };

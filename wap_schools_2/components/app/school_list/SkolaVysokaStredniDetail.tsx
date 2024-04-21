@@ -2,17 +2,25 @@ import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllDat
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { addressToText } from "@/helpers/address-to-text";
 import { Colors } from "@/lib/colors";
 import { useStore } from "@/state/useStore";
 import {
   Bed,
   CookingPot,
+  Crown,
   Heart,
+  LinkIcon,
+  LocateFixed,
+  Mail,
   Notebook,
   Phone,
+  Speech,
   Star,
   UserRound,
 } from "lucide-react";
+import Link from "next/link";
+import DotInfoTile from "../generic/DotInfoTile";
 import InfoDetailTile from "../generic/InfoDetailTile";
 import PodskolaDetailsTile from "./PodskolaDetailsTile";
 
@@ -31,7 +39,10 @@ export default function SkolaVysokaStredniDetail({
     .some((id) => id === skola.id);
 
   const setFavourite = useStore((state) => state.filter.setFavourite);
-
+  const vyucovaneJazyky = ["Angličtina", "Němčina"];
+  //skola.skola_vyucovanyjazyk
+  //  .map((jazyk) => jazyk.jazyk?.nazev)
+  //  .filter((jazyk) => jazyk !== null && jazyk !== undefined);
   return (
     <div className="flex flex-col items-stretch w-full">
       <div className="flex flex-row justify-between items-center">
@@ -91,19 +102,15 @@ export default function SkolaVysokaStredniDetail({
           <InfoDetailTile
             text={"Hodnocení"}
             Icon={Star}
-            description={(
-              skola.hodnoceni.reduce(
-                (acc, hodnoceni) => acc + hodnoceni.hvezdicek,
-                0
-              ) / skola.hodnoceni.length
-            ).toFixed(1)}
+            description={skola.prumer_hvezdicek.toFixed(1)}
           />
         )}
         {skola.poznamka && (
           <InfoDetailTile
             text={"Poznámka"}
             Icon={Notebook}
-            description={skola.poznamka}
+            description=""
+            subtext={skola.poznamka}
           />
         )}
         {skola.stravovani && (
@@ -121,12 +128,55 @@ export default function SkolaVysokaStredniDetail({
           />
         )}
 
-        {skola.adresa}
+        {skola.adresa && (
+          <InfoDetailTile
+            text={"Adresa"}
+            Icon={LocateFixed}
+            description={addressToText(skola.adresa)}
+          />
+        )}
 
-        <InfoDetailTile text={"Hodno"} Icon={Heart} description="Adresa" />
-        <InfoDetailTile text={"Hodno"} Icon={Heart} description="Adresa" />
-        <InfoDetailTile text={"Hodno"} Icon={Heart} description="Adresa" />
-        <InfoDetailTile text={"Hodno"} Icon={Heart} description="Adresa" />
+        {skola.url && (
+          <Link href={skola.url}>
+            <InfoDetailTile
+              text={"URL"}
+              Icon={LinkIcon}
+              description={skola.url}
+            />
+          </Link>
+        )}
+        {/*TODO: Missing data in requests*/}
+        {skola.typ_zrizovatele?.nazev && (
+          <InfoDetailTile
+            text={"Typ zřizovatele"}
+            Icon={Crown}
+            description={skola.typ_zrizovatele.nazev}
+          />
+        )}
+
+        {vyucovaneJazyky.length > 0 && (
+          <div className="flex flex-col">
+            <InfoDetailTile
+              text={"Vyučované jazyky"}
+              Icon={Speech}
+              description={""}
+            />
+            <div className="h-2" />
+            <div className="pl-8 flex flex-wrap gap-x-4 gap-y-4">
+              {vyucovaneJazyky.map((jazyk) => (
+                <DotInfoTile key={jazyk} text={jazyk ?? ""} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {skola.email && (
+          <InfoDetailTile
+            text={"Email"}
+            Icon={Mail}
+            description={skola.email}
+          />
+        )}
       </div>
       <div className="h-6" />
       <Separator />
