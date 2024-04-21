@@ -1,5 +1,3 @@
-
-
 /**
  * Holds informations about adresa for certain skola entity, viz documentation to the dataset or python extractors
  */
@@ -40,10 +38,10 @@ export interface SkolaVysokaStredniType {
   hodnoceni: {
     hvezdicek: number;
     popis: string | null;
-    jina_role: string | null;
+    jinaroleuzivatele: string | null;
     vytvoreno: Date;
     autor: string | null;
-    role_uzivatele_typy: {
+    typ_role_uzivatele: {
       nazev: string;
     } | null;
   }[];
