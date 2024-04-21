@@ -5,6 +5,14 @@ interface DotInfoDetailTileProps {
   description: string;
 }
 
+/**
+ * Renders a dot info detail tile component.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.text - The text to display.
+ * @param {string} props.description - The description to display.
+ * @returns {JSX.Element} The dot info detail tile component.
+ */
 export default function DotInfoDetailTile({
   text,
   description,

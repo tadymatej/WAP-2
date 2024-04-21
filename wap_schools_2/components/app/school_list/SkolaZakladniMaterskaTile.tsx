@@ -32,6 +32,12 @@ interface SkolaVysokaStredniTileProps {
   favIndex: number | undefined;
 }
 
+/**
+ * Renders information about a high school in a tile
+ * @param skola - school data
+ * @param favIndex - index of the favourite
+ * @returns tile with elementary and kindergarten school information
+ */
 export default function SkolaZakladniMaterskaTiple({
   skola,
   favIndex,
@@ -54,21 +60,7 @@ export default function SkolaZakladniMaterskaTiple({
   );
 
   const isSelected = selectedZakladniMaterska?.id == skola.id;
-  //const isVysokaSkola = [
-  //  ...new Set(
-  //    skola.podskola
-  //      .map((podskola) => podskola.druh_podskoly?.nazev)
-  //      .filter((druh) => druh !== null)
-  //  ),
-  //];
-  //Give me all the unique values of druh_podskoly.nazev that are not null
-  //const isVysokaSkola = [
-  //  ...new Set(
-  //    skola.podskola
-  //      .map((podskola) => podskola.druh_podskoly?.nazev)
-  //      .filter((druh) => druh !== null)
-  //  ),
-  //];
+
   const obory = skola.obor_skolky_zakladky.map((obory) => obory.nazev);
 
   const badges = (
@@ -166,7 +158,7 @@ export default function SkolaZakladniMaterskaTiple({
           {skola.prumer_hvezdicek && (
             <InfoTile
               Icon={Star}
-              text={(skola.prumer_hvezdicek / -10).toFixed(1) + " / 5"}
+              text={(skola.prumer_hvezdicek / 10).toFixed(1) + " / 5"}
             />
           )}
           {vzdalenostInKm && (

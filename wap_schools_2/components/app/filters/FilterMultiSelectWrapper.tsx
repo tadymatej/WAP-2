@@ -31,13 +31,16 @@ interface FilterMultiSelectWrapperProps {
   type: FilterMultiSelectWrapperType;
 }
 
+/**
+ * A component for a multi-select filter.
+ *
+ * @param {FilterMultiSelectWrapperProps} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ */
 export default function FilterMultiSelectWrapper({
   type,
 }: FilterMultiSelectWrapperProps) {
   const filter = useStore((state) => state.filter);
-  //For kraje get filter.selectedKraje, for obce get filter.selectedObce
-  //for okresy get filter.selectedOkresy, for mestskeCasti get filter.selectedMestskeCasti
-  //for obory get filter.selectedObory, for typSkoly get filter.selectedTypSkoly
 
   const getSelected = (type: FilterMultiSelectWrapperType): OptionState[] => {
     switch (type) {
@@ -157,8 +160,8 @@ export default function FilterMultiSelectWrapper({
   };
 
   useEffect(() => {
-    // Create a debounced version of fetchOptions
     const debouncedFetchOptions = debounce(async () => {
+      //fetch options based on type and search text
       const result = await optionsBasedOnTypeAndSearch({
         type,
         searchedText: searchText,
@@ -172,10 +175,8 @@ export default function FilterMultiSelectWrapper({
           hodnoceniSelected: filter.hodnoceniSelected,
           prijmaciZkouskySelected: filter.prijmaciZkouskySelected,
           skolneSelected: filter.skolneSelected,
-          currentLocation: filter.currentLocation,
           sortBy: filter.sortBy,
           sortSkolkaZakladkaBy: filter.sortSkolkaZakladkaBy,
-          offset: filter.offset,
           druhPodskolySelected: filter.druhPodskolySelected,
           searchingType: filter.searchingType,
           favourites: filter.favourites,
@@ -188,12 +189,10 @@ export default function FilterMultiSelectWrapper({
         },
       });
       setOptions(result);
-    }, 200); // Wait 300ms after the last call to run the function
+    }, 200);
 
-    // Call the debounced version of fetchOptions
     debouncedFetchOptions();
 
-    // Cleanup function to cancel any pending debounced function calls
     return () => {
       debouncedFetchOptions.cancel();
     };

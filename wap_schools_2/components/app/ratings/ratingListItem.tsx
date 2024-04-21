@@ -6,6 +6,12 @@ export interface RatingListItemProps {
   model: SkolaZakladniMaterskaHodnoceniType;
 }
 
+/**
+ * Renders a single rating item.
+ *
+ * @param props - The props for the RatingListItem component.
+ * @returns The rendered RatingListItem component.
+ */
 export function RatingListItem(props: RatingListItemProps) {
   let author: string | null | undefined = props.model.autor;
   if (author == null) author = "Anonymní uživatel";

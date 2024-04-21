@@ -13,6 +13,11 @@ interface ZarizeniDetailsTileProps {
   podskola: SkolaZakladniMaterskaZarizeniType[];
 }
 
+/**
+ * Renders a tile displaying details of "Zařízení" (facilities).
+ * @param zarizeni - array of "Zařízení" to be displayed
+ * @returns rendered "ZarizeniDetailsTile" component
+ */
 export default function ZarizeniDetailsTile({
   podskola: zarizeni,
 }: ZarizeniDetailsTileProps) {

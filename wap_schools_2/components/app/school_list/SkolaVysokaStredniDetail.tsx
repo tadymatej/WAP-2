@@ -30,7 +30,11 @@ import PodskolaDetailsTile from "./PodskolaDetailsTile";
 interface SkolaVysokaStredniDetailProps {
   skola: SkolaVysokaStredniType;
 }
-
+/**
+ * Side menu of details for high school.
+ * @param skola - school data
+ * @returns
+ */
 export default function SkolaVysokaStredniDetail({
   skola,
 }: SkolaVysokaStredniDetailProps) {
@@ -100,11 +104,17 @@ export default function SkolaVysokaStredniDetail({
       </div>
       <div className="h-4" />
       <div className="flex flex-col gap-y-4">
-        {skola.prumer_hvezdicek && (
+        {skola.hodnoceni.length > 0 && (
           <InfoDetailTile
             text={"Hodnocení"}
             Icon={Star}
-            description={(skola.prumer_hvezdicek / -10).toFixed(1) + " / 5"}
+            description={
+              (
+                skola.hodnoceni.reduce((a, b) => a + b.hvezdicek, 0) /
+                skola.hodnoceni.length /
+                10
+              ).toFixed(1) + " / 5"
+            }
           />
         )}
         {vzdalenostInKm && (

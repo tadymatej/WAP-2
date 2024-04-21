@@ -7,6 +7,15 @@ interface BadgeCustomProps {
   text: string;
 }
 
+/**
+ * Renders a custom badge component.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ElementType} [props.Icon] - The icon component to be rendered.
+ * @param {string} [props.iconColor] - The color of the icon.
+ * @param {string} props.text - The text to be displayed in the badge.
+ * @returns {React.ReactElement} The rendered badge component.
+ */
 export default function BadgeCustom({
   Icon = undefined,
   iconColor = undefined,

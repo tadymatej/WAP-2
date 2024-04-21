@@ -5,6 +5,14 @@ interface InfoTileProps {
   text: string;
 }
 
+/**
+ * Renders an information tile with an icon and text.
+ *
+ * @param {object} props - The component props.
+ * @param {React.ElementType} props.Icon - The icon component to be rendered.
+ * @param {string} props.text - The text to be displayed in the tile.
+ * @returns {React.ReactElement} The rendered information tile.
+ */
 export default function InfoTile({ Icon, text }: InfoTileProps) {
   return (
     <div className="flex flex-row items-center">

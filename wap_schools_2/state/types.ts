@@ -4,6 +4,7 @@ import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
 import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
 import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
 import { StateCreator } from "zustand";
+import { ResponsiveStateType } from "./createResponsiveState";
 
 export interface OptionState {
   id: number;
@@ -43,23 +44,22 @@ export interface FilterStateDefinition {
   typySkolSelected: OptionState[];
   //custom values
   hodnoceniSelected: HodnoceniTypes;
+
   prijmaciZkouskySelected: OptionState[];
   //custom values
   skolneSelected: OptionState[];
 
-  //It can be not used, custom values
+  //Location of an user
   longitude: number | undefined;
   latitude: number | undefined;
 
-  currentLocation: { x: number; y: number } | undefined;
   //viewing the school list
   sortBy: SkolaOrderByEnum;
   sortSkolkaZakladkaBy: SkolkaZakladkaOrderByEnum;
-  offset: number;
 
   favourites: Array<SkolaVysokaStredniType | SkolaZakladniMaterskaType>;
 
-  //Selected
+  //Selected school that will be desplayed in the detail
   vysokeStredniSelected: SkolaVysokaStredniType | undefined;
   zakladniMaterskaSelected: SkolaZakladniMaterskaType | undefined;
   //
@@ -78,12 +78,10 @@ export interface FilterStateActions {
   setHodnoceni: (hodnoceni: HodnoceniTypes) => void;
   setPrijmaciZkousky: (prijmaciZkousky: OptionState[]) => void;
   setSkolne: (skolne: OptionState[]) => void;
-  setCurrentLocation: (location: { x: number; y: number }) => void;
   setSortBy: (sortBy: SkolaOrderByEnum) => void;
   setSortSkolkaZakladkaBy: (
     sortSkolkaZakladkaBy: SkolkaZakladkaOrderByEnum
   ) => void;
-  setOffset: (offset: number) => void;
   //setFavouriteSchools: (favouriteSchools: OptionState[]) => void;
   setFavourite: (
     favouriteSchools: Array<SkolaVysokaStredniType | SkolaZakladniMaterskaType>
@@ -94,10 +92,6 @@ export interface FilterStateActions {
   ) => void;
   setVysokeStredniSelected: (skola: SkolaVysokaStredniType | undefined) => void;
   //Getters for getting values for filtering
-  //getKraje: () => number[];
-  //getMesta: () => number[];
-  //getVyucovaneObory: () => number[];
-  //getTypySkol: () => number[];
   setSearchingType: (searchingType: SearchingType) => void;
   getFavouritesMaterskeSkoly: () => SkolaZakladniMaterskaType[];
   getFavouritesVysokeStredniSkoly: () => SkolaVysokaStredniType[];
@@ -107,7 +101,7 @@ export interface FilterStateActions {
 
   setToDefault: () => void;
 
-  //to top
+  //moving of favourites schools
   moveFavToTop: (index: number) => void;
   moveFavToBottom: (index: number) => void;
 
@@ -119,6 +113,7 @@ export type FilterStateType = FilterStateDefinition & FilterStateActions;
 
 export interface CombinedState {
   filter: FilterStateType;
+  responsive: ResponsiveStateType;
 }
 
 export type StateSlice<T> = StateCreator<

@@ -33,6 +33,12 @@ interface SkolaVysokaStredniTileProps {
   favIndex: number | undefined;
 }
 
+/**
+ * Renders information about a high school in a tile
+ * @param skola - school data
+ * @param favIndex - index of the favourite
+ * @returns
+ */
 export default function SkolaVysokaStredniTile({
   skola,
   favIndex,
@@ -52,21 +58,7 @@ export default function SkolaVysokaStredniTile({
   );
 
   const isSelected = selectedVysokaStredni?.id == skola.id;
-  //const isVysokaSkola = [
-  //  ...new Set(
-  //    skola.podskola
-  //      .map((podskola) => podskola.druh_podskoly?.nazev)
-  //      .filter((druh) => druh !== null)
-  //  ),
-  //];
-  //Give me all the unique values of druh_podskoly.nazev that are not null
-  //const isVysokaSkola = [
-  //  ...new Set(
-  //    skola.podskola
-  //      .map((podskola) => podskola.druh_podskoly?.nazev)
-  //      .filter((druh) => druh !== null)
-  //  ),
-  //];
+
   const druhy = skola.podskola
     .map((podskola) => podskola.druh_podskoly?.nazev)
     .filter(

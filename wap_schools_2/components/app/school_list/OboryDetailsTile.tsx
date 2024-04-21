@@ -11,6 +11,12 @@ interface ZarizeniDetailsTileProps {
   obory: SkolaZakladniMaterskaOboryType[];
 }
 
+/**
+ * Renders a tile displaying details of "Obory" (fields of study).
+ *
+ * @param {ZarizeniDetailsTileProps} obory - The array of "Obory" to be displayed.
+ * @returns {JSX.Element} The rendered "OboryDetailsTile" component.
+ */
 export default function OboryDetailsTile({ obory }: ZarizeniDetailsTileProps) {
   if (obory.length == 0) return <div></div>;
   return (

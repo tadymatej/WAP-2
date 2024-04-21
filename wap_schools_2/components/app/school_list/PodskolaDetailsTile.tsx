@@ -12,6 +12,12 @@ interface PodskolaDetailsTileProps {
   podskola: SkolaVysokaStredniPodskolaType;
 }
 
+/**
+ * Renders a tile displaying details of "Podskola" (subschool).
+ *
+ * @param {PodskolaDetailsTileProps} podskola - The "Podskola" to be displayed.
+ * @returns {JSX.Element} The rendered "PodskolaDetailsTile" component.
+ */
 export default function PodskolaDetailsTile({
   podskola,
 }: PodskolaDetailsTileProps) {

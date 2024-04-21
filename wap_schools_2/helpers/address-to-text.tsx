@@ -1,5 +1,10 @@
 import { SkolaVysokaStredniAdresaType } from "@/actions/types/skolaVysokaStredniType";
 
+/**
+ * Converts address object to text.
+ * @param adress - address object
+ * @returns - address text
+ */
 export const addressToText = (adress: SkolaVysokaStredniAdresaType) => {
   //ulice + cislo domovni + '/' + cislo orientacni + psc + mestska cast | cast obce + mesto/obec
   //- mestska cast se muze == mesto/obec

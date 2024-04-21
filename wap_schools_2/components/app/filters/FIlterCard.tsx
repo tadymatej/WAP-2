@@ -8,10 +8,23 @@ import { useStore } from "@/state/useStore";
 import { FilterMultiSelectWrapperType, SearchingType } from "../../../enums/filter-types";
 import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
 import { boolean } from "zod";
+import { Button } from "@/components/ui/button";
 
+/**
+ * Renders a filter card component.
+ *
+ * @returns The filter card component.
+ */
 export function FilterCard() {
   const setToDefault = useStore((state) => state.filter.setToDefault);
   const searchingType = useStore((state) => state.filter.searchingType);
+  const setShowList = useStore((state) => state.responsive.setShowList);
+  const setShowFilters = useStore((state) => state.responsive.setShowFilters);
+
+  function onSubmitFilters() {
+    setShowList(true);
+    setShowFilters(false);
+  }
 
   const advancedOptions = searchingType == SearchingType.StredniVysoke && (
     <div className="flex flex-col">
@@ -126,31 +139,8 @@ export function FilterCard() {
               </div>
             </ScrollArea>
           </TabsContent>
-
-          {/* <TabsContent value="advanced">
-              <Card>
-              <CardHeader>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>
-              Change your password here. After saving, out.
-              </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-              <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-              </div>
-              <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-              </div>
-              </CardContent>
-              <CardFooter>
-              <Button>Save password</Button>
-              </CardFooter>
-              </Card>
-            </TabsContent> */}
         </Tabs>
+        <Button onClick={onSubmitFilters}>Potvrdit</Button>
       </CardContent>
     </Card>
   );

@@ -8,6 +8,12 @@ import { Share } from "lucide-react";
 import SkolaVysokaStredniTile from "../school_list/SkolaVysokaStredniTile";
 import SkolaZakladniMaterskaTiple from "../school_list/SkolaZakladniMaterskaTile";
 
+
+
+
+/**
+ * Renders a card component that displays a list of favorite schools.
+ */
 export function FavouritesCard() {
   const favourites = useStore((state) => state.filter.favourites);
 
