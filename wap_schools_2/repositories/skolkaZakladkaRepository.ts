@@ -177,7 +177,6 @@ export async function getSkolkaZakladkaList(
   filter: SkolkaZakladkaFilterModel,
   order: SkolkaZakladkaOrderByModel
 ): Promise<SkolaZakladniMaterskaType[]> {
-  console.log(order);
   let sql = Prisma.empty;
   if (order.type == SkolkaZakladkaOrderByEnum.Location) {
     sql = Prisma.sql`

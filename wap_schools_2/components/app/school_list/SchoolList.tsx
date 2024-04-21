@@ -37,10 +37,7 @@ export function SchoolList() {
   const next = async () => {
     setLoading(true);
 
-    console.log("Fetching data");
-
     if (searchingType === SearchingType.StredniVysoke) {
-      console.log("fething skoly vysoke stredni");
       const result = await filterSkolyAction(
         {
           castObceIDs: [],
@@ -80,10 +77,6 @@ export function SchoolList() {
         }
       );
 
-      console.log("Result: ", result);
-
-      console.log("Vysoke skoly fetched");
-
       setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
 
       // Usually your response will tell you if there is no more data.
@@ -94,8 +87,6 @@ export function SchoolList() {
     }
 
     if (searchingType === SearchingType.MaterskeZakladni) {
-      console.log("materske skoly");
-      console.log(filter);
       const result = await filterSkolkyZakladkyAction(
         {
           castObceIDs: [],
@@ -125,12 +116,6 @@ export function SchoolList() {
         }
       );
 
-      console.log(filter.sortSkolkaZakladkaBy);
-
-      console.log("Result: ", result);
-
-      console.log("Materske skoly fetched");
-
       setSkolyZakladniMaterske([...skolyZakladniMaterske, ...result]);
 
       // Usually your response will tell you if there is no more data.
@@ -144,7 +129,6 @@ export function SchoolList() {
   };
 
   useEffect(() => {
-    console.log("filter changed");
     setPage(0);
     setHasMore(true);
     setLoading(false);
@@ -171,7 +155,6 @@ export function SchoolList() {
                 skola={school}
               />
             ))}
-        ;
       </ScrollArea>
       <InfiniteScroll
         hasMore={hasMore}

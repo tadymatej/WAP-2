@@ -61,6 +61,8 @@ export async function insertHodnoceni(model: hodnoceni): Promise<boolean> {
        hvezdicek: model.hvezdicek,
        jinaroleuzivatele: model.jinaroleuzivatele,
        typroleuzivateleid: model.typroleuzivateleid,
+       skolaid: model.skolaid,
+       skolkazakladkaid: model.skolkazakladkaid
      },
    });
  } catch (e) {

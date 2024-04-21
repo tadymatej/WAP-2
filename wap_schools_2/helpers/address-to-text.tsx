@@ -4,8 +4,6 @@ export const addressToText = (adress: SkolaVysokaStredniAdresaType) => {
   //ulice + cislo domovni + '/' + cislo orientacni + psc + mestska cast | cast obce + mesto/obec
   //- mestska cast se muze == mesto/obec
 
-  console.log("Adresa", adress);
-
   if (!adress) return "";
 
   let text = "";
@@ -30,8 +28,6 @@ export const addressToText = (adress: SkolaVysokaStredniAdresaType) => {
   if (adress.obec?.nazev && adress.cast_obce?.nazev !== adress.obec.nazev) {
     text += ", " + adress.obec.nazev;
   }
-
-  console.log("Adresa text", text);
 
   return text;
 };

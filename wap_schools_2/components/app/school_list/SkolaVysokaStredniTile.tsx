@@ -76,7 +76,6 @@ export default function SkolaVysokaStredniTile({
         druh !== null && druh !== undefined && self.indexOf(druh) === index
     ) as string[];
 
-  console.log("Druhy: ", druhy);
   const badges = (
     <div className="flex flex-wrap items-center space-x-2">
       {isFavourite && (

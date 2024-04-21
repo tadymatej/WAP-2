@@ -8,7 +8,7 @@ import { TypRoleUzivateleFilterModel } from "./filterModels/typRoleUzivateleFilt
  * @param filter typ_role_uzivatele filter options
  */
 export async function getTypRoleUzivateleiList(filter : TypRoleUzivateleFilterModel) {
-    const res = await db.typ_role_uzivatele.findMany({
+    return await db.typ_role_uzivatele.findMany({
       where: {
         id: filter.ID
       },
@@ -21,9 +21,5 @@ export async function getTypRoleUzivateleiList(filter : TypRoleUzivateleFilterMo
       },
       take: 50
     });
-    return res.map((r) => ({
-      ID: r.id,
-      nazev: r.nazev
-    }));
 }
 

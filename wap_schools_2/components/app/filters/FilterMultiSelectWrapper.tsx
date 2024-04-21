@@ -152,7 +152,7 @@ export default function FilterMultiSelectWrapper({
       }
 
       default: {
-        console.log("Unknown type");
+
       }
     }
   };

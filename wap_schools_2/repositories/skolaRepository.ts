@@ -222,8 +222,6 @@ export async function getSkolaList(filter: SkolaFilterModel, order: SkolaOrderBy
     ${getLimit(filter.limit)}
     ${getOffset(filter.offset)}
   `;
-  console.log(sql);
   let res : SkolaVysokaStredniType[] = await db.$queryRaw(sql);
-  console.log(res);
   return res;
 }

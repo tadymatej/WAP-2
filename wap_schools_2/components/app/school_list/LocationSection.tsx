@@ -15,8 +15,6 @@ export default function LocationSection({
   schoolLatitude,
   schoolLongitude,
 }: LocationSectionProps) {
-  console.log("schoolLatitude", schoolLatitude);
-  console.log("schoolLongitude", schoolLongitude);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",

@@ -67,6 +67,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
       skolkazakladkaid: props.skolkaZakladkaID,
       hvezdicek: parseFloat(data.hvezdicek) * 10,
     } as hodnoceni;
+    console.log(model);
     let typRoleUzivateleID = parseInt(data.typRoleUzivateleID);
     if (typRoleUzivateleID != -1) model.jinaroleuzivatele = null;
     else
@@ -97,8 +98,10 @@ export function RatingPopUp(props: RatingPopUpProps) {
       let res = await getTypRoleUzivateleiList(
         {} as TypRoleUzivateleFilterModel
       );
-      fetchData();
+      console.log(res);
+      setPossibleVztahKeSkoleArray(res)
     };
+    fetchData();
   }, []);
 
   return (
@@ -133,7 +136,7 @@ export function RatingPopUp(props: RatingPopUpProps) {
                   </FormControl>
                   <SelectContent>
                     {possibleVztahKeSkoleArray.map((item) => {
-                      let key = (item.id as number).toString();
+                      let key = item.id.toString();
                       return (
                         <SelectItem value={key} key={key}>
                           {item.nazev}
