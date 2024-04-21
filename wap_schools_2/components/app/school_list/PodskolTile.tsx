@@ -4,7 +4,12 @@ import DotInfoTile from "../generic/DotInfoTile";
 interface SkolaPodskolTileProps {
   podskola: SkolaVysokaStredniPodskolaType;
 }
-
+/**
+ * Renders a tile displaying details of "Podskola" (subschool).
+ *
+ * @param {SkolaPodskolTileProps} podskola - The "Podskola" to be displayed.
+ * @returns {JSX.Element} The rendered "PodskolaDetailsTile" component.
+ */
 export default function PodskolTile({ podskola }: SkolaPodskolTileProps) {
   const uniqueObory = podskola.obor
     .map((obor) => obor.nazevoboru)

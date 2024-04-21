@@ -8,6 +8,10 @@ import { FilterCard } from "../filters/FIlterCard";
 import SchoolsCard from "../school_list/SchoolsCard";
 import { VysokaStredniVsMaterskaZakladniSelect } from "../VysokaStredniVsMaterskaZakladniSelect";
 
+/**
+ * Renders the main frame of the application.
+ * @returns The JSX element representing the main frame.
+ */
 export function MainFrame() {
   const [isShowedLocationPopUp, setIsShowedLocationPopUp] = useState(false);
   const setShowFilter = useStore((state) => state.filter.setShowFilter);
@@ -55,18 +59,6 @@ export function MainFrame() {
             <SchoolsCard />
           </div>
         </div>
-
-        {/*<div className="grid grid-cols-8 gap-4 w-full h-full">
-          <div className="col-span-2 gap-4 grid grid-rows-2 h-full">
-            <div className="row-span-1 h-full">
-              <FilterCard />
-            </div>
-            <div className="row-span-1  h-full">
-              <FavouritesCard />
-            </div>
-          </div>
-          <SchoolsCard />
-        </div>*/}
       </main>
     </React.Fragment>
   );

@@ -14,6 +14,15 @@ interface HodnoceniSectionProps {
   skolaId: number;
 }
 
+/**
+ * Renders the HodnoceniSection component.
+ *
+ * @param {Object} props - The component props.
+ * @param {Array} props.hodnoceni - The array of hodnoceni.
+ * @param {string} props.skolaId - The ID of the skola.
+ * @returns {JSX.Element} The rendered HodnoceniSection component.
+ */
+
 export default function HodnoceniSection({
   hodnoceni,
   skolaId,

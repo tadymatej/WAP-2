@@ -43,11 +43,12 @@ export interface FilterStateDefinition {
   typySkolSelected: OptionState[];
   //custom values
   hodnoceniSelected: HodnoceniTypes;
+
   prijmaciZkouskySelected: OptionState[];
   //custom values
   skolneSelected: OptionState[];
 
-  //It can be not used, custom values
+  //Location of an user
   longitude: number | undefined;
   latitude: number | undefined;
 
@@ -57,7 +58,7 @@ export interface FilterStateDefinition {
 
   favourites: Array<SkolaVysokaStredniType | SkolaZakladniMaterskaType>;
 
-  //Selected
+  //Selected school that will be desplayed in the detail
   vysokeStredniSelected: SkolaVysokaStredniType | undefined;
   zakladniMaterskaSelected: SkolaZakladniMaterskaType | undefined;
   //
@@ -90,10 +91,6 @@ export interface FilterStateActions {
   ) => void;
   setVysokeStredniSelected: (skola: SkolaVysokaStredniType | undefined) => void;
   //Getters for getting values for filtering
-  //getKraje: () => number[];
-  //getMesta: () => number[];
-  //getVyucovaneObory: () => number[];
-  //getTypySkol: () => number[];
   setSearchingType: (searchingType: SearchingType) => void;
   getFavouritesMaterskeSkoly: () => SkolaZakladniMaterskaType[];
   getFavouritesVysokeStredniSkoly: () => SkolaVysokaStredniType[];
@@ -103,7 +100,7 @@ export interface FilterStateActions {
 
   setToDefault: () => void;
 
-  //to top
+  //moving of favourites schools
   moveFavToTop: (index: number) => void;
   moveFavToBottom: (index: number) => void;
 

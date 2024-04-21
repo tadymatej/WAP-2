@@ -5,19 +5,16 @@ export enum SearchingType {
   StredniVysoke,
 }
 
-//SearchingType to description
 export const SearchingTypeDescription = {
   [SearchingType.MaterskeZakladni]: "Mateřské a základní školy",
   [SearchingType.StredniVysoke]: "Střední a vysoké školy",
 };
 
-//Searching type icon
 export const SearchingTypeIcon = {
   [SearchingType.MaterskeZakladni]: Baby,
   [SearchingType.StredniVysoke]: GraduationCap,
 };
 
-//SearchingType values
 export const SearchingTypeValues: SearchingType[] = Object.values(
   SearchingType
 ).filter((value) => typeof value === "number") as SearchingType[];
@@ -31,7 +28,6 @@ export enum SkolneTypes {
   moreThan32k,
 }
 
-//get all values of SkolneTypes
 export const SkolneTypesValues: SkolneTypes[] = Object.values(
   SkolneTypes
 ).filter((value) => typeof value === "number") as SkolneTypes[];
@@ -120,13 +116,11 @@ export const HodnoceniTypesData = {
   },
 };
 
-//get all values of HodnoceniTypes
 export const HodnoceniTypesValues: HodnoceniTypes[] = Object.values(
   HodnoceniTypes
 ).filter((value) => typeof value === "number") as HodnoceniTypes[];
 
 export enum FilterMultiSelectWrapperType {
-  //Basic options, only one is active at a time
   //kraj table, take nazev
   Kraj,
   //obec table, take nazev

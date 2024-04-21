@@ -23,6 +23,11 @@ interface SkolaZakladniMaterskaProps {
   skola: SkolaZakladniMaterskaType;
 }
 
+/**
+ * Side menu of details for elementary and kindergarten school.
+ * @param skola - school data
+ * @returns side menu of details for elementary and kindergarten school
+ */
 export default function SkolaZakladniMaterskaDetail({
   skola,
 }: SkolaZakladniMaterskaProps) {

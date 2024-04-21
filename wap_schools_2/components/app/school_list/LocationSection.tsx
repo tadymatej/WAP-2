@@ -11,11 +11,13 @@ const containerStyle = {
   height: "400px",
 };
 
+/**
+ * Renders the location section of the school list.
+ */
 export default function LocationSection({
   schoolLatitude,
   schoolLongitude,
 }: LocationSectionProps) {
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyCbqCg_gtkDa48oTFEDuaZXx6pvr8B49DI",

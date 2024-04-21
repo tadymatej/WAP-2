@@ -18,6 +18,11 @@ import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import SkolaVysokaStredniTile from "./SkolaVysokaStredniTile";
 import SkolaZakladniMaterskaTiple from "./SkolaZakladniMaterskaTile";
+/**
+ * Renders a list of schools based on the selected filters and search type.
+ *
+ * @returns The rendered school list component.
+ */
 
 export function SchoolList() {
   const krajeSelected = useStore((state) => state.filter.krajeSelected);
@@ -63,6 +68,7 @@ export function SchoolList() {
     setLoading(true);
 
     if (searchingType === SearchingType.StredniVysoke) {
+      //fetch schools "Vysoke" and "Stredni" schools data
       const result = await filterSkolyAction(
         {
           castObceIDs: [],
@@ -78,8 +84,6 @@ export function SchoolList() {
             (prijimaciZkouska) => prijimaciZkouska.id
           ),
           skolneRange: skolneSelected.map((skolne) => {
-            //convert to Skolne. I need to do it  based on the value of the key
-
             return SkolneTypesData[skolne.id as keyof typeof SkolneTypesData]
               .range;
           }),
@@ -102,7 +106,6 @@ export function SchoolList() {
 
       setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
 
-      // Usually your response will tell you if there is no more data.
       if (result.length < 3) {
         setHasMore(false);
       }
@@ -110,6 +113,7 @@ export function SchoolList() {
     }
 
     if (searchingType === SearchingType.MaterskeZakladni) {
+      //fetch schools "Materske" and "Zakladni" schools data
       const result = await filterSkolkyZakladkyAction(
         {
           castObceIDs: [],
@@ -141,7 +145,6 @@ export function SchoolList() {
 
       setSkolyZakladniMaterske([...skolyZakladniMaterske, ...result]);
 
-      // Usually your response will tell you if there is no more data.
       if (result.length < 3) {
         setHasMore(false);
       }

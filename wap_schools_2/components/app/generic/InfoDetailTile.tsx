@@ -8,6 +8,16 @@ interface InfoDetailTileProps {
   subtext?: string;
 }
 
+/**
+ * Renders a tile component with an icon, text, description, and optional subtext.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ElementType} props.Icon - The icon component to be rendered.
+ * @param {string} props.text - The main text to be displayed.
+ * @param {string} props.description - The description text to be displayed.
+ * @param {string} [props.subtext] - The optional subtext to be displayed.
+ * @returns {React.ReactNode} The rendered InfoDetailTile component.
+ */
 export default function InfoDetailTile({
   Icon,
   text,

@@ -27,6 +27,13 @@ import SkolaZakladniMaterskaDetail from "./SkolaZakladniMaterskaDetail";
 
 export interface SchoolsCardProps {}
 
+/**
+ * Renders the SchoolsCard component.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @returns {JSX.Element} The rendered SchoolsCard component.
+ */
 export default function SchoolsCard() {
   const setSortBy = useStore((state) => state.filter.setSortBy);
   const setSortSkolkaZakladkaBy = useStore(

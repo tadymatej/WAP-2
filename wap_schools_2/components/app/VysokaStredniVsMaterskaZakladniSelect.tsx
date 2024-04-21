@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import CustomNavItem from "./CustomNavitem";
 
+// Top navigation bar
 export function VysokaStredniVsMaterskaZakladniSelect() {
   const setSearchingType = useStore((state) => state.filter.setSearchingType);
   const searchingType = useStore((state) => state.filter.searchingType);

@@ -4,6 +4,13 @@ interface DotInfoTileProps {
   text: string;
 }
 
+/**
+ * Renders a dot info tile component.
+ *
+ * @param {DotInfoTileProps} props - The props for the DotInfoTile component.
+ * @param {string} props.text - The text to be displayed in the tile.
+ * @returns {JSX.Element} The rendered DotInfoTile component.
+ */
 export default function DotInfoTile({ text }: DotInfoTileProps) {
   return (
     <div className="flex flex-row items-center">

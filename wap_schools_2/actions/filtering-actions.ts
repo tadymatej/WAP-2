@@ -14,6 +14,13 @@ interface OptionsBasedOnTypeAndSearchInputProps {
   filterState: FilterStateDefinition;
 }
 
+/**
+ * Retrieves options based on the provided type, searched text, and filter state.
+ * @param type - The type of filter multi-select wrapper.
+ * @param searchedText - The text to search for in the options.
+ * @param filterState - The filter state.
+ * @returns A promise that resolves to an array of option states.
+ */
 export async function optionsBasedOnTypeAndSearch({
   type,
   searchedText,

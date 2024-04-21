@@ -9,6 +9,11 @@ type CustomNavItemProps = {
   onClick: () => void;
 };
 
+/**
+ *  Renders a custom navigation item.
+ * @param props - The props for the CustomNavItem component.
+ * @returns The rendered CustomNavItem component.
+ */
 const CustomNavItem: React.FC<CustomNavItemProps> = ({
   name,
   Icon,

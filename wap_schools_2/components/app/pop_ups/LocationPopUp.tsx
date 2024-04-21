@@ -24,6 +24,12 @@ export interface LocationPopUpProps {
   className?: string;
 }
 
+/**
+ * Renders a location pop-up component.
+ *
+ * @param props - The props for the LocationPopUp component.
+ * @returns The rendered LocationPopUp component.
+ */
 export function LocationPopUp(props: LocationPopUpProps) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",

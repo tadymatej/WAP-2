@@ -8,6 +8,11 @@ import { useStore } from "@/state/useStore";
 import { FilterMultiSelectWrapperType } from "../../../enums/filter-types";
 import FilterMultiSelectWrapper from "./FilterMultiSelectWrapper";
 
+/**
+ * Renders a filter card component.
+ *
+ * @returns The filter card component.
+ */
 export function FilterCard() {
   const advancedOptions = (
     <div className="flex flex-col">

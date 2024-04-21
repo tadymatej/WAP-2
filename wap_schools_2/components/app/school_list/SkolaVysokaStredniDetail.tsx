@@ -30,7 +30,11 @@ import PodskolaDetailsTile from "./PodskolaDetailsTile";
 interface SkolaVysokaStredniDetailProps {
   skola: SkolaVysokaStredniType;
 }
-
+/**
+ * Side menu of details for high school.
+ * @param skola - school data
+ * @returns
+ */
 export default function SkolaVysokaStredniDetail({
   skola,
 }: SkolaVysokaStredniDetailProps) {

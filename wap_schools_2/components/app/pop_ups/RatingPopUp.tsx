@@ -51,6 +51,13 @@ interface RatingPopUpProps {
   onClose?: (hod: SkolaZakladniMaterskaHodnoceniType) => void;
 }
 
+/**
+ * Renders a pop-up component for adding ratings.
+ *
+ * @component
+ * @param {RatingPopUpProps} props - The component props.
+ * @returns {JSX.Element} The rendered RatingPopUp component.
+ */
 export function RatingPopUp(props: RatingPopUpProps) {
   const possibleRatings = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -60,6 +67,10 @@ export function RatingPopUp(props: RatingPopUpProps) {
     },
   });
 
+  /**
+   * Handles the form submission for the RatingPopUp component.
+   * @param data - The form data.
+   */
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     let model: hodnoceni = {
       popis: data.popis === undefined ? null : data.popis,
