@@ -166,7 +166,7 @@ export default function SkolaZakladniMaterskaTiple({
           {skola.prumer_hvezdicek && (
             <InfoTile
               Icon={Star}
-              text={(skola.prumer_hvezdicek / -10).toFixed(1) + " / 5"}
+              text={(skola.prumer_hvezdicek / 10).toFixed(1) + " / 5"}
             />
           )}
           {vzdalenostInKm && (

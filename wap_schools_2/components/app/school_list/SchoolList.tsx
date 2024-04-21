@@ -20,9 +20,34 @@ import SkolaVysokaStredniTile from "./SkolaVysokaStredniTile";
 import SkolaZakladniMaterskaTiple from "./SkolaZakladniMaterskaTile";
 
 export function SchoolList() {
-  const filter = useStore((state) => state.filter);
-
-  const searchingType = filter.searchingType;
+  const krajeSelected = useStore((state) => state.filter.krajeSelected);
+  const mestaSelected = useStore((state) => state.filter.mestaSelected);
+  const mestskeCastiSelected = useStore(
+    (state) => state.filter.mestskeCastiSelected
+  );
+  const okresySelected = useStore((state) => state.filter.okresySelected);
+  const vyucovaneOborySelected = useStore(
+    (state) => state.filter.vyucovaneOborySelected
+  );
+  const druhPodskolySelected = useStore(
+    (state) => state.filter.druhPodskolySelected
+  );
+  const skolaDruhTypeSelected = useStore(
+    (state) => state.filter.skolaDruhTypeSelected
+  );
+  const typySkolSelected = useStore((state) => state.filter.typySkolSelected);
+  const hodnoceniSelected = useStore((state) => state.filter.hodnoceniSelected);
+  const prijmaciZkouskySelected = useStore(
+    (state) => state.filter.prijmaciZkouskySelected
+  );
+  const skolneSelected = useStore((state) => state.filter.skolneSelected);
+  const longitude = useStore((state) => state.filter.longitude);
+  const latitude = useStore((state) => state.filter.latitude);
+  const sortBy = useStore((state) => state.filter.sortBy);
+  const sortSkolkaZakladkaBy = useStore(
+    (state) => state.filter.sortSkolkaZakladkaBy
+  );
+  const searchingType = useStore((state) => state.filter.searchingType);
 
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -41,39 +66,37 @@ export function SchoolList() {
       const result = await filterSkolyAction(
         {
           castObceIDs: [],
-          druhSkolyIDs: filter.druhPodskolySelected.map((druh) => druh.id),
-          krajIDs: filter.krajeSelected.map((kraj) => kraj.id),
-          mestskaCastIDs: filter.mestskeCastiSelected.map(
+          druhSkolyIDs: druhPodskolySelected.map((druh) => druh.id),
+          krajIDs: krajeSelected.map((kraj) => kraj.id),
+          mestskaCastIDs: mestskeCastiSelected.map(
             (mestskaCast) => mestskaCast.id
           ),
-          obecIDs: filter.mestaSelected.map((mesto) => mesto.id),
-          okresIDs: filter.okresySelected.map((okres) => okres.id),
-          oborKods: filter.vyucovaneOborySelected.map(
-            (obor) => obor.kod as string
-          ),
-          prijimaciZkouskaIDs: filter.prijmaciZkouskySelected.map(
+          obecIDs: mestaSelected.map((mesto) => mesto.id),
+          okresIDs: okresySelected.map((okres) => okres.id),
+          oborKods: vyucovaneOborySelected.map((obor) => obor.kod as string),
+          prijimaciZkouskaIDs: prijmaciZkouskySelected.map(
             (prijimaciZkouska) => prijimaciZkouska.id
           ),
-          skolneRange: filter.skolneSelected.map((skolne) => {
+          skolneRange: skolneSelected.map((skolne) => {
             //convert to Skolne. I need to do it  based on the value of the key
 
             return SkolneTypesData[skolne.id as keyof typeof SkolneTypesData]
               .range;
           }),
-          typSkolyIDs: filter.typySkolSelected.map((typSkoly) => typSkoly.id),
-          hodnoceniRange: HodnoceniTypesData[filter.hodnoceniSelected].range,
+          typSkolyIDs: typySkolSelected.map((typSkoly) => typSkoly.id),
+          hodnoceniRange: HodnoceniTypesData[hodnoceniSelected].range,
           offset: page * 15,
           IDs: [],
-          lat: filter.latitude,
-          lon: filter.longitude,
+          lat: latitude,
+          lon: longitude,
           limit: 15,
           nazev: undefined,
           vzdalenostMax: undefined,
         },
         {
-          type: filter.sortBy,
-          lat: filter.latitude,
-          lon: filter.longitude,
+          type: sortBy,
+          lat: latitude,
+          lon: longitude,
         }
       );
 
@@ -90,29 +113,29 @@ export function SchoolList() {
       const result = await filterSkolkyZakladkyAction(
         {
           castObceIDs: [],
-          krajIDs: filter.krajeSelected.map((kraj) => kraj.id),
-          mestskaCastIDs: filter.mestskeCastiSelected.map(
+          krajIDs: krajeSelected.map((kraj) => kraj.id),
+          mestskaCastIDs: mestskeCastiSelected.map(
             (mestskaCast) => mestskaCast.id
           ),
-          obecIDs: filter.mestaSelected.map((mesto) => mesto.id),
-          okresIDs: filter.okresySelected.map((okres) => okres.id),
+          obecIDs: mestaSelected.map((mesto) => mesto.id),
+          okresIDs: okresySelected.map((okres) => okres.id),
 
-          hodnoceniRange: HodnoceniTypesData[filter.hodnoceniSelected].range,
+          hodnoceniRange: HodnoceniTypesData[hodnoceniSelected].range,
           offset: page * 15,
           IDs: [],
-          lat: filter.latitude,
-          lon: filter.longitude,
+          lat: latitude,
+          lon: longitude,
           limit: 15,
           nazev: undefined,
           vzdalenostMax: undefined,
-          skolaDruhTypIDs: filter.skolaDruhTypeSelected.map((druh) => druh.id),
-          typZrizovateleIDs: filter.typySkolSelected.map((typ) => typ.id),
+          skolaDruhTypIDs: skolaDruhTypeSelected.map((druh) => druh.id),
+          typZrizovateleIDs: typySkolSelected.map((typ) => typ.id),
           zarizeniIDs: [],
         },
         {
-          type: filter.sortSkolkaZakladkaBy,
-          lat: filter.latitude,
-          lon: filter.longitude,
+          type: sortSkolkaZakladkaBy,
+          lat: latitude,
+          lon: longitude,
         }
       );
 
@@ -135,7 +158,24 @@ export function SchoolList() {
     setSkolyVysokeStredni([]);
     setSkolyZakladniMaterske([]);
     return () => {};
-  }, [filter]);
+  }, [
+    krajeSelected,
+    mestaSelected,
+    mestskeCastiSelected,
+    okresySelected,
+    vyucovaneOborySelected,
+    druhPodskolySelected,
+    skolaDruhTypeSelected,
+    typySkolSelected,
+    hodnoceniSelected,
+    prijmaciZkouskySelected,
+    skolneSelected,
+    longitude,
+    latitude,
+    sortBy,
+    sortSkolkaZakladkaBy,
+    searchingType,
+  ]);
 
   return (
     <div className="flex flex-col">

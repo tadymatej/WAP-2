@@ -51,11 +51,9 @@ export interface FilterStateDefinition {
   longitude: number | undefined;
   latitude: number | undefined;
 
-  currentLocation: { x: number; y: number } | undefined;
   //viewing the school list
   sortBy: SkolaOrderByEnum;
   sortSkolkaZakladkaBy: SkolkaZakladkaOrderByEnum;
-  offset: number;
 
   favourites: Array<SkolaVysokaStredniType | SkolaZakladniMaterskaType>;
 
@@ -78,12 +76,10 @@ export interface FilterStateActions {
   setHodnoceni: (hodnoceni: HodnoceniTypes) => void;
   setPrijmaciZkousky: (prijmaciZkousky: OptionState[]) => void;
   setSkolne: (skolne: OptionState[]) => void;
-  setCurrentLocation: (location: { x: number; y: number }) => void;
   setSortBy: (sortBy: SkolaOrderByEnum) => void;
   setSortSkolkaZakladkaBy: (
     sortSkolkaZakladkaBy: SkolkaZakladkaOrderByEnum
   ) => void;
-  setOffset: (offset: number) => void;
   //setFavouriteSchools: (favouriteSchools: OptionState[]) => void;
   setFavourite: (
     favouriteSchools: Array<SkolaVysokaStredniType | SkolaZakladniMaterskaType>

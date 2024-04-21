@@ -19,10 +19,8 @@ const initialFilterState: FilterStateDefinition = {
   hodnoceniSelected: HodnoceniTypes.zadneOmezeni,
   prijmaciZkouskySelected: [],
   skolneSelected: [],
-  currentLocation: undefined,
   sortBy: SkolaOrderByEnum.Nazev,
   sortSkolkaZakladkaBy: SkolkaZakladkaOrderByEnum.Nazev,
-  offset: 0,
   favourites: [],
   druhPodskolySelected: [],
   skolaDruhTypeSelected: [],
@@ -92,12 +90,7 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
       state.filter.skolneSelected = skolne;
     });
   },
-  //setCurrentLocation
-  setCurrentLocation(location) {
-    set((state) => {
-      state.filter.currentLocation = location;
-    });
-  },
+
   //setSortBy
   setSortBy(sortBy) {
     set((state) => {
@@ -107,12 +100,6 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   setSortSkolkaZakladkaBy(sortSkolkaZakladkaBy) {
     set((state) => {
       state.filter.sortSkolkaZakladkaBy = sortSkolkaZakladkaBy;
-    });
-  },
-  //setOffset
-  setOffset(offset) {
-    set((state) => {
-      state.filter.offset = offset;
     });
   },
 
