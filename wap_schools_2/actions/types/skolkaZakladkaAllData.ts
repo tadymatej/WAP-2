@@ -7,6 +7,9 @@ export type SkolaZakladniMaterskaOboryType =
     ? T
     : never;
 
+export type SkolaZakladniMaterskaHodnoceniType =
+  SkolaZakladniMaterskaType["hodnoceni"] extends (infer T)[] ? T : never;
+
 export interface SkolaZakladniMaterskaType {
   id: number;
   datumzahajeni: Date | null;
@@ -16,6 +19,15 @@ export interface SkolaZakladniMaterskaType {
   jazyk: {
     nazev: string | null;
   } | null;
+  hodnoceni: {
+    hvezdicek: number;
+    popis: string | null;
+    jina_role: string | null;
+    autor: string | null;
+    role_uzivatele_typy: {
+      nazev: string;
+    } | null;
+  }[];
   kapacita: number | null;
   obor_skolky_zakladky: {
     obordobihajici: boolean | null;

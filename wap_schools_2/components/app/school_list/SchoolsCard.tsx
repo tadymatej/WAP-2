@@ -99,7 +99,7 @@ export default function SchoolsCard() {
                   defaultValue={sortBy.toString()}
                   onValueChange={(value) => {
                     const type = parseInt(value) as SkolaOrderByEnum;
-                    //setSortSkolkaZakladkaBy(type);
+                    setSortSkolkaZakladkaBy(parseInt(value));
                     setSortBy(type);
 
                     if (

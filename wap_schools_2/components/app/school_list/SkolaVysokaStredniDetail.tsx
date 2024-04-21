@@ -23,6 +23,7 @@ import {
 import Link from "next/link";
 import DotInfoTile from "../generic/DotInfoTile";
 import InfoDetailTile from "../generic/InfoDetailTile";
+import HodnoceniSection from "./HodnoceniSection";
 import PodskolaDetailsTile from "./PodskolaDetailsTile";
 
 interface SkolaVysokaStredniDetailProps {
@@ -220,6 +221,7 @@ export default function SkolaVysokaStredniDetail({
       <div className="h-2" />
       <Separator />
       <div className="h-6" />
+      <HodnoceniSection hodnoceni={skola.hodnoceni} skolaId={skola.id} />
     </div>
   );
 }
