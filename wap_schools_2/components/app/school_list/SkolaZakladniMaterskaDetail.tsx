@@ -84,11 +84,17 @@ export default function SkolaZakladniMaterskaDetail({
       </div>
       <div className="h-4" />
       <div className="flex flex-col gap-y-4">
-        {skola.prumer_hvezdicek && (
+        {skola.hodnoceni.length > 0 && (
           <InfoDetailTile
             text={"Hodnocení"}
             Icon={Star}
-            description={(skola.prumer_hvezdicek / -10).toFixed(1) + " / 5"}
+            description={
+              (
+                skola.hodnoceni.reduce((a, b) => a + b.hvezdicek, 0) /
+                skola.hodnoceni.length /
+                10
+              ).toFixed(1) + " / 5"
+            }
           />
         )}
         {vzdalenostInKm && (

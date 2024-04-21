@@ -38,9 +38,7 @@ export function MainFrame() {
   return (
     <React.Fragment>
       <main className="h-full flex flex-col">
-        <div className="sticky top-0 z-10  p-8">
-          <VysokaStredniVsMaterskaZakladniSelect />
-        </div>
+        <VysokaStredniVsMaterskaZakladniSelect />
         <div className="flex flex-row">
           <div
             className={

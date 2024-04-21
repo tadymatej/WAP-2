@@ -4,6 +4,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { SearchingType } from "@/enums/filter-types";
 import { useStore } from "@/state/useStore";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { RatingPopUp } from "../pop_ups/RatingPopUp";
 import { RatingListItem } from "../ratings/ratingListItem";
 
@@ -17,6 +19,15 @@ export default function HodnoceniSection({
   skolaId,
 }: HodnoceniSectionProps) {
   const searchingType = useStore((state) => state.filter.searchingType);
+  const setVysokeStredniSelected = useStore(
+    (state) => state.filter.setVysokeStredniSelected
+  );
+  const setZakladniMaterskaSelected = useStore(
+    (state) => state.filter.setMaterskaZakladniSelected
+  );
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const router = useRouter();
   return (
     <div className="flex flex-col">
       <div className="flex flex-row justify-between">
@@ -24,7 +35,7 @@ export default function HodnoceniSection({
           {hodnoceni.length} Hodnoceni
         </div>
         <div className="flex flex-row">
-          <Dialog>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger>
               <Button>
                 <Plus size={20} />
@@ -40,6 +51,25 @@ export default function HodnoceniSection({
                 skolaID={
                   searchingType === SearchingType.StredniVysoke ? skolaId : null
                 }
+                onClose={(rating) => {
+                  const currentSel =
+                    searchingType === SearchingType.MaterskeZakladni
+                      ? useStore.getState().filter.zakladniMaterskaSelected
+                      : useStore.getState().filter.vysokeStredniSelected;
+                  if (currentSel) {
+                    const newRat = {
+                      ...currentSel,
+                      hodnoceni: [...currentSel.hodnoceni, rating],
+                    };
+                    if (searchingType === SearchingType.MaterskeZakladni) {
+                      setZakladniMaterskaSelected(newRat as any);
+                    } else {
+                      setVysokeStredniSelected(newRat as any);
+                    }
+                  }
+                  router.refresh();
+                  setIsDialogOpen(false);
+                }}
               />
             </DialogContent>
           </Dialog>
