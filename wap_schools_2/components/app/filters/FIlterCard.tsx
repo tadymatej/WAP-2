@@ -59,11 +59,7 @@ export function FilterCard() {
         <CardTitle>Možnosti vyhledani</CardTitle>
       </CardHeader>
       <CardContent>
-        <Tabs
-          defaultValue="kraj"
-          className="w-full"
-          onValueChange={() => setToDefault()}
-        >
+        <Tabs defaultValue="kraj" onValueChange={() => setToDefault()}>
           <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger disabled={false} value="mesto">
               Mesto

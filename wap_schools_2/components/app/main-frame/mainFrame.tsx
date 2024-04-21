@@ -28,6 +28,7 @@ export function MainFrame() {
     if (window.innerWidth > 1024) {
       setShowFilter(true);
     }
+    console.log("Setting to default");
   }, [setShowFilter]);
 
   function onLocationOpen() {
@@ -36,8 +37,10 @@ export function MainFrame() {
 
   return (
     <React.Fragment>
-      <main className="h-full flex flex-col p-8">
-        <VysokaStredniVsMaterskaZakladniSelect />
+      <main className="h-full flex flex-col">
+        <div className="sticky top-0 z-10  p-8">
+          <VysokaStredniVsMaterskaZakladniSelect />
+        </div>
         <div className="flex flex-row">
           <div
             className={
