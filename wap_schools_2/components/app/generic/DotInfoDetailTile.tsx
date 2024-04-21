@@ -21,8 +21,10 @@ export default function DotInfoDetailTile({
           <div className="font-normal text-sm text-slate-600">{text}</div>
         </div>
       </div>
-      <div className="w-3" />
-      <div className="font-normal text-sm text-slate-600">{description}</div>
+      <div className="w-4" />
+      <div className="font-normal text-sm text-end text-slate-600">
+        {description}
+      </div>
     </div>
   );
 }

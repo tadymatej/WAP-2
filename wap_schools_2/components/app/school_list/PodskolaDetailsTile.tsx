@@ -41,7 +41,11 @@ export default function PodskolaDetailsTile({
                 {obor.delkastudia && (
                   <DotInfoDetailTile
                     text={"Délka studia"}
-                    description={obor.delkastudia.toFixed(0)}
+                    description={
+                      obor.delkastudia > 1
+                        ? obor.delkastudia.toFixed(0) + " roky"
+                        : obor.delkastudia.toFixed(0) + "rok"
+                    }
                   />
                 )}
                 {obor.druh_studia?.nazev && (

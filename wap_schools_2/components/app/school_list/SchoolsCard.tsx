@@ -14,13 +14,16 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
+import { SearchingType } from "@/enums/filter-types";
 import { cn } from "@/lib/utils";
+import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
 import { SkolaSortByMap } from "@/state/types";
 import { useStore } from "@/state/useStore";
 import React from "react";
 import { LocationPopUp } from "../pop_ups/LocationPopUp";
 import { SchoolList } from "./SchoolList";
 import SkolaVysokaStredniDetail from "./SkolaVysokaStredniDetail";
+import SkolaZakladniMaterskaDetail from "./SkolaZakladniMaterskaDetail";
 
 export interface SchoolsCardProps {}
 
@@ -29,6 +32,9 @@ export default function SchoolsCard() {
   const setSortSkolkaZakladkaBy = useStore(
     (state) => state.filter.setSortSkolkaZakladkaBy
   );
+
+  const selectedLat = useStore((state) => state.filter.latitude);
+  const searchingType = useStore((state) => state.filter.searchingType);
   const sortBy = useStore((state) => state.filter.sortBy);
   const setLatitude = useStore((state) => state.filter.setLatitude);
   const setLongitude = useStore((state) => state.filter.setLongitude);
@@ -49,7 +55,10 @@ export default function SchoolsCard() {
   }
 
   const [locationDialogOpen, setLocationDialogOpen] = React.useState(false);
-
+  const showingDetails =
+    (selectedVysokaStredni && searchingType == SearchingType.StredniVysoke) ||
+    (selectedMaterskaZakladni &&
+      searchingType == SearchingType.MaterskeZakladni);
   return (
     <React.Fragment>
       <Card className=" col-span-6 w-full">
@@ -57,9 +66,7 @@ export default function SchoolsCard() {
           <div
             className={cn(
               "flex flex-col ",
-              selectedVysokaStredni || selectedMaterskaZakladni
-                ? "col-span-1"
-                : "col-span-2"
+              showingDetails ? "col-span-1" : "col-span-2"
             )}
           >
             <div className="flex flex-row justify-between items-center">
@@ -72,7 +79,9 @@ export default function SchoolsCard() {
                 >
                   <DialogTrigger asChild>
                     <Button variant="outline">
-                      <span className="hidden lg:inline">Aktuálni lokace</span>
+                      <span className="hidden lg:inline">
+                        {selectedLat ? "Změnit polohu" : "Vybrat lokaci"}
+                      </span>
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[500px]">
@@ -89,12 +98,20 @@ export default function SchoolsCard() {
                 <Select
                   defaultValue={sortBy.toString()}
                   onValueChange={(value) => {
-                    setSortSkolkaZakladkaBy(parseInt(value));
-                    setSortBy(parseInt(value));
+                    const type = parseInt(value) as SkolaOrderByEnum;
+                    //setSortSkolkaZakladkaBy(type);
+                    setSortBy(type);
+
+                    if (
+                      type == SkolaOrderByEnum.Location &&
+                      selectedLat == undefined
+                    ) {
+                      setLocationDialogOpen(true);
+                    }
                   }}
                 >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select a fruit" />
+                    <SelectValue placeholder="Select a sorting" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -113,20 +130,40 @@ export default function SchoolsCard() {
               </div>
             </div>
             <div className="h-6" />
-            <SchoolList />
+            {sortBy == SkolaOrderByEnum.Location && selectedLat == undefined ? (
+              <div className="flex flex-col items-start justify-center text-start">
+                <div className="h-8" />
+                <div className="font-semibold text-xl text-start">
+                  Potřebujeme znát lokaci vůči které chcete řadit
+                </div>
+                <div className="h-2" />
+                <div className="text-start font-normal text-base">
+                  Lokaci potřebujeme, aby jsme mohli najít školy, které jsou vám
+                  nejbliže. Nebo zvolte jiný způsob řazeni.
+                </div>
+                <div className="h-4" />
+                <Button>Vyberat lokaci</Button>
+              </div>
+            ) : (
+              <SchoolList />
+            )}
           </div>
 
-          {(selectedVysokaStredni || selectedMaterskaZakladni) && (
+          {showingDetails && (
             <div className="col-span-1 flex flex-row">
               <div className="w-6" />
               <Separator orientation="vertical" />
               <div className="w-6" />
-              {selectedVysokaStredni && (
-                <SkolaVysokaStredniDetail skola={selectedVysokaStredni} />
-              )}
-              {selectedMaterskaZakladni && (
-                <div className="bg-red-500 h-20 w-20" />
-              )}
+              {selectedVysokaStredni &&
+                searchingType == SearchingType.StredniVysoke && (
+                  <SkolaVysokaStredniDetail skola={selectedVysokaStredni} />
+                )}
+              {selectedMaterskaZakladni &&
+                searchingType == SearchingType.MaterskeZakladni && (
+                  <SkolaZakladniMaterskaDetail
+                    skola={selectedMaterskaZakladni}
+                  />
+                )}
             </div>
           )}
         </CardContent>

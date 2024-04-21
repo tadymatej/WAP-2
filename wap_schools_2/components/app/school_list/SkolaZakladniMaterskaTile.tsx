@@ -1,4 +1,4 @@
-import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
+import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -17,43 +17,42 @@ import { useStore } from "@/state/useStore";
 import {
   EllipsisVertical,
   Heart,
-  LinkIcon,
   LocateFixed,
   Mail,
-  Phone,
   Route,
+  Speech,
   Star,
   UserRound,
+  Users,
 } from "lucide-react";
-import Link from "next/link";
 import BadgeCustom from "../generic/BadgeCustom";
+import DotInfoTile from "../generic/DotInfoTile";
 import InfoTile from "../generic/InfoTile";
-import PodskolTile from "./PodskolTile";
 
 interface SkolaVysokaStredniTileProps {
-  skola: SkolaVysokaStredniType;
+  skola: SkolaZakladniMaterskaType;
   inFavorites: boolean;
 }
 
-export default function SkolaVysokaStredniTile({
+export default function SkolaZakladniMaterskaTiple({
   skola,
   inFavorites = false,
 }: SkolaVysokaStredniTileProps) {
   const favouriteVysokeStredniIds = useStore((state) =>
-    state.filter.getFavouritesVysokeStredniSkoly()
+    state.filter.getFavouritesMaterskeSkoly()
   ).map((skola) => skola.id);
 
   const isFavourite = favouriteVysokeStredniIds.includes(skola.id);
 
-  const selectedVysokaStredni = useStore(
-    (state) => state.filter.vysokeStredniSelected
+  const selectedZakladniMaterska = useStore(
+    (state) => state.filter.zakladniMaterskaSelected
   );
 
-  const selectVysokaStredni = useStore(
-    (state) => state.filter.setVysokeStredniSelected
+  const setMaterskaZakladniSelected = useStore(
+    (state) => state.filter.setMaterskaZakladniSelected
   );
 
-  const isSelected = selectedVysokaStredni?.id == skola.id;
+  const isSelected = selectedZakladniMaterska?.id == skola.id;
   //const isVysokaSkola = [
   //  ...new Set(
   //    skola.podskola
@@ -69,14 +68,8 @@ export default function SkolaVysokaStredniTile({
   //      .filter((druh) => druh !== null)
   //  ),
   //];
-  const druhy = skola.podskola
-    .map((podskola) => podskola.druh_podskoly?.nazev)
-    .filter(
-      (druh, index, self) =>
-        druh !== null && druh !== undefined && self.indexOf(druh) === index
-    ) as string[];
+  const obory = skola.obor_skolky_zakladky.map((obory) => obory.nazev);
 
-  console.log("Druhy: ", druhy);
   const badges = (
     <div className="flex flex-wrap items-center space-x-2">
       {isFavourite && (
@@ -86,9 +79,12 @@ export default function SkolaVysokaStredniTile({
           iconColor={Colors.redFavourite}
         />
       )}
-      {druhy.map((druh) => (
-        <BadgeCustom key={druh} text={druh} />
-      ))}
+      {skola.skola_druh_typ?.nazev && (
+        <BadgeCustom
+          key={skola.skola_druh_typ?.nazev}
+          text={skola.skola_druh_typ?.nazev}
+        />
+      )}
     </div>
   );
 
@@ -111,7 +107,7 @@ export default function SkolaVysokaStredniTile({
         isSelected && "bg-muted/60"
       )}
       onClick={() => {
-        selectVysokaStredni(isSelected ? undefined : skola);
+        setMaterskaZakladniSelected(isSelected ? undefined : skola);
       }}
     >
       <CardContent className="p-4">
@@ -145,10 +141,19 @@ export default function SkolaVysokaStredniTile({
         <div className="h-2" />
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           {skola.reditel && <InfoTile Icon={UserRound} text={skola.reditel} />}
-          {skola.kontaktniosobatel && (
-            <InfoTile Icon={Phone} text={skola.kontaktniosobatel} />
+          {skola.reditelemail && (
+            <InfoTile Icon={Mail} text={skola.reditelemail} />
           )}
-          {skola.email && <InfoTile Icon={Mail} text={skola.email} />}
+          {skola.typ_zrizovatele?.nazev && (
+            <InfoTile Icon={UserRound} text={skola.typ_zrizovatele.nazev} />
+          )}
+          {skola.jazyk?.nazev && (
+            <InfoTile Icon={Speech} text={skola.jazyk.nazev} />
+          )}
+
+          {skola.kapacita && (
+            <InfoTile Icon={Users} text={skola.kapacita.toFixed(1)} />
+          )}
           {skola.prumer_hvezdicek && (
             <InfoTile
               Icon={Star}
@@ -158,36 +163,34 @@ export default function SkolaVysokaStredniTile({
           {vzdalenostInKm && (
             <InfoTile Icon={Route} text={vzdalenostInKm.toFixed(1) + " km"} />
           )}
-          {skola.adresa && (
-            <InfoTile Icon={LocateFixed} text={addressToText(skola.adresa)} />
+          {skola.skolkazakladka_adresa && (
+            <InfoTile
+              Icon={LocateFixed}
+              text={skola.skolkazakladka_adresa
+                .map((adresa) => addressToText(adresa.adresa))
+                .join(", ")}
+            />
           )}
+        </div>
 
-          {skola.url && (
-            <Link
-              href={
-                skola.url.startsWith("http://") ||
-                skola.url.startsWith("https://")
-                  ? skola.url
-                  : `https://${skola.url}`
-              }
-            >
-              <InfoTile Icon={LinkIcon} text={skola.url} />
-            </Link>
-          )}
-        </div>
-        <div className="h-4" />
-        <Separator />
-        <div className="h-4" />
-        <div className="space-y-3">
-          {skola.podskola.map((podskola) => {
-            return (
-              <PodskolTile
-                key={podskola.druh_podskoly?.nazev}
-                podskola={podskola}
-              />
-            );
-          })}
-        </div>
+        {obory.length > 1 && (
+          <>
+            <div className="h-4" />
+            <Separator />
+            <div className="h-4" />
+            <div className="space-y-3">
+              <div className="flex flex-col">
+                <div className="text-sm font-normal text-slate-600">Obory</div>
+                <div className="h-2" />
+                <div className="pl-8 flex flex-wrap gap-x-4 gap-y-4">
+                  {obory.map((obornazev) => (
+                    <DotInfoTile key={obornazev} text={obornazev ?? ""} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </CardContent>
     </Card>
   );

@@ -1,13 +1,13 @@
 import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniAllData";
 import { SkolaZakladniMaterskaType } from "@/actions/types/skolkaZakladkaAllData";
 import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
+import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
+import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
 import {
   FilterStateDefinition,
   FilterStateType,
   type StateSlice,
 } from "./types";
-import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
-import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
 
 const initialFilterState: FilterStateDefinition = {
   krajeSelected: [],
@@ -125,7 +125,6 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   setVysokeStredniSelected(skola) {
     set((state) => {
       state.filter.vysokeStredniSelected = skola;
-      state.filter.zakladniMaterskaSelected = undefined;
     });
   },
 
@@ -133,7 +132,6 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   setMaterskaZakladniSelected(skola) {
     set((state) => {
       state.filter.zakladniMaterskaSelected = skola;
-      state.filter.vysokeStredniSelected = undefined;
     });
   },
   //setSearchingType

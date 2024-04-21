@@ -17,6 +17,7 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import SkolaVysokaStredniTile from "./SkolaVysokaStredniTile";
+import SkolaZakladniMaterskaTiple from "./SkolaZakladniMaterskaTile";
 
 export function SchoolList() {
   const filter = useStore((state) => state.filter);
@@ -50,7 +51,9 @@ export function SchoolList() {
           ),
           obecIDs: filter.mestaSelected.map((mesto) => mesto.id),
           okresIDs: filter.okresySelected.map((okres) => okres.id),
-          oborKods: filter.vyucovaneOborySelected.map((obor) => obor.kod as string),
+          oborKods: filter.vyucovaneOborySelected.map(
+            (obor) => obor.kod as string
+          ),
           prijimaciZkouskaIDs: filter.prijmaciZkouskySelected.map(
             (prijimaciZkouska) => prijimaciZkouska.id
           ),
@@ -160,10 +163,11 @@ export function SchoolList() {
               />
             ))
           : skolyZakladniMaterske.map((school) => (
-              <div key={school.id}>
-                {" "}
-                <p> {school.nazev} </p>{" "}
-              </div>
+              <SkolaZakladniMaterskaTiple
+                inFavorites={false}
+                key={school.id}
+                skola={school}
+              />
             ))}
         ;
       </ScrollArea>

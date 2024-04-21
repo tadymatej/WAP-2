@@ -1,3 +1,12 @@
+export type SkolaZakladniMaterskaZarizeniType =
+  SkolaZakladniMaterskaType["zarizeni_skolky_zakladky"] extends (infer T)[]
+    ? T
+    : never;
+export type SkolaZakladniMaterskaOboryType =
+  SkolaZakladniMaterskaType["obor_skolky_zakladky"] extends (infer T)[]
+    ? T
+    : never;
+
 export interface SkolaZakladniMaterskaType {
   id: number;
   datumzahajeni: Date | null;
@@ -34,6 +43,14 @@ export interface SkolaZakladniMaterskaType {
     } | null;
     zarizeniskolkyzakladky_adresa: {
       adresa: {
+        cislodomovni: number | null;
+        cisloorientacni: string | null;
+        psc: string | null;
+        ulice: string | null;
+        cast_obce: {
+          nazev: string | null;
+        } | null;
+
         obec: {
           nazev: string | null;
           okres: {
@@ -43,10 +60,6 @@ export interface SkolaZakladniMaterskaType {
             } | null;
           } | null;
         } | null;
-        cislodomovni: number | null;
-        cisloorientacni: string | null;
-        psc: string | null;
-        ulice: string | null;
         mestska_cast_obvod: {
           nazev: string | null;
         } | null;
@@ -56,6 +69,14 @@ export interface SkolaZakladniMaterskaType {
   zkracenynazev: string | null;
   skolkazakladka_adresa: {
     adresa: {
+      cislodomovni: number | null;
+      cisloorientacni: string | null;
+      psc: string | null;
+      ulice: string | null;
+      cast_obce: {
+        nazev: string | null;
+      } | null;
+
       obec: {
         nazev: string | null;
         okres: {
@@ -65,10 +86,6 @@ export interface SkolaZakladniMaterskaType {
           } | null;
         } | null;
       } | null;
-      cislodomovni: number | null;
-      cisloorientacni: string | null;
-      psc: string | null;
-      ulice: string | null;
       mestska_cast_obvod: {
         nazev: string | null;
       } | null;
