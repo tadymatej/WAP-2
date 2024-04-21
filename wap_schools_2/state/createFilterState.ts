@@ -32,6 +32,8 @@ const initialFilterState: FilterStateDefinition = {
   searchingType: SearchingType.MaterskeZakladni,
   longitude: undefined,
   latitude: undefined,
+
+  showFilter: false,
 };
 
 export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
@@ -117,6 +119,10 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   //setFavourite
   setFavourite(favourite) {
     set((state) => {
+      console.log("Setting favourite");
+      console.log({
+        fav: favourite,
+      });
       state.filter.favourites = favourite;
     });
   },
@@ -171,6 +177,29 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
       state.filter.mestaSelected = [];
       state.filter.mestskeCastiSelected = [];
       state.filter.okresySelected = [];
+    });
+  },
+
+  moveFavToTop(index) {
+    set((state) => {
+      const favs = state.filter.favourites;
+      const fav = favs[index];
+      favs.splice(index, 1);
+      favs.unshift(fav);
+    });
+  },
+  moveFavToBottom(index) {
+    set((state) => {
+      const favs = state.filter.favourites;
+      const fav = favs[index];
+      favs.splice(index, 1);
+      favs.push(fav);
+    });
+  },
+
+  setShowFilter(showFilter) {
+    set((state) => {
+      state.filter.showFilter = showFilter;
     });
   },
 });

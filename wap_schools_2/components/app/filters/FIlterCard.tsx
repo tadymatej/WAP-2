@@ -54,7 +54,7 @@ export function FilterCard() {
 
   const setToDefault = useStore((state) => state.filter.setToDefault);
   return (
-    <Card className="h-full">
+    <Card className="">
       <CardHeader>
         <CardTitle>Možnosti vyhledani</CardTitle>
       </CardHeader>
@@ -84,9 +84,7 @@ export function FilterCard() {
           </TabsList>
 
           <TabsContent value="mesto">
-            <ScrollArea
-              className={"[&>[data-radix-scroll-area-viewport]]:max-h-[30vh]"}
-            >
+            <ScrollArea>
               <div className="space-y-1">
                 <Label htmlFor="name">Mesto/Obec</Label>
                 <FilterMultiSelectWrapper
@@ -97,9 +95,7 @@ export function FilterCard() {
             </ScrollArea>
           </TabsContent>
           <TabsContent value="okres">
-            <ScrollArea
-              className={"[&>[data-radix-scroll-area-viewport]]:max-h-[30vh]"}
-            >
+            <ScrollArea>
               <div className="space-y-1">
                 <Label htmlFor="name">Okres</Label>
                 <FilterMultiSelectWrapper
@@ -110,9 +106,7 @@ export function FilterCard() {
             </ScrollArea>
           </TabsContent>
           <TabsContent value="mestska-cast">
-            <ScrollArea
-              className={"[&>[data-radix-scroll-area-viewport]]:max-h-[30vh]"}
-            >
+            <ScrollArea>
               <div className="space-y-1">
                 <Label htmlFor="name">Mestska cast</Label>
                 <FilterMultiSelectWrapper
@@ -123,9 +117,7 @@ export function FilterCard() {
             </ScrollArea>
           </TabsContent>
           <TabsContent value="kraj">
-            <ScrollArea
-              className={"[&>[data-radix-scroll-area-viewport]]:max-h-[30vh]"}
-            >
+            <ScrollArea>
               <div className="space-y-1">
                 <Label htmlFor="name">Kraj</Label>
                 <FilterMultiSelectWrapper

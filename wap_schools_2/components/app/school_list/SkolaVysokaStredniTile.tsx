@@ -5,8 +5,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
@@ -32,12 +30,12 @@ import PodskolTile from "./PodskolTile";
 
 interface SkolaVysokaStredniTileProps {
   skola: SkolaVysokaStredniType;
-  inFavorites: boolean;
+  favIndex: number | undefined;
 }
 
 export default function SkolaVysokaStredniTile({
   skola,
-  inFavorites = false,
+  favIndex,
 }: SkolaVysokaStredniTileProps) {
   const favouriteVysokeStredniIds = useStore((state) =>
     state.filter.getFavouritesVysokeStredniSkoly()
@@ -78,7 +76,7 @@ export default function SkolaVysokaStredniTile({
 
   const badges = (
     <div className="flex flex-wrap items-center space-x-2">
-      {isFavourite && (
+      {favIndex && (
         <BadgeCustom
           Icon={Heart}
           text="Oblíbená"
@@ -90,6 +88,9 @@ export default function SkolaVysokaStredniTile({
       ))}
     </div>
   );
+
+  const moveToTop = useStore((state) => state.filter.moveFavToTop);
+  const moveToBottom = useStore((state) => state.filter.moveFavToBottom);
 
   const userLatitude = useStore((state) => state.filter.latitude);
   const userLongitude = useStore((state) => state.filter.longitude);
@@ -114,7 +115,7 @@ export default function SkolaVysokaStredniTile({
       }}
     >
       <CardContent className="p-4">
-        {!inFavorites ? (
+        {favIndex == undefined ? (
           badges
         ) : (
           <div className="flex flex-row">
@@ -127,12 +128,20 @@ export default function SkolaVysokaStredniTile({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    moveToTop(favIndex);
+                  }}
+                >
+                  Posunot nahoru
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    moveToBottom(favIndex);
+                  }}
+                >
+                  Posunot dolů
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
