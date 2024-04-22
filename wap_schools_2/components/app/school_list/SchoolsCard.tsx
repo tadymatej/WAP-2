@@ -158,25 +158,23 @@ export default function SchoolsCard() {
             )}
           </div>
 
-          <div className="md:visible hidden">
-            {showingDetails && (
-              <div className="col-span-1 flex flex-row">
-                <div className="w-6" />
-                <Separator orientation="vertical" />
-                <div className="w-6" />
-                {selectedVysokaStredni &&
-                  searchingType == SearchingType.StredniVysoke && (
-                    <SkolaVysokaStredniDetail skola={selectedVysokaStredni} />
-                  )}
-                {selectedMaterskaZakladni &&
-                  searchingType == SearchingType.MaterskeZakladni && (
-                    <SkolaZakladniMaterskaDetail
-                      skola={selectedMaterskaZakladni}
-                    />
-                  )}
-              </div>
-            )}
-          </div>
+          {showingDetails && (
+            <div className="col-span-1 flex flex-row">
+              <div className="w-6" />
+              <Separator orientation="vertical" />
+              <div className="w-6" />
+              {selectedVysokaStredni &&
+                searchingType == SearchingType.StredniVysoke && (
+                  <SkolaVysokaStredniDetail skola={selectedVysokaStredni} />
+                )}
+              {selectedMaterskaZakladni &&
+                searchingType == SearchingType.MaterskeZakladni && (
+                  <SkolaZakladniMaterskaDetail
+                    skola={selectedMaterskaZakladni}
+                  />
+                )}
+            </div>
+          )}
         </CardContent>
       </Card>
     </React.Fragment>

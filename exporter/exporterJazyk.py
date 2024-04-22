@@ -28,7 +28,7 @@ class ExporterJazyk(Exporter):
         self.cur.execute("INSERT INTO jazyk(Nazev, Kod) VALUES(%s, %s)", (nazev, kod))
 
     def json_export(self):
-        df = pd.read_json("jazyky.json")
+        df = pd.read_json("data/jazyky.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

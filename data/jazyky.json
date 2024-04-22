@@ -1,0 +1,158 @@
+{
+  "polozky": [
+    {
+      "id": "Jazyk/anJ",
+      "kod": "anJ",
+      "nazev": {
+        "cs": "Angličtina"
+      }
+    },
+    {
+      "id": "Jazyk/ceJ",
+      "kod": "ceJ",
+      "nazev": {
+        "cs": "Čeština"
+      }
+    },
+    {
+      "id": "Jazyk/frJ",
+      "kod": "frJ",
+      "nazev": {
+        "cs": "Francouzština"
+      }
+    },
+    {
+      "id": "Jazyk/itJ",
+      "kod": "itJ",
+      "nazev": {
+        "cs": "Italština"
+      }
+    },
+    {
+      "id": "Jazyk/japJ",
+      "kod": "japJ",
+      "nazev": {
+        "cs": "Japonština"
+      }
+    },
+    {
+      "id": "Jazyk/latJ",
+      "kod": "latJ",
+      "nazev": {
+        "cs": "Latina"
+      }
+    },
+    {
+      "id": "Jazyk/madJ",
+      "kod": "madJ",
+      "nazev": {
+        "cs": "Maďarština"
+      }
+    },
+    {
+      "id": "Jazyk/nemJ",
+      "kod": "nemJ",
+      "nazev": {
+        "cs": "Němčina"
+      }
+    },
+    {
+      "id": "Jazyk/polJ",
+      "kod": "polJ",
+      "nazev": {
+        "cs": "Polština"
+      }
+    },
+    {
+      "id": "Jazyk/portJ",
+      "kod": "portJ",
+      "nazev": {
+        "cs": "Portugalština"
+      }
+    },
+    {
+      "id": "Jazyk/rusJ",
+      "kod": "rusJ",
+      "nazev": {
+        "cs": "Ruština"
+      }
+    },
+    {
+      "id": "Jazyk/sloJ",
+      "kod": "sloJ",
+      "nazev": {
+        "cs": "Slovenština"
+      }
+    },
+    {
+      "id": "Jazyk/spJ",
+      "kod": "spJ",
+      "nazev": {
+        "cs": "Španělština"
+      }
+    },
+    {
+      "id": "Jazyk/jiny",
+      "kod": "jiny",
+      "nazev": {
+        "cs": "Jiné"
+      }
+    },
+    {
+      "id": "Jazyk/arJ",
+      "kod": "arJ",
+      "nazev": {
+        "cs": "Arabština"
+      }
+    },
+    {
+      "id": "Jazyk/cinJ",
+      "kod": "cinJ",
+      "nazev": {
+        "cs": "Čínština"
+      }
+    },
+    {
+      "id": "Jazyk/hebJ",
+      "kod": "hebJ",
+      "nazev": {
+        "cs": "Hebrejština"
+      }
+    },
+    {
+      "id": "Jazyk/makJ",
+      "kod": "makJ",
+      "nazev": {
+        "cs": "Makedonština"
+      }
+    },
+    {
+      "id": "Jazyk/turJ",
+      "kod": "turJ",
+      "nazev": {
+        "cs": "Turečtina"
+      }
+    },
+    {
+      "id": "Jazyk/ukrJ",
+      "kod": "ukrJ",
+      "nazev": {
+        "cs": "Ukrajinština"
+      }
+    },
+    {
+      "id": "Jazyk/uzbJ",
+      "kod": "uzbJ",
+      "nazev": {
+        "cs": "Uzbečtina"
+      }
+    },
+    {
+      "id": "Jazyk/vietJ",
+      "kod": "vietJ",
+      "nazev": {
+        "cs": "Vietnamština"
+      }
+    }
+  ]
+}

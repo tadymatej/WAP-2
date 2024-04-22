@@ -1,0 +1,270 @@
+{
+  "polozky": [
+    {
+      "id": "PrijimaciZkousky/aj",
+      "kod": "aj",
+      "nazev": {
+        "cs": "Anglický jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/bio",
+      "kod": "bio",
+      "nazev": {
+        "cs": "Biologie"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/ciz",
+      "kod": "ciz",
+      "nazev": {
+        "cs": "Cizí jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/cj",
+      "kod": "cj",
+      "nazev": {
+        "cs": "Český jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/fr",
+      "kod": "fr",
+      "nazev": {
+        "cs": "Francouzský jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/hud",
+      "kod": "hud",
+      "nazev": {
+        "cs": "Hudební výchova"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/kr",
+      "kod": "kr",
+      "nazev": {
+        "cs": "Křesťanská nauka"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/ma",
+      "kod": "ma",
+      "nazev": {
+        "cs": "Matematika"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/nj",
+      "kod": "nj",
+      "nazev": {
+        "cs": "Německý jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/osp",
+      "kod": "osp",
+      "nazev": {
+        "cs": "Obecné studijní předpoklady"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/poh",
+      "kod": "poh",
+      "nazev": {
+        "cs": "Pohovor"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/ru",
+      "kod": "ru",
+      "nazev": {
+        "cs": "Ruský jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/sp",
+      "kod": "sp",
+      "nazev": {
+        "cs": "Španělský jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/tal",
+      "kod": "tal",
+      "nazev": {
+        "cs": "Talentové zkoušky"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/tv",
+      "kod": "tv",
+      "nazev": {
+        "cs": "Tělesná výchova"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/vse",
+      "kod": "vse",
+      "nazev": {
+        "cs": "Test všeobecných znalostí"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/vv",
+      "kod": "vv",
+      "nazev": {
+        "cs": "Výtvarná výchova"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/zam",
+      "kod": "zam",
+      "nazev": {
+        "cs": "Dle zaměření"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/jiny",
+      "kod": "jiny",
+      "nazev": {
+        "cs": "Jiné"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/dej",
+      "kod": "dej",
+      "nazev": {
+        "cs": "Dějepis"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/ek",
+      "kod": "ek",
+      "nazev": {
+        "cs": "Ekonomika"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/fy",
+      "kod": "fy",
+      "nazev": {
+        "cs": "Fyzika"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/geo",
+      "kod": "geo",
+      "nazev": {
+        "cs": "Geometrie"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/che",
+      "kod": "che",
+      "nazev": {
+        "cs": "Chemie"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/inf",
+      "kod": "inf",
+      "nazev": {
+        "cs": "Informatika"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/it",
+      "kod": "it",
+      "nazev": {
+        "cs": "Italský jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/la",
+      "kod": "la",
+      "nazev": {
+        "cs": "Latina"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/obc",
+      "kod": "obc",
+      "nazev": {
+        "cs": "Občanská nauka"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/pol",
+      "kod": "pol",
+      "nazev": {
+        "cs": "Polský jazyk"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/psyt",
+      "kod": "psyt",
+      "nazev": {
+        "cs": "Psychologické testy"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/psy",
+      "kod": "psy",
+      "nazev": {
+        "cs": "Psychologie"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/som",
+      "kod": "som",
+      "nazev": {
+        "cs": "Somatologie"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/sle",
+      "kod": "sle",
+      "nazev": {
+        "cs": "Šlechtitelské práce"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/log",
+      "kod": "log",
+      "nazev": {
+        "cs": "Testy logiky"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/zem",
+      "kod": "zem",
+      "nazev": {
+        "cs": "Zeměpis"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/zruc",
+      "kod": "zruc",
+      "nazev": {
+        "cs": "Zkouška zručnosti"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/bude",
+      "kod": "bude",
+      "nazev": {
+        "cs": "Bude upřesněno"
+      }
+    },
+    {
+      "id": "PrijimaciZkousky/nevy",
+      "kod": "nevy",
+      "nazev": {
+        "cs": "Nevyplňovat"
+      }
+    }
+  ]
+}

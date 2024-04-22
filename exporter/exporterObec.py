@@ -33,7 +33,7 @@ class ExporterObec(Exporter):
         self.cur.execute("INSERT INTO obec(Kod, Nazev, OkresID) VALUES(%s, %s, %s)", (kod, nazev, okresID))
 
     def json_export(self):
-        df = pd.read_json("obce.json")
+        df = pd.read_json("data/obce.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

@@ -43,7 +43,7 @@ class XMLExporterSkola():
         self.exporterOborSkolkyZakladky = ExporterOborSkolkyZakladky(dbController)
         self.exporterZarizeniSkolkyZakladky = ExporterZarizeniSkolkyZakladky(dbController)
 
-    def export(self, fileName='vrejcelk.xml'):
+    def export(self, fileName='data/vrejcelk.xml'):
         """
         Performs the export. 
         Args: 

@@ -4,3 +4,6 @@ myenv
 myenv/**/*
 exporter/__pycache__/*
 exporter/__pycache__
+docs/py
+docs/ts
+html/

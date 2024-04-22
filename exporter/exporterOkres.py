@@ -36,7 +36,7 @@ class ExporterOkres(Exporter):
         self.cur.execute("INSERT INTO okres (Kod, Nazev, Kod3, KrajID) VALUES(%s, %s, %s, %s)", (kod, nazev, kodLau, krajID))
 
     def json_export(self):
-        df = pd.read_json("okresy.json")
+        df = pd.read_json("data/okresy.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

@@ -27,7 +27,7 @@ class ExporterDruhPodskoly(Exporter):
         self.cur.execute("INSERT INTO druh_podskoly(Nazev, Kod) VALUES(%s, %s)", (nazev, kod))
 
     def json_export(self):
-        df = pd.read_json("druhy-skoly.json")
+        df = pd.read_json("data/druhy-skoly.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

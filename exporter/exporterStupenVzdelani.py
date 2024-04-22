@@ -28,7 +28,7 @@ class ExporterStupenVzdelani(Exporter):
         self.cur.execute("INSERT INTO stupen_vzdelani(Nazev, Kod) VALUES(%s, %s)", (nazev, kod))
 
     def json_export(self):
-        df = pd.read_json("vzdelani-detailni-kategorie.json")
+        df = pd.read_json("data/vzdelani-detailni-kategorie.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

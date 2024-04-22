@@ -28,7 +28,7 @@ class ExporterTypZrizovatele(Exporter):
         self.cur.execute("INSERT INTO typ_zrizovatele(Nazev, Kod) VALUES(%s, %s)", (nazev, kod))
 
     def json_export(self):
-        df = pd.read_json("typy-zrizovatele.json")
+        df = pd.read_json("data/typy-zrizovatele.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

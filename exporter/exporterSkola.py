@@ -97,7 +97,7 @@ class ExporterSkola(Exporter):
 
 
     def json_export(self):
-        df = pd.read_json("skoly.json")
+        df = pd.read_json("data/skoly.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             modelSkola = ModelSkola()

@@ -1,0 +1,60 @@
+{
+  "polozky": [
+    {
+      "id": "UkonceniStudia/abs",
+      "kod": "abs",
+      "nazev": {
+        "cs": "Absolutorium"
+      }
+    },
+    {
+      "id": "UkonceniStudia/jin",
+      "kod": "jin",
+      "nazev": {
+        "cs": "Jiné"
+      }
+    },
+    {
+      "id": "UkonceniStudia/mat",
+      "kod": "mat",
+      "nazev": {
+        "cs": "Maturitní zkouška"
+      }
+    },
+    {
+      "id": "UkonceniStudia/osv",
+      "kod": "osv",
+      "nazev": {
+        "cs": "Osvědčení"
+      }
+    },
+    {
+      "id": "UkonceniStudia/stzk",
+      "kod": "stzk",
+      "nazev": {
+        "cs": "Státní zkouška"
+      }
+    },
+    {
+      "id": "UkonceniStudia/zavz",
+      "kod": "zavz",
+      "nazev": {
+        "cs": "Závěrečná zkouška"
+      }
+    },
+    {
+      "id": "UkonceniStudia/zzvl",
+      "kod": "zzvl",
+      "nazev": {
+        "cs": "ZZ + výuční list"
+      }
+    },
+    {
+      "id": "UkonceniStudia/ne",
+      "kod": "ne",
+      "nazev": {
+        "cs": "Nezadáno"
+      }
+    }
+  ]
+}

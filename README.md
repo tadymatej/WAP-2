@@ -8,6 +8,52 @@ Z těchto důvodů jsme se rozhodli tvořit tuto aplikaci, která se snaží ule
 
 V dohledné době se chystáme tuto aplikaci také publikovat.
 
+## Použité datové sady
+Z důvodu nízkého limitu pro odevzdávání souborů do informačního systému VUT je zde seznam odkazů na použité 
+datové sady v projektu:
+
+- [druhy-skoly](https://data.mpsv.cz/od/soubory/ciselniky/druhy-skoly.json)
+- [formy-studia](https://data.mpsv.cz/od/soubory/ciselniky/formy-studia.json)
+- [prijimaci-zkousky](https://data.mpsv.cz/od/soubory/ciselniky/prijimaci-zkousky.json)
+- [skoly](https://data.mpsv.cz/od/soubory/skoly/skoly.json)
+- [typy-skoly](https://data.mpsv.cz/od/soubory/ciselniky/typy-skoly.json)
+- [typy-zrizovatele](https://data.mpsv.cz/od/soubory/ciselniky/typy-zrizovatele.json)
+- [ukonceni-studia](https://data.mpsv.cz/od/soubory/ciselniky/ukonceni-studia.json)
+- [vhodnosti-pro-zaky](https://data.mpsv.cz/od/soubory/ciselniky/vhodnosti-pro-zaky.json)
+- [vzdelani-detailni-kategorie](https://data.mpsv.cz/od/soubory/ciselniky/vzdelani-detailni-kategorie.json)
+- [vrejcelk](https://rejstriky.msmt.cz/opendata/vrejcelk.xml)
+- [casti-obci](https://data.mpsv.cz/od/soubory/ciselniky/casti-obci.json)
+- [druhy-studia](https://data.mpsv.cz/od/soubory/ciselniky/druhy-studia.json)
+- [jazyky](https://data.mpsv.cz/od/soubory/ciselniky/jazyky.json)
+- [kraje](https://data.mpsv.cz/od/soubory/ciselniky/kraje.json)
+- [mestske-obvody-mestske-casti](https://data.mpsv.cz/od/soubory/ciselniky/mestske-obvody-mestske-casti.json)
+- [obce](https://data.mpsv.cz/od/soubory/ciselniky/obce.json)
+- [okresy](https://data.mpsv.cz/od/soubory/ciselniky/okresy.json)
+
+tyto datasety lze stáhnout například nástrojem wget:
+```
+mkdir data
+cd data
+wget https://data.mpsv.cz/od/soubory/ciselniky/druhy-skoly.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/formy-studia.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/prijimaci-zkousky.json
+wget https://data.mpsv.cz/od/soubory/skoly/skoly.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/typy-skoly.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/typy-zrizovatele.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/ukonceni-studia.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/vhodnosti-pro-zaky.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/vzdelani-detailni-kategorie.json
+wget https://rejstriky.msmt.cz/opendata/vrejcelk.xml
+wget https://data.mpsv.cz/od/soubory/ciselniky/casti-obci.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/druhy-studia.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/jazyky.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/kraje.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/mestske-obvody-mestske-casti.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/obce.json
+wget https://data.mpsv.cz/od/soubory/ciselniky/okresy.json
+```
+
+
 ## Authors
 - Matěj Žalmánek (xzalma00)
   - Extrakce a zpracování dat ze souborů XML, JSON
@@ -58,6 +104,12 @@ Pro rychlejší generování databáze jsme vyexportovali výsledný .sql script
 ### Spuštění projektu
 Pro spuštění projektu aplikace spustte následující příkazy ze složky ./wap_schools_2/
 ```
+./run-db.sh
+npm install
+./generate-db.sh
+npm run prisma:pull
+npm run prisma:generate
+npm run dev
 ```
 
 ## Dokumentace
@@ -65,4 +117,6 @@ Pro spuštění projektu aplikace spustte následující příkazy ze složky ./
 Schéma vytvořené databáze lze vidět v souboru 
 ![/docs/ER.png](/docs/ER.png)
 
-Ve stejné složce je poté dokumentace všech kodů, včetně kodů pro extrakci dat z formátu json, XML, stejně tak dokumentace kodu výsledné aplikace.
+Ve stejné složce je poté dokumentace všech kodů, včetně kodů pro extrakci dat z formátu json, XML, stejně tak dokumentace kodu výsledné aplikace. Jelikož jsme psali část kodu v Pythonu, část kodu v Typescript, dokumentace se skládá ze dvou složek s dokumentací: 
+- src/python
+- src/ts

@@ -103,7 +103,7 @@ export function SchoolList() {
           lon: longitude,
         }
       );
-
+      //@ts-ignore
       setSkolyVysokeStredni([...skolyVysokeStredni, ...result]);
 
       if (result.length < 3) {
@@ -142,7 +142,7 @@ export function SchoolList() {
           lon: longitude,
         }
       );
-
+      //@ts-ignore
       setSkolyZakladniMaterske([...skolyZakladniMaterske, ...result]);
 
       if (result.length < 3) {

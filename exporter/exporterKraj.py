@@ -31,7 +31,7 @@ class ExporterKraj(Exporter):
         self.cur.execute("INSERT INTO kraj(Nazev, Kod, Kod3) VALUES(%s, %s, %s)", (nazev, kod, kod3))
 
     def json_export(self):
-        df = pd.read_json("kraje.json")
+        df = pd.read_json("data/kraje.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

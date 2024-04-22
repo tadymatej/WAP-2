@@ -1,0 +1,60 @@
+{
+  "polozky": [
+    {
+      "id": "TypSkoly/cirk",
+      "kod": "cirk",
+      "nazev": {
+        "cs": "Církevní"
+      }
+    },
+    {
+      "id": "TypSkoly/druz",
+      "kod": "druz",
+      "nazev": {
+        "cs": "Družstevní"
+      }
+    },
+    {
+      "id": "TypSkoly/soukr",
+      "kod": "soukr",
+      "nazev": {
+        "cs": "Soukromá"
+      }
+    },
+    {
+      "id": "TypSkoly/spec",
+      "kod": "spec",
+      "nazev": {
+        "cs": "Jiný, specifická"
+      }
+    },
+    {
+      "id": "TypSkoly/stat",
+      "kod": "stat",
+      "nazev": {
+        "cs": "Státní"
+      }
+    },
+    {
+      "id": "TypSkoly/ver",
+      "kod": "ver",
+      "nazev": {
+        "cs": "Veřejná"
+      }
+    },
+    {
+      "id": "TypSkoly/voj",
+      "kod": "voj",
+      "nazev": {
+        "cs": "Vojenská"
+      }
+    },
+    {
+      "id": "TypSkoly/zahr",
+      "kod": "zahr",
+      "nazev": {
+        "cs": "Zahraniční škola"
+      }
+    }
+  ]
+}

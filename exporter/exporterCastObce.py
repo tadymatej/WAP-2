@@ -32,7 +32,7 @@ class ExporterCastObce(Exporter):
         self.cur.execute("INSERT INTO cast_obce(Kod, Nazev, ObecID) VALUES(%s, %s, %s)", (kod, nazev, obecID))
 
     def json_export(self):
-        df = pd.read_json("casti-obci.json")
+        df = pd.read_json("data/casti-obci.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

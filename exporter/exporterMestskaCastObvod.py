@@ -34,7 +34,7 @@ class ExporterMestskaCastObvod(Exporter):
         self.cur.execute("INSERT INTO mestska_cast_obvod(Kod, Nazev, ObecID) VALUES(%s, %s, %s)", (kod, nazev, obecID))
 
     def json_export(self):
-        df = pd.read_json("mestske-obvody-mestske-casti.json")
+        df = pd.read_json("data/mestske-obvody-mestske-casti.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")

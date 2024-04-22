@@ -1,0 +1,60 @@
+{
+  "polozky": [
+    {
+      "id": "FormaStudia/dal",
+      "kod": "dal",
+      "nazev": {
+        "cs": "Dálková"
+      }
+    },
+    {
+      "id": "FormaStudia/den",
+      "kod": "den",
+      "nazev": {
+        "cs": "Denní"
+      }
+    },
+    {
+      "id": "FormaStudia/dist",
+      "kod": "dist",
+      "nazev": {
+        "cs": "Distanční"
+      }
+    },
+    {
+      "id": "FormaStudia/ext",
+      "kod": "ext",
+      "nazev": {
+        "cs": "Externí"
+      }
+    },
+    {
+      "id": "FormaStudia/jina",
+      "kod": "jina",
+      "nazev": {
+        "cs": "Jiná forma"
+      }
+    },
+    {
+      "id": "FormaStudia/komb",
+      "kod": "komb",
+      "nazev": {
+        "cs": "Kombinovaná"
+      }
+    },
+    {
+      "id": "FormaStudia/prez",
+      "kod": "prez",
+      "nazev": {
+        "cs": "Prezenční"
+      }
+    },
+    {
+      "id": "FormaStudia/vec",
+      "kod": "vec",
+      "nazev": {
+        "cs": "Večerní"
+      }
+    }
+  ]
+}

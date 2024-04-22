@@ -28,7 +28,7 @@ class ExporterPrijimaciZkouska(Exporter):
         self.cur.execute("INSERT INTO prijimaci_zkouska(Nazev, Kod) VALUES(%s, %s)", (nazev, kod))
 
     def json_export(self):
-        df = pd.read_json("prijimaci-zkousky.json")
+        df = pd.read_json("data/prijimaci-zkousky.json")
         polozky = df.get("polozky")
         for key in polozky.keys():
             kod = polozky[key].get("kod")
