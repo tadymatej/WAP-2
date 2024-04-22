@@ -78,6 +78,7 @@ export interface FilterStateDefinition {
   windowWidth: number;
   showFilterDrawer: boolean;
   showFavouritesDrawer: boolean;
+  showSchoolDetail: boolean;
 }
 
 export interface FilterStateActions {
@@ -124,6 +125,8 @@ export interface FilterStateActions {
   setWindowWidth: (width: number) => void;
   setShowFavoritesDrawer: (show: boolean) => void;
   setShowFilterDrawer: (show: boolean) => void;
+
+  setShowSchoolDetail: (show: boolean) => void;
 }
 
 export type FilterStateType = FilterStateDefinition & FilterStateActions;

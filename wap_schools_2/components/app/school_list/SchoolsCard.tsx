@@ -93,7 +93,7 @@ export default function SchoolsCard() {
                       <LocateFixedIcon className="w-5 h-5 lg:hidden"></LocateFixedIcon>
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[500px]">
+                  <DialogContent className="max-w-[400px] md:max-w-[500px]">
                     <LocationPopUp
                       onSave={(lat, lon) => {
                         setLocationDialogOpen(false);
@@ -151,7 +151,9 @@ export default function SchoolsCard() {
                   nejbliže. Nebo zvolte jiný způsob řazeni.
                 </div>
                 <div className="h-4" />
-                <Button>Vyberat lokaci</Button>
+                <Button onClick={() => setLocationDialogOpen(true)}>
+                  Vyberat lokaci
+                </Button>
               </div>
             ) : (
               <SchoolList />

@@ -8,11 +8,14 @@ import {
 } from "@/enums/filter-types";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/state/useStore";
-import { Filter, FilterX } from "lucide-react";
+import { Filter, FilterX, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import { CardContent } from "../ui/card";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import CustomNavItem from "./CustomNavitem";
 import { FilterCard } from "./filters/FIlterCard";
+import SkolaVysokaStredniDetail from "./school_list/SkolaVysokaStredniDetail";
+import SkolaZakladniMaterskaDetail from "./school_list/SkolaZakladniMaterskaDetail";
 
 // Top navigation bar
 export function VysokaStredniVsMaterskaZakladniSelect() {
@@ -59,30 +62,41 @@ export function VysokaStredniVsMaterskaZakladniSelect() {
         </DrawerContent>
       </Drawer>
       {/*//To Show selected school*/}
-      {/*<div className="">
-        <Drawer
-          open={
-            filter.vysokeStredniSelected !== undefined ||
-            filter.zakladniMaterskaSelected !== undefined
-          }
-          onClose={() => {
-            filter.setVysokeStredniSelected(undefined);
-            filter.setMaterskaZakladniSelected(undefined);
-          }}
-        >
-          <DrawerTrigger></DrawerTrigger>
-          <DrawerContent>
-            {filter.vysokeStredniSelected && (
-              <SkolaVysokaStredniDetail skola={filter.vysokeStredniSelected} />
-            )}
-            {filter.zakladniMaterskaSelected && (
-              <SkolaZakladniMaterskaDetail
-                skola={filter.zakladniMaterskaSelected}
-              />
-            )}
-          </DrawerContent>
-        </Drawer>
-      </div>*/}
+      <Drawer
+        open={filter.showSchoolDetail}
+        onClose={() => {
+          filter.setShowSchoolDetail(false);
+        }}
+        onOpenChange={(open) => {
+          filter.setShowSchoolDetail(open);
+        }}
+      >
+        <DrawerTrigger></DrawerTrigger>
+        <DrawerContent>
+          <div className="flex flex-row">
+            <Button variant="ghost">
+              <XIcon size={24} />
+            </Button>
+          </div>
+          <div className="h-4" />
+          <ScrollArea
+            className={"[&>[data-radix-scroll-area-viewport]]:max-h-[70vh]"}
+          >
+            <CardContent className="">
+              {filter.vysokeStredniSelected && (
+                <SkolaVysokaStredniDetail
+                  skola={filter.vysokeStredniSelected}
+                />
+              )}
+              {filter.zakladniMaterskaSelected && (
+                <SkolaZakladniMaterskaDetail
+                  skola={filter.zakladniMaterskaSelected}
+                />
+              )}
+            </CardContent>
+          </ScrollArea>
+        </DrawerContent>
+      </Drawer>
       <div className="w-4" />
       <ScrollArea className="max-w-[600px] lg:max-w-none sm:flex flex-shrink">
         <div className={cn("flex items-center")}>

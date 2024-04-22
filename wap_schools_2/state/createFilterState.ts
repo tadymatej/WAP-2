@@ -37,6 +37,7 @@ const initialFilterState: FilterStateDefinition = {
   windowWidth: 0,
   showFavouritesDrawer: false,
   showFilterDrawer: false,
+  showSchoolDetail: false,
 };
 
 export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
@@ -127,6 +128,10 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
         state.filter.showFilter = false;
         state.filter.showFilterDrawer = false;
       }
+
+      if (state.filter.windowWidth <= MD) {
+        state.filter.showSchoolDetail = true;
+      }
     });
   },
 
@@ -138,6 +143,10 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
       if (state.filter.windowWidth < XXL) {
         state.filter.showFilter = false;
         state.filter.showFilterDrawer = false;
+      }
+
+      if (state.filter.windowWidth <= MD) {
+        state.filter.showSchoolDetail = true;
       }
     });
   },
@@ -237,6 +246,17 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   setShowFilterDrawer(show) {
     set((state) => {
       state.filter.showFilterDrawer = show;
+    });
+  },
+
+  setShowSchoolDetail(show) {
+    set((state) => {
+      state.filter.showSchoolDetail = show;
+
+      if (!show) {
+        state.filter.vysokeStredniSelected = undefined;
+        state.filter.zakladniMaterskaSelected = undefined;
+      }
     });
   },
 });

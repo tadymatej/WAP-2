@@ -77,7 +77,7 @@ export function FilterCard({
 
   const setToDefault = useStore((state) => state.filter.setToDefault);
   return (
-    <Card className="">
+    <Card className={cn("w-full", inDialog && "border-0")}>
       <CardHeader>
         <CardTitle>Možnosti vyhledani</CardTitle>
       </CardHeader>

@@ -85,7 +85,7 @@ export function MainFrame() {
           <div
             className={
               showFilter
-                ? "md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-grow mr-4 transition-all duration-500 ease-in-out"
+                ? "md:block sm:hidden  md:basis-1/2 xl:basis-1/3 2xl:basis-1/4 flex-grow mr-4 transition-all duration-500 ease-in-out"
                 : "w-0 h-full overflow-hidden transition-all duration-500 ease-in-out"
             }
           >
