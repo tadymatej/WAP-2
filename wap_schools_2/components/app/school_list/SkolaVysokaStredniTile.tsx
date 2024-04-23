@@ -67,7 +67,7 @@ export default function SkolaVysokaStredniTile({
     ) as string[];
 
   const badges = (
-    <div className="flex flex-wrap items-center space-x-2">
+    <div className="flex flex-wrap items-center space-x-2 gap-y-2">
       {favIndex && (
         <BadgeCustom
           Icon={Heart}

@@ -1,5 +1,6 @@
 import { SkolaVysokaStredniType } from "@/actions/types/skolaVysokaStredniType";
 import { SkolaZakladniMaterskaType } from "@/actions/types/skolaZakladniMaterskaType";
+import { toast } from "@/components/ui/use-toast";
 import { HodnoceniTypes, SearchingType } from "@/enums/filter-types";
 import { SkolaOrderByEnum } from "@/repositories/orderByTypes/skolaOrderByTypes";
 import { SkolkaZakladkaOrderByEnum } from "@/repositories/orderByTypes/skolkaZakladkaOrderByTypes";
@@ -116,6 +117,15 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
       console.log({
         fav: favourite,
       });
+      if (favourite.length > state.filter.favourites.length) {
+        toast({
+          description: "Škola přidána do oblíbených",
+        });
+      } else {
+        toast({
+          description: "Škola odebrána z oblíbených",
+        });
+      }
       state.filter.favourites = favourite;
     });
   },
@@ -225,10 +235,6 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
           }
         }
       }
-      if (state.filter.windowWidth <= MD) {
-        console.log("Setting show filter drawer");
-        state.filter.showFilterDrawer = true;
-      }
     });
   },
 
@@ -245,6 +251,7 @@ export const createFilterState: StateSlice<FilterStateType> = (set, get) => ({
   },
   setShowFilterDrawer(show) {
     set((state) => {
+      console.log("Setting show filter drawer");
       state.filter.showFilterDrawer = show;
     });
   },

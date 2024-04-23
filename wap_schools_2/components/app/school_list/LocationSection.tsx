@@ -1,5 +1,5 @@
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 interface LocationSectionProps {
   schoolLatitude: number | undefined;
@@ -24,7 +24,6 @@ export default function LocationSection({
   });
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [zoom, setZoom] = useState<number>(12);
 
   const center = {
     lat: schoolLatitude ?? 49,
@@ -35,19 +34,13 @@ export default function LocationSection({
     function callback(map: google.maps.Map) {
       // This is just an example of getting and using the map instance!!! don't just blindly copy!
       const bounds = new window.google.maps.LatLngBounds(center);
-      map.fitBounds(bounds);
+      //map.fitBounds(bounds);
 
       setMap(map);
     },
 
     [center]
   );
-
-  useEffect(() => {
-    setTimeout(() => {
-      setZoom(14);
-    }, 300);
-  }, [map]);
 
   const onUnmount = useCallback(function callback(map: google.maps.Map) {
     setMap(null);
@@ -71,7 +64,7 @@ export default function LocationSection({
               onLoad={onLoad}
               onUnmount={onUnmount}
               onClick={() => {}}
-              zoom={zoom}
+              zoom={15}
               options={{ fullscreenControl: false }}
             >
               <Marker

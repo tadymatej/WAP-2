@@ -7,6 +7,7 @@ import {
   SearchingTypeIcon,
 } from "@/enums/filter-types";
 import { cn } from "@/lib/utils";
+import { MD } from "@/state/types";
 import { useStore } from "@/state/useStore";
 import { Filter, FilterX, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
@@ -47,7 +48,12 @@ export function VysokaStredniVsMaterskaZakladniSelect() {
       <Button
         variant="outline"
         onClick={() => {
-          setShowFilter(!showFilter);
+          console.log("Showing filter");
+          if (window.innerWidth > MD) {
+            setShowFilter(!showFilter);
+          } else {
+            setShowFilterDrawer(!showFilterDrawer);
+          }
         }}
       >
         {showFilter ? <FilterX size={20} /> : <Filter size={20} />}
@@ -64,6 +70,7 @@ export function VysokaStredniVsMaterskaZakladniSelect() {
       {/*//To Show selected school*/}
       <Drawer
         open={filter.showSchoolDetail}
+        dismissible={false}
         onClose={() => {
           filter.setShowSchoolDetail(false);
         }}
@@ -74,7 +81,12 @@ export function VysokaStredniVsMaterskaZakladniSelect() {
         <DrawerTrigger></DrawerTrigger>
         <DrawerContent>
           <div className="flex flex-row">
-            <Button variant="ghost">
+            <Button
+              onClick={() => {
+                filter.setShowSchoolDetail(false);
+              }}
+              variant="ghost"
+            >
               <XIcon size={24} />
             </Button>
           </div>

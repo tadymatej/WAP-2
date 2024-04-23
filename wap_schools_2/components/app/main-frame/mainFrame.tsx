@@ -14,6 +14,7 @@ import { VysokaStredniVsMaterskaZakladniSelect } from "../VysokaStredniVsMatersk
  * @returns The JSX element representing the main frame.
  */
 export function MainFrame() {
+  const [init, setInit] = useState(false);
   const [isShowedLocationPopUp, setIsShowedLocationPopUp] = useState(false);
   const setLatitude = useStore((state) => state.filter.setLatitude);
   const setLongitude = useStore((state) => state.filter.setLongitude);
@@ -42,9 +43,9 @@ export function MainFrame() {
   const setWindowWidth = useStore((state) => state.filter.setWindowWidth);
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = (init: boolean) => {
       setWindowWidth(window.innerWidth);
-
+      console.log("ahooy", init);
       if (window.innerWidth > XXL) {
         setShowFilter(true);
       }
@@ -62,16 +63,22 @@ export function MainFrame() {
         setShowFilter(false);
         if (
           selectedMaterskaZakladni == undefined &&
-          selectedVysokaStredni == undefined
+          selectedVysokaStredni == undefined &&
+          init
         ) {
+          console.log("Calling 1111 show filter drawer");
           setShowFilterDrawer(true);
         }
       }
     };
-    handleResize();
+    handleResize(true);
+    window.addEventListener("resize", handleResize.bind(null, false));
+  }, []);
 
-    window.addEventListener("resize", handleResize);
-  }, [setShowFilter, setWindowWidth, setShowFilterDrawer]);
+  useEffect(() => {
+    console.log("Calling 2222 show filter drawer");
+    setInit(true);
+  }, []);
 
   function onLocationOpen() {
     setIsShowedLocationPopUp(true);
