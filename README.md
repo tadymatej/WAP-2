@@ -32,11 +32,11 @@
       - hvezdicky
       - Popis
 
----
+## Honza (musta-pollo)
 
-[ ] For favourites use zustand + middleware for saving to local storage
+- Focus on UI/UX in Figma using Shadcn components
+- Transforming this design into React and Next.js with Matej's assistance.
 
-    overflow-y: scroll;
-    max-height: 50vh;
+## Example of Figma Design
 
----
+![wap-design](https://github.com/user-attachments/assets/9ef50214-d3fc-427a-8333-34423e61f4ec)
